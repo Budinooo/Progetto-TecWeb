@@ -1,14 +1,17 @@
-import React from 'react'
-import './Style/Navbar.css'
+import React, {StyleSheet} from 'react'
+import {Link} from 'react-router-dom';
+import {
+  Nav
+} from './NavbarElements'
 
 export default function Navbar() {
   return (
-    <div>
-      <button id="home-btn">Home</button>
+    <Nav>
+      <Link to="/">Home</Link>
       <input id="searchbar" type="text" />
-      <button id="cart-btn">Cart</button> 
-      <button id="profile-btn">Profile</button>
-    </div>
+      <Link to="/cart">Cart</Link> 
+      <Link to="/profile">Profile</Link>
+    </Nav>
   )
 }
 

@@ -1,8 +1,10 @@
 import React, { useState } from "react"
 import Navbar from './Components/Navbar.js'
+import { BrowserRouter as Router, Routes as Switch, Route} from "react-router-dom"
 import Product_Scroll from "./Components/Product_Scroll.js"
 import Animal_Select from "./Components/Animal_Select"
 import Service_Scroll from "./Components/Service_Scroll"
+import "./App.css"
 
 function App() {
     
@@ -12,7 +14,15 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path='/' exact component={App} />
+          <Route path='/cart' exact component={App} />
+          <Route path='/profile' exact component={App} />          
+        </Switch>
+      </Router>
+
       <Product_Scroll productList={products} />
     </div>
   )
