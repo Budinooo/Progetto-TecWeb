@@ -1,7 +1,8 @@
 import React, { useState } from "react"
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './Components/Navbar.js'
 import { BrowserRouter as Router, Routes as Switch, Route} from "react-router-dom"
-import Product_Scroll from "./Components/Product_Scroll.js"
+import Product_Carousel from './Components/Product_Carousel'
 import Animal_Select from "./Components/Animal_Select"
 import Service_Scroll from "./Components/Service_Scroll"
 import "./App.css"
@@ -23,8 +24,9 @@ function App() {
         </Switch>
       </Router>
 
-      <Product_Scroll productList={products} />
+      <Product_Carousel productList={products} />
     </div>
+    
   )
 }
 
