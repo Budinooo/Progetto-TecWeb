@@ -1,11 +1,11 @@
-.carousel-indicators li {
-    background-color: gray;
-    border-radius: 100%;
-    margin-left: 0.5em;
-    width: 0.8em;
-    height: 0.8em;
+.carousel-indicators {
+    bottom:-10%;
 }
 
-.sr-only {
-    display: none;
+.carousel-control-next {
+    right: -10%;
+}
+
+.carousel-control-prev {
+    left: -10%;
 }
