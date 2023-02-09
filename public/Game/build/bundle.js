@@ -11115,7 +11115,7 @@ var app = (function () {
 
     const file$n = "src\\component\\Navbar.svelte";
 
-    // (31:4) <NavbarBrand href="/game">
+    // (31:4) <NavbarBrand href="/game/">
     function create_default_slot_13(ctx) {
     	let div0;
     	let span0;
@@ -11141,17 +11141,17 @@ var app = (function () {
     			div1 = element("div");
     			div1.textContent = "FOR YOUR PETS AND FOR YOUR MIND";
     			attr_dev(span0, "class", "svelte-1jcp91h");
-    			add_location(span0, file$n, 31, 24, 669);
+    			add_location(span0, file$n, 31, 24, 670);
     			attr_dev(span1, "class", "svelte-1jcp91h");
-    			add_location(span1, file$n, 31, 43, 688);
+    			add_location(span1, file$n, 31, 43, 689);
     			if (!src_url_equal(img.src, img_src_value = "images/dog-house.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "logo");
     			attr_dev(img, "class", "svelte-1jcp91h");
-    			add_location(img, file$n, 31, 57, 702);
+    			add_location(img, file$n, 31, 57, 703);
     			attr_dev(div0, "class", "logo svelte-1jcp91h");
-    			add_location(div0, file$n, 31, 6, 651);
+    			add_location(div0, file$n, 31, 6, 652);
     			attr_dev(div1, "class", "slogan svelte-1jcp91h");
-    			add_location(div1, file$n, 32, 6, 764);
+    			add_location(div1, file$n, 32, 6, 765);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -11175,7 +11175,7 @@ var app = (function () {
     		block,
     		id: create_default_slot_13.name,
     		type: "slot",
-    		source: "(31:4) <NavbarBrand href=\\\"/game\\\">",
+    		source: "(31:4) <NavbarBrand href=\\\"/game/\\\">",
     		ctx
     	});
 
@@ -11831,7 +11831,7 @@ var app = (function () {
 
     	navbarbrand = new NavbarBrand({
     			props: {
-    				href: "/game",
+    				href: "/game/",
     				$$slots: { default: [create_default_slot_13] },
     				$$scope: { ctx }
     			},
@@ -11982,33 +11982,33 @@ var app = (function () {
     			t14 = space();
     			a7 = element("a");
     			a7.textContent = "Your Pets";
-    			attr_dev(a0, "href", "/game");
+    			attr_dev(a0, "href", "/game/");
     			attr_dev(a0, "class", "svelte-1jcp91h");
-    			add_location(a0, file$n, 56, 4, 1694);
+    			add_location(a0, file$n, 56, 4, 1695);
     			attr_dev(a1, "href", "/game/quiz");
     			attr_dev(a1, "class", "svelte-1jcp91h");
-    			add_location(a1, file$n, 57, 4, 1724);
+    			add_location(a1, file$n, 57, 4, 1726);
     			attr_dev(a2, "href", "/game/wordle");
     			attr_dev(a2, "class", "svelte-1jcp91h");
-    			add_location(a2, file$n, 58, 4, 1759);
+    			add_location(a2, file$n, 58, 4, 1761);
     			attr_dev(a3, "href", "/game/memory");
     			attr_dev(a3, "class", "svelte-1jcp91h");
-    			add_location(a3, file$n, 59, 4, 1798);
+    			add_location(a3, file$n, 59, 4, 1800);
     			attr_dev(a4, "href", "/game/funnyvideos");
     			attr_dev(a4, "class", "svelte-1jcp91h");
-    			add_location(a4, file$n, 60, 4, 1837);
+    			add_location(a4, file$n, 60, 4, 1839);
     			attr_dev(a5, "href", "/game/animalinfo");
     			attr_dev(a5, "class", "svelte-1jcp91h");
-    			add_location(a5, file$n, 61, 4, 1887);
+    			add_location(a5, file$n, 61, 4, 1889);
     			attr_dev(a6, "href", "/game/medinfo");
     			attr_dev(a6, "class", "svelte-1jcp91h");
-    			add_location(a6, file$n, 62, 4, 1935);
+    			add_location(a6, file$n, 62, 4, 1937);
     			attr_dev(a7, "href", "/game/yourpets");
     			attr_dev(a7, "class", "svelte-1jcp91h");
-    			add_location(a7, file$n, 63, 4, 1981);
+    			add_location(a7, file$n, 63, 4, 1983);
     			attr_dev(div, "class", "mininav svelte-1jcp91h");
     			toggle_class(div, "mobile", /*screenWidth*/ ctx[0] < 500);
-    			add_location(div, file$n, 55, 2, 1636);
+    			add_location(div, file$n, 55, 2, 1637);
     			add_location(header, file$n, 28, 0, 559);
     		},
     		l: function claim(nodes) {
@@ -12539,86 +12539,86 @@ var app = (function () {
     			div8 = element("div");
     			if (!src_url_equal(img0.src, img0_src_value = "images/answer.png")) attr_dev(img0, "src", img0_src_value);
     			attr_dev(img0, "alt", "quiz");
-    			attr_dev(img0, "class", "svelte-1o8wd2d");
-    			add_location(img0, file$l, 76, 84, 2765);
-    			attr_dev(a0, "class", "game flex svelte-1o8wd2d");
-    			attr_dev(a0, "href", "/quiz");
+    			attr_dev(img0, "class", "svelte-6iha9n");
+    			add_location(img0, file$l, 76, 89, 2770);
+    			attr_dev(a0, "class", "game flex svelte-6iha9n");
+    			attr_dev(a0, "href", "/game/quiz");
     			toggle_class(a0, "mobilefun", /*screenWidth*/ ctx[0] < 500);
     			add_location(a0, file$l, 76, 16, 2697);
     			if (!src_url_equal(img1.src, img1_src_value = "images/wordle.jpg")) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "alt", "wordle");
-    			attr_dev(img1, "class", "svelte-1o8wd2d");
-    			add_location(img1, file$l, 77, 86, 2903);
-    			attr_dev(a1, "class", "game flex svelte-1o8wd2d");
-    			attr_dev(a1, "href", "/wordle");
+    			attr_dev(img1, "class", "svelte-6iha9n");
+    			add_location(img1, file$l, 77, 91, 2913);
+    			attr_dev(a1, "class", "game flex svelte-6iha9n");
+    			attr_dev(a1, "href", "/game/wordle");
     			toggle_class(a1, "mobilefun", /*screenWidth*/ ctx[0] < 500);
-    			add_location(a1, file$l, 77, 16, 2833);
+    			add_location(a1, file$l, 77, 16, 2838);
     			if (!src_url_equal(img2.src, img2_src_value = "images/memory.png")) attr_dev(img2, "src", img2_src_value);
     			attr_dev(img2, "alt", "memory");
-    			attr_dev(img2, "class", "svelte-1o8wd2d");
-    			add_location(img2, file$l, 78, 86, 3044);
-    			attr_dev(a2, "class", "game flex svelte-1o8wd2d");
-    			attr_dev(a2, "href", "/memory");
+    			attr_dev(img2, "class", "svelte-6iha9n");
+    			add_location(img2, file$l, 78, 91, 3059);
+    			attr_dev(a2, "class", "game flex svelte-6iha9n");
+    			attr_dev(a2, "href", "/game/memory");
     			toggle_class(a2, "mobilefun", /*screenWidth*/ ctx[0] < 500);
-    			add_location(a2, file$l, 78, 16, 2974);
-    			attr_dev(div0, "class", "fun flex svelte-1o8wd2d");
+    			add_location(a2, file$l, 78, 16, 2984);
+    			attr_dev(div0, "class", "fun flex svelte-6iha9n");
     			add_location(div0, file$l, 75, 12, 2655);
-    			attr_dev(div1, "class", "choosefun flex svelte-1o8wd2d");
+    			attr_dev(div1, "class", "choosefun flex svelte-6iha9n");
     			toggle_class(div1, "mobile", /*screenWidth*/ ctx[0] < 500);
     			add_location(div1, file$l, 74, 8, 2576);
     			if (!src_url_equal(img3.src, img3_src_value = "images/youtube.png")) attr_dev(img3, "src", img3_src_value);
     			attr_dev(img3, "alt", "funny videos");
-    			attr_dev(img3, "class", "svelte-1o8wd2d");
-    			add_location(img3, file$l, 84, 100, 3422);
-    			attr_dev(a3, "class", "entertainment flex svelte-1o8wd2d");
+    			attr_dev(img3, "class", "svelte-6iha9n");
+    			add_location(img3, file$l, 84, 100, 3437);
+    			attr_dev(a3, "class", "entertainment flex svelte-6iha9n");
     			attr_dev(a3, "href", "/funnyvideos");
     			toggle_class(a3, "mobilefun", /*screenWidth*/ ctx[0] < 500);
-    			add_location(a3, file$l, 84, 16, 3338);
+    			add_location(a3, file$l, 84, 16, 3353);
     			if (!src_url_equal(img4.src, img4_src_value = "images/did-you-know.png")) attr_dev(img4, "src", img4_src_value);
     			attr_dev(img4, "alt", "quiz");
-    			attr_dev(img4, "class", "svelte-1o8wd2d");
-    			add_location(img4, file$l, 85, 99, 3589);
-    			attr_dev(a4, "class", "entertainment flex svelte-1o8wd2d");
+    			attr_dev(img4, "class", "svelte-6iha9n");
+    			add_location(img4, file$l, 85, 99, 3604);
+    			attr_dev(a4, "class", "entertainment flex svelte-6iha9n");
     			attr_dev(a4, "href", "/animalinfo");
     			toggle_class(a4, "mobilefun", /*screenWidth*/ ctx[0] < 500);
-    			add_location(a4, file$l, 85, 16, 3506);
+    			add_location(a4, file$l, 85, 16, 3521);
     			if (!src_url_equal(img5.src, img5_src_value = "images/stethoscope.png")) attr_dev(img5, "src", img5_src_value);
     			attr_dev(img5, "alt", "quiz");
-    			attr_dev(img5, "class", "svelte-1o8wd2d");
-    			add_location(img5, file$l, 86, 96, 3749);
-    			attr_dev(a5, "class", "entertainment flex svelte-1o8wd2d");
+    			attr_dev(img5, "class", "svelte-6iha9n");
+    			add_location(img5, file$l, 86, 96, 3764);
+    			attr_dev(a5, "class", "entertainment flex svelte-6iha9n");
     			attr_dev(a5, "href", "/medinfo");
     			toggle_class(a5, "mobilefun", /*screenWidth*/ ctx[0] < 500);
-    			add_location(a5, file$l, 86, 16, 3669);
-    			attr_dev(div2, "class", "fun flex svelte-1o8wd2d");
-    			add_location(div2, file$l, 83, 12, 3296);
-    			attr_dev(div3, "class", "choosefun flex svelte-1o8wd2d");
+    			add_location(a5, file$l, 86, 16, 3684);
+    			attr_dev(div2, "class", "fun flex svelte-6iha9n");
+    			add_location(div2, file$l, 83, 12, 3311);
+    			attr_dev(div3, "class", "choosefun flex svelte-6iha9n");
     			toggle_class(div3, "mobile", /*screenWidth*/ ctx[0] < 500);
-    			add_location(div3, file$l, 82, 8, 3209);
-    			attr_dev(div4, "class", "flex svelte-1o8wd2d");
+    			add_location(div3, file$l, 82, 8, 3224);
+    			attr_dev(div4, "class", "flex svelte-6iha9n");
     			set_style(div4, "justify-content", "space-evenly");
     			toggle_class(div4, "mobileflex", /*screenWidth*/ ctx[0] < 500);
     			add_location(div4, file$l, 72, 4, 2410);
     			attr_dev(a6, "href", "/");
-    			attr_dev(a6, "class", "svelte-1o8wd2d");
-    			add_location(a6, file$l, 91, 8, 3933);
-    			attr_dev(div5, "class", "logguest svelte-1o8wd2d");
+    			attr_dev(a6, "class", "svelte-6iha9n");
+    			add_location(a6, file$l, 91, 8, 3948);
+    			attr_dev(div5, "class", "logguest svelte-6iha9n");
     			toggle_class(div5, "moblogguest", /*screenWidth*/ ctx[0] < 500);
-    			add_location(div5, file$l, 90, 4, 3865);
+    			add_location(div5, file$l, 90, 4, 3880);
     			attr_dev(div6, "class", "container");
     			add_location(div6, file$l, 71, 0, 2381);
     			set_style(span0, "font-size", "200%");
     			set_style(span0, "font-style", "italic");
-    			add_location(span0, file$l, 96, 22, 4057);
+    			add_location(span0, file$l, 96, 22, 4072);
     			set_style(span1, "font-size", "400%");
     			set_style(span1, "font-weight", "bold");
-    			add_location(span1, file$l, 96, 92, 4127);
-    			attr_dev(div7, "class", "bob3 svelte-1o8wd2d");
-    			add_location(div7, file$l, 96, 4, 4039);
-    			attr_dev(div8, "class", "bob4 svelte-1o8wd2d");
-    			add_location(div8, file$l, 97, 4, 4204);
-    			attr_dev(div9, "class", "ad2 flex svelte-1o8wd2d");
-    			add_location(div9, file$l, 95, 0, 4011);
+    			add_location(span1, file$l, 96, 92, 4142);
+    			attr_dev(div7, "class", "bob3 svelte-6iha9n");
+    			add_location(div7, file$l, 96, 4, 4054);
+    			attr_dev(div8, "class", "bob4 svelte-6iha9n");
+    			add_location(div8, file$l, 97, 4, 4219);
+    			attr_dev(div9, "class", "ad2 flex svelte-6iha9n");
+    			add_location(div9, file$l, 95, 0, 4026);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
