@@ -20,6 +20,8 @@ body {
     text-decoration: none;
     color: #eeeeee;
     font-weight: 500;
+    height: 50px;
+    max-width: 200px;
 }
 
 .nav__link:hover {
