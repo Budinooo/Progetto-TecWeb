@@ -50,11 +50,13 @@ const cors = require('cors')
 /* ========================== */
 
 let app= express(); 
+app.use(express.static(global.rootDir +'/public'))
 app.use('/js'  , express.static(global.rootDir +'/public/js'));
 app.use('/css' , express.static(global.rootDir +'/public/css'));
 app.use('/data', express.static(global.rootDir +'/public/data'));
 app.use('/docs', express.static(global.rootDir +'/public/html'));
 app.use('/img' , express.static(global.rootDir +'/public/media'));
+app.use('/game' , express.static(global.rootDir +'/public/Game'));
 app.use(express.urlencoded({ extended: true })) 
 app.use(cors())
 
@@ -68,6 +70,12 @@ app.get('/', async function (req, res) {
 			host: req.hostname,
 			site: sitename
 	}));
+})
+
+app.get('/game', (req,res) => {
+	res.sendFile( 
+		global.rootDir + 'public/Game/index.html'
+	)
 })
 
 app.get('/hw', async function(req, res) { 
