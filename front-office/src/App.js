@@ -1,10 +1,10 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './Components/Navbar.js'
-import { BrowserRouter as Router, Routes as Switch, Route} from "react-router-dom"
-import Product_Carousel from './Components/Product_Carousel'
-import Animal_Select from "./Components/Animal_Select"
-import "./App.css"
+import Navbar from './Components/Navbar.js';
+import { BrowserRouter as Router, Routes as Switch, Route} from "react-router-dom";
+import Product_Carousel from './Components/Product_Carousel';
+import Animal_Select from "./Components/Animal_Select";
+import "./App.css";
 
 function App() {
 
@@ -30,28 +30,28 @@ function App() {
           <div className="col-sm-3">
             <div className="animal-card">
               <a href="#" role="link">
-                <img width="60%" src={require("./img/dog.png")} alt="Picture of a dog"/>
+                <img width="60%" src="/shop/img/dog.png" alt="Picture of a dog"/>
               </a>
             </div>
           </div>
           <div className="col-sm-3">
             <div className="animal-card">
               <a href="#" role="link">
-                <img width="60%" src={require("./img/bird.png")} alt="Picture of a dog"/>
+                <img width="60%" src="/shop/img/bird.png" alt="Picture of a bird"/>
               </a>
             </div>
           </div>
           <div className="col-sm-3">
             <div className="animal-card">
               <a href="#" role="link">
-                <img width="60%" src={require("./img/clown-fish.png")} alt="Picture of a dog"/>
+                <img width="60%" src="/shop/img/clown-fish.png" alt="Picture of a clown fish"/>
               </a>
             </div>
           </div>
           <div className="col-sm-3">
             <div className="animal-card">
               <a href="#" role="link">
-                <img width="60%" src={require("./img/tiger.png")} alt="Picture of a dog"/>
+                <img width="60%" src="/shop/img/tiger.png" alt="Picture of a dog"/>
               </a>
             </div>
           </div>

@@ -57,6 +57,7 @@ app.use('/data', express.static(global.rootDir +'/public/data'));
 app.use('/docs', express.static(global.rootDir +'/public/html'));
 app.use('/img' , express.static(global.rootDir +'/public/media'));
 app.use('/game' , express.static(global.rootDir +'/public/Game'));
+app.use('/shop' , express.static(global.rootDir +'/public/FrontOffice'));
 app.use(express.urlencoded({ extended: true })) 
 app.use(cors())
 
@@ -77,6 +78,13 @@ app.get('/game', (req,res) => {
 		global.rootDir + 'public/Game/index.html'
 	)
 })
+
+app.get('/shop', (req,res) => {
+	res.sendFile( 
+		global.rootDir + 'public/FrontOffice/index.html'
+	)
+})
+
 
 app.get('/hw', async function(req, res) { 
 	var text = "Hello world as a Node service";
