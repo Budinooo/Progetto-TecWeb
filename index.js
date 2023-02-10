@@ -29,12 +29,12 @@ Copyright (c) 2021 by Fabio Vitali
 /*                            */
 /* ========================== */
 
-global.rootDir = __dirname ;
-global.startDate = null; 
+global.rootDir = __dirname;
+global.startDate = null;
 
-const template = require(global.rootDir + '/scripts/tpl.js') ; 
-const mymongo = require(global.rootDir + '/scripts/mongo.js') ; 
-const express = require('express') ;
+const template = require(global.rootDir + '/scripts/tpl.js');
+const mymongo = require(global.rootDir + '/scripts/mongo.js');
+const express = require('express');
 const cors = require('cors')
 
 
@@ -57,6 +57,7 @@ app.use('/data', express.static(global.rootDir +'/public/data'));
 app.use('/docs', express.static(global.rootDir +'/public/html'));
 app.use('/img' , express.static(global.rootDir +'/public/media'));
 app.use('/game' , express.static(global.rootDir +'/public/Game'));
+app.use('/backoffice', express.static(global.rootDir + '/public/BackOffice'));
 app.use('/shop' , express.static(global.rootDir +'/public/FrontOffice'));
 app.use(express.urlencoded({ extended: true })) 
 app.use(cors())
@@ -65,19 +66,26 @@ app.use(cors())
 app.enable('trust proxy');
 
 
-app.get('/', async function (req, res) { 
-	let sitename = req.hostname.split('.')[0]
-	res.send(await template.generate('index.html', {
-			host: req.hostname,
-			site: sitename
-	}));
+app.get('/', async function(req, res) {
+    let sitename = req.hostname.split('.')[0]
+    res.send(await template.generate('index.html', {
+        host: req.hostname,
+        site: sitename
+    }));
 })
 
-app.get('/game', (req,res) => {
-	res.sendFile( 
-		global.rootDir + 'public/Game/index.html'
-	)
+app.get('/game', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/Game/index.html'
+    )
 })
+
+app.get('/backoffice', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/BackOffice/login.html'
+    )
+})
+
 
 app.get('/shop', (req,res) => {
 	res.sendFile( 
@@ -86,10 +94,10 @@ app.get('/shop', (req,res) => {
 })
 
 
-app.get('/hw', async function(req, res) { 
-	var text = "Hello world as a Node service";
-	res.send(
-`<!doctype html>
+app.get('/hw', async function(req, res) {
+    var text = "Hello world as a Node service";
+    res.send(
+        `<!doctype html>
 <html>
 	<body>
 		<h1>${text}</h1>
@@ -99,30 +107,30 @@ app.get('/hw', async function(req, res) {
 			`)
 });
 
-app.get('/hwhb', async function(req, res) { 
-	res.send(await template.generate('generic.html', {
-		text: "Hello world as a Handlebar service",
-	}));
+app.get('/hwhb', async function(req, res) {
+    res.send(await template.generate('generic.html', {
+        text: "Hello world as a Handlebar service",
+    }));
 });
 
 const info = async function(req, res) {
-	let data = {
-		startDate: global.startDate.toLocaleString(), 
-		requestDate: (new Date()).toLocaleString(), 
-		request: {
-			host: req.hostname,
-			method: req.method,
-			path: req.path,
-			protocol: req.protocol
-		}, 
-		query: req.query,
-		body: req.body
-	}
-	res.send( await template.generate('info.html', data));
+    let data = {
+        startDate: global.startDate.toLocaleString(),
+        requestDate: (new Date()).toLocaleString(),
+        request: {
+            host: req.hostname,
+            method: req.method,
+            path: req.path,
+            protocol: req.protocol
+        },
+        query: req.query,
+        body: req.body
+    }
+    res.send(await template.generate('info.html', data));
 }
 
-app.get('/info', info )
-app.post('/info', info )
+app.get('/info', info)
+app.post('/info', info)
 
 
 
@@ -134,19 +142,19 @@ app.post('/info', info )
 /*                            */
 /* ========================== */
 
-/* Replace these info with the ones you were given when activating mongoDB */ 
+/* Replace these info with the ones you were given when activating mongoDB */
 const mongoCredentials = {
         user: "site212229",
         pwd: "oiy3ahSa",
         site: "mongo_site212229"
-}  
-/* end */
+    }
+    /* end */
 
-app.get('/db/create', async function(req, res) { 
-	res.send(await mymongo.create(mongoCredentials))
+app.get('/db/create', async function(req, res) {
+    res.send(await mymongo.create(mongoCredentials))
 });
-app.get('/db/search', async function(req, res) { 
-	res.send(await mymongo.search(req.query, mongoCredentials))
+app.get('/db/search', async function(req, res) {
+    res.send(await mymongo.search(req.query, mongoCredentials))
 });
 
 
@@ -163,9 +171,9 @@ app.get('/db/search', async function(req, res) {
 /*                            */
 /* ========================== */
 
-app.listen(8000, function() { 
-	global.startDate = new Date() ; 
-	console.log(`App listening on port 8000 started ${global.startDate.toLocaleString()}` )
+app.listen(8000, function() {
+    global.startDate = new Date();
+    console.log(`App listening on port 8000 started ${global.startDate.toLocaleString()}`)
 })
 
 
