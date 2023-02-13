@@ -56,9 +56,7 @@ app.use('/css' , express.static(global.rootDir +'/public/css'));
 app.use('/data', express.static(global.rootDir +'/public/data'));
 app.use('/docs', express.static(global.rootDir +'/public/html'));
 app.use('/img' , express.static(global.rootDir +'/public/media'));
-app.use('/backoffice', express.static(global.rootDir + '/public/BackOffice'));
 app.use('/shop', express.static(global.rootDir + '/public/FrontOffice'));
-app.use('/game', express.static(global.rootDir + '/public/Game'));
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
@@ -115,6 +113,15 @@ app.get('/game/yourpets', (req, res) => {
 // https://stackoverflow.com/questions/40459511/in-express-js-req-protocol-is-not-picking-up-https-for-my-secure-link-it-alwa
 app.enable('trust proxy');
 
+//Backoffice
+app.use('/backoffice', express.static(global.rootDir + '/public/BackOffice'));
+app.use('/backoffice/bacheca', express.static(global.rootDir + '/public/BackOffice/frontend/index.html'));
+app.use('/backoffice/utenti', express.static(global.rootDir + '/public/BackOffice/frontend/static/js/views/utenti/utenti.html'));
+app.use('/backoffice/prodotti', express.static(global.rootDir + '/public/BackOffice/frontend/static/js/views/prodotti/prodotti.html'));
+app.use('/backoffice/messaggi', express.static(global.rootDir + '/public/BackOffice/frontend/static/js/views/messaggi/messaggi.html'));
+app.use('/backoffice/servizi', express.static(global.rootDir + '/public/BackOffice/frontend/static/js/views/servizi/servizi.html'));
+app.use('/backoffice/serviziOnline', express.static(global.rootDir + '/public/BackOffice/frontend/static/js/views/serviziOnline/serviziOnline.html'));
+
 app.get('/backoffice', (req, res) => {
     res.send(global.rootDir + '/public/BackOffice/index.html');
 })
@@ -149,19 +156,6 @@ app.get('/', async function(req, res) {
         host: req.hostname,
         site: sitename
     }));
-})
-app.get('/', async function(req, res) {
-    let sitename = req.hostname.split('.')[0]
-    res.send(await template.generate('index.html', {
-        host: req.hostname,
-        site: sitename
-    }));
-})
-
-app.get('/backoffice', (req, res) => {
-    res.sendFile(
-        global.rootDir + 'public/FrontOffice/index.html'
-    )
 })
 
 app.get('/hw', async function(req, res) {
