@@ -63,7 +63,8 @@ app.use('/backoffice/messaggi', express.static(global.rootDir + '/public/BackOff
 app.use('/backoffice/servizi', express.static(global.rootDir + '/public/BackOffice/frontend/static/js/views/servizi/servizi.html'));
 app.use('/backoffice/serviziOnline', express.static(global.rootDir + '/public/BackOffice/frontend/static/js/views/serviziOnline/serviziOnline.html'));
 app.use('/backoffice', express.static(global.rootDir + '/public/BackOffice'));
-app.use('/shop' , express.static(global.rootDir +'/public/FrontOffice'));
+app.use('/shop', express.static(global.rootDir + '/public/FrontOffice'));
+app.use('/game', express.static(global.rootDir + '/public/Game'));
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
@@ -119,10 +120,10 @@ app.get('/game', (req, res) => {
     )
 })
 
-app.get('/shop', (req,res) => {
-	res.sendFile( 
-		global.rootDir + 'public/FrontOffice/index.html'
-	)
+app.get('/shop', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/FrontOffice/index.html'
+    )
 })
 
 app.get('/hw', async function(req, res) {
