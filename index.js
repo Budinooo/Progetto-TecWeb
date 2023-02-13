@@ -56,12 +56,61 @@ app.use('/css' , express.static(global.rootDir +'/public/css'));
 app.use('/data', express.static(global.rootDir +'/public/data'));
 app.use('/docs', express.static(global.rootDir +'/public/html'));
 app.use('/img' , express.static(global.rootDir +'/public/media'));
-app.use('/game' , express.static(global.rootDir +'/public/Game'));
 app.use('/backoffice', express.static(global.rootDir + '/public/BackOffice'));
 app.use('/shop' , express.static(global.rootDir +'/public/FrontOffice'));
 app.use(express.urlencoded({ extended: true })) 
 app.use(cors())
 
+//Game
+app.use('/game' , express.static(global.rootDir +'/public/Game'));
+app.use('/game/quiz' , express.static(global.rootDir +'/public/Game'));
+app.use('/game/wordle' , express.static(global.rootDir +'/public/Game'));
+app.use('/game/memory' , express.static(global.rootDir +'/public/Game'));
+app.use('/game/animalinfo' , express.static(global.rootDir +'/public/Game'));
+app.use('/game/medinfo' , express.static(global.rootDir +'/public/Game'));
+app.use('/game/yourpets' , express.static(global.rootDir +'/public/Game'));
+
+app.get('/game', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/Game/index.html'
+    )
+})
+
+app.get('/game/quiz', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/Game/index.html'
+    )
+})
+
+app.get('/game/wordle', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/Game/index.html'
+    )
+})
+
+app.get('/game/memory', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/Game/index.html'
+    )
+})
+
+app.get('/game/animalinfo', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/Game/index.html'
+    )
+})
+
+app.get('/game/medinfo', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/Game/index.html'
+    )
+})
+
+app.get('/game/yourpets', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/Game/index.html'
+    )
+})
 // https://stackoverflow.com/questions/40459511/in-express-js-req-protocol-is-not-picking-up-https-for-my-secure-link-it-alwa
 app.enable('trust proxy');
 
@@ -72,12 +121,6 @@ app.get('/', async function(req, res) {
         host: req.hostname,
         site: sitename
     }));
-})
-
-app.get('/game', (req, res) => {
-    res.sendFile(
-        global.rootDir + 'public/Game/index.html'
-    )
 })
 
 app.get('/backoffice', (req, res) => {
