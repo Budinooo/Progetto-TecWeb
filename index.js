@@ -63,12 +63,12 @@ app.use('/backoffice/messaggi', express.static(global.rootDir + '/public/BackOff
 app.use('/backoffice/servizi', express.static(global.rootDir + '/public/BackOffice/frontend/static/js/views/servizi/servizi.html'));
 app.use('/backoffice/serviziOnline', express.static(global.rootDir + '/public/BackOffice/frontend/static/js/views/serviziOnline/serviziOnline.html'));
 app.use('/backoffice', express.static(global.rootDir + '/public/BackOffice'));
+app.use('/shop' , express.static(global.rootDir +'/public/FrontOffice'));
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 // https://stackoverflow.com/questions/40459511/in-express-js-req-protocol-is-not-picking-up-https-for-my-secure-link-it-alwa
 app.enable('trust proxy');
-
 
 app.get('/backoffice', (req, res) => {
     res.send(global.rootDir + '/public/BackOffice/index.html');
@@ -104,6 +104,25 @@ app.get('/', async function(req, res) {
         host: req.hostname,
         site: sitename
     }));
+})
+app.get('/', async function(req, res) {
+    let sitename = req.hostname.split('.')[0]
+    res.send(await template.generate('index.html', {
+        host: req.hostname,
+        site: sitename
+    }));
+})
+
+app.get('/game', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/Game/index.html'
+    )
+})
+
+app.get('/shop', (req,res) => {
+	res.sendFile( 
+		global.rootDir + 'public/FrontOffice/index.html'
+	)
 })
 
 app.get('/hw', async function(req, res) {
