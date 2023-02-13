@@ -71,8 +71,8 @@ button:focus {
 }
 
 body{
-	background-image: url("images/background.jpg");
-	background-size:cover;
+	background-image: url("images/background.avif");
+	background-size:contain;
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
@@ -80,7 +80,7 @@ body{
 }
 
 .content{
-	border: 8px solid black;
+	border: 8px solid #1a2238;
 	border-radius: 10px;
 	background-color: white;
 	padding-top: 2vh;
