@@ -57,8 +57,9 @@ app.use('/data', express.static(global.rootDir +'/public/data'));
 app.use('/docs', express.static(global.rootDir +'/public/html'));
 app.use('/img' , express.static(global.rootDir +'/public/media'));
 app.use('/backoffice', express.static(global.rootDir + '/public/BackOffice'));
-app.use('/shop' , express.static(global.rootDir +'/public/FrontOffice'));
-app.use(express.urlencoded({ extended: true })) 
+app.use('/shop', express.static(global.rootDir + '/public/FrontOffice'));
+app.use('/game', express.static(global.rootDir + '/public/Game'));
+app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 //Game
@@ -114,7 +115,41 @@ app.get('/game/yourpets', (req, res) => {
 // https://stackoverflow.com/questions/40459511/in-express-js-req-protocol-is-not-picking-up-https-for-my-secure-link-it-alwa
 app.enable('trust proxy');
 
+app.get('/backoffice', (req, res) => {
+    res.send(global.rootDir + '/public/BackOffice/index.html');
+})
 
+app.get('/backoffice/bacheca', (req, res) => {
+    res.send(global.rootDir + '/public/BackOffice/frontend/index.html');
+})
+
+app.get('/backoffice/utenti', (req, res) => {
+    res.send(global.rootDir + '/public/BackOffice/frontend/static/js/views/utenti/utenti.html');
+})
+
+app.get('/backoffice/prodotti', (req, res) => {
+    res.send(global.rootDir + '/public/BackOffice/frontend/static/js/views/prodotti/prodotti.html');
+})
+
+app.get('/backoffice/messaggi', (req, res) => {
+    res.send(global.rootDir + '/public/BackOffice/frontend/static/js/views/bacheca/bacheca.html');
+})
+
+app.get('/backoffice/servizi', (req, res) => {
+    res.send(global.rootDir + '/public/BackOffice/frontend/static/js/views/servizi/servizi.html');
+})
+
+app.get('/backoffice/serviziOnline', (req, res) => {
+    res.send(global.rootDir + '/public/BackOffice/frontend/static/js/views/serviziOnline/serviziOnline.html');
+})
+
+app.get('/', async function(req, res) {
+    let sitename = req.hostname.split('.')[0]
+    res.send(await template.generate('index.html', {
+        host: req.hostname,
+        site: sitename
+    }));
+})
 app.get('/', async function(req, res) {
     let sitename = req.hostname.split('.')[0]
     res.send(await template.generate('index.html', {
@@ -125,17 +160,9 @@ app.get('/', async function(req, res) {
 
 app.get('/backoffice', (req, res) => {
     res.sendFile(
-        global.rootDir + 'public/BackOffice/login.html'
+        global.rootDir + 'public/FrontOffice/index.html'
     )
 })
-
-
-app.get('/shop', (req,res) => {
-	res.sendFile( 
-		global.rootDir + 'public/FrontOffice/index.html'
-	)
-})
-
 
 app.get('/hw', async function(req, res) {
     var text = "Hello world as a Node service";
