@@ -55,7 +55,7 @@ app.use('/css', express.static(global.rootDir + '/public/css'));
 app.use('/data', express.static(global.rootDir + '/public/data'));
 app.use('/docs', express.static(global.rootDir + '/public/html'));
 app.use('/img', express.static(global.rootDir + '/public/media'));
-app.use('/backoffice', express.static(global.rootDir + '/public/BackOffice'));
+app.use('/backoffice', express.static(global.rootDir + '/public/BackOffice/index.html'));
 app.use('/backoffice/bacheca', express.static(global.rootDir + '/public/BackOffice/frontend/index.html'));
 app.use('/backoffice/utenti', express.static(global.rootDir + '/public/BackOffice/frontend/static/js/views/utenti/utenti.html'));
 app.use('/backoffice/prodotti', express.static(global.rootDir + '/public/BackOffice/frontend/static/js/views/prodotti/prodotti.html'));
