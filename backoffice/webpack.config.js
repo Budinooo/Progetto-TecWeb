@@ -4,6 +4,7 @@ module.exports = {
     context: path.join(__dirname, 'src'),
     entry: [
         './index.js',
+        '../frontend/static/js/views/utenti/utenti.js'
     ],
     output: {
         path: path.join(__dirname, 'www'),
