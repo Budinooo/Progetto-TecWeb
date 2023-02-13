@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizzazione messaggi</title>
+    <!-- Inclusione della libreria Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../css/index.css">
+</head>
+
+<body>
+    <nav class="nav">
+        <a href="../utenti/utenti.html" class="nav__link" data-link>Anagrafica Clienti</a>
+        <a href="./bacheca.html" class="nav__link" data-link>Bacheca messaggi</a>
+        <a href="../prodotti/prodotti.html" class="nav__link" data-link>Gestione Prodotti</a>
+        <a href="../servizi/servizi.html" class="nav__link" data-link>Servizi in presenza</a>
+        <a href="../serviziOnline/serviziOnline.html" class="nav__link" data-link>Servizi online</a>
+        <a href="../utenti/utenti.html" class="nav__link" data-link>Torna al negozio</a>
+        <a href="../utenti/utenti.html" class="nav__link" data-link>Vai ai giochi</a>
+        <a href="../utenti/utenti.html" class="nav__link" data-link>LogOut</a>
+    </nav>
+    <div id="app">
+        <!-- Container per la visualizzazione dei messaggi -->
+        <div class="container mt-5" id="messageContainer">
+        </div>
+        <!-- Inclusione di jQuery e JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="bacheca.js"></script>
+    </div>
+</body>
+
+</html>
