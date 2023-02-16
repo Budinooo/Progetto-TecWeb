@@ -1,3 +1,9 @@
+//const AuthController = require('./authController');
+import { User } from './login/user.js';
+//const User = require('./login/User');
+//const bcrypt = require('bcryptjs');
+//const jwt = require('jsonwebtoken');
+
 function setFormMessage(formElement, type, message) {
     const messageElement = formElement.querySelector(".form__message");
     messageElement.textContent = message;
@@ -33,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
 
         //login
+
         setFormMessage(loginForm, "success", "You're logged in!");
 
 

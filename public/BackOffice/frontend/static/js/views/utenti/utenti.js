@@ -38,10 +38,10 @@ fetch('utenti.json')
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">${client.name}</h5>
-              <p class="card-text">Animali preferiti: ${client.favorites}</p>
-              <p class="card-text">Punteggio giochi: ${client.score}</p>
-              <button class="btn btn-primary" onclick="editClient(${client})">Modifica</button>
-              <button class="btn btn-danger" onclick="removeClient(${client.id})">Rimuovi</button>
+              <p class="card-text">Favorite Animals: ${client.favorites}</p>
+              <p class="card-text">Game Score: ${client.score}</p>
+              <button class="btn btn-primary" onclick="editClient(${client})">Edit</button>
+              <button class="btn btn-danger" onclick="removeClient(${client.id})">Remove</button>
             </div>
           </div>
         </div>
@@ -75,9 +75,9 @@ function addClient() {
 
 function editClient(jsonData) {
     // logica per la modifica delle informazioni del cliente
-    document.getElementById("name").innerHTML = "Nome: " + jsonData.name;
-    document.getElementById("favorites").innerHTML = "Animali preferiti: " + jsonData.favorites;
-    document.getElementById("score").innerHTML = "Punteggio: " + jsonData.score;
+    document.getElementById("name").innerHTML = "Name: " + jsonData.name;
+    document.getElementById("favorites").innerHTML = "Favorite Animals: " + jsonData.favorites;
+    document.getElementById("score").innerHTML = "Game Score: " + jsonData.score;
 
     document.getElementById("editButton").addEventListener("click", function() {
         document.getElementById("formContainer").style.display = "block";

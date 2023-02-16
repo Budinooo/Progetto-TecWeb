@@ -27,11 +27,11 @@ $.getJSON("bacheca.json", function(messages) {
           <div class="card-body">
             <h5 class="card-title">` + message.title + `</h5>
             <p class="card-text">` + message.text + `</p>
-            <p>Prodotto di riferimento: ` + message.product + `</p>
+            <p>Reference Product: ` + message.product + `</p>
           </div>
           <div class="card-footer">
-            <button class="btn btn-warning" onclick="editMessage(` + message.id + `)">Modifica</button>
-            <button class="btn btn-danger" onclick="deleteMessage(` + message.id + `)">Elimina</button>
+            <button class="btn btn-warning" onclick="editMessage(` + message.id + `)">Edit</button>
+            <button class="btn btn-danger" onclick="deleteMessage(` + message.id + `)">Remove</button>
           </div>
         </div>
       `;

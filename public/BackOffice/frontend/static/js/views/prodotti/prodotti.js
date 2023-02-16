@@ -25,9 +25,9 @@ $.getJSON("prodotti.json", function(data) {
         productCards += "<div class='card-body'>";
         productCards += "<h5 class='card-title'>" + data.products[i].name + "</h5>";
         productCards += "<p class='card-text'>" + data.products[i].description + "</p>";
-        productCards += "<p class='card-text'>Prezzo: €" + data.products[i].price + "</p>";
-        productCards += "<p class='card-text'>Disponibilità: €" + data.products[i].availability + "</p>";
-        productCards += "<button  class='btn btn-primary' data-index='" + i + "'>Modifica</button>";
+        productCards += "<p class='card-text'>Price: €" + data.products[i].price + "</p>";
+        productCards += "<p class='card-text'>Availability: " + data.products[i].availability + "</p>";
+        productCards += "<button  class='btn btn-primary' data-index='" + i + "'>Edit</button>";
         productCards += "</div>";
         productCards += "</div>";
     }
