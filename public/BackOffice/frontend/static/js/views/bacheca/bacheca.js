@@ -1,18 +1,3 @@
-/*import AbstractView from "../AbstractView.js";
-
-export default class extends AbstractView {
-    constructor(params) {
-            super(params);
-            this.setTitle("bacheca");
-        }
-            async getHtml() {
-                return `
-                    <h1>Bacheca</h1>
-                    <p>Tutti i messaggi dei nostri clienti!</p>
-                `;
-}
-            }*/
-
 // Caricamento dei messaggi dal file JSON
 $.getJSON("bacheca.json", function(messages) {
     // Iterazione attraverso tutti i messaggi

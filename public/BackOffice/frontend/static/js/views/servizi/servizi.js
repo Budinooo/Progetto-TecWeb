@@ -1,20 +1,3 @@
-/*
-        import AbstractView from "../AbstractView.js";
-
-export default class extends AbstractView {
-    constructor(params) {
-            super(params);
-            this.setTitle("servizi");
-        }
-            async getHtml() {
-                return `
-                    <h1>Servizi</h1>
-                    <p>Ecco quali servizi offriamo per i tuoi animali da noi!</p>
-                `;
-            }
-}
-        */
-
 fetch('services.json')
     .then(response => response.json())
     .then(services => {

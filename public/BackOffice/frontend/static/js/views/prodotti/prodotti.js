@@ -1,21 +1,3 @@
-/*
-import AbstractView from "../AbstractView.js";
-
-export default class extends AbstractView {
-    constructor(params) {
-        super(params);
-        this.setTitle("prodotti");
-    }
-
-    async getHtml() {
-        return `
-                    <h1>Bacheca</h1>
-                    <p>Tutti i messaggi dei nostri clienti!</p>
-                `;
-    }
-} 
-*/
-
 $.getJSON("prodotti.json", function(data) {
     // Crea card per ogni prodotto
     var productCards = "";

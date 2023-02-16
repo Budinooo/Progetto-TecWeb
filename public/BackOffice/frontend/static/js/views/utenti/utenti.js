@@ -1,33 +1,3 @@
-/*
-import AbstractView from "../AbstractView.js";
-
-export default class extends AbstractView {
-    constructor(params) {
-        super(params);
-        this.setTitle("Utenti");
-    };
-
-    async getHtml() {
-        return fetch('/frontend/static/js/views/utenti/utenti.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(htmlText => {
-                // restituisce il contenuto del file HTML come stringa
-                return htmlText;
-            })
-            .catch(error => {
-                console.error(error);
-                return error;
-            });
-    }
-
-}
-*/
-
 fetch('utenti.json')
     .then(response => response.json())
     .then(clients => {
