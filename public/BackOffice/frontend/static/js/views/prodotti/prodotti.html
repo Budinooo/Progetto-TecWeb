@@ -4,28 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestione Prodotti</title>
+    <title>Product Management</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../css/index.css">
 </head>
 
 <body>
     <nav class="nav">
-        <a href="../utenti/utenti.html" class="nav__link" data-link>Anagrafica Clienti</a>
-        <a href="../bacheca/bacheca.html" class="nav__link" data-link>Bacheca messaggi</a>
-        <a href="./prodotti.html" class="nav__link" data-link>Gestione Prodotti</a>
-        <a href="../servizi/servizi.html" class="nav__link" data-link>Servizi in presenza</a>
-        <a href="../serviziOnline/serviziOnline.html" class="nav__link" data-link>Servizi online</a>
-        <a href="../utenti/utenti.html" class="nav__link" data-link>Torna al negozio</a>
-        <a href="../utenti/utenti.html" class="nav__link" data-link>Vai ai giochi</a>
-        <a href="../utenti/utenti.html" class="nav__link" data-link>LogOut</a>
+        <a href="../utenti/utenti.html" class="nav__link" data-link>Customer data</a>
+        <a href="../bacheca/bacheca.html" class="nav__link" data-link>Community Feed</a>
+        <a href="./prodotti.html" class="nav__link" data-link>Products</a>
+        <a href="../servizi/servizi.html" class="nav__link" data-link>Services</a>
+        <a href="../serviziOnline/serviziOnline.html" class="nav__link" data-link>Online Services</a>
+        <a href="/shop" class="nav__link" data-link>Back to Shop</a>
+        <a href="/game" class="nav__link" data-link>Play</a>
+        <a href="/backoffice" class="nav__link" data-link>LogOut</a>
     </nav>
     <div id="app">
-        <h1>Prodotti in vendita</h1>
-        <div id="productCards" margin-bottom="100px"></div>
-        <div id="buttonGroup">
-            <button class="btn btn-warning" id="addBtn">Aggiungi prodotto</button>
-            <button class="btn btn-danger" id="removeBtn">Rimuovi prodotto</button>
+        <h1 class="title" style="text-align:center; margin-bottom:50px">Products</h1>
+        <div class="productCard text-center" id="productCards" style="margin-left:50px; margin-bottom:50px"></div>
+        <div class="buttonGroup text-center" id="buttonGroup">
+            <button class="btn btn-warning" id="addBtn">Add product</button>
+            <button class="btn btn-danger" id="removeBtn">Remove product</button>
         </div>
     </div>
 </body>
