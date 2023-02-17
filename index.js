@@ -217,11 +217,15 @@ const mongoCredentials = {
 app.get('/db/create', async function(req, res) {
     res.send(await mymongo.create(mongoCredentials))
 });
+
 app.get('/db/search', async function(req, res) {
     res.send(await mymongo.search(req.query, mongoCredentials))
 });
 
-
+app.get('/api/getProducts', async function(req, res)
+{
+    res.send({risposta: "yoyoyo"});
+})
 
 
 
