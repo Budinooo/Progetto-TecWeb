@@ -22,10 +22,10 @@
     </nav>
     <div id="app">
         <h1 class="title" style="text-align:center">Customer</h1>
-        <div class="container" style="margin-bottom:50px">
+        <div id="container" style="margin-bottom:50px">
             <div class="row" id="clients"></div>
-            <div id="formContainer" style="display:none;">
-                <form>
+            <div class="container" id="formcontainer" style="display:none">
+                <form class="form form--hidden" id="addClientForm">
                     <div class="form-group">
                         <label for="nameInput">Name</label>
                         <input type="text" class="form-control" id="nameInput">
@@ -38,12 +38,12 @@
                         <label for="scoreInput">Game Score</label>
                         <input type="text" class="form-control" id="scoreInput">
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary" id="saveClient">Save</button>
                 </form>
             </div>
         </div>
         <div class="buttonGroup text-center" id="addClient">
-            <button class="btn btn-primary" id="addClientButton" onclick="addClient()">Add Customer</button>
+            <button class="btn btn-primary" id="addClientButton">Add Customer</button>
         </div>
         <script src="utenti.js "></script>
     </div>
