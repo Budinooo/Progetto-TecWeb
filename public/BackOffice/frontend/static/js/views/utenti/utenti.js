@@ -6,11 +6,11 @@ fetch('utenti.json')
             clientsHtml += `
         <div class="col-sm-4">
           <div class="card">
-            <div class="card-body">
+            <div class="card-body" id="${client.id}">
               <h5 class="card-title">${client.name}</h5>
               <p class="card-text">Favorite Animals: ${client.favorites}</p>
               <p class="card-text">Game Score: ${client.score}</p>
-              <button class="btn btn-primary" onclick="editClient(${client})">Edit</button>
+              <button class="btn btn-primary" id="editClient" onclick="editClient(${client.id})">Edit</button>
               <button class="btn btn-danger" onclick="removeClient(${client.id})">Remove</button>
             </div>
           </div>
@@ -20,7 +20,26 @@ fetch('utenti.json')
         document.getElementById('clients').innerHTML = clientsHtml;
     });
 
-function addClient() {
+
+document.addEventListener("DOMContentLoaded", () => {
+    const addForm = document.querySelector('#addClientForm');
+    document.querySelector('#addClientButton').addEventListener("click", e => {
+        e.preventDefault();
+        //addForm.classList.remove("form--hidden");
+        document.getElementById("formcontainer").style.display = "block";
+    });
+    document.querySelector('#saveClient').addEventListener("click", e => {
+        e.preventDefault();
+        const name = document.querySelector('#nameInput');
+        const animals = document.querySelector('#favoritesInput');
+        const score = document.querySelector('#scoreInput');
+        //addClient(name, animals, score);
+        //addForm.classList.add("form--hidden");
+        document.getElementById("formcontainer").style.display = "none";
+    });
+});
+
+function addClient(name, animals, score) {
     // logica per l'aggiunta di un nuovo cliente
     // legge il contenuto del file JSON
     fetch('utenti.json')
@@ -29,9 +48,9 @@ function addClient() {
             // modifica l'oggetto JavaScript
             data.push({
                 id: '4',
-                name: 'Nuovo cliente',
-                animali_preferiti: 'gatti',
-                punteggio: 10
+                name: name,
+                animali_preferiti: animals,
+                punteggio: score
             });
 
             // scrive il contenuto del file JSON
@@ -40,33 +59,45 @@ function addClient() {
                 body: JSON.stringify(data)
             });
         });
-
 }
 
-function editClient(jsonData) {
+function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
-    document.getElementById("name").innerHTML = "Name: " + jsonData.name;
-    document.getElementById("favorites").innerHTML = "Favorite Animals: " + jsonData.favorites;
-    document.getElementById("score").innerHTML = "Game Score: " + jsonData.score;
-
-    document.getElementById("editButton").addEventListener("click", function() {
-        document.getElementById("formContainer").style.display = "block";
-        document.getElementById("jsonData").style.display = "none";
-        document.getElementById("nameInput").value = jsonData.name;
-        document.getElementById("favoritesInput").value = jsonData.favorites;
-        document.getElementById("scoreInput").value = jsonData.score;
-    });
-
+    /*
+    document.getElementById("name").value = "Name: " + "jsonData.name";
+    document.getElementById("favorites").innerHTML = "Favorite Animals: " + "jsonData.favorites";
+    document.getElementById("score").innerHTML = "Game Score: " + "jsonData.score";
+    */
+    fetch('utenti.json')
+        .then(response => response.json())
+        .then(data => {
+            // ricerca dell'utente nel file JSON
+            const jsonData = data.find(u => u.id === jsonDataid);
+        });
+    document.getElementById("formcontainer").style.display = "block";
+    document.getElementById(jsonDataid).style.display = "none";
+    /*
+        document.getElementById("editButton").addEventListener("click", function() {
+            document.getElementById("formcontainer").style.display = "block";
+            document.getElementById(jsonData.id).style.display = "none";
+            document.getElementById("nameInput").value = jsonData.name;
+            document.getElementById("favoritesInput").value = jsonData.favorites;
+            document.getElementById("scoreInput").value = jsonData.score;
+        });
+    */
     document.querySelector("form").addEventListener("submit", function(event) {
-        event.preventDefault();
+        //event.preventDefault();
         jsonData.name = document.getElementById("nameInput").value;
         jsonData.favorites = document.getElementById("favoritesInput").value;
         jsonData.score = document.getElementById("scoreInput").value;
-        document.getElementById("jsonData").style.display = "block";
-        document.getElementById("formContainer").style.display = "none";
+        //document.getElementById("jsonData").style.display = "block";
+        document.getElementById("formcontainer").style.display = "none";
+        document.getElementById(jsonDataid).style.display = "block";
+        /*
         document.getElementById("name").innerHTML = "Nome: " + jsonData.name;
         document.getElementById("favorites").innerHTML = "Animali preferiti: " + jsonData.favorites;
         document.getElementById("score").innerHTML = "Punteggio: " + jsonData.score;
+        */
     });
 }
 

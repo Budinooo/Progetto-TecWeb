@@ -13,7 +13,7 @@ class Navbar extends React.Component {
     {
       e.preventDefault();
       console.log()
-      callback();
+      callback(document.getElementById("searchBar").value);
     }
   
   render() {
@@ -27,8 +27,8 @@ class Navbar extends React.Component {
         </button>
 
         <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-          <form id="searchbar" className="ms-auto my-2 my-lg-0">
-            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+          <form id="searchbarContainer" className="ms-auto my-2 my-lg-0">
+            <input id="searchBar" className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
             <button onClick={(e)=>this.handleSearch(this.props.callback)(e)} >Cerca</button>
           </form>
           <ul className="navbar-nav justify-content-end me-5">

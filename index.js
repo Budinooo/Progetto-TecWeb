@@ -35,7 +35,8 @@ global.startDate = null;
 const template = require(global.rootDir + '/scripts/tpl.js');
 const mymongo = require(global.rootDir + '/scripts/mongo.js');
 const express = require('express');
-const cors = require('cors')
+const cors = require('cors');
+const fs = require('fs');
 
 
 
@@ -49,25 +50,25 @@ const cors = require('cors')
 /*                            */
 /* ========================== */
 
-let app= express(); 
-app.use(express.static(global.rootDir +'/public'))
-app.use('/js'  , express.static(global.rootDir +'/public/js'));
-app.use('/css' , express.static(global.rootDir +'/public/css'));
-app.use('/data', express.static(global.rootDir +'/public/data'));
-app.use('/docs', express.static(global.rootDir +'/public/html'));
-app.use('/img' , express.static(global.rootDir +'/public/media'));
+let app = express();
+app.use(express.static(global.rootDir + '/public'))
+app.use('/js', express.static(global.rootDir + '/public/js'));
+app.use('/css', express.static(global.rootDir + '/public/css'));
+app.use('/data', express.static(global.rootDir + '/public/data'));
+app.use('/docs', express.static(global.rootDir + '/public/html'));
+app.use('/img', express.static(global.rootDir + '/public/media'));
 app.use('/shop', express.static(global.rootDir + '/public/FrontOffice'));
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 //Game
-app.use('/game' , express.static(global.rootDir +'/public/Game'));
-app.use('/game/quiz' , express.static(global.rootDir +'/public/Game'));
-app.use('/game/wordle' , express.static(global.rootDir +'/public/Game'));
-app.use('/game/memory' , express.static(global.rootDir +'/public/Game'));
-app.use('/game/animalinfo' , express.static(global.rootDir +'/public/Game'));
-app.use('/game/medinfo' , express.static(global.rootDir +'/public/Game'));
-app.use('/game/yourpets' , express.static(global.rootDir +'/public/Game'));
+app.use('/game', express.static(global.rootDir + '/public/Game'));
+app.use('/game/quiz', express.static(global.rootDir + '/public/Game'));
+app.use('/game/wordle', express.static(global.rootDir + '/public/Game'));
+app.use('/game/memory', express.static(global.rootDir + '/public/Game'));
+app.use('/game/animalinfo', express.static(global.rootDir + '/public/Game'));
+app.use('/game/medinfo', express.static(global.rootDir + '/public/Game'));
+app.use('/game/yourpets', express.static(global.rootDir + '/public/Game'));
 
 app.get('/game', (req, res) => {
     res.sendFile(
@@ -106,11 +107,11 @@ app.get('/game/medinfo', (req, res) => {
 })
 
 app.get('/game/yourpets', (req, res) => {
-    res.sendFile(
-        global.rootDir + 'public/Game/index.html'
-    )
-})
-// https://stackoverflow.com/questions/40459511/in-express-js-req-protocol-is-not-picking-up-https-for-my-secure-link-it-alwa
+        res.sendFile(
+            global.rootDir + 'public/Game/index.html'
+        )
+    })
+    // https://stackoverflow.com/questions/40459511/in-express-js-req-protocol-is-not-picking-up-https-for-my-secure-link-it-alwa
 app.enable('trust proxy');
 
 //Backoffice
@@ -195,6 +196,22 @@ const info = async function(req, res) {
 
 app.get('/info', info)
 app.post('/info', info)
+app.post('/backoffice/users.json', (req, res) => {
+    var filepath = 'public/BackOffice/users.json';
+    var file = fs.readFileSync(filepath);
+    var json = JSON.parse(file);
+    // var user = JSON.parse(req.body);
+    const newUser = {
+        usernames: req.username,
+        email: "user.email",
+        password: "user.password",
+        admin: 0
+    };
+    //json.push(newUser);
+    console.log(req.body.username);
+    fs.writeFileSync(filepath, JSON.stringify(json));
+    res.send();
+})
 
 
 
@@ -214,6 +231,10 @@ const mongoCredentials = {
     }
     /* end */
 
+let MongoClient = require('mongodb').MongoClient;
+
+let localMongoUri = `mongodb://${mongoCredentials.user}:${mongoCredentials.pwd}@${mongoCredentials.site}?writeConcern=majority`
+
 app.get('/db/create', async function(req, res) {
     res.send(await mymongo.create(mongoCredentials))
 });
@@ -227,6 +248,29 @@ app.get('/api/getProducts', async function(req, res)
     res.send({risposta: "yoyoyo"});
 })
 
+app.get('/mongo/collections', async (req, res) => {
+    let collection_name = ["Uffici", "Clienti", "Dipendenti", "Manager"];
+
+    MongoClient.connect(localMongoUri, async function (err, database) {
+        if (err) throw err;
+        console.log("DB OK - RESET DATA");
+        var dbo = database.db("SiteDB");
+
+        for (name of collection_name) {
+            //Crea le collezioni di default
+            dbo.createCollection(name, function (err, res) {
+                if (err) throw err;
+                console.log("Collection created! " + name);
+            });
+
+            dbo.collection(name).find({}).toArray(function (err, result) {
+                if (err) throw err;
+                console.log(result);
+            });
+        }
+    });
+});
+
 
 
 
@@ -239,9 +283,9 @@ app.get('/api/getProducts', async function(req, res)
 /*                            */
 /* ========================== */
 
-app.listen(8000, function() {
+app.listen(8001, function() {
     global.startDate = new Date();
-    console.log(`App listening on port 8000 started ${global.startDate.toLocaleString()}`)
+    console.log(`App listening on port 8001 started ${global.startDate.toLocaleString()}`)
 })
 
 

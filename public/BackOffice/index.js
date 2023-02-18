@@ -1,3 +1,9 @@
+//const AuthController = require('./authController');
+//import { User } from './login/user.js';
+//const User = require('./login/User');
+//const bcrypt = require('bcryptjs');
+//const jwt = require('jsonwebtoken');
+
 function setFormMessage(formElement, type, message) {
     const messageElement = formElement.querySelector(".form__message");
     messageElement.textContent = message;
@@ -48,16 +54,23 @@ function registrazione(username, email, password) {
                 const newUser = {
                     username: username,
                     email: email,
-                    password: password
+                    password: password,
+                    admin: '1'
                 };
                 // aggiunta del nuovo utente al file JSON
-                data.push(newUser);
+                //data.push(newUser);
                 // salvataggio del file JSON aggiornato
                 fetch('users.json', {
                         method: 'PUT',
-                        body: JSON.stringify(data)
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(newUser)
                     })
-                    .then(() => console.log("Utente registrato con successo."))
+                    .then(() => {
+                        console.log("Utente registrato con successo.");
+                        //window.location.replace('/backoffice');
+                    })
                     .catch(error => console.error(error));
             }
         });
@@ -95,6 +108,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.log(`Benvenuto ${user.username}!`);
                     setFormMessage(loginForm, "success", "You're logged in!");
                     window.location.replace('./frontend/index.html');
+                } else if (user && user.admin === 0) {
+                    setFormMessage(loginForm, "error", "You're not an administrator!");
                 } else {
                     // login fallito
                     console.log("Credenziali non valide.");
@@ -102,6 +117,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
     });
+
+    /////
+    createAccount.addEventListener("submit", e => {
+        e.preventDefault();
+
+        //registrazione
+        var username = document.getElementById("createUsername").value;
+        var email = document.getElementById("createMail").value;
+        var password = document.getElementById("passwordCreate").value;
+        var passwordConfirm = document.getElementById("confirmPasswordCreate").value;
+        if (password == passwordConfirm) {
+            registrazione(username, email, password);
+        }
+    });
+    ////
 
     document.querySelectorAll("form__input").forEach(inputElement => {
         inputElement.addEventListener("blur", e => {
