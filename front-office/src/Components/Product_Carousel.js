@@ -28,7 +28,6 @@ class Product_Carousel extends React.Component {
   }
   
   render() {
-    console.log(this.state.slides)
     return (
       <Carousel controls variant='dark'>
         {this.state.slides.map( (productList, i) => {

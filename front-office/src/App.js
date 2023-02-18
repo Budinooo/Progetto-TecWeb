@@ -6,6 +6,11 @@ import Product_Carousel from './Components/Product_Carousel';
 import Animal_Select from "./Components/Animal_Select";
 import "./App.css";
 
+const onSearch = (query) =>  
+{
+  fetch("http://localhost:8000/api/getProducts/").then((response) => response.json()).then((jsonResponse) => console.log(jsonResponse));
+} 
+
 function App() {
 
   //todo: aggiungere campi tag, disponibilità.
@@ -22,8 +27,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
-
+      <Navbar callback={onSearch}/>
 
       <div className="container mt-5">
         <div id="animal-select" className="row mx-3">

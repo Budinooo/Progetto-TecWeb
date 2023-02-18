@@ -1,6 +1,7 @@
 .navbar-brand img {
     width: 100%;
 }
+
 .navbar-brand {
     width: 10%;
 }
@@ -16,8 +17,11 @@
 .icon-btn {
     border-radius:2em;
     border-style: solid;
-    padding:0% 0% 10%;
     text-align: center;
+}
+
+.navbar-nav {
+    width: 20%;
 }
 
 .icon-btn:hover {
