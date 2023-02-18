@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './Components/Navbar.js';
 import { BrowserRouter as Router, Routes as Switch, Route} from "react-router-dom";
@@ -8,7 +8,8 @@ import "./App.css";
 
 const onSearch = (query) =>  
 {
-  fetch("http://localhost:8000/api/getProducts/").then((response) => response.json()).then((jsonResponse) => console.log(jsonResponse));
+  debugger;
+  fetch("http://localhost:8000/db/search/" + query).then((response) => response.json()).then((jsonResponse) => console.log(jsonResponse));
 } 
 
 function App() {
