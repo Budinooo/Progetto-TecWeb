@@ -17,11 +17,13 @@ fetch('services.json')
                 <button class="btn btn-danger" id="remove-${service.id}" onclick="removeService(${service.id})">Remove</button>
             </div>
             <div class="container" id="formdate${service.id}" style="display:none; width:500px">
-                <label for="date">Choose a date:</label>
-                <select id="bookDate" form="select">
-                <option value="2023-02-20">20 febbraio 2023</option>
-                </select>
-                <button class="btn btn-primary" onclick='document.getElementById("formcontainer${service.id}").style.display = "none"'>Save</button>
+            <form class="form form--hidden" id="addDateForm">
+            <div class="form-group">
+                <label for="scoreInput">New Date</label>
+                <input type="date" class="form-control" id="dateService">
+            </div>
+            <button type="submit" class="btn btn-primary" id="saveService">Save</button>
+        </form>
             </div>
             <div class="container" id="formcontainer` + service.id + `" style="display:none">
             <form class="form form--hidden" id="editServiceForm">
@@ -80,6 +82,7 @@ function editService(serviceId) {
 function addAvailability(serviceId) {
     // logica per la visualizzazione della disponibilità del servizio
     //scrivere dato di data aggiunta
+    document.getElementById("formdate" + serviceId).style.display = "block";
 }
 
 function saveDate(serviceId) {
