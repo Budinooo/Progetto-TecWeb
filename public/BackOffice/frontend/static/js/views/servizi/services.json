@@ -2,20 +2,14 @@
         "id": 1,
         "name": "Servizio 1",
         "description": "Descrizione del servizio 1",
-        "availability": [
-            { "date": "2023-02-01", "available": true },
-            { "date": "2023-02-02", "available": false },
-            { "date": "2023-02-03", "available": true }
-        ]
+        "place": "Via Jacopo della Quercia, 1, Bologna, BO",
+        "availability": ["2023-02-01", "2023-02-02", "2023-02-03"]
     },
     {
         "id": 2,
         "name": "Servizio 2",
         "description": "Descrizione del servizio 2",
-        "availability": [
-            { "date": "2023-02-01", "available": false },
-            { "date": "2023-02-02", "available": true },
-            { "date": "2023-02-03", "available": false }
-        ]
+        "place": "Via Jacopo della Quercia, 1, Bologna, BO",
+        "availability": ["2023-02-01", "2023-02-02", "2023-02-03"]
     }
 ]
