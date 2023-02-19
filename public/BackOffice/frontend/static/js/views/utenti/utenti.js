@@ -14,6 +14,23 @@ fetch('utenti.json')
               <button class="btn btn-danger" onclick="removeClient(${client.id})">Remove</button>
             </div>
           </div>
+          <div class="container" id="formcontainer${client.id}" style="display:none">
+                <form class="form form--hidden" id="addClientForm">
+                    <div class="form-group">
+                        <label for="nameInput">Name</label>
+                        <input type="text" class="form-control" id="nameInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="favoritesInput">Favorite Animals</label>
+                        <input type="text" class="form-control" id="favoritesInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="scoreInput">Game Score</label>
+                        <input type="text" class="form-control" id="scoreInput">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="saveClient">Save</button>
+                </form>
+            </div>
         </div>
       `;
         });
@@ -83,6 +100,7 @@ function addClient(name, animals, score) {
 
 function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
+    document.getElementById("formcontainer" + jsonDataid).style.display = "block";
     /*
     document.getElementById("name").value = "Name: " + "jsonData.name";
     document.getElementById("favorites").innerHTML = "Favorite Animals: " + "jsonData.favorites";
