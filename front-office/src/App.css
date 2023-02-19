@@ -19,3 +19,7 @@
     background-color: rgb(68, 215, 208);
     transition: 0.1s;
 }
+
+.service-img {
+    height: 20em;
+}

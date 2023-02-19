@@ -1,19 +1,57 @@
+.postContainer{
+    display:flex;
+    flex-direction: column;
+}
+
 .post{
-    width: 100%;
     border-radius: 10px;
     border: 2px solid black;
     cursor: pointer;
+    margin: auto;
+    width: 60vw;
+    height: fit-content;
 }
 
 .postOpen{
-    height: 40vh;
+    gap: 20px;
+    cursor:default;
 }
 
 .postClose{
-    height: 25vh;
+    gap: 40px;
 }
 
 .title{
     font-size: 180%;
     font-weight: 800;
+}
+
+.author{
+    text-align: end;
+}
+
+.container{
+    display:flex;
+    flex-direction: column;
+    padding-bottom: 8px;
+}
+
+.answer{
+    word-wrap:break-word;
+    border-radius: 10px;
+    border: 2px solid black;
+    margin: auto;
+    width: 50vw;
+    height: fit-content;
+    margin-top: 10px;
+    background-color: rgb(233, 233, 233);
+}
+
+img{
+    max-width: 95%;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
 }

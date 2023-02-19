@@ -34,6 +34,7 @@ const template = require(global.rootDir + '/scripts/tpl.js') ;
 exports.create = async function(credentials) {
 	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
 
+	let collections = ['communityFeed, products, services, users, leaderboard'];
 	let debug = []
 	try {
 		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
@@ -100,12 +101,489 @@ exports.search = async function(q,credentials) {
 		debug.push("Managed to close connection to MongoDB.")
 
 		data.debug = debug
+
 		if (q.ajax) {
 			return data
 		} else {
 			var out = await template.generate('mongo.html', data);
 			return out
 		}
+	} catch (e) {
+		data.debug = debug
+		data.error = e
+		return data
+	}
+}
+
+///////GET/////////
+
+//Recupera l'intera collezione c
+exports.getCollection = async function(c,credentials) {
+	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+
+	let debug = []
+	try {
+		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
+		const mongo = new MongoClient(mongouri);		
+		await mongo.connect();
+		debug.push("... managed to connect to MongoDB.")
+
+		debug.push(`Trying to get collection '${c}'... `)
+		let result = [];
+		await mongo.db(dbname)
+					.collection(c)
+					.find({})
+					.forEach( (r) => { 
+						result.push(r) 
+					} );
+		debug.push(`... managed to get collection. Found ${result.length} results.`)
+
+		data.result = result
+		await mongo.close();
+		debug.push("Managed to close connection to MongoDB.")
+
+		data.debug = debug
+		return data;
+	} catch (e) {
+		data.debug = debug
+		data.error = e
+		return data
+	}
+}
+
+//Recupera l'elemento e
+exports.getElem = async function(e,collection,credentials) {
+	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+
+	let debug = []
+	try {
+		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
+		const mongo = new MongoClient(mongouri);		
+		await mongo.connect();
+		debug.push("... managed to connect to MongoDB.")
+
+		debug.push(`Trying to get '${e}'... `)
+		let result = [];
+		await mongo.db(dbname)
+					.collection(collection)
+					.findOne({
+						_id: e._id
+					})
+					.forEach( (r) => { 
+						result.push(r) 
+					} );
+		debug.push(`... managed to get element. Found ${result.length} results.`)
+
+		data.result = result
+		await mongo.close();
+		debug.push("Managed to close connection to MongoDB.")
+
+		data.debug = debug
+		return data;
+	} catch (e) {
+		data.debug = debug
+		data.error = e
+		return data
+	}
+}
+
+//Recupera il numero di elementi presenti nella collezione c
+exports.getCollectionSize = async function(c,credentials) {
+	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+
+	let debug = []
+	try {
+		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
+		const mongo = new MongoClient(mongouri);		
+		await mongo.connect();
+		debug.push("... managed to connect to MongoDB.")
+
+		debug.push(`Trying to get the number of elements in '${c}'... `)
+		let result = await mongo.db(dbname)
+								.collection(c)
+								.estimatedDocumentCount();
+		
+		debug.push(`... managed to get length. Found ${result.length} results.`)
+
+		data.result = result
+		await mongo.close();
+		debug.push("Managed to close connection to MongoDB.")
+
+		data.debug = debug
+		return data;
+	} catch (e) {
+		data.debug = debug
+		data.error = e
+		return data
+	}
+}
+
+///////INSERT/////////
+
+//Inserisci l'elemento e 
+exports.insertElem = async function(e,collection,credentials) {
+	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+
+	let debug = []
+	try {
+		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
+		const mongo = new MongoClient(mongouri);		
+		await mongo.connect();
+		debug.push("... managed to connect to MongoDB.")
+
+		debug.push(`Trying to insert '${e}'... `)
+
+		await mongo.db(dbname)
+					.collection(collection)
+					.insertOne(e);
+		debug.push(`... managed to insert element. Found ${result.length} results.`)
+
+		await mongo.close();
+		debug.push("Managed to close connection to MongoDB.")
+
+		data.debug = debug
+		return data;
+	} catch (e) {
+		data.debug = debug
+		data.error = e
+		return data
+	}
+}
+
+//Inserisci l'utente u
+exports.insertUser = async function(u,credentials) {
+	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+
+	let debug = []
+	try {
+		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
+		const mongo = new MongoClient(mongouri);		
+		await mongo.connect();
+		debug.push("... managed to connect to MongoDB.")
+
+		debug.push(`Trying to insert user '${u.username}'... `)
+		let user = {
+
+		}
+		await mongo.db(dbname)
+					.collection('users')
+					.insertOne(user);
+		debug.push(`... managed to insert user. Found ${result.length} results.`)
+
+		await mongo.close();
+		debug.push("Managed to close connection to MongoDB.")
+
+		data.debug = debug
+		return data;
+	} catch (e) {
+		data.debug = debug
+		data.error = e
+		return data
+	}
+}
+
+//Inserisci il prodotto p
+exports.insertProduct = async function(p,credentials) {
+	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+
+	let debug = []
+	try {
+		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
+		const mongo = new MongoClient(mongouri);		
+		await mongo.connect();
+		debug.push("... managed to connect to MongoDB.")
+
+		debug.push(`Trying to insert product '${p.name}'... `)
+		let product = {
+
+		}
+		await mongo.db(dbname)
+					.collection('products')
+					.insertOne(product);
+		debug.push(`... managed to insert product. Found ${result.length} results.`)
+
+		await mongo.close();
+		debug.push("Managed to close connection to MongoDB.")
+
+		data.debug = debug
+		return data;
+	} catch (e) {
+		data.debug = debug
+		data.error = e
+		return data
+	}
+}
+
+//Inserisci il servizio s
+exports.insertService = async function(s,credentials) {
+	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+
+	let debug = []
+	try {
+		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
+		const mongo = new MongoClient(mongouri);		
+		await mongo.connect();
+		debug.push("... managed to connect to MongoDB.")
+
+		debug.push(`Trying to insert product '${s.name}'... `)
+		let service = {
+
+		}
+		await mongo.db(dbname)
+					.collection('services')
+					.insertOne(service);
+		debug.push(`... managed to insert service. Found ${result.length} results.`)
+
+		await mongo.close();
+		debug.push("Managed to close connection to MongoDB.")
+
+		data.debug = debug
+		return data;
+	} catch (e) {
+		data.debug = debug
+		data.error = e
+		return data
+	}
+}
+
+//Inserisci il post p
+exports.insertPost = async function(p,credentials) {
+	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+
+	let debug = []
+	try {
+		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
+		const mongo = new MongoClient(mongouri);		
+		await mongo.connect();
+		debug.push("... managed to connect to MongoDB.")
+
+		debug.push(`Trying to insert post '${p.id}'... `)
+		let post = {
+
+		}
+		await mongo.db(dbname)
+					.collection('communityFeed')
+					.insertOne(post);
+		debug.push(`... managed to insert post. Found ${result.length} results.`)
+
+		await mongo.close();
+		debug.push("Managed to close connection to MongoDB.")
+
+		data.debug = debug
+		return data;
+	} catch (e) {
+		data.debug = debug
+		data.error = e
+		return data
+	}
+}
+
+///////EDIT/////////
+
+//Modifica l'elemento e
+exports.editElem = async function(e,collection,credentials) {
+	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+
+	let debug = []
+	try {
+		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
+		const mongo = new MongoClient(mongouri);		
+		await mongo.connect();
+		debug.push("... managed to connect to MongoDB.")
+
+		debug.push(`Trying to edit element '${e}'... `)
+
+		await mongo.db(dbname)
+					.collection(collection)
+					.findOneAndReplace(
+						{_id: u._id},
+						e
+					)
+		debug.push(`... managed to edit user. Found ${result.length} results.`)
+
+		await mongo.close();
+		debug.push("Managed to close connection to MongoDB.")
+
+		data.debug = debug
+		return data;
+	} catch (e) {
+		data.debug = debug
+		data.error = e
+		return data
+	}
+}
+
+//Modifica l'utente u
+exports.editUser = async function(u,credentials) {
+	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+
+	let debug = []
+	try {
+		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
+		const mongo = new MongoClient(mongouri);		
+		await mongo.connect();
+		debug.push("... managed to connect to MongoDB.")
+
+		debug.push(`Trying to edit user '${u.username}'... `)
+		let user = {
+
+		}
+		await mongo.db(dbname)
+					.collection('users')
+					.findOneAndReplace(
+						{_id: u._id},
+						user
+					)
+		debug.push(`... managed to edit user. Found ${result.length} results.`)
+
+		await mongo.close();
+		debug.push("Managed to close connection to MongoDB.")
+
+		data.debug = debug
+		return data;
+	} catch (e) {
+		data.debug = debug
+		data.error = e
+		return data
+	}
+}
+
+//Modifica il prodotto p
+exports.editProduct = async function(p,credentials) {
+	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+
+	let debug = []
+	try {
+		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
+		const mongo = new MongoClient(mongouri);		
+		await mongo.connect();
+		debug.push("... managed to connect to MongoDB.")
+
+		debug.push(`Trying to edit product '${p.name}'... `)
+		let product = {
+
+		}
+		await mongo.db(dbname)
+					.collection('product')
+					.findOneAndReplace(
+						{_id: p._id},
+						product
+					)
+		debug.push(`... managed to edit product. Found ${result.length} results.`)
+
+		await mongo.close();
+		debug.push("Managed to close connection to MongoDB.")
+
+		data.debug = debug
+		return data;
+	} catch (e) {
+		data.debug = debug
+		data.error = e
+		return data
+	}
+}
+
+//Modifica il servizio s
+exports.editService = async function(s,credentials) {
+	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+
+	let debug = []
+	try {
+		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
+		const mongo = new MongoClient(mongouri);		
+		await mongo.connect();
+		debug.push("... managed to connect to MongoDB.")
+
+		debug.push(`Trying to edit service '${s.name}'... `)
+		let service = {
+
+		}
+		await mongo.db(dbname)
+					.collection('services')
+					.findOneAndReplace(
+						{_id: s._id},
+						service
+					)
+		debug.push(`... managed to edit service. Found ${result.length} results.`)
+
+		await mongo.close();
+		debug.push("Managed to close connection to MongoDB.")
+
+		data.debug = debug
+		return data;
+	} catch (e) {
+		data.debug = debug
+		data.error = e
+		return data
+	}
+}
+
+//Modifica il post p
+exports.editPost = async function(p,credentials) {
+	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+
+	let debug = []
+	try {
+		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
+		const mongo = new MongoClient(mongouri);		
+		await mongo.connect();
+		debug.push("... managed to connect to MongoDB.")
+
+		debug.push(`Trying to edit post '${p.title}'... `)
+		let post = {
+
+		}
+		await mongo.db(dbname)
+					.collection('communityFeed')
+					.findOneAndReplace(
+						{_id: p._id},
+						post
+					)
+		debug.push(`... managed to edit post. Found ${result.length} results.`)
+
+		await mongo.close();
+		debug.push("Managed to close connection to MongoDB.")
+
+		data.debug = debug
+		return data;
+	} catch (e) {
+		data.debug = debug
+		data.error = e
+		return data
+	}
+}
+
+///////REMOVE/////////
+
+//Rimuovi un elemento da una collezione
+exports.removeElem = async function(u,collection,credentials) {
+	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+
+	let debug = []
+	try {
+		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
+		const mongo = new MongoClient(mongouri);		
+		await mongo.connect();
+		debug.push("... managed to connect to MongoDB.")
+
+		debug.push(`Trying to remove user '${u.username}'... `)
+		let user = {
+
+		}
+		await mongo.db(dbname)
+					.collection(collection)
+					.findOneAndDelete(
+						{
+							_id: u._id
+						}
+					)
+		debug.push(`... managed to edit post. Found ${result.length} results.`)
+
+		await mongo.close();
+		debug.push("Managed to close connection to MongoDB.")
+
+		data.debug = debug
+		return data;
 	} catch (e) {
 		data.debug = debug
 		data.error = e

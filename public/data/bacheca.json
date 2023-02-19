@@ -1,5 +1,5 @@
 [{
-    "id": 1,
+    "_id": 1,
     "senderId": 123,
     "senderName": "John Doe",
     "title": "Informazioni prodotto",
@@ -7,7 +7,7 @@
     "text": "Buongiorno, vorrei sapere se il prodotto A è disponibile.",
     "replies": []
 }, {
-    "id": 2,
+    "_id": 2,
     "senderId": 456,
     "senderName": "Jane Doe",
     "title": "Richiesta informazioni",

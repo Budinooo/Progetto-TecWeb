@@ -262,7 +262,7 @@ const mongoCredentials = {
         user: "site212229",
         pwd: "oiy3ahSa",
         site: "mongo_site212229"
-    }
+}
     /* end */
 
 let MongoClient = require('mongodb').MongoClient;
@@ -304,8 +304,29 @@ app.get('/mongo/collections', async (req, res) => {
     });
 });
 
+app.get('/db/collection', async function(req, res) {
+    res.send(await mymongo.getCollection(req.body.collection, mongoCredentials))
+});
 
+app.get('/db/collectionsize', async function(req, res) {
+    res.send(await mymongo.getCollectionSize(req.body.collection, mongoCredentials))
+});
 
+app.get('/db/element', async function(req, res) {
+    res.send(await mymongo.getElem(req.body.id,req.body.collection, mongoCredentials))
+});
+
+app.post('/db/element', async function(req, res) {
+    res.send(await mymongo.insertElem(req.body.elem,req.body.collection, mongoCredentials))
+});
+
+app.put('/db/element', async function(req, res) {
+    res.send(await mymongo.editElem(req.body.elem,req.body.collection, mongoCredentials))
+});
+
+app.delete('/db/element', async function(req, res) {
+    res.send(await mymongo.removeElem(req.body.elem,req.body.collection, mongoCredentials))
+});
 
 
 
@@ -316,9 +337,9 @@ app.get('/mongo/collections', async (req, res) => {
 /*                            */
 /* ========================== */
 
-app.listen(8001, function() {
+app.listen(8000, function() {
     global.startDate = new Date();
-    console.log(`App listening on port 8001 started ${global.startDate.toLocaleString()}`)
+    console.log(`App listening on port 8000 started ${global.startDate.toLocaleString()}`)
 })
 
 

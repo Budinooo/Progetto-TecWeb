@@ -1,13 +1,13 @@
 [
     {
-        "id": 1,
+        "_id": 1,
         "name": "Cliente 1",
         "favorites": "Cani, gatti",
         "score": 10
     },
     
     { 
-        "id": 2, 
+        "_id": 2, 
         "name": "Cliente 2", 
         "favorites": "Uccelli, pesci", 
         "score": 20 
