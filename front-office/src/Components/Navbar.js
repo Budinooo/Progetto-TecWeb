@@ -29,7 +29,7 @@ class Navbar extends React.Component {
         <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
           <form id="searchbarContainer" className="ms-auto my-2 my-lg-0">
             <input id="searchBar" className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-            <button onClick={(e)=>this.handleSearch(this.props.callback)(e)} >Cerca</button>
+            <button onClick={(e)=>this.handleSearch(this.props.callback)(e)} ><img width="85%" src="https://assets.stickpng.com/images/585e4ae1cb11b227491c3393.png" /></button>
           </form>
           <ul className="navbar-nav justify-content-end me-5">
             <li className="nav-item active">

@@ -1,5 +1,5 @@
 [{
-        "id": 1,
+        "_id": 1,
         "name": "Servizio 1",
         "description": "Descrizione del servizio 1",
         "availability": [
@@ -9,7 +9,7 @@
         ]
     },
     {
-        "id": 2,
+        "_id": 2,
         "name": "Servizio 2",
         "description": "Descrizione del servizio 2",
         "availability": [

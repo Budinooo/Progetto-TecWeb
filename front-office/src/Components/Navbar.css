@@ -8,6 +8,24 @@
 
 #searchbarContainer {
     width: 70%;
+    display: flex;
+}
+
+#searchBar {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#searchbarContainer > button {
+    border: hidden;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    width: 3%;
+}
+
+#searchbarContainer > button > img {
+    margin-bottom: 3px;
+    margin-right: 3px;
 }
 
 .nav-item {
