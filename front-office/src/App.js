@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './Components/Navbar.js';
 import { BrowserRouter as Router, Routes as Switch, Route} from "react-router-dom";
 import Product_Carousel from './Components/Product_Carousel';
+import Community_Feed from "./Components/Community_Feed";
 import Animal_Select from "./Components/Animal_Select";
 import "./App.css";
 
 const onSearch = (query) =>  
 {
-  fetch("http://localhost:8000/api/getProducts/").then((response) => response.json()).then((jsonResponse) => console.log(jsonResponse));
+  debugger;
+  fetch("http://localhost:8000/db/search/" + query).then((response) => response.json()).then((jsonResponse) => console.log(jsonResponse));
 } 
 
 function App() {
@@ -65,6 +67,7 @@ function App() {
           <Product_Carousel productList={products} />
         </div>
       </div>
+      <Community_Feed />
     </div>
     
   )

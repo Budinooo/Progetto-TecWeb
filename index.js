@@ -265,6 +265,10 @@ const mongoCredentials = {
     }
     /* end */
 
+let MongoClient = require('mongodb').MongoClient;
+
+let localMongoUri = `mongodb://${mongoCredentials.user}:${mongoCredentials.pwd}@${mongoCredentials.site}?writeConcern=majority`
+
 app.get('/db/create', async function(req, res) {
     res.send(await mymongo.create(mongoCredentials))
 });
@@ -276,6 +280,29 @@ app.get('/db/search', async function(req, res) {
 app.get('/api/getProducts', async function(req, res) {
     res.send({ risposta: "yoyoyo" });
 })
+
+app.get('/mongo/collections', async (req, res) => {
+    let collection_name = ["Uffici", "Clienti", "Dipendenti", "Manager"];
+
+    MongoClient.connect(localMongoUri, async function (err, database) {
+        if (err) throw err;
+        console.log("DB OK - RESET DATA");
+        var dbo = database.db("SiteDB");
+
+        for (name of collection_name) {
+            //Crea le collezioni di default
+            dbo.createCollection(name, function (err, res) {
+                if (err) throw err;
+                console.log("Collection created! " + name);
+            });
+
+            dbo.collection(name).find({}).toArray(function (err, result) {
+                if (err) throw err;
+                console.log(result);
+            });
+        }
+    });
+});
 
 
 
@@ -289,9 +316,9 @@ app.get('/api/getProducts', async function(req, res) {
 /*                            */
 /* ========================== */
 
-app.listen(8000, function() {
+app.listen(8001, function() {
     global.startDate = new Date();
-    console.log(`App listening on port 8000 started ${global.startDate.toLocaleString()}`)
+    console.log(`App listening on port 8001 started ${global.startDate.toLocaleString()}`)
 })
 
 

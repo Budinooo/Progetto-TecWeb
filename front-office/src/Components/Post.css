@@ -1,0 +1,19 @@
+.post{
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.postOpen{
+    height: 40vh;
+}
+
+.postClose{
+    height: 25vh;
+}
+
+.title{
+    font-size: 180%;
+    font-weight: 800;
+}
