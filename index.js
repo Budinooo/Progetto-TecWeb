@@ -51,6 +51,10 @@ const fs = require('fs');
 /* ========================== */
 
 let app = express();
+
+let bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
 app.use(express.static(global.rootDir + '/public'))
 app.use('/js', express.static(global.rootDir + '/public/js'));
 app.use('/css', express.static(global.rootDir + '/public/css'));
@@ -196,24 +200,54 @@ const info = async function(req, res) {
 
 app.get('/info', info)
 app.post('/info', info)
-app.post('/backoffice/users.json', (req, res) => {
+
+app.put('/backoffice/users.json', (req, res) => {
     var filepath = 'public/BackOffice/users.json';
     var file = fs.readFileSync(filepath);
     var json = JSON.parse(file);
-    // var user = JSON.parse(req.body);
     const newUser = {
-        usernames: req.username,
-        email: "user.email",
-        password: "user.password",
-        admin: 0
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        admin: '1'
     };
-    //json.push(newUser);
-    console.log(req.body.username);
+    json.push(newUser);
     fs.writeFileSync(filepath, JSON.stringify(json));
     res.send();
 })
 
+app.put('/backoffice/frontend/static/js/views/utenti/utenti.json', (req, res) => {
+    var filepath = 'public/BackOffice/frontend/static/js/views/utenti/utenti.json';
+    var file = fs.readFileSync(filepath);
+    var json = JSON.parse(file);
+    const newUser = {
+        id: req.body.id,
+        name: req.body.name,
+        favorites: req.body.favorites,
+        score: req.body.score
+    };
+    json.push(newUser);
+    fs.writeFileSync(filepath, JSON.stringify(json));
+    res.send();
+})
 
+app.put('/backoffice/frontend/static/js/views/prodotti/prodotti.json', (req, res) => {
+    var filepath = 'public/BackOffice/frontend/static/js/views/prodotti/prodotti.json';
+    var file = fs.readFileSync(filepath);
+    var json = JSON.parse(file);
+    const newProduct = {
+        id: req.body.id,
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+        availability: req.body.availability,
+        image: req.body.image
+    };
+    json.products.push(newProduct);
+    console.log(req.body);
+    fs.writeFileSync(filepath, JSON.stringify(json));
+    res.send();
+})
 
 
 
@@ -239,9 +273,8 @@ app.get('/db/search', async function(req, res) {
     res.send(await mymongo.search(req.query, mongoCredentials))
 });
 
-app.get('/api/getProducts', async function(req, res)
-{
-    res.send({risposta: "yoyoyo"});
+app.get('/api/getProducts', async function(req, res) {
+    res.send({ risposta: "yoyoyo" });
 })
 
 

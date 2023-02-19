@@ -30,12 +30,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     document.querySelector('#saveClient').addEventListener("click", e => {
         e.preventDefault();
-        const name = document.querySelector('#nameInput');
-        const animals = document.querySelector('#favoritesInput');
-        const score = document.querySelector('#scoreInput');
-        //addClient(name, animals, score);
+        const name = document.querySelector('#nameInput').value;
+        const animals = document.querySelector('#favoritesInput').value;
+        const score = document.querySelector('#scoreInput').value;
+        addClient(name, animals, score);
         //addForm.classList.add("form--hidden");
         document.getElementById("formcontainer").style.display = "none";
+    });
+    document.querySelector('#editClient').addEventListener("click", e => {
+        e.preventDefault();
+        document.getElementById("formcontainer").style.display = "block";
     });
 });
 
@@ -45,19 +49,35 @@ function addClient(name, animals, score) {
     fetch('utenti.json')
         .then(response => response.json())
         .then(data => {
-            // modifica l'oggetto JavaScript
-            data.push({
-                id: '4',
-                name: name,
-                animali_preferiti: animals,
-                punteggio: score
-            });
-
-            // scrive il contenuto del file JSON
-            fetch('utenti.json', {
-                method: 'PUT',
-                body: JSON.stringify(data)
-            });
+            const userExists = data.some(u => u.name === name);
+            if (userExists) {
+                console.log("Utente già registrato con questo username o email.");
+                editClient(userExists.id, name, animals, score);
+            } else {
+                // creazione di un nuovo oggetto utente
+                const newUser = {
+                    id: data.length + 1,
+                    name: name,
+                    favorites: animals,
+                    score: score
+                };
+                // aggiunta del nuovo utente al file JSON
+                // salvataggio del file JSON aggiornato
+                const options = {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(newUser)
+                };
+                fetch('utenti.json', options)
+                    .then(() => {
+                        console.log("Utente registrato con successo.");
+                        window.location.replace('./utenti.html');
+                    })
+                    .catch(error => console.error(error));
+            }
         });
 }
 
@@ -68,14 +88,16 @@ function editClient(jsonDataid) {
     document.getElementById("favorites").innerHTML = "Favorite Animals: " + "jsonData.favorites";
     document.getElementById("score").innerHTML = "Game Score: " + "jsonData.score";
     */
-    fetch('utenti.json')
-        .then(response => response.json())
-        .then(data => {
-            // ricerca dell'utente nel file JSON
-            const jsonData = data.find(u => u.id === jsonDataid);
-        });
-    document.getElementById("formcontainer").style.display = "block";
-    document.getElementById(jsonDataid).style.display = "none";
+    /*
+     fetch('utenti.json')
+         .then(response => response.json())
+         .then(data => {
+             // ricerca dell'utente nel file JSON
+             const jsonData = data.find(u => u.id === jsonDataid);
+         });
+     document.getElementById("formcontainer").style.display = "block";
+     document.getElementById(jsonDataid).style.display = "none";
+     */
     /*
         document.getElementById("editButton").addEventListener("click", function() {
             document.getElementById("formcontainer").style.display = "block";
@@ -85,19 +107,48 @@ function editClient(jsonDataid) {
             document.getElementById("scoreInput").value = jsonData.score;
         });
     */
-    document.querySelector("form").addEventListener("submit", function(event) {
-        //event.preventDefault();
-        jsonData.name = document.getElementById("nameInput").value;
-        jsonData.favorites = document.getElementById("favoritesInput").value;
-        jsonData.score = document.getElementById("scoreInput").value;
-        //document.getElementById("jsonData").style.display = "block";
-        document.getElementById("formcontainer").style.display = "none";
-        document.getElementById(jsonDataid).style.display = "block";
-        /*
-        document.getElementById("name").innerHTML = "Nome: " + jsonData.name;
-        document.getElementById("favorites").innerHTML = "Animali preferiti: " + jsonData.favorites;
-        document.getElementById("score").innerHTML = "Punteggio: " + jsonData.score;
-        */
+    /*
+     document.querySelector("form").addEventListener("submit", function(event) {
+         //event.preventDefault();
+         jsonData.name = document.getElementById("nameInput").value;
+         jsonData.favorites = document.getElementById("favoritesInput").value;
+         jsonData.score = document.getElementById("scoreInput").value;
+         //document.getElementById("jsonData").style.display = "block";
+         document.getElementById("formcontainer").style.display = "none";
+         document.getElementById(jsonDataid).style.display = "block";
+         /*
+         /*
+         document.getElementById("name").innerHTML = "Nome: " + jsonData.name;
+         document.getElementById("favorites").innerHTML = "Animali preferiti: " + jsonData.favorites;
+         document.getElementById("score").innerHTML = "Punteggio: " + jsonData.score;
+         */
+    //});
+
+
+    ////////////////////////////////////////////////////////////////
+    // prendi l'elemento della card
+    const card = document.querySelector('.card');
+
+    // prendi gli elementi del form
+    const titleInput = document.getElementById('card-title-input');
+    const descriptionInput = document.getElementById('card-description-input');
+    const imageInput = document.getElementById('card-image-input');
+    const editCardForm = document.getElementById('edit-card-form');
+
+    // popola i valori della card con quelli del form
+    titleInput.value = card.querySelector('.card-title').innerText;
+    descriptionInput.value = card.querySelector('.card-description').innerText;
+    imageInput.value = card.querySelector('.card-image').innerText;
+
+    // ascolta l'evento di submit del form
+    editCardForm.addEventListener('submit', function(event) {
+        // previeni il comportamento predefinito del form
+        event.preventDefault();
+
+        // aggiorna i valori della card con quelli del form
+        card.querySelector('.card-title').innerText = titleInput.value;
+        card.querySelector('.card-description').innerText = descriptionInput.value;
+        card.querySelector('.card-image').innerText = imageInput.value;
     });
 }
 

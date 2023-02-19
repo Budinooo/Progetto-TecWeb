@@ -49,7 +49,7 @@ $.getJSON("prodotti.json", function(data) {
 });
 
 // Aggiunge un nuovo prodotto
-$("#addBtn").click(function(name, description, price, availability, image) {
+$("#addBtn").click(function() {
     // logica per l'aggiunta di un nuovo prodotto
     // legge il contenuto del file JSON
     document.getElementById("formcontainer").style.display = "block";
@@ -61,20 +61,31 @@ $("#addBtn").click(function(name, description, price, availability, image) {
             .then(response => response.json())
             .then(data => {
                 // modifica l'oggetto JavaScript
-                data.push({
-                    id: '4',
-                    name: name,
-                    description: description,
-                    price: price,
-                    availability: availability,
-                    image: image
-                });
-
-                // scrive il contenuto del file JSON
-                fetch('prodotti.json', {
+                // creazione di un nuovo oggetto prodotto
+                const newProduct = {
+                    id: data.products.length + 1,
+                    name: document.getElementById("nameInput").value,
+                    description: document.getElementById("descriptionInput").value,
+                    price: document.getElementById("priceInput").value,
+                    availability: document.getElementById("availabilityInput").value,
+                    image: document.getElementById("imageInput").value
+                };
+                // aggiunta del nuovo utente al file JSON
+                // salvataggio del file JSON aggiornato
+                const options = {
                     method: 'PUT',
-                    body: JSON.stringify(data)
-                });
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(newProduct)
+                };
+                fetch('prodotti.json', options)
+                    .then(() => {
+                        console.log("Prodotto registrato con successo.");
+                        window.location.replace('./prodotti.html');
+                    })
+                    .catch(error => console.error(error));
             });
     });
 });
