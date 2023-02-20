@@ -18,6 +18,15 @@ $.getJSON("bacheca.json", function(messages) {
             <button class="btn btn-warning" onclick="editMessage(` + message.id + `)">Edit</button>
             <button class="btn btn-danger" onclick="deleteMessage(` + message.id + `)">Remove</button>
           </div>
+          <div class="container" id="formcontainer` + message.id + `" style="display:none">
+            <form class="form form--hidden" id="editMessageForm">
+                <div class="form-group">
+                    <label for="scoreInput">Message</label>
+                    <input type="text" class="form-control" id="newMessage">
+                </div>
+                <button type="submit" class="btn btn-primary" id="saveClient">Save</button>
+            </form>
+        </div>
         </div>
       `;
         // Aggiunta della card al container
@@ -38,7 +47,7 @@ function editMessage(messageId) {
             // ricerca dell'utente nel file JSON
             const jsonData = data.find(u => u.id === messageId);
         });
-    document.getElementById("formcontainer").style.display = "block";
+    document.getElementById("formcontainer" + messageId).style.display = "block";
     document.getElementById(jsonDataid).style.display = "none";
     /*
         document.getElementById("editButton").addEventListener("click", function() {
@@ -53,7 +62,7 @@ function editMessage(messageId) {
         //event.preventDefault();
         jsonData.message = document.getElementById("messageText").value;
         //document.getElementById("jsonData").style.display = "block";
-        document.getElementById("formcontainer").style.display = "none";
+        document.getElementById("formcontainer" + messageId).style.display = "none";
         document.getElementById(jsonDataid).style.display = "block";
         /*
         document.getElementById("name").innerHTML = "Nome: " + jsonData.name;

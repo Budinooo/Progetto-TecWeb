@@ -60,16 +60,18 @@ function registrazione(username, email, password) {
                 // aggiunta del nuovo utente al file JSON
                 //data.push(newUser);
                 // salvataggio del file JSON aggiornato
-                fetch('users.json', {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(newUser)
-                    })
+                const options = {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(newUser)
+                };
+                fetch('users.json', options)
                     .then(() => {
                         console.log("Utente registrato con successo.");
-                        //window.location.replace('/backoffice');
+                        window.location.replace('/backoffice');
                     })
                     .catch(error => console.error(error));
             }
@@ -102,13 +104,13 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(response => response.json())
             .then(data => {
                 // ricerca dell'utente nel file JSON
-                const user = data.find(u => u.username === username && u.password === password);
-                if (user && user.admin === 1) {
+                const user = data.find(u => u.username == username && u.password == password);
+                if (user && user.admin == 1) {
                     // login effettuato con successo
                     console.log(`Benvenuto ${user.username}!`);
                     setFormMessage(loginForm, "success", "You're logged in!");
                     window.location.replace('./frontend/index.html');
-                } else if (user && user.admin === 0) {
+                } else if (user && user.admin == 0) {
                     setFormMessage(loginForm, "error", "You're not an administrator!");
                 } else {
                     // login fallito
