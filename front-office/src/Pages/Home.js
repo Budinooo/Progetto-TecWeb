@@ -1,6 +1,7 @@
 import React from "react";
 import Product_Carousel from "../Components/Product_Carousel";
 import Community_Feed from "./Community_Feed.js";
+import Service from '../Components/Service.js';
 
 export default function Home(props)
 {
@@ -42,17 +43,10 @@ export default function Home(props)
           </div>
           <div className="row">
             <h3 className="mb-4">Explore our services</h3>
-            <div className="d-flex service-container">
-              <div className="d-none service-img">
-                <img width="100%" src="https://larchmontvillagevet.com/wp-content/uploads/2019/02/grooming-lab-bath-1024x682.jpg" />
-              </div>
-              <div className="service-body-container">
-                <h4 className="service-name"></h4>
-                <p className="service-desc"></p>
-                <p className="service-price"></p>
-                <button className="service-btn"></button>
-              </div>
-            </div>
+            <Service short={true} service={props.services[0]} />
+          </div>
+          <div className="row">
+            <a href="/services">More Services</a>
           </div>
           <Community_Feed />
         </div>
