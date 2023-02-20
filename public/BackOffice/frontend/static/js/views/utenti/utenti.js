@@ -63,9 +63,15 @@ document.addEventListener("DOMContentLoaded", () => {
 function addClient(name, animals, score) {
     // logica per l'aggiunta di un nuovo cliente
     // legge il contenuto del file JSON
-    fetch('utenti.json')
-        .then(response => response.json())
+    fetch('/db/collection?collection=products',{
+        method:'GET'
+    })
+        .then(response => {
+            return response.json()
+        })
         .then(data => {
+            console.log(data)
+            /*
             const userExists = data.some(u => u.name === name);
             if (userExists) {
                 console.log("Utente già registrato con questo username o email.");
@@ -95,7 +101,127 @@ function addClient(name, animals, score) {
                     })
                     .catch(error => console.error(error));
             }
-        });
+        */});
+
+    fetch('/db/collectionsize?collection=products',{
+        method:'GET'
+    })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            console.log(data)
+        })
+
+    fetch('/db/element?id=1&collection=products',{
+        method:'GET'
+    })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            console.log(data)
+        })
+
+    let obj = {
+        collection:'users',
+        elem:{ 
+            "_id":"3",
+            "name": "Gerald",
+            "username": "Geraldadmin",
+            "email": "gerald@marcio.com",
+            "password":"ciaociao",
+            "favorites": ["cat"],
+            "pets":[],
+            "score": "1000",
+            "admin": "1"
+        }
+    };
+
+    fetch('/db/element',{
+        method:'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(obj)
+    })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            console.log(data)
+        })
+
+    fetch('/db/element?id=3&collection=users',{
+        method:'GET'
+    })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            console.log(data)
+        })
+
+    obj = {
+        collection:'users',
+        elem:{
+            "_id":"3",
+            "name": "Gerald",
+            "username": "Budino",
+            "email": "gerald@marcio.com",
+            "password":"ciaociao",
+            "favorites": ["cat"],
+            "pets":[],
+            "score": "1000",
+            "admin": "1"
+        }
+    }
+
+    fetch('/db/element',{
+        method:'PUT',
+        headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(obj)
+    })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            console.log(data)
+        })
+    
+    obj = {
+        collection:'users',
+        id:'3'
+    }
+
+    fetch('/db/element',{
+        method:'DELETE',
+        headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(obj)
+    })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            console.log(data)
+        })
+
+    fetch('/db/collection?collection=users',{
+        method:'GET'
+    })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            console.log(data)
+        })
 }
 
 function editClient(jsonDataid) {

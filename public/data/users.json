@@ -1,0 +1,24 @@
+[
+    {
+        "_id": 1,
+        "name": "Cliente 1",
+        "username": "Ciccio",
+        "email": "mail@narcio.com",
+        "password":"password",
+        "favorites": ["dog"],
+        "pets":[],
+        "score": 10,
+        "admin": 0
+    },
+    { 
+        "_id": 2,
+        "name": "Cliente 1",
+        "username": "admin",
+        "email": "mail@narcio.com",
+        "password":"admin",
+        "favorites": ["dog"],
+        "pets":[],
+        "score": 10,
+        "admin": 1
+    }
+]

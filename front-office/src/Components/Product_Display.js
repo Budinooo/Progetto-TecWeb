@@ -38,6 +38,25 @@ class Product_Display extends React.Component
 
     product = this.props.product;
 
+    addToCart = (item) =>
+    {
+        let cart = JSON.parse(localStorage.getItem("cart"));
+        let cartItem = cart.findIndex(i => i.id == item.id);
+        if(cartItem>=0)
+            cart.at(cartItem).quantity++;
+        else {
+            let newItem = {id:0, img:"", name:"", price:0, quantity:0};
+            newItem.id = item.id;
+            newItem.img = item.img;
+            newItem.name = item.name;
+            newItem.price = item.price;
+            newItem.quantity = 1;
+            cart.push(newItem);
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        console.log("aggiunto " + item.name + " al carrello");
+    }
+
     render() 
     {
         let id = "product"+this.props.product._id;
@@ -53,7 +72,7 @@ class Product_Display extends React.Component
                 </div>
                 <div>
                     <div className="pricep"> {this.product.price}</div>
-                    <button className='btn-add'>ADD TO CART</button>
+                    <button className='btn-add' onClick={()=>this.addToCart(this.props.product)}>ADD TO CART</button>
                 </div>
             </div>
         )
