@@ -1,6 +1,26 @@
 import { Button } from 'bootstrap'
 import React from 'react'
 import './Product.css'
+
+const addToCart = (item) =>
+{
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  let cartItem = cart.findIndex(i => i.id == item.id);
+  if(cartItem>=0)
+    cart.at(cartItem).quantity++;
+  else {
+    let newItem = {id:0, img:"", name:"", price:0, quantity:0};
+    newItem.id = item.id;
+    newItem.img = item.img;
+    newItem.name = item.name;
+    newItem.price = item.price;
+    newItem.quantity = 1;
+    cart.push(newItem);
+  }
+  localStorage.setItem("cart", JSON.stringify(cart));
+  console.log("aggiunto " + item.name + " al carrello");
+}
+
 export default function Product(props) {
 
   return (
@@ -9,7 +29,7 @@ export default function Product(props) {
       <div className='card-body mt-auto'>
         <h5 className='card-title'> {props.product.name} </h5>
         <p className='card-text price'>€ {props.product.price} </p>
-        <button className='btn-add'>ADD TO CART</button>
+        <button onClick={(e) => addToCart(props.product)} className='btn-add'>ADD TO CART</button>
       </div>
     
     </div>

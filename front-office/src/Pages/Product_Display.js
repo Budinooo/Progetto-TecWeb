@@ -1,12 +1,13 @@
 import React from "react";
-import Product from "./Product";
+import Product from "../Components/Product";
 
 class Product_Display extends React.Component 
 {
     constructor(props) 
     {
         super(props);
-        this.state = props.productList;
+        debugger;
+        fetch("products.json").then((res)=>{response.json(); console.log("fetch avvenuta")}).then((data)=>this.state = JSON.parse(data));
     }
 
     render() 
