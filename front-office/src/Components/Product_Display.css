@@ -1,0 +1,33 @@
+.product{
+    width: 30%;
+    border-radius: 10px;
+    border: 2px solid grey;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.imgp{
+    border-radius: 10px;
+    width: 70%;
+}
+
+.imgpContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.namep{
+    font-weight: bold;
+}
+
+.descp{
+    font-size: 85%;
+}
+
+.pricep{
+    font-size: 140%;
+    font-weight: bold;
+}

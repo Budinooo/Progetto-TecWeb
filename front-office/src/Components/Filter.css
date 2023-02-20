@@ -1,0 +1,7 @@
+.filters{
+    width: 20%;
+    border: 2px solid grey;
+    background-color: lightgray;
+    border-radius: 10px;
+    height: fit-content;
+}
