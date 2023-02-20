@@ -1,6 +1,11 @@
 import React from 'react'
 import './Service.css'
+
+function disableDays()
+
 export default function Service(props) {
+
+  const today = new Date().toLocaleDateString();
 
   if(props.short == true)
     return (
@@ -38,10 +43,13 @@ export default function Service(props) {
           <h4 className="service-name">{props.service.name}</h4>
           <p className="service-desc">{props.service.desc}</p>
           <p className="service-price">{props.service.price}</p>
-          <p className='availability'>Available slots on
+          <form id="booking-form">
+            <select name="time-slot-select">
 
-          </p>
-          <button className="service-btn">Book Now</button>
+            </select>
+            <input type="date">{}</input>
+            <button className="service-btn">Book Now</button>
+          </form>      
         </div>
       </div>
     )
