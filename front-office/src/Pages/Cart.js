@@ -9,12 +9,9 @@ class Cart extends React.Component
         super(props);
 //        const products = props.products;
         const services = props.services;
-        const products = [{id: 1, img: 'https://www.ideashoppingcenter.it/files/archivio_Files/Foto/44645_2.JPG', 
-        name: 'croccantini', price: '99.99', quantity: '1'},{id: 2, img: 'https://www.loradeglianimali.it/22047-large_default/flexi-original-new-classic-guinzaglio-acorda-5-mt-per-cani-m.jpg', 
-        name: 'guinzaglio', price: '99.99', quantity: '1'},{id: 3, img: 'https://www.isoladeitesori.it/dw/image/v2/BGRZ_PRD/on/demandware.static/-/Sites-it-master-catalog/default/dwaada2229/176032.jpg?sw=400&sh=400',
-        name: 'Shampoo Petup Mousse Delicata', price:'8.99', quantity: '2'},{id: 4, img: 'https://www.isoladeitesori.it/dw/image/v2/BGRZ_PRD/on/demandware.static/-/Sites-it-master-catalog/default/dwd0f06e10/idt/142719_1_1.jpg?sw=400&sh=400',
-        name: 'NaturalPet Ghiotto Chef', price: '0.99', quantity: '1'}, {id: 5, img: 'https://www.isoladeitesori.it/dw/image/v2/BGRZ_PRD/on/demandware.static/-/Sites-it-master-catalog/default/dw697e1d01/162528.jpg?sw=400&sh=400',
-        name: 'Petup Cuscino Ovale Natalizio', price: '8.99', quantity: '4'}]
+        let products = JSON.parse(localStorage.getItem("cart"));
+        if (!products)
+            products = [];
         this.state = {products, services};
     }
 
@@ -23,12 +20,12 @@ class Cart extends React.Component
         let productToRemove = this.state.products.findIndex(product => product.id == id);
         let remainingProducts = this.state.products;
         remainingProducts.splice(productToRemove,1);
-        this.setState({products: remainingProducts}, () => console.log(this.state.products));
+        this.setState({products: remainingProducts}, () => localStorage.setItem("cart", JSON.stringify(this.state.products)));
     };
 
     getTotal = () => 
     {
-        let sum=0;
+        let sum=0.00;
         this.state.products.map((i) => {sum += (parseFloat(i.price) * parseInt(i.quantity))})
         return sum.toFixed(2);
     };
@@ -42,12 +39,15 @@ class Cart extends React.Component
 
     setQuantity = (e) => (id) =>
     {
+        debugger;
+        if(!e.target.value)
+            return;
         let productToUpdate = this.state.products.findIndex(product => product.id == id);
         let items = this.state.products;
         let newProduct = items.at(productToUpdate);
         newProduct.quantity = e.target.value;
         items.splice(productToUpdate, 1, newProduct);
-        this.setState(items);
+        this.setState({products:items}, () => localStorage.setItem("cart", JSON.stringify(this.state.products)));
     }
 
     render()

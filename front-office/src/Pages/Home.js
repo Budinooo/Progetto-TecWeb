@@ -9,28 +9,28 @@ export default function Home(props)
           <div id="animal-select" className="row mx-3">
             <div className="col-sm-3">
               <div className="animal-card">
-                <a href="#" role="link">
+                <a href="/results" role="link">
                   <img width="60%" src="/shop/img/dog.png" alt="Picture of a dog"/>
                 </a>
               </div>
             </div>
             <div className="col-sm-3">
               <div className="animal-card">
-                <a href="#" role="link">
+                <a href="/results" role="link">
                   <img width="60%" src="/shop/img/bird.png" alt="Picture of a bird"/>
                 </a>
               </div>
             </div>
             <div className="col-sm-3">
               <div className="animal-card">
-                <a href="#" role="link">
+                <a href="/results" role="link">
                   <img width="60%" src="/shop/img/clown-fish.png" alt="Picture of a clown fish"/>
                 </a>
               </div>
             </div>
             <div className="col-sm-3">
               <div className="animal-card">
-                <a href="#" role="link">
+                <a href="/results" role="link">
                   <img width="60%" src="/shop/img/tiger.png" alt="Picture of a dog"/>
                 </a>
               </div>
