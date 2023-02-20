@@ -72,8 +72,8 @@
           "description": "Now when you buy 2x packs of selected Lukullus Dog Bones, small, low-fat chews made from meat or fish and pressed beef rawhide, you'll only pay for one - that's another pack free!"
      },
      {
-          "_id": "8",
-          "name": "12kg Greenwoods Adult Grain-Free Dry Dog Food - Save 5!*",
+          "_id": 8,
+          "name": "12kg Greenwoods Adult Grain-Free Dry Dog Food - Save \u20ac5!*",
           "img": "https://media.mediazs.com/bilder/1/140/1__1346198_1.jpg",
           "tag": "food",
           "animal": "dog",
