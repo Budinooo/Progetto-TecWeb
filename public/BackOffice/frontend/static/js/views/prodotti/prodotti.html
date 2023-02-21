@@ -21,36 +21,37 @@
     </nav>
     <div id="app">
         <h1 class="title" style="text-align:center; margin-bottom:50px">Products</h1>
-        <div class="productCard text-center" id="productCards" style="margin-left:50px; margin-bottom:50px"></div>
-        <div class="container" id="formcontainer" style="display:none">
-            <form class="form form--hidden" id="addProductForm">
-                <div class="form-group">
-                    <label for="nameInput">Name</label>
-                    <input type="text" class="form-control" id="nameInput">
-                </div>
-                <div class="form-group">
-                    <label for="favoritesInput">Description</label>
-                    <input type="text" class="form-control" id="descriptionInput">
-                </div>
-                <div class="form-group">
-                    <label for="scoreInput">Price</label>
-                    <input type="text" class="form-control" id="priceInput">
-                </div>
-                <div class="form-group">
-                    <label for="scoreInput">Availability</label>
-                    <input type="text" class="form-control" id="availabilityInput">
-                </div>
-                <div class="form-group">
-                    <label for="scoreInput">Image url</label>
-                    <input type="text" class="form-control" id="imageInput">
-                </div>
-                <button type="submit" class="btn btn-primary" id="saveClient">Save</button>
-            </form>
+        <div id="container" style="margin-bottom:50px">
+            <div class="row" id="productCards"></div>
+            <div class="container" id="formcontainer" style="display:none">
+                <form class="form form--hidden" id="addProductForm">
+                    <div class="form-group">
+                        <label for="nameInput">Name</label>
+                        <input type="text" class="form-control" id="nameInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="favoritesInput">Description</label>
+                        <input type="text" class="form-control" id="descriptionInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="scoreInput">Price</label>
+                        <input type="text" class="form-control" id="priceInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="scoreInput">Availability</label>
+                        <input type="text" class="form-control" id="availabilityInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="scoreInput">Image url</label>
+                        <input type="text" class="form-control" id="imageInput">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="saveClient">Save</button>
+                </form>
+            </div>
+            <div class="buttonGroup text-center" id="buttonGroup">
+                <button class="btn btn-warning" id="addBtn">Add product</button>
+            </div>
         </div>
-        <div class="buttonGroup text-center" id="buttonGroup">
-            <button class="btn btn-warning" id="addBtn">Add product</button>
-        </div>
-    </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="prodotti.js"></script>

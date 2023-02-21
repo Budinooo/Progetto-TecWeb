@@ -1,10 +1,14 @@
 // Caricamento dei messaggi dal file JSON
-$.getJSON("bacheca.json", function(messages) {
-    // Iterazione attraverso tutti i messaggi
-    for (var i = 0; i < messages.length; i++) {
-        var message = messages[i];
-        // Creazione della card per ogni messaggio
-        var card = `
+fetch('/db/collection?collection=communityFeed', {
+        method: 'GET'
+    })
+    .then(response => response.json())
+    .then(messages => {
+        // Iterazione attraverso tutti i messaggi
+        for (var i = 0; i < messages.length; i++) {
+            var message = messages[i];
+            // Creazione della card per ogni messaggio
+            var card = `
         <div class="card mb-3" id="` + message.id + `">
           <div class="card-header">
             <h5>` + message.senderName + `</h5>
@@ -29,49 +33,49 @@ $.getJSON("bacheca.json", function(messages) {
         </div>
         </div>
       `;
-        // Aggiunta della card al container
-        $("#messageContainer").append(card);
-    }
-});
+            // Aggiunta della card al container
+            $("#messageContainer").append(card);
+        }
+    });
 
 function editMessage(messageId) {
     // logica per la modifica delle informazioni del cliente
-    /*
-    document.getElementById("name").value = "Name: " + "jsonData.name";
-    document.getElementById("favorites").innerHTML = "Favorite Animals: " + "jsonData.favorites";
-    document.getElementById("score").innerHTML = "Game Score: " + "jsonData.score";
-    */
-    fetch('bacheca.json')
-        .then(response => response.json())
-        .then(data => {
-            // ricerca dell'utente nel file JSON
-            const jsonData = data.find(u => u.id === messageId);
-        });
     document.getElementById("formcontainer" + messageId).style.display = "block";
     document.getElementById(jsonDataid).style.display = "none";
-    /*
-        document.getElementById("editButton").addEventListener("click", function() {
-            document.getElementById("formcontainer").style.display = "block";
-            document.getElementById(jsonData.id).style.display = "none";
-            document.getElementById("nameInput").value = jsonData.name;
-            document.getElementById("favoritesInput").value = jsonData.favorites;
-            document.getElementById("scoreInput").value = jsonData.score;
-        });
-    */
-    document.querySelector("form").addEventListener("submit", function(event) {
-        //event.preventDefault();
-        jsonData.message = document.getElementById("messageText").value;
-        //document.getElementById("jsonData").style.display = "block";
+    document.querySelector("formcontainer" + messageId).addEventListener("submit", function(event) {
+        event.preventDefault();
+        const message = document.getElementById("messageText").value;
+        obj = {
+            collection: 'communityFeed',
+            elem: {
+                "description": message
+            }
+        }
+        fetch('/db/element', {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
         document.getElementById("formcontainer" + messageId).style.display = "none";
         document.getElementById(jsonDataid).style.display = "block";
-        /*
-        document.getElementById("name").innerHTML = "Nome: " + jsonData.name;
-        document.getElementById("favorites").innerHTML = "Animali preferiti: " + jsonData.favorites;
-        document.getElementById("score").innerHTML = "Punteggio: " + jsonData.score;
-        */
     });
 }
 
 function removeMessage(messageId) {
-    // logica per la rimozione del cliente
+    // logica per la rimozione del messaggio
+    obj = {
+        collection: 'communityFeed',
+        id: messageId
+    }
+    fetch('/db/element', {
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(obj)
+    })
 }

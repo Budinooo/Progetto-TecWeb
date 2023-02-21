@@ -12,25 +12,45 @@ fetch('/db/collection?collection=users', {
               <h5 class="card-title">${client.name}</h5>
               <p class="card-text">Favorite Animals: ${client.favorites}</p>
               <p class="card-text">Game Score: ${client.score}</p>
-              <button class="btn btn-primary" id="editClient" onclick="editClient(${client.id})">Edit</button>
+              <button class="btn btn-primary" id="editClient">Edit</button>
               <button class="btn btn-danger" onclick="removeClient(${client.id})">Remove</button>
             </div>
           </div>
-          <div class="container" id="formcontainer${client.id}" style="display:none">
-                <form class="form form--hidden" id="addClientForm">
+          <div class="container" id="formeditcontainer" style="display:none">
+                <form class="form form--hidden" id="editClientForm">
                     <div class="form-group">
                         <label for="nameInput">Name</label>
                         <input type="text" class="form-control" id="nameInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="nameInput">username</label>
+                        <input type="text" class="form-control" id="usernameInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="emailInput">Mail</label>
+                        <input type="text" class="form-control" id="emailInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordInput">Password</label>
+                        <input type="text" class="form-control" id="passwordInput">
                     </div>
                     <div class="form-group">
                         <label for="favoritesInput">Favorite Animals</label>
                         <input type="text" class="form-control" id="favoritesInput">
                     </div>
                     <div class="form-group">
+                        <label for="animalsInput">Pets</label>
+                        <input type="text" class="form-control" id="petsInput">
+                    </div>
+                    <div class="form-group">
                         <label for="scoreInput">Game Score</label>
                         <input type="text" class="form-control" id="scoreInput">
                     </div>
-                    <button type="submit" class="btn btn-primary" id="saveClient">Save</button>
+                    <div class="form-group">
+                        <label for="adminInput">Admin</label>
+                        <input type="checkbox" class="form-control" id="adminInput">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="editSaveClient">Save</button>
                 </form>
             </div>
         </div>
@@ -49,18 +69,32 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector('#saveClient').addEventListener("click", e => {
         e.preventDefault();
         const name = document.querySelector('#nameInput').value;
+        const username = document.querySelector('#usernameInput').value;
         const animals = document.querySelector('#favoritesInput').value;
+        const email = document.querySelector('#emailInput').value;
+        const password = document.querySelector('#passwordInput').value;
+        const pets = document.querySelector('#petsInput').value;
+        const admin = document.querySelector('#adminInput').value;
         const score = document.querySelector('#scoreInput').value;
-        addClient(name, animals, score);
+        addClient(name, username, email, password, pets, admin, animals, score);
         document.getElementById("formcontainer").style.display = "none";
     });
     document.querySelector('#editClient').addEventListener("click", e => {
         e.preventDefault();
-        document.getElementById("formcontainer").style.display = "block";
+        document.getElementById("formeditcontainer").style.display = "block";
+    });
+    document.querySelector('#editSaveClient').addEventListener("click", e => {
+        e.preventDefault();
+        const id = document.querySelector('#id').value;
+        const name = document.querySelector('#nameInput').value;
+        const animals = document.querySelector('#favoritesInput').value;
+        const score = document.querySelector('#scoreInput').value;
+        editClient(id, name, username, email, password, pets, admin, animals, score);
+        document.getElementById("formeditcontainer").style.display = "none";
     });
 });
 
-function addClient(name, animals, score) {
+function addClient(name, username, email, password, pets, admin, animals, score) {
     // logica per l'aggiunta di un nuovo cliente
     let size;
     fetch('/db/collectionsize?collection=products', {
@@ -77,13 +111,13 @@ function addClient(name, animals, score) {
         elem: {
             "_id": (size + 1).stringify,
             "name": name,
-            "username": "Geraldadmin",
-            "email": "gerald@marcio.com",
-            "password": "ciaociao",
+            "username": username,
+            "email": email,
+            "password": password,
             "favorites": animals,
-            "pets": [],
+            "pets": pets,
             "score": score,
-            "admin": "1"
+            "admin": admin
         }
     };
 
@@ -262,20 +296,20 @@ fetch('/db/collection?collection=users', {
     */
 }
 
-function editClient(jsonDataid) {
+function editClient(jsonDataid, name, username, email, password, pets, admin, animals, score) {
     // logica per la modifica delle informazioni del cliente
     obj = {
         collection: 'users',
         elem: {
             "_id": jsonDataid,
-            "name": "Gerald",
-            "username": "Budino",
-            "email": "gerald@marcio.com",
-            "password": "ciaociao",
-            "favorites": ["cat"],
-            "pets": [],
-            "score": "1000",
-            "admin": "1"
+            "name": name,
+            "username": username,
+            "email": email,
+            "password": password,
+            "favorites": animals,
+            "pets": pets,
+            "score": score,
+            "admin": admin
         }
     }
     fetch('/db/element', {

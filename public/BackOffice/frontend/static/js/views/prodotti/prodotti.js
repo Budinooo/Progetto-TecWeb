@@ -92,8 +92,8 @@ $("#addBtn").click(function() {
 function removeElement(jsonDataid) {
     // Implementare la logica per rimuovere un prodotto
     obj = {
-        collection: 'users',
-        id: '3'
+        collection: 'products',
+        id: jsonDataid
     }
     fetch('/db/element', {
         method: 'DELETE',
