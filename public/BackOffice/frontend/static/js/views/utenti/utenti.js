@@ -97,32 +97,33 @@ function addClient(name, username, email, password, pets, admin, animals, score)
         })
         .then(data => {
             size = data.result;
-        })
-    let obj = {
-        collection: 'users',
-        elem: {
-            "_id": JSON.stringify(size),
-            "name": name,
-            "username": username,
-            "email": email,
-            "password": password,
-            "favorites": animals,
-            "pets": pets,
-            "score": score,
-            "admin": admin
-        }
-    };
+            let obj = {
+                collection: 'users',
+                elem: {
+                    "_id": JSON.stringify(size),
+                    "name": name,
+                    "username": username,
+                    "email": email,
+                    "password": password,
+                    "favorites": animals,
+                    "pets": pets,
+                    "score": score,
+                    "admin": admin
+                }
+            };
 
-    fetch('/db/element', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(obj)
-        })
-        .then(() => {
-            location.reload();
+            fetch('/db/element', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(obj)
+                })
+                .then(() => {
+                    location.reload();
+                })
+
         })
 }
 
@@ -177,11 +178,14 @@ function removeClient(clientId) {
         id: clientId
     }
     fetch('/db/element', {
-        method: 'DELETE',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(obj)
-    })
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        .then(() => {
+            location.reload();
+        })
 }
