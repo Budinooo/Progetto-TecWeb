@@ -71,7 +71,7 @@ button:focus {
 }
 
 body{
-	background-image: url("images/background.avif");
+	background-image: url("game/images/background.avif");
 	background-size:contain;
 	display: flex;
 	flex-direction: column;
@@ -85,6 +85,28 @@ body{
 	background-color: white;
 	padding-top: 2vh;
 	padding-bottom: 2vh;
-	margin-top: 4vh;
 	margin-bottom: 4vh;
+	margin-top: 2vh;
+}
+
+.titlepage{
+	border: 8px solid #1a2238;
+	border-radius: 10px;
+	margin: auto;
+	text-align: center;
+	font-weight: 800;
+	font-size: 150%;
+	margin-top: 4vh;
+	background-color: #1a2238;
+	width:30vw;
+	color:white; 
+}
+
+.titlepagemob{
+	width:100%;
+}
+
+.capital{
+	font-size: 140%;
+	color:#ff6a3d; 
 }

@@ -61,9 +61,23 @@ app.use('/css', express.static(global.rootDir + '/public/css'));
 app.use('/data', express.static(global.rootDir + '/public/data'));
 app.use('/docs', express.static(global.rootDir + '/public/html'));
 app.use('/img', express.static(global.rootDir + '/public/media'));
-app.use('/shop', express.static(global.rootDir + '/public/FrontOffice'));
+app.use('/', express.static(global.rootDir + '/public/FrontOffice'));
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
+
+app.get('/', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/FrontOffice/index.html'
+    )
+})
+
+app.use('/login', express.static(global.rootDir + '/public/BackOffice'));
+
+app.get('/login', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/BackOffice/index.html'
+    )
+})
 
 //Game
 app.use('/game', express.static(global.rootDir + '/public/Game'));
@@ -359,7 +373,7 @@ fetch('/db/element',{
 })
 */ 
 app.post('/db/element', async function(req, res) {
-    console.log("post"+req.body.elem+_id)
+    console.log("post"+req.body.elem._id)
     res.send(await mymongo.insertElem(req.body.elem,req.body.collection, mongoCredentials))
 });
 

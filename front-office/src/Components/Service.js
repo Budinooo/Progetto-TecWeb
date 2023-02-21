@@ -16,7 +16,7 @@ export default function Service(props) {
           <p className="service-desc">{props.service.desc}</p>
           <p className="service-price">{props.service.price}</p>
           <p className='availability'>Available slots on
-            {props.service.days.map((day, i) => 
+            {props.service.availability.map((day, i) => 
             {
               
             })}

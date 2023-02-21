@@ -24,10 +24,12 @@ function clearInputElement(inputElement) {
 ////////
 function login(username, password) {
     // caricamento del file JSON degli utenti
-    fetch('users.json')
-        .then(response => response.json())
+    fetch('/db/collection?collection=users',{
+        method:'GET'
+    }).then(response => response.json())
         .then(data => {
             // ricerca dell'utente nel file JSON
+            data = data.result;
             const user = data.find(u => u.username === username && u.password === password);
             if (user) {
                 // login effettuato con successo
@@ -40,40 +42,61 @@ function login(username, password) {
         });
 }
 
-function registrazione(username, email, password) {
+function registrazione(name,username, email, password) {
     // caricamento del file JSON degli utenti
-    fetch('users.json')
-        .then(response => response.json())
+    fetch('/db/collection?collection=users',{
+        method:'GET'
+    }).then(response => response.json())
         .then(data => {
+            data = data.result;
             // verifica che l'username o l'email non siano già presenti
             const userExists = data.some(u => u.username === username || u.email === email);
             if (userExists) {
                 console.log("Utente già registrato con questo username o email.");
             } else {
-                // creazione di un nuovo oggetto utente
-                const newUser = {
-                    username: username,
-                    email: email,
-                    password: password,
-                    admin: '1'
-                };
-                // aggiunta del nuovo utente al file JSON
-                //data.push(newUser);
-                // salvataggio del file JSON aggiornato
-                const options = {
-                    method: 'PUT',
-                    headers: {
-                        'Content-type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(newUser)
-                };
-                fetch('users.json', options)
-                    .then(() => {
-                        console.log("Utente registrato con successo.");
-                        window.location.replace('/backoffice');
-                    })
-                    .catch(error => console.error(error));
+                fetch('/db/collectionsize?collection=users',{
+                    method:'GET'
+                }).then(response => response.json())
+                .then(data => {
+                    // creazione di un nuovo oggetto utente
+                    const newUser = { 
+                        "_id": JSON.stringify(data.result),
+                        "name": name,
+                        "username": username,
+                        "email": email,
+                        "password": password,
+                        "favorites": [],
+                        "pets":[],
+                        "score": 0,
+                        "admin": 0
+                    };
+                    const elem = {
+                        collection:'users',
+                        elem: newUser
+                    }
+                    // aggiunta del nuovo utente al file JSON
+                    //data.push(newUser);
+                    // salvataggio del file JSON aggiornato
+                    const options = {
+                        method: 'POST',
+                        headers: {
+                            'Content-type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(elem)
+                    };
+                    fetch('/db/element', options)
+                        .then(() => {
+                            console.log("Utente registrato con successo.");
+                            window.location.replace('/backoffice');
+                            fetch('/db/collection?collection=users',{
+                                method:'GET'
+                            }).then(response => response.json())
+                                .then(data => console.log(data.result))
+                        })
+                        .catch(error => console.error(error));
+                    }
+                )
             }
         });
 }
@@ -100,18 +123,32 @@ document.addEventListener("DOMContentLoaded", () => {
         //login
         var username = document.getElementById("loginUsername").value;
         var password = document.getElementById("loginPassword").value;
-        fetch('users.json')
+        fetch('/db/collection?collection=users',{
+            method:'GET'
+        })
             .then(response => response.json())
             .then(data => {
+                data = data.result
                 // ricerca dell'utente nel file JSON
                 const user = data.find(u => u.username == username && u.password == password);
                 if (user && user.admin == 1) {
                     // login effettuato con successo
                     console.log(`Benvenuto ${user.username}!`);
                     setFormMessage(loginForm, "success", "You're logged in!");
+                    const longinInfo = {
+                        islogged: true,
+                        id: user._id
+                    }
+                    localStorage.setItem("login",JSON.stringify(longinInfo))
                     window.location.replace('./frontend/index.html');
                 } else if (user && user.admin == 0) {
                     setFormMessage(loginForm, "error", "You're not an administrator!");
+                    const longinInfo = {
+                        islogged: true,
+                        id: user._id
+                    }
+                    localStorage.setItem("login",JSON.stringify(longinInfo))
+                    window.location.replace("/")
                 } else {
                     // login fallito
                     console.log("Credenziali non valide.");
@@ -125,12 +162,13 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
 
         //registrazione
+        var name = document.getElementById("createName").value;
         var username = document.getElementById("createUsername").value;
         var email = document.getElementById("createMail").value;
         var password = document.getElementById("passwordCreate").value;
         var passwordConfirm = document.getElementById("confirmPasswordCreate").value;
         if (password == passwordConfirm) {
-            registrazione(username, email, password);
+            registrazione(name,username, email, password);
         }
     });
     ////

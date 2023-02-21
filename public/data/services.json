@@ -1,5 +1,5 @@
 [{
-        "_id": 1,
+        "_id": "0",
         "name": "Servizio 1",
         "description": "Descrizione del servizio 1",
         "price":"50.00",
@@ -7,7 +7,7 @@
         "availability": ["2023-02-01", "2023-02-02", "2023-02-03"]
     },
     {
-        "_id": 2,
+        "_id": "1",
         "name": "Servizio 2",
         "description": "Descrizione del servizio 2",
         "price":"50.00",

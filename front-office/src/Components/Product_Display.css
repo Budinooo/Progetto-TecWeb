@@ -1,11 +1,16 @@
 .product{
-    width: 30%;
+    width: 32%;
     border-radius: 10px;
     border: 2px solid grey;
-    height: 60vh;
+    height: 65vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    max-height: fit-content;
+}
+
+.product:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .imgp{
@@ -24,10 +29,15 @@
 }
 
 .descp{
-    font-size: 85%;
+    font-size: 80%;
+    overflow: auto;
 }
 
 .pricep{
     font-size: 140%;
     font-weight: bold;
+}
+
+.prodmob{
+    height: 57vh;
 }

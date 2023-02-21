@@ -1,6 +1,6 @@
 [
     {
-        "_id": 1,
+        "_id": "0",
         "name": "Cliente 1",
         "username": "Ciccio",
         "email": "mail@narcio.com",
@@ -11,7 +11,7 @@
         "admin": 0
     },
     { 
-        "_id": 2,
+        "_id": "1",
         "name": "Cliente 1",
         "username": "admin",
         "email": "mail@narcio.com",
