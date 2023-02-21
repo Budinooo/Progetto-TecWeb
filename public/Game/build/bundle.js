@@ -2321,7 +2321,7 @@ var app = (function () {
     	let t5;
 
     	function select_block_type(ctx, dirty) {
-    		if (!JSON.parse(localStorage.getItem("login")).islogged) return create_if_block_3$2;
+    		if (JSON.parse(localStorage.getItem("login")).islogged) return create_if_block_3$2;
     		return create_else_block_1$1;
     	}
 
@@ -2414,7 +2414,7 @@ var app = (function () {
     			a.textContent = "LOG IN";
     			attr_dev(a, "href", "/login/");
     			attr_dev(a, "class", "svelte-114x7wo");
-    			add_location(a, file$r, 39, 10, 1408);
+    			add_location(a, file$r, 39, 10, 1407);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -2436,7 +2436,7 @@ var app = (function () {
     	return block;
     }
 
-    // (37:8) {#if !JSON.parse(localStorage.getItem("login")).islogged}
+    // (37:8) {#if JSON.parse(localStorage.getItem("login")).islogged}
     function create_if_block_3$2(ctx) {
     	let a;
     	let t;
@@ -2449,7 +2449,7 @@ var app = (function () {
     			t = text("LOG OUT");
     			attr_dev(a, "href", window.location.href);
     			attr_dev(a, "class", "svelte-114x7wo");
-    			add_location(a, file$r, 37, 10, 1319);
+    			add_location(a, file$r, 37, 10, 1318);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -2472,7 +2472,7 @@ var app = (function () {
     		block,
     		id: create_if_block_3$2.name,
     		type: "if",
-    		source: "(37:8) {#if !JSON.parse(localStorage.getItem(\\\"login\\\")).islogged}",
+    		source: "(37:8) {#if JSON.parse(localStorage.getItem(\\\"login\\\")).islogged}",
     		ctx
     	});
 
@@ -2494,7 +2494,7 @@ var app = (function () {
     	let t5;
 
     	function select_block_type_1(ctx, dirty) {
-    		if (!JSON.parse(localStorage.getItem("login")).islogged) return create_if_block_1$9;
+    		if (JSON.parse(localStorage.getItem("login")).islogged) return create_if_block_1$9;
     		return create_else_block$6;
     	}
 
@@ -2522,27 +2522,27 @@ var app = (function () {
     			input.value = "";
     			attr_dev(input, "placeholder", "Search for a product");
     			set_style(input, "width", "100%");
-    			add_location(input, file$r, 46, 6, 1633);
+    			add_location(input, file$r, 46, 6, 1632);
     			attr_dev(i, "class", "bi-search");
-    			add_location(i, file$r, 47, 36, 1772);
+    			add_location(i, file$r, 47, 36, 1771);
     			attr_dev(button, "class", "shopSearchBtn svelte-114x7wo");
-    			add_location(button, file$r, 47, 6, 1742);
+    			add_location(button, file$r, 47, 6, 1741);
     			set_style(div0, "display", "flex");
     			set_style(div0, "width", "90%");
     			set_style(div0, "height", "fit-content");
     			set_style(div0, "margin", "auto");
     			set_style(div0, "margin-top", "10px");
     			set_style(div0, "margin-bottom", "10px");
-    			add_location(div0, file$r, 45, 4, 1517);
+    			add_location(div0, file$r, 45, 4, 1516);
     			attr_dev(a0, "href", "/");
     			attr_dev(a0, "class", "svelte-114x7wo");
-    			add_location(a0, file$r, 50, 6, 1892);
+    			add_location(a0, file$r, 50, 6, 1891);
     			attr_dev(a1, "href", "/backoffice/");
     			attr_dev(a1, "class", "svelte-114x7wo");
-    			add_location(a1, file$r, 51, 6, 1920);
+    			add_location(a1, file$r, 51, 6, 1919);
     			attr_dev(div1, "class", "flex nav svelte-114x7wo");
     			set_style(div1, "justify-content", "space-around");
-    			add_location(div1, file$r, 49, 4, 1824);
+    			add_location(div1, file$r, 49, 4, 1823);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -2590,7 +2590,7 @@ var app = (function () {
     			a.textContent = "LOG IN";
     			attr_dev(a, "href", "/login/");
     			attr_dev(a, "class", "svelte-114x7wo");
-    			add_location(a, file$r, 55, 8, 2119);
+    			add_location(a, file$r, 55, 8, 2115);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -2612,7 +2612,7 @@ var app = (function () {
     	return block;
     }
 
-    // (53:6) {#if !(JSON.parse(localStorage.getItem("login")).islogged)}
+    // (53:6) {#if JSON.parse(localStorage.getItem("login")).islogged}
     function create_if_block_1$9(ctx) {
     	let a;
     	let t;
@@ -2625,7 +2625,7 @@ var app = (function () {
     			t = text("LOG OUT");
     			attr_dev(a, "href", window.location.href);
     			attr_dev(a, "class", "svelte-114x7wo");
-    			add_location(a, file$r, 53, 8, 2034);
+    			add_location(a, file$r, 53, 8, 2030);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -2648,7 +2648,7 @@ var app = (function () {
     		block,
     		id: create_if_block_1$9.name,
     		type: "if",
-    		source: "(53:6) {#if !(JSON.parse(localStorage.getItem(\\\"login\\\")).islogged)}",
+    		source: "(53:6) {#if JSON.parse(localStorage.getItem(\\\"login\\\")).islogged}",
     		ctx
     	});
 
@@ -2756,31 +2756,31 @@ var app = (function () {
     			add_location(div2, file$r, 23, 2, 480);
     			attr_dev(a1, "href", "/game/");
     			attr_dev(a1, "class", "svelte-114x7wo");
-    			add_location(a1, file$r, 60, 4, 2253);
+    			add_location(a1, file$r, 60, 4, 2249);
     			attr_dev(a2, "href", "/game/quiz");
     			attr_dev(a2, "class", "svelte-114x7wo");
-    			add_location(a2, file$r, 61, 4, 2284);
+    			add_location(a2, file$r, 61, 4, 2280);
     			attr_dev(a3, "href", "/game/wordle");
     			attr_dev(a3, "class", "svelte-114x7wo");
-    			add_location(a3, file$r, 62, 4, 2319);
+    			add_location(a3, file$r, 62, 4, 2315);
     			attr_dev(a4, "href", "/game/memory");
     			attr_dev(a4, "class", "svelte-114x7wo");
-    			add_location(a4, file$r, 63, 4, 2358);
+    			add_location(a4, file$r, 63, 4, 2354);
     			attr_dev(a5, "href", "/game/funnyvideos");
     			attr_dev(a5, "class", "svelte-114x7wo");
-    			add_location(a5, file$r, 64, 4, 2397);
+    			add_location(a5, file$r, 64, 4, 2393);
     			attr_dev(a6, "href", "/game/animalinfo");
     			attr_dev(a6, "class", "svelte-114x7wo");
-    			add_location(a6, file$r, 65, 4, 2447);
+    			add_location(a6, file$r, 65, 4, 2443);
     			attr_dev(a7, "href", "/game/medinfo");
     			attr_dev(a7, "class", "svelte-114x7wo");
-    			add_location(a7, file$r, 66, 4, 2495);
+    			add_location(a7, file$r, 66, 4, 2491);
     			attr_dev(a8, "href", "/game/yourpets");
     			attr_dev(a8, "class", "svelte-114x7wo");
-    			add_location(a8, file$r, 67, 4, 2541);
+    			add_location(a8, file$r, 67, 4, 2537);
     			attr_dev(div3, "class", "mininav container svelte-114x7wo");
     			toggle_class(div3, "mobile", /*screenWidth*/ ctx[0] < 500);
-    			add_location(div3, file$r, 59, 2, 2185);
+    			add_location(div3, file$r, 59, 2, 2181);
     			attr_dev(header, "class", "svelte-114x7wo");
     			add_location(header, file$r, 22, 0, 468);
     		},
