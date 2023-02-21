@@ -67,7 +67,7 @@ $("#addBtn").click(function() {
                 let obj = {
                     collection: 'products',
                     elem: {
-                        _id: (prodotti + 1).stringify,
+                        _id: JSON.stringify(prodotti.result),
                         name: document.getElementById("nameInput").value,
                         description: document.getElementById("descriptionInput").value,
                         price: document.getElementById("priceInput").value,

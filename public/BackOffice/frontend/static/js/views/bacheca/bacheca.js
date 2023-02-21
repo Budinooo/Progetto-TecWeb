@@ -76,12 +76,6 @@ fetch('/db/collection?collection=communityFeed', {
                 //aggiunta delle risposte alla card
                 $("#responseContainer").append(res[i]);
             }
-            /*
-            res.forEach(element => {
-                //aggiunta delle risposte alla card
-                $("#responseContainer").append(res);
-            });
-            */
         }
     });
 

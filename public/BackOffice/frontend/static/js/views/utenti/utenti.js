@@ -114,7 +114,7 @@ function addClient(name, username, email, password, pets, admin, animals, score)
             return response.json()
         })
         .then(data => {
-            size = data;
+            size = data.result;
         })
     let obj = {
         collection: 'users',
