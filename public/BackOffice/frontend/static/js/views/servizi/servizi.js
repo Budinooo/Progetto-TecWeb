@@ -4,6 +4,7 @@ fetch('services.json')
         let servicesHtml = '';
         let dateHtml = '';
         services.forEach(service => {
+            services = services.result;
             servicesHtml += `
         <div class="container">
             <div class="col-sm-4">

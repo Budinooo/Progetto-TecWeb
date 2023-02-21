@@ -4,10 +4,12 @@ fetch('/db/collection?collection=communityFeed', {
     })
     .then(response => response.json())
     .then(messages => {
+        messages = messages.result;
+        var res = [];
         // Iterazione attraverso tutti i messaggi
         for (var i = 0; i < messages.length; i++) {
             var message = messages[i];
-            var response = message[i].answers;
+            var response = message.answers;
             // Creazione della card per ogni messaggio
             var card = `
         <div class="card mb-3" id="` + message._id + `">
@@ -17,7 +19,7 @@ fetch('/db/collection?collection=communityFeed', {
           <div class="card-body">
             <h5 class="card-title">` + message.title + `</h5>
             <p class="card-text" id="messageText">` + message.description + `</p>
-            <img class="card-img-top" src="` + message.file + `" alt="` + message.file + `}" style="width: 18rem;">
+            <img class="card-img-top" src="` + message.file + `" alt="` + message.author + `" style="width: 18rem;">
             <p>Reference Date: ` + message.date + `</p>
           </div>
           <div class="card-footer">
@@ -37,8 +39,8 @@ fetch('/db/collection?collection=communityFeed', {
         </div>
         </div>
       `;
-            response.forEach(element => {
-                var res = `
+            response.forEach((element, j) => {
+                res[j] = `
         <div class="card mb-3" id="` + element._id + `">
           <div class="card-header">
             <h5>` + element.author + `</h5>
@@ -46,7 +48,7 @@ fetch('/db/collection?collection=communityFeed', {
           <div class="card-body">
             <h5 class="card-title">` + element.author + `</h5>
             <p class="card-text" id="messageText">` + element.description + `</p>
-            <img class="card-img-top" src="` + element.file + `" alt="` + element.file + `}" style="width: 18rem;">
+            <img class="card-img-top" src="` + element.file + `" alt="` + element.file + `" style="width: 18rem;">
             <p>Date: ` + element.date + `</p>
           </div>
           <div class="card-footer">
@@ -65,12 +67,21 @@ fetch('/db/collection?collection=communityFeed', {
             </form>
         </div>
         </div>
+        </div>
       `;
             });
-            //aggiunta delle risposte alla card
-            $("#responseContainer").append(res);
             // Aggiunta della card al container
             $("#messageContainer").append(card);
+            for (var i = 0; i < res.length; i++) {
+                //aggiunta delle risposte alla card
+                $("#responseContainer").append(res[i]);
+            }
+            /*
+            res.forEach(element => {
+                //aggiunta delle risposte alla card
+                $("#responseContainer").append(res);
+            });
+            */
         }
     });
 

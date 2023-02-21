@@ -3,12 +3,13 @@ fetch('/db/collection?collection=users', {
     })
     .then(response => response.json())
     .then(clients => {
+        clients = clients.result;
         let clientsHtml = '';
         clients.forEach(client => {
             clientsHtml += `
         <div class="col-sm-4">
           <div class="card">
-            <div class="card-body" id="${client.id}">
+            <div class="card-body" id="${client._id}">
               <h5 class="card-title">${client.name}</h5>
               <p class="card-text">Username: ${client.username}</p>
               <p class="card-text">email: ${client.email}</p>
@@ -118,7 +119,7 @@ function addClient(name, username, email, password, pets, admin, animals, score)
     let obj = {
         collection: 'users',
         elem: {
-            "_id": (size + 1).stringify,
+            "_id": JSON.stringify(size),
             "name": name,
             "username": username,
             "email": email,
