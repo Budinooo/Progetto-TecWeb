@@ -86,14 +86,14 @@ $("#addBtn").click(function() {
                     body: JSON.stringify(obj)
                 })
             });
-
     });
+    location.reload();
 });
 
 // Rimuove il prodotto selezionato
 function removeElement(jsonDataid) {
     // Implementare la logica per rimuovere un prodotto
-    obj = {
+    let obj = {
         collection: 'products',
         id: jsonDataid
     }
@@ -105,13 +105,14 @@ function removeElement(jsonDataid) {
         },
         body: JSON.stringify(obj)
     })
+    location.reload();
 }
 
 function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
     document.getElementById("formcontainer" + jsonDataid).style.display = "block";
     document.querySelector("form").addEventListener("submit", function(event) {
-        obj = {
+        let obj = {
             collection: 'products',
             elem: {
                 "_id": jsonDataid,
@@ -131,4 +132,5 @@ function editClient(jsonDataid) {
             body: JSON.stringify(obj)
         })
     });
+    location.reload();
 }

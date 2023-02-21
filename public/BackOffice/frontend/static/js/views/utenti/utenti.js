@@ -17,8 +17,8 @@ fetch('/db/collection?collection=users', {
               <p class="card-text">Favorite Animals: ${client.favorites}</p>
               <p class="card-text">Pets: ${client.pets}</p>
               <p class="card-text">Game Score: ${client.score}</p>
-              <button class="btn btn-primary" id="editClient">Edit</button>
-              <button class="btn btn-danger" onclick="removeClient(${client.id})">Remove</button>
+              <button class="btn btn-primary" id="editClient" onclick="editClient(${client._id})>Edit</button>
+              <button class="btn btn-danger" onclick="removeClient(${client._id})">Remove</button>
             </div>
           </div>
           <div class="container" id="formeditcontainer" style="display:none">
@@ -84,24 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
         addClient(name, username, email, password, pets, admin, animals, score);
         document.getElementById("formcontainer").style.display = "none";
     });
-    document.querySelector('#editClient').addEventListener("click", e => {
-        e.preventDefault();
-        document.getElementById("formeditcontainer").style.display = "block";
-    });
-    document.querySelector('#editSaveClient').addEventListener("click", e => {
-        e.preventDefault();
-        const id = document.querySelector('#id').value;
-        const name = document.querySelector('#nameInput').value;
-        const username = document.querySelector('#usernameInput').value;
-        const animals = document.querySelector('#favoritesInput').value;
-        const email = document.querySelector('#emailInput').value;
-        const password = document.querySelector('#passwordInput').value;
-        const pets = document.querySelector('#petsInput').value;
-        const admin = document.querySelector('#adminInput').value;
-        const score = document.querySelector('#scoreInput').value;
-        editClient(id, name, username, email, password, pets, admin, animals, score);
-        document.getElementById("formeditcontainer").style.display = "none";
-    });
 });
 
 function addClient(name, username, email, password, pets, admin, animals, score) {
@@ -139,37 +121,53 @@ function addClient(name, username, email, password, pets, admin, animals, score)
         },
         body: JSON.stringify(obj)
     })
+    location.reload();
 }
 
-function editClient(jsonDataid, name, username, email, password, pets, admin, animals, score) {
+function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
-    obj = {
-        collection: 'users',
-        elem: {
-            "_id": jsonDataid,
-            "name": name,
-            "username": username,
-            "email": email,
-            "password": password,
-            "favorites": animals,
-            "pets": pets,
-            "score": score,
-            "admin": admin
+    document.getElementById("formeditcontainer").style.display = "block";
+    document.querySelector('#editSaveClient').addEventListener("click", e => {
+        e.preventDefault();
+        const id = document.querySelector('#id').value;
+        const name = document.querySelector('#nameInput').value;
+        const username = document.querySelector('#usernameInput').value;
+        const animals = document.querySelector('#favoritesInput').value;
+        const email = document.querySelector('#emailInput').value;
+        const password = document.querySelector('#passwordInput').value;
+        const pets = document.querySelector('#petsInput').value;
+        const admin = document.querySelector('#adminInput').value;
+        const score = document.querySelector('#scoreInput').value;
+        let obj = {
+            collection: 'users',
+            elem: {
+                "_id": jsonDataid,
+                "name": name,
+                "username": username,
+                "email": email,
+                "password": password,
+                "favorites": animals,
+                "pets": pets,
+                "score": score,
+                "admin": admin
+            }
         }
-    }
-    fetch('/db/element', {
-        method: 'PUT',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(obj)
-    })
+        fetch('/db/element', {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        document.getElementById("formeditcontainer").style.display = "none";
+    });
+    location.reload();
 }
 
 function removeClient(clientId) {
     // logica per la rimozione del cliente
-    obj = {
+    let obj = {
         collection: 'users',
         id: clientId
     }
@@ -181,4 +179,5 @@ function removeClient(clientId) {
         },
         body: JSON.stringify(obj)
     })
+    location.reload();
 }

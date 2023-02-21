@@ -80,7 +80,7 @@ fetch('/db/collection?collection=communityFeed', {
     });
 
 function deleteImage(messageId) {
-    obj = {
+    let obj = {
         collection: 'communityFeed',
         elem: {
             "file": ""
@@ -94,6 +94,7 @@ function deleteImage(messageId) {
         },
         body: JSON.stringify(obj)
     })
+    location.reload();
 }
 
 function editMessage(messageId) {
@@ -103,7 +104,7 @@ function editMessage(messageId) {
     document.querySelector("formcontainer" + messageId).addEventListener("submit", function(event) {
         event.preventDefault();
         const message = document.getElementById("messageText").value;
-        obj = {
+        let obj = {
             collection: 'communityFeed',
             elem: {
                 "description": message
@@ -120,11 +121,12 @@ function editMessage(messageId) {
         document.getElementById("formcontainer" + messageId).style.display = "none";
         document.getElementById(jsonDataid).style.display = "block";
     });
+    location.reload();
 }
 
 function removeMessage(messageId) {
     // logica per la rimozione del messaggio
-    obj = {
+    let obj = {
         collection: 'communityFeed',
         id: messageId
     }
@@ -136,4 +138,5 @@ function removeMessage(messageId) {
         },
         body: JSON.stringify(obj)
     })
+    location.reload();
 }
