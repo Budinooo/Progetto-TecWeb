@@ -9,7 +9,7 @@ fetch('/db/collection?collection=products', {
             prodottiHtml += `
         <div class="col-sm-4">
           <div class="card">
-          <img class="card-img-top" src="${prodotto.image}" alt="${prodotto.name}" style="width: 18rem;">
+          <img class="card-img-top" src="${prodotto.img}" alt="${prodotto.name}" style="width: 18rem;">
             <div class="card-body" id="${prodotto._id}">
               <h5 class="card-title">${prodotto.name}</h5>
               <p class="card-text">${prodotto.description}</p>

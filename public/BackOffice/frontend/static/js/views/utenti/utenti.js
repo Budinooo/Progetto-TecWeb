@@ -17,7 +17,7 @@ fetch('/db/collection?collection=users', {
               <p class="card-text">Favorite Animals: ${client.favorites}</p>
               <p class="card-text">Pets: ${client.pets}</p>
               <p class="card-text">Game Score: ${client.score}</p>
-              <button class="btn btn-primary" id="editClient" onclick="editClient(${client._id})>Edit</button>
+              <button class="btn btn-primary" id="editClient" onclick="editClient(${client._id})">Edit</button>
               <button class="btn btn-danger" onclick="removeClient(${client._id})">Remove</button>
             </div>
           </div>
