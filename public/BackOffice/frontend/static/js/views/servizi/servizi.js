@@ -103,16 +103,18 @@ function editService(serviceId) {
             }
         }
         fetch('/db/element', {
-            method: 'PUT',
-            headers: {
-                'Content-type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(obj)
-        })
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(obj)
+            })
+            .then(() => {
+                location.reload();
+            })
         document.getElementById("formeditcontainer").style.display = "none";
     });
-    location.reload();
 }
 
 function addAvailability(serviceId) {
@@ -144,13 +146,16 @@ function saveDate(serviceId) {
         })
 
     fetch('/db/element', {
-        method: 'PUT',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(obj)
-    })
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        .then(() => {
+            location.reload();
+        })
     document.getElementById("formdate" + serviceId).style.display = "none";
 }
 
@@ -161,12 +166,14 @@ function removeService(serviceId) {
         id: serviceId
     }
     fetch('/db/element', {
-        method: 'DELETE',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(obj)
-    })
-    location.reload();
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        .then(() => {
+            location.reload();
+        })
 }

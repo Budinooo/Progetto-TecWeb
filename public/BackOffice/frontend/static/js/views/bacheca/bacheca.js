@@ -87,14 +87,16 @@ function deleteImage(messageId) {
         }
     }
     fetch('/db/element', {
-        method: 'PUT',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(obj)
-    })
-    location.reload();
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        .then(() => {
+            location.reload();
+        })
 }
 
 function editMessage(messageId) {
@@ -111,17 +113,19 @@ function editMessage(messageId) {
             }
         }
         fetch('/db/element', {
-            method: 'PUT',
-            headers: {
-                'Content-type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(obj)
-        })
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(obj)
+            }
+            .then(() => {
+                location.reload();
+            }))
         document.getElementById("formcontainer" + messageId).style.display = "none";
         document.getElementById(jsonDataid).style.display = "block";
     });
-    location.reload();
 }
 
 function removeMessage(messageId) {
@@ -131,12 +135,14 @@ function removeMessage(messageId) {
         id: messageId
     }
     fetch('/db/element', {
-        method: 'DELETE',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(obj)
-    })
-    location.reload();
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        .then(() => {
+            location.reload();
+        })
 }

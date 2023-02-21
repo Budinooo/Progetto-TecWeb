@@ -25,35 +25,35 @@ fetch('/db/collection?collection=users', {
                 <form class="form form--hidden" id="editClientForm">
                     <div class="form-group">
                         <label for="nameInput">Name</label>
-                        <input type="text" class="form-control" id="nameInput" value="${client.name}">
+                        <input type="text" class="form-control" id="nameEditInput" value="${client.name}">
                     </div>
                     <div class="form-group">
                         <label for="nameInput">username</label>
-                        <input type="text" class="form-control" id="usernameInput" value="${client.username}">
+                        <input type="text" class="form-control" id="usernameEditInput" value="${client.username}">
                     </div>
                     <div class="form-group">
                         <label for="emailInput">Mail</label>
-                        <input type="text" class="form-control" id="emailInput" value="${client.email}">
+                        <input type="text" class="form-control" id="emailEditInput" value="${client.email}">
                     </div>
                     <div class="form-group">
                         <label for="passwordInput">Password</label>
-                        <input type="text" class="form-control" id="passwordInput" value="${client.password}">
+                        <input type="text" class="form-control" id="passwordEditInput" value="${client.password}">
                     </div>
                     <div class="form-group">
                         <label for="favoritesInput">Favorite Animals</label>
-                        <input type="text" class="form-control" id="favoritesInput" value="${client.favorites}">
+                        <input type="text" class="form-control" id="favoritesEditInput" value="${client.favorites}">
                     </div>
                     <div class="form-group">
                         <label for="animalsInput">Pets</label>
-                        <input type="text" class="form-control" id="petsInput" value="${client.pets}">
+                        <input type="text" class="form-control" id="petsEditInput" value="${client.pets}">
                     </div>
                     <div class="form-group">
                         <label for="scoreInput">Game Score</label>
-                        <input type="text" class="form-control" id="scoreInput" value="${client.score}">
+                        <input type="text" class="form-control" id="scoreEditInput" value="${client.score}">
                     </div>
                     <div class="form-group">
                         <label for="adminInput">Admin</label>
-                        <input type="checkbox" class="form-control" id="adminInput">
+                        <input type="checkbox" class="form-control" id="adminEditInput">
                     </div>
                     <button type="submit" class="btn btn-primary" id="editSaveClient">Save</button>
                 </form>
@@ -114,14 +114,16 @@ function addClient(name, username, email, password, pets, admin, animals, score)
     };
 
     fetch('/db/element', {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(obj)
-    })
-    location.reload();
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        .then(() => {
+            location.reload();
+        })
 }
 
 function editClient(jsonDataid) {
@@ -130,14 +132,14 @@ function editClient(jsonDataid) {
     document.querySelector('#editSaveClient').addEventListener("click", e => {
         e.preventDefault();
         const id = document.querySelector('#id').value;
-        const name = document.querySelector('#nameInput').value;
-        const username = document.querySelector('#usernameInput').value;
-        const animals = document.querySelector('#favoritesInput').value;
-        const email = document.querySelector('#emailInput').value;
-        const password = document.querySelector('#passwordInput').value;
-        const pets = document.querySelector('#petsInput').value;
-        const admin = document.querySelector('#adminInput').value;
-        const score = document.querySelector('#scoreInput').value;
+        const name = document.querySelector('#nameEditInput').value;
+        const username = document.querySelector('#usernameEditInput').value;
+        const animals = document.querySelector('#favoritesEditInput').value;
+        const email = document.querySelector('#emailEditInput').value;
+        const password = document.querySelector('#passwordEditInput').value;
+        const pets = document.querySelector('#petsEditInput').value;
+        const admin = document.querySelector('#adminEditInput').value;
+        const score = document.querySelector('#scoreEditInput').value;
         let obj = {
             collection: 'users',
             elem: {
@@ -153,16 +155,18 @@ function editClient(jsonDataid) {
             }
         }
         fetch('/db/element', {
-            method: 'PUT',
-            headers: {
-                'Content-type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(obj)
-        })
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(obj)
+            })
+            .then(() => {
+                location.reload();
+            })
         document.getElementById("formeditcontainer").style.display = "none";
     });
-    location.reload();
 }
 
 function removeClient(clientId) {
@@ -172,12 +176,14 @@ function removeClient(clientId) {
         id: clientId
     }
     fetch('/db/element', {
-        method: 'DELETE',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(obj)
-    })
-    location.reload();
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        .then(() => {
+            location.reload();
+        })
 }

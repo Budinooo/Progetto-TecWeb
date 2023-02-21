@@ -78,16 +78,18 @@ $("#addBtn").click(function() {
                 };
 
                 fetch('/db/element', {
-                    method: 'POST',
-                    headers: {
-                        'Content-type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(obj)
-                })
+                        method: 'POST',
+                        headers: {
+                            'Content-type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(obj)
+                    })
+                    .then(() => {
+                        location.reload();
+                    })
             });
     });
-    location.reload();
 });
 
 // Rimuove il prodotto selezionato
@@ -98,14 +100,16 @@ function removeElement(jsonDataid) {
         id: jsonDataid
     }
     fetch('/db/element', {
-        method: 'DELETE',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(obj)
-    })
-    location.reload();
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        .then(() => {
+            location.reload();
+        })
 }
 
 function editClient(jsonDataid) {
@@ -124,13 +128,15 @@ function editClient(jsonDataid) {
             }
         }
         fetch('/db/element', {
-            method: 'PUT',
-            headers: {
-                'Content-type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(obj)
-        })
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(obj)
+            })
+            .then(() => {
+                location.reload();
+            })
     });
-    location.reload();
 }
