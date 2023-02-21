@@ -3,6 +3,7 @@ fetch('/db/collection?collection=products', {
     })
     .then(response => response.json())
     .then(prodotti => {
+        prodotti = prodotti.result;
         let prodottiHtml = '';
         prodotti.forEach(prodotto => {
             prodottiHtml += `
