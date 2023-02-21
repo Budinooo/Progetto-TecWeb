@@ -9,10 +9,11 @@ fetch('/db/collection?collection=products', {
         <div class="col-sm-4">
           <div class="card">
           <img class="card-img-top" src="${prodotto.image}" alt="${prodotto.name}" style="width: 18rem;">
-            <div class="card-body" id="${prodotto.id}">
+            <div class="card-body" id="${prodotto._id}">
               <h5 class="card-title">${prodotto.name}</h5>
               <p class="card-text">${prodotto.description}</p>
               <p class="card-text">Price €: ${prodotto.price}</p>
+              <p class="card-text">Product for: ${prodotto.animal}</p>
               <p class="card-text">Availability: ${prodotto.availability}</p>
               <button class="btn btn-primary" id="editClient" onclick="editClient(${prodotto.id})">Edit</button>
               <button class="btn btn-danger" onclick="removeElement(${prodotto.id})">Remove</button>
@@ -129,5 +130,4 @@ function editClient(jsonDataid) {
             body: JSON.stringify(obj)
         })
     });
-
 }

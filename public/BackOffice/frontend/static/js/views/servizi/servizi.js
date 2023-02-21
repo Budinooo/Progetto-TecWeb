@@ -51,11 +51,6 @@ fetch('services.json')
       `;
         });
         document.getElementById('services').innerHTML = servicesHtml;
-        $('.date').datepicker({
-            multidate: true,
-            format: 'dd-mm-yyyy'
-        });
-
     });
 
 function bookService(serviceId) {
