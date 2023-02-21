@@ -3,16 +3,18 @@ fetch('/db/collection?collection=products', {
     })
     .then(response => response.json())
     .then(prodotti => {
+        prodotti = prodotti.result;
         let prodottiHtml = '';
         prodotti.forEach(prodotto => {
             prodottiHtml += `
         <div class="col-sm-4">
           <div class="card">
           <img class="card-img-top" src="${prodotto.image}" alt="${prodotto.name}" style="width: 18rem;">
-            <div class="card-body" id="${prodotto.id}">
+            <div class="card-body" id="${prodotto._id}">
               <h5 class="card-title">${prodotto.name}</h5>
               <p class="card-text">${prodotto.description}</p>
               <p class="card-text">Price €: ${prodotto.price}</p>
+              <p class="card-text">Product for: ${prodotto.animal}</p>
               <p class="card-text">Availability: ${prodotto.availability}</p>
               <button class="btn btn-primary" id="editClient" onclick="editClient(${prodotto.id})">Edit</button>
               <button class="btn btn-danger" onclick="removeElement(${prodotto.id})">Remove</button>
@@ -65,7 +67,7 @@ $("#addBtn").click(function() {
                 let obj = {
                     collection: 'products',
                     elem: {
-                        _id: (prodotti + 1).stringify,
+                        _id: JSON.stringify(prodotti.result),
                         name: document.getElementById("nameInput").value,
                         description: document.getElementById("descriptionInput").value,
                         price: document.getElementById("priceInput").value,
@@ -84,14 +86,14 @@ $("#addBtn").click(function() {
                     body: JSON.stringify(obj)
                 })
             });
-
     });
+    location.reload();
 });
 
 // Rimuove il prodotto selezionato
 function removeElement(jsonDataid) {
     // Implementare la logica per rimuovere un prodotto
-    obj = {
+    let obj = {
         collection: 'products',
         id: jsonDataid
     }
@@ -103,13 +105,14 @@ function removeElement(jsonDataid) {
         },
         body: JSON.stringify(obj)
     })
+    location.reload();
 }
 
 function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
     document.getElementById("formcontainer" + jsonDataid).style.display = "block";
     document.querySelector("form").addEventListener("submit", function(event) {
-        obj = {
+        let obj = {
             collection: 'products',
             elem: {
                 "_id": jsonDataid,
@@ -129,5 +132,5 @@ function editClient(jsonDataid) {
             body: JSON.stringify(obj)
         })
     });
-
+    location.reload();
 }

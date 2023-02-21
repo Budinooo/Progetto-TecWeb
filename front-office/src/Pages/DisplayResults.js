@@ -496,37 +496,51 @@ class DisplayResults extends React.Component {
                  "description": "3 filled coconut shells, each filled with either sunflower seeds, nuts or dried mealworms, approx. 600g, with practical loops, easy to hang up, enjoyed by birds that eat grain and insects"
             }
        ];
-        this.state={
-            screenWidth: window.innerWidth,
-            products: products,
-            productsDisplayed: products
-        }
-    }
+          this.state={
+               screenWidth: window.innerWidth,
+               products: products,
+               productsDisplayed: products
+          }
 
-    handleResize = () =>{
-        this.setState({screenWidth: window.innerWidth});
-    }
+          this.handleCategoryFilter = this.handleCategoryFilter.bind(this);
+          this.handlePriceFilter = this.handlePriceFilter.bind(this);
+     }
 
-    componentDidMount() {
-        window.addEventListener("resize", this.handleResize);
-    }
+     handleResize = () =>{
+          this.setState({screenWidth: window.innerWidth});
+     }
 
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.handleResize);
-    }
+     componentDidMount() {
+          window.addEventListener("resize", this.handleResize);
+     }
+
+     componentWillUnmount() {
+          window.removeEventListener("resize", this.handleResize);
+     }
+
+     handleCategoryFilter = (animal,tag) =>{
+          //prima fare this.state.products = collezione intera di prodotti
+          let products = this.state.products.filter(product => product.animal == animal && product.tag == tag);
+          this.setState({productsDisplayed: products});
+     }
+
+     handlePriceFilter = (min,max) =>{
+          let products = this.state.products.filter(product => parseFloat(product.price) >= min && parseFloat(product.price) <= max);
+          this.setState({productsDisplayed: products});
+     }
 
     renderProducts = () => {
-        return this.state.productsDisplayed.map((product, i)=>{
-            return <Product_Display product={product} key={i} />;
-        })
+          return this.state.productsDisplayed.map((product, i)=>{
+               return <Product_Display product={product} key={i} />;
+          })
     }
 
     render() {
         return (
             <div className="container displayResult">
-                <Filter />
-                <div className="products">
-                    {this.renderProducts()}
+                <Filter applyCategory={this.handleCategoryFilter} applyPrice={this.handlePriceFilter}/>
+                <div className={`products ${this.state.screenWidth<500 ? "w-100" : ""}`}>
+                    {this.renderProducts() }
                 </div>
             </div>
         )
