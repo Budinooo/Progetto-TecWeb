@@ -61,9 +61,23 @@ app.use('/css', express.static(global.rootDir + '/public/css'));
 app.use('/data', express.static(global.rootDir + '/public/data'));
 app.use('/docs', express.static(global.rootDir + '/public/html'));
 app.use('/img', express.static(global.rootDir + '/public/media'));
-app.use('/', express.static(global.rootDir + '/public/FrontOffice'));
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
+
+app.use('/login', express.static(global.rootDir + '/public/BackOffice'));
+
+app.get('/login', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/BackOffice/index.html'
+    )
+})
+
+//Shop
+app.use('/', express.static(global.rootDir + '/public/FrontOffice'));
+app.use('/results', express.static(global.rootDir + '/public/FrontOffice'));
+app.use('/cart', express.static(global.rootDir + '/public/FrontOffice'));
+app.use('/services', express.static(global.rootDir + '/public/FrontOffice'));
+app.use('/profile', express.static(global.rootDir + '/public/FrontOffice'));
 
 app.get('/', (req, res) => {
     res.sendFile(
@@ -71,11 +85,27 @@ app.get('/', (req, res) => {
     )
 })
 
-app.use('/login', express.static(global.rootDir + '/public/BackOffice'));
-
-app.get('/login', (req, res) => {
+app.get('/results', (req, res) => {
     res.sendFile(
-        global.rootDir + 'public/BackOffice/index.html'
+        global.rootDir + 'public/FrontOffice/index.html'
+    )
+})
+
+app.get('/cart', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/FrontOffice/index.html'
+    )
+})
+
+app.get('/services', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/FrontOffice/index.html'
+    )
+})
+
+app.get('/profile', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/FrontOffice/index.html'
     )
 })
 
