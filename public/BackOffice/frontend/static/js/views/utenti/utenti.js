@@ -55,7 +55,7 @@ fetch('/db/collection?collection=users', {
                         <label for="adminInput">Admin</label>
                         <input type="checkbox" class="form-control" id="adminEditInput">
                     </div>
-                    <button type="submit" class="btn btn-primary" id="editSaveClient">Save</button>
+                    <button type="submit" class="btn btn-primary" id="editSaveClient${client._id}">Save</button>
                 </form>
             </div>
         </div>
@@ -129,7 +129,7 @@ function addClient(name, username, email, password, pets, admin, animals, score)
 function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
     document.getElementById("formeditcontainer").style.display = "block";
-    document.querySelector('#editSaveClient').addEventListener("click", e => {
+    document.querySelector('#editSaveClient' + jsonDataid).addEventListener("click", e => {
         e.preventDefault();
         const id = document.querySelector('#id').value;
         const name = document.querySelector('#nameEditInput').value;
