@@ -40,6 +40,7 @@ class Product_Display extends React.Component
 
     addToCart = (item) =>
     {
+        debugger;
         let cart = JSON.parse(localStorage.getItem("cart"));
         let cartItem = cart.findIndex(i => i.id == item.id);
         if(cartItem>=0)

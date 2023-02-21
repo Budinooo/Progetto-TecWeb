@@ -16,11 +16,20 @@ class Navbar extends React.Component {
       callback(document.getElementById("searchBar").value);
     }
   
+  loginBtn = () =>
+  {
+    if(localStorage.getItem("login").islogged){
+      return(<a className="icon-btn nav-link" href="/game/profile">PROFILE</a>)
+    }
+    else
+      return(<a className="icon-btn nav-link" href="/login">LOG IN</a>)
+  }
+
   render() {
     return (
       <nav className="navbar navbar-expand-lg">
         <a className="navbar-brand ms-4" href="#">
-          <img src="/shop/img/immagine.png" alt="Animal House Logo"/>
+          <img src="img/immagine.png" alt="Animal House Logo"/>
         </a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -41,9 +50,7 @@ class Navbar extends React.Component {
               </a> 
             </li>
             <li className="nav-item">
-              <a className="icon-btn nav-link" href="/profile">
-                LOG IN
-              </a>
+              {this.loginBtn()}
             </li>
           </ul>
         </div>

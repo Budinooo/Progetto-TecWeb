@@ -7,11 +7,7 @@
 }
 
 .react-calendar {
-    display: inline-block;
-}
-
-.label-select {
-    margin-top: 1em;
+    display: block;
 }
 
 .book-btn {
@@ -25,10 +21,14 @@
     width:30%;
     transition: 0.2s;
     font-weight: 500;
-    margin: 0.5em;
+    margin-top: 2em;
 }
 
 .book-btn:hover {
     border-radius: 10px;
     transition:0.2s;
+}
+
+.service-container {
+    margin-bottom: 3em;
 }

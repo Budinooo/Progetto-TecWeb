@@ -18,8 +18,6 @@ const onSearch = (query) =>
   //fetch("http://localhost:8000/db/search/" + query).then((response) => response.json()).then((jsonResponse) => console.log(jsonResponse));
 } 
 
-
-
 function App() {
 
   //todo: aggiungere campi tag, disponibilità.
@@ -41,6 +39,13 @@ function App() {
     if(localStorage.getItem("cart"))
       return;
     localStorage.setItem("cart","[]");
+    if(localStorage.getItem("login") == null) {
+      const longinInfo = {
+        islogged: false,
+        id: 0,
+      }
+      localStorage.setItem("login",JSON.stringify(longinInfo))
+    }
   },[])
   
   return (
