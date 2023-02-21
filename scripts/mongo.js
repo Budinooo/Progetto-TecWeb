@@ -34,7 +34,7 @@ const template = require(global.rootDir + '/scripts/tpl.js') ;
 exports.create = async function(credentials) {
 	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
 
-	let collections = ['communityFeed', 'products', 'services', 'users'];
+	let collections = ['communityFeed', 'products', 'services', 'users', 'bookings'];
 	let debug = []
 	try {
 		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)

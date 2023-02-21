@@ -73,6 +73,13 @@ app.use('/game/memory', express.static(global.rootDir + '/public/Game'));
 app.use('/game/animalinfo', express.static(global.rootDir + '/public/Game'));
 app.use('/game/medinfo', express.static(global.rootDir + '/public/Game'));
 app.use('/game/yourpets', express.static(global.rootDir + '/public/Game'));
+app.use('/login', express.static(global.rootDir + '/public/BackOffice'));
+
+app.get('/login', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/BackOffice/index.html'
+    )
+})
 
 app.get('/game', (req, res) => {
     res.sendFile(
