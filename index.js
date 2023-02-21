@@ -87,6 +87,7 @@ app.use('/game/memory', express.static(global.rootDir + '/public/Game'));
 app.use('/game/animalinfo', express.static(global.rootDir + '/public/Game'));
 app.use('/game/medinfo', express.static(global.rootDir + '/public/Game'));
 app.use('/game/yourpets', express.static(global.rootDir + '/public/Game'));
+app.use('/game/funnyvideos', express.static(global.rootDir + '/public/Game'));
 
 app.get('/game', (req, res) => {
     res.sendFile(
@@ -119,6 +120,12 @@ app.get('/game/animalinfo', (req, res) => {
 })
 
 app.get('/game/medinfo', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/Game/index.html'
+    )
+})
+
+app.get('/game/funnyvideos', (req, res) => {
     res.sendFile(
         global.rootDir + 'public/Game/index.html'
     )
