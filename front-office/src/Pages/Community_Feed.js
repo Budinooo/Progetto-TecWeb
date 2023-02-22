@@ -37,7 +37,7 @@ class Community_Feed extends React.Component {
 
     setContent = () =>{
         if (this.state.isPost){
-            let post = this.state.posts.filter((post) => post.id == this.state.postChosen);
+            let post = this.state.posts.filter((post) => post._id == this.state.postChosen);
             return <Post isPost={this.state.isPost} openPost={this.handleIsPost} post={post[0]}/>
         }else{
             let isPost = this.state.isPost;

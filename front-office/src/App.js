@@ -13,7 +13,8 @@ import ServiceDisplay from "./Pages/ServiceDisplay.js";
 const onSearch = (query) =>  
 {
   console.log(query);
-  //fetch("http://localhost:8000/db/search/" + query).then((response) => response.json()).then((jsonResponse) => console.log(jsonResponse));
+  if (query && query != "" && query!=" ")
+    window.location.href = "/results?query=query";
 } 
 
 class App extends React.Component {
@@ -22,7 +23,7 @@ class App extends React.Component {
     super(props);
     let products = []
     let service = null
-    this.state = {products, service};
+    this.state = {products: products, service: service};
     fetch('/db/collection?collection=products', {method:"GET"}).then((res)=>res.json()).then((data)=> {this.setState({products: data.result.slice(0,8)})});
     fetch('/db/element?id=0&collection=services', {method: "GET"}).then((res) => res.json()).then((data) => this.setState({services: data.result}));
   }

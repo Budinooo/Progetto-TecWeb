@@ -2351,24 +2351,24 @@ var app = (function () {
     			attr_dev(input, "placeholder", "Search for a product");
     			set_style(input, "width", "100%");
     			attr_dev(input, "id", "search");
-    			add_location(input, file$r, 37, 8, 1138);
+    			add_location(input, file$r, 37, 8, 1141);
     			attr_dev(i, "class", "bi-search");
-    			add_location(i, file$r, 38, 63, 1307);
+    			add_location(i, file$r, 38, 63, 1310);
     			attr_dev(button, "class", "shopSearchBtn svelte-114x7wo");
-    			add_location(button, file$r, 38, 8, 1252);
+    			add_location(button, file$r, 38, 8, 1255);
     			set_style(div0, "display", "flex");
     			set_style(div0, "width", "57%");
     			set_style(div0, "height", "fit-content");
-    			add_location(div0, file$r, 36, 6, 1070);
+    			add_location(div0, file$r, 36, 6, 1073);
     			attr_dev(a0, "href", "/");
     			attr_dev(a0, "class", "svelte-114x7wo");
-    			add_location(a0, file$r, 41, 8, 1435);
+    			add_location(a0, file$r, 41, 8, 1438);
     			attr_dev(a1, "href", "/backoffice/");
     			attr_dev(a1, "class", "svelte-114x7wo");
-    			add_location(a1, file$r, 42, 8, 1465);
+    			add_location(a1, file$r, 42, 8, 1468);
     			attr_dev(div1, "class", "flex nav svelte-114x7wo");
     			set_style(div1, "justify-content", "space-between");
-    			add_location(div1, file$r, 40, 6, 1363);
+    			add_location(div1, file$r, 40, 6, 1366);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -2426,7 +2426,7 @@ var app = (function () {
     			t = text(/*log*/ ctx[1]);
     			attr_dev(a, "href", "/login/");
     			attr_dev(a, "class", "svelte-114x7wo");
-    			add_location(a, file$r, 46, 10, 1667);
+    			add_location(a, file$r, 46, 10, 1670);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -2471,7 +2471,7 @@ var app = (function () {
     			t = text(/*log*/ ctx[1]);
     			attr_dev(a, "href", window.location.href);
     			attr_dev(a, "class", "svelte-114x7wo");
-    			add_location(a, file$r, 44, 10, 1580);
+    			add_location(a, file$r, 44, 10, 1583);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -2548,27 +2548,27 @@ var app = (function () {
     			attr_dev(input, "placeholder", "Search for a product");
     			set_style(input, "width", "100%");
     			attr_dev(input, "id", "search");
-    			add_location(input, file$r, 53, 6, 1921);
+    			add_location(input, file$r, 53, 6, 1924);
     			attr_dev(i, "class", "bi-search");
-    			add_location(i, file$r, 54, 61, 2088);
+    			add_location(i, file$r, 54, 61, 2091);
     			attr_dev(button, "class", "shopSearchBtn svelte-114x7wo");
-    			add_location(button, file$r, 54, 6, 2033);
+    			add_location(button, file$r, 54, 6, 2036);
     			set_style(div0, "display", "flex");
     			set_style(div0, "width", "90%");
     			set_style(div0, "height", "fit-content");
     			set_style(div0, "margin", "auto");
     			set_style(div0, "margin-top", "10px");
     			set_style(div0, "margin-bottom", "10px");
-    			add_location(div0, file$r, 52, 4, 1805);
+    			add_location(div0, file$r, 52, 4, 1808);
     			attr_dev(a0, "href", "/");
     			attr_dev(a0, "class", "svelte-114x7wo");
-    			add_location(a0, file$r, 57, 6, 2208);
+    			add_location(a0, file$r, 57, 6, 2211);
     			attr_dev(a1, "href", "/backoffice/");
     			attr_dev(a1, "class", "svelte-114x7wo");
-    			add_location(a1, file$r, 58, 6, 2236);
+    			add_location(a1, file$r, 58, 6, 2239);
     			attr_dev(div1, "class", "flex nav svelte-114x7wo");
     			set_style(div1, "justify-content", "space-around");
-    			add_location(div1, file$r, 56, 4, 2140);
+    			add_location(div1, file$r, 56, 4, 2143);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -2625,7 +2625,7 @@ var app = (function () {
     			a.textContent = "LOG IN";
     			attr_dev(a, "href", "/login/");
     			attr_dev(a, "class", "svelte-114x7wo");
-    			add_location(a, file$r, 62, 8, 2432);
+    			add_location(a, file$r, 62, 8, 2435);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -2667,7 +2667,7 @@ var app = (function () {
     			t = text("LOG OUT");
     			attr_dev(a, "href", window.location.href);
     			attr_dev(a, "class", "svelte-114x7wo");
-    			add_location(a, file$r, 60, 8, 2347);
+    			add_location(a, file$r, 60, 8, 2350);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -2778,53 +2778,53 @@ var app = (function () {
     			a8 = element("a");
     			a8.textContent = "YOUR PETS";
     			attr_dev(span0, "class", "svelte-114x7wo");
-    			add_location(span0, file$r, 32, 24, 851);
+    			add_location(span0, file$r, 32, 24, 854);
     			attr_dev(span1, "class", "svelte-114x7wo");
-    			add_location(span1, file$r, 32, 43, 870);
+    			add_location(span1, file$r, 32, 43, 873);
     			if (!src_url_equal(img.src, img_src_value = "images/dog-house.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "logo");
     			attr_dev(img, "class", "svelte-114x7wo");
-    			add_location(img, file$r, 32, 57, 884);
+    			add_location(img, file$r, 32, 57, 887);
     			attr_dev(div0, "class", "logo svelte-114x7wo");
-    			add_location(div0, file$r, 32, 6, 833);
+    			add_location(div0, file$r, 32, 6, 836);
     			attr_dev(div1, "class", "slogan svelte-114x7wo");
     			set_style(div1, "color", "#ff6a3d");
-    			add_location(div1, file$r, 33, 6, 946);
+    			add_location(div1, file$r, 33, 6, 949);
     			attr_dev(a0, "class", "navbar-brand svelte-114x7wo");
     			attr_dev(a0, "href", "/game/");
-    			add_location(a0, file$r, 31, 4, 787);
+    			add_location(a0, file$r, 31, 4, 790);
     			attr_dev(div2, "class", "container-fluid flex svelte-114x7wo");
     			toggle_class(div2, "width100", /*screenWidth*/ ctx[0] < 500);
-    			add_location(div2, file$r, 30, 2, 714);
+    			add_location(div2, file$r, 30, 2, 717);
     			attr_dev(a1, "href", "/game/");
     			attr_dev(a1, "class", "svelte-114x7wo");
-    			add_location(a1, file$r, 67, 4, 2596);
+    			add_location(a1, file$r, 67, 4, 2599);
     			attr_dev(a2, "href", "/game/quiz");
     			attr_dev(a2, "class", "svelte-114x7wo");
-    			add_location(a2, file$r, 68, 4, 2627);
+    			add_location(a2, file$r, 68, 4, 2630);
     			attr_dev(a3, "href", "/game/wordle");
     			attr_dev(a3, "class", "svelte-114x7wo");
-    			add_location(a3, file$r, 69, 4, 2662);
+    			add_location(a3, file$r, 69, 4, 2665);
     			attr_dev(a4, "href", "/game/memory");
     			attr_dev(a4, "class", "svelte-114x7wo");
-    			add_location(a4, file$r, 70, 4, 2701);
+    			add_location(a4, file$r, 70, 4, 2704);
     			attr_dev(a5, "href", "/game/funnyvideos");
     			attr_dev(a5, "class", "svelte-114x7wo");
-    			add_location(a5, file$r, 71, 4, 2740);
+    			add_location(a5, file$r, 71, 4, 2743);
     			attr_dev(a6, "href", "/game/animalinfo");
     			attr_dev(a6, "class", "svelte-114x7wo");
-    			add_location(a6, file$r, 72, 4, 2790);
+    			add_location(a6, file$r, 72, 4, 2793);
     			attr_dev(a7, "href", "/game/medinfo");
     			attr_dev(a7, "class", "svelte-114x7wo");
-    			add_location(a7, file$r, 73, 4, 2838);
+    			add_location(a7, file$r, 73, 4, 2841);
     			attr_dev(a8, "href", "/game/yourpets");
     			attr_dev(a8, "class", "svelte-114x7wo");
-    			add_location(a8, file$r, 74, 4, 2884);
+    			add_location(a8, file$r, 74, 4, 2887);
     			attr_dev(div3, "class", "mininav container svelte-114x7wo");
     			toggle_class(div3, "mobile", /*screenWidth*/ ctx[0] < 500);
-    			add_location(div3, file$r, 66, 2, 2528);
+    			add_location(div3, file$r, 66, 2, 2531);
     			attr_dev(header, "class", "svelte-114x7wo");
-    			add_location(header, file$r, 29, 0, 702);
+    			add_location(header, file$r, 29, 0, 705);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2938,7 +2938,7 @@ var app = (function () {
 
     	const searchProduct = () => {
     		let value = document.getElementById("search").value;
-    		if (value && value != "" && value != " ") window.location.href = "/results?query=cat";
+    		if (value && value != "" && value != " ") window.location.href = "/results?query=" + value;
     	};
 
     	const writable_props = [];
