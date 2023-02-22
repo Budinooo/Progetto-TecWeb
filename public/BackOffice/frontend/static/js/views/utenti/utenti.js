@@ -144,7 +144,7 @@ function editClient(jsonDataid) {
         let obj = {
             collection: 'users',
             elem: {
-                "_id": jsonDataid,
+                "_id": JSON.stringify(jsonDataid),
                 "name": name,
                 "username": username,
                 "email": email,
@@ -172,10 +172,10 @@ function editClient(jsonDataid) {
 
 function removeClient(clientId) {
     // logica per la rimozione del cliente
-    console.log(clientId);
+    console.log(JSON.stringify(clientId));
     let obj = {
         collection: 'users',
-        id: clientId
+        id: JSON.stringify(clientId)
     }
     fetch('/db/element', {
             method: 'DELETE',

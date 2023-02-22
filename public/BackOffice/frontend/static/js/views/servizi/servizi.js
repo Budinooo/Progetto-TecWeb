@@ -94,12 +94,12 @@ function editService(serviceId) {
         let obj = {
             collection: 'services',
             elem: {
-                "_id": id,
-                "name": name,
-                "description": description,
-                "place": place,
-                "date": date,
-                "img": img
+                "_id": JSON.stringify(id),
+                "name": JSON.stringify(name),
+                "description": JSON.stringify(description),
+                "place": JSON.stringify(place),
+                "date": JSON.stringify(date),
+                "img": JSON.stringify(img)
             }
         }
         fetch('/db/element', {
@@ -135,7 +135,7 @@ function saveDate(serviceId) {
             let obj = {
                 collection: 'services',
                 elem: {
-                    "_id": data._id,
+                    "_id": JSOn.stringify(serviceId),
                     "name": data.name,
                     "description": data.description,
                     "price": data.price,
@@ -143,18 +143,17 @@ function saveDate(serviceId) {
                     "availability": date
                 }
             }
-        })
-
-    fetch('/db/element', {
-            method: 'PUT',
-            headers: {
-                'Content-type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(obj)
-        })
-        .then(() => {
-            location.reload();
+            fetch('/db/element', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(obj)
+                })
+                .then(() => {
+                    location.reload();
+                })
         })
     document.getElementById("formdate" + serviceId).style.display = "none";
 }
@@ -163,7 +162,7 @@ function removeService(serviceId) {
     // logica per la modifica del servizio
     let obj = {
         collection: 'services',
-        id: serviceId
+        id: JSON.stringify(serviceId)
     }
     fetch('/db/element', {
             method: 'DELETE',
