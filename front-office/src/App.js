@@ -21,10 +21,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     let products = []
-    let services = []
-    this.state = {products, services};
-    fetch('db/collection?collection=products', {method:"GET"}).then((res)=>res.json()).then((data)=> {this.setState({products: data.result.slice(0,8)})});
-    fetch('db/element?id=0&collection=services', {method: "GET"}).then((res) => res.json()).then((data) => this.setState({services: data.result}));
+    let service = null
+    this.state = {products, service};
+    fetch('/db/collection?collection=products', {method:"GET"}).then((res)=>res.json()).then((data)=> {this.setState({products: data.result.slice(0,8)})});
+    fetch('/db/element?id=0&collection=services', {method: "GET"}).then((res) => res.json()).then((data) => this.setState({services: data.result}));
   }
 
   componentDidMount()
@@ -46,12 +46,12 @@ class App extends React.Component {
       <>
         <Navbar callback={onSearch}/>
         <Switch>
-          <Route exact path='/' element={<Home services={this.state.services} products={this.state.products}/>} />
+          <Route exact path='/' element={<Home service={this.state.service} products={this.state.products}/>} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/feed' element={<Community_Feed />} />
           <Route path='/results' element={<DisplayResults />} />
-          <Route path='/services' element={<ServiceDisplay services={this.state.services} />} />
+          <Route path='/services' element={<ServiceDisplay />} />
         </Switch>
       </>
       

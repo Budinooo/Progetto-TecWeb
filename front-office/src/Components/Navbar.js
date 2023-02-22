@@ -21,10 +21,18 @@ class Navbar extends React.Component {
     let islogged = JSON.parse(login);
     console.log(islogged)
     if(JSON.parse(localStorage.getItem("login")).islogged){
-      return(<a className="icon-btn nav-link" href="/game/profile">PROFILE</a>)
+      return(<a className="icon-btn nav-link" onClick={this.logoutBtn} href="/">LOG OUT</a>)
     }
     else
       return(<a className="icon-btn nav-link" href="/login">LOG IN</a>)
+  }
+
+  logoutBtn = () =>{
+    let obj = {
+      "islogged": false,
+      "id": ""
+    }
+    localStorage.setItem("login", JSON.stringify(obj))
   }
 
   render() {
