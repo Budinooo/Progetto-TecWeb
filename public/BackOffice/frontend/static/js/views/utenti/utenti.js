@@ -118,7 +118,7 @@ function editClient(jsonDataid) {
     document.getElementById("formeditcontainer" + jsonDataid).style.display = "block";
     document.querySelector('#editSaveClient' + jsonDataid).addEventListener("click", e => {
         e.preventDefault();
-        fetch('/db/element?id=' + serviceId + '&collection=users', {
+        fetch('/db/element?id=' + jsonDataid + '&collection=users', {
                 method: 'GET'
             })
             .then(response => response.json())

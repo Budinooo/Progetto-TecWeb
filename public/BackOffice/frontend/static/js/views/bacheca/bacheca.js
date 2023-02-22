@@ -29,7 +29,7 @@ fetch('/db/collection?collection=communityFeed', {
           </div>
           <div class="container mt-5" id="responseContainer"></div>
           <div class="container" id="formcontainer` + message._id + `" style="display:none">
-            <form class="form form--hidden" id="editMessageForm">
+            <form class="form form--hidden" id="editMessageForm` + message._id + `">
                 <div class="form-group">
                     <label for="scoreInput">Message</label>
                     <textarea class="form-control" id="newMessage` + message._id + `">` + message.description + `</textarea>
@@ -58,7 +58,7 @@ fetch('/db/collection?collection=communityFeed', {
           </div>
           <div class="container mt-5" id="responseContainer"></div>
           <div class="container" id="formcontainer` + element._id + `" style="display:none">
-            <form class="form form--hidden" id="editMessageForm">
+            <form class="form form--hidden" id="editMessageForm` + element._id + `">
                 <div class="form-group">
                     <label for="scoreInput">Message</label>
                     <input type="text" class="form-control" id="newMessage` + element._id + `" value="` + element.description + `">
