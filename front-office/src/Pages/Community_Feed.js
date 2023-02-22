@@ -1,4 +1,3 @@
-import { response } from 'express';
 import React, {StyleSheet} from 'react'
 import {Link} from 'react-router-dom';
 import Post from '../Components/Post';
