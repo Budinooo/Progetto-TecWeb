@@ -2,6 +2,12 @@
     width: 100%;
 }
 
+nav {
+    border-bottom-color: rgb(17, 204, 229);
+    border-bottom-style: solid;
+    border-bottom-width: 0.3em;
+}
+
 .navbar-brand {
     width: 10%;
 }
@@ -51,4 +57,12 @@
 
 .nav-link {
     color: black;
+}
+
+.bottom {
+    width:10em;
+}
+
+#bottom-navbar {
+    margin-left: 7%;
 }

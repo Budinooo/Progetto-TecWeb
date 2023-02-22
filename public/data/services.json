@@ -1,7 +1,7 @@
 [{
         "_id": "0",
-        "name": "Servizio 1",
-        "desc": "Descrizione del servizio 1",
+        "name": "Grooming",
+        "description": "A Full Groom Includes: Pre bath brush, bath with your choice of shampoo and conditioner all available in our room, ear cleansing, fluff up warm blow dry by hand with brush styling, pawdicure (hair clip, nail clip and file), eye stain removal, scissor cut to breed specific styling or your own style preference. Your choice of cologne from the blue room. Hair Accessory \nPLEASE NOTE - Additional costs apply for parasites present/ heavily soiled or matted coats/ difficult / aggressive behaviour. Final cost is dependent on the complexity of the groom and how long it takes. ",
         "price": "50.00",
         "place": "Bologna",
         "img": "https://larchmontvillagevet.com/wp-content/uploads/2019/02/grooming-lab-bath-1024x682.jpg",
@@ -9,11 +9,11 @@
     },
     {
         "_id": "1",
-        "name": "Servizio 2",
-        "desc": "Descrizione del servizio 2",
+        "name": "Dinosaur vet",
+        "description": "Is your pet feeling unwell? Our vet team is ready to take care of them. Our staff, trained on Isla Nublar, are among the best in treating large reptiles. Let them treat your scaly friend and they'll go back to normal! *We reserve the ability to charge additional fees in case of dismemberment of staff*",
         "price": "50.00",
         "place": "Bologna",
-        "img": "https://larchmontvillagevet.com/wp-content/uploads/2019/02/grooming-lab-bath-1024x682.jpg",
+        "img": "https://s.yimg.com/ny/api/res/1.2/dWy8vcVjGDKUdM9EZ.Ja3w--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD03Njk-/https://s.yimg.com/cd/resizer/2.0/FIT_TO_WIDTH-w1248/febd64e074c51ef538d9c2f8408d47a33559fdd4.png",
         "availability": ["2023-2-1", "2023-2-2", "2023-2-3"]
     }
 ]

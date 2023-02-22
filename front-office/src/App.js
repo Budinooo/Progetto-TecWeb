@@ -16,15 +16,18 @@ const onSearch = (query) =>
   //fetch("http://localhost:8000/db/search/" + query).then((response) => response.json()).then((jsonResponse) => console.log(jsonResponse));
 } 
 
-function App() {
+class App extends React.Component {
 
-  //todo: aggiungere campi tag, disponibilità.
+  constructor(props) {
+    super(props);
+    let products = []
+    let services = []
+    this.state = {products, services};
+    fetch('db/collection?collection=products', {method:"GET"}).then((res)=>res.json()).then((data)=> {this.setState({products: data.result.slice(0,8)})});
+    fetch('db/element?id=0&collection=services', {method: "GET"}).then((res) => res.json()).then((data) => this.setState({services: data.result}));
+  }
 
-  const [products, setProducts] = useState(fetch('db/collection?collection=products', {method:"GET"}).then((res)=>res.json()).then((data)=> setProducts(data.result.slice(0,8))));
-  
-  const [services, setServices] = useState(fetch('db/element?id=0&collection=services', {method: "GET"}).then((res) => res.json()).then((data) => setServices(data.result)));
-
-  useEffect(()=>
+  componentDidMount()
   {
     if(localStorage.getItem("cart"))
       return;
@@ -36,22 +39,24 @@ function App() {
       }
       localStorage.setItem("login",JSON.stringify(longinInfo))
     }
-  },[])
+  }
   
-  return (
-    <>
-      <Navbar callback={onSearch}/>
-      <Switch>
-        <Route exact path='/' element={<Home services={services} products={products}/>} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/feed' element={<Community_Feed />} />
-        <Route path='/results' element={<DisplayResults />} />
-        <Route path='/services' element={<ServiceDisplay services={services} />} />
-      </Switch>
-    </>
-    
-  )
+  render () {
+    return (
+      <>
+        <Navbar callback={onSearch}/>
+        <Switch>
+          <Route exact path='/' element={<Home services={this.state.services} products={this.state.products}/>} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/feed' element={<Community_Feed />} />
+          <Route path='/results' element={<DisplayResults />} />
+          <Route path='/services' element={<ServiceDisplay services={this.state.services} />} />
+        </Switch>
+      </>
+      
+    )
+  }
 }
 
 export default App;
