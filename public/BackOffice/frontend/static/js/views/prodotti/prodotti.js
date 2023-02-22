@@ -66,7 +66,7 @@ $("#addBtn").click(function() {
                         "name": document.getElementById("nameInput").value,
                         "description": document.getElementById("descriptionInput").value,
                         "price": document.getElementById("priceInput").value,
-                        "image": document.getElementById("imageInput").value,
+                        "img": document.getElementById("imageInput").value,
                         "tag": "food",
                         "animal": "dog"
                     }
@@ -160,7 +160,7 @@ function saveEdit(jsonDataid) {
                     "name": document.getElementById("nameEditInput" + jsonDataid).value,
                     "description": document.getElementById("descriptionEditInput" + jsonDataid).value,
                     "price": document.getElementById("priceEditInput" + jsonDataid).value,
-                    "image": document.getElementById("imageEditInput" + jsonDataid).value,
+                    "img": document.getElementById("imageEditInput" + jsonDataid).value,
                     "tag": data.tag,
                     "animal": data.animal
                 }
