@@ -32,7 +32,7 @@ fetch('/db/collection?collection=communityFeed', {
             <form class="form form--hidden" id="editMessageForm">
                 <div class="form-group">
                     <label for="scoreInput">Message</label>
-                    <textarea class="form-control" id="newMessage">` + message.description + `</textarea>
+                    <textarea class="form-control" id="newMessage` + message._id + `">` + message.description + `</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" id="saveClient">Save</button>
             </form>
@@ -61,7 +61,7 @@ fetch('/db/collection?collection=communityFeed', {
             <form class="form form--hidden" id="editMessageForm">
                 <div class="form-group">
                     <label for="scoreInput">Message</label>
-                    <input type="text" class="form-control" id="newMessage">
+                    <input type="text" class="form-control" id="newMessage` + element._id + `" value="` + element.description + `">
                 </div>
                 <button type="submit" class="btn btn-primary" id="saveClient">Save</button>
             </form>
@@ -80,23 +80,38 @@ fetch('/db/collection?collection=communityFeed', {
     });
 
 function deleteImage(messageId) {
-    let obj = {
-        collection: 'communityFeed',
-        elem: {
-            "file": ""
-        }
-    }
-    fetch('/db/element', {
-            method: 'PUT',
-            headers: {
-                'Content-type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(obj)
+    fetch('/db/element?id=' + messageId + '&collection=communityFeed', {
+            method: 'GET'
         })
-        .then(() => {
-            location.reload();
-        })
+        .then(response => response.json())
+        .then(data => {
+            data = data.result;
+            let date = data.availability;
+            date.push(newDate);
+            let obj = {
+                collection: 'communityFeed',
+                elem: {
+                    "_id": JSON.stringify(data._id),
+                    "author": JSON.stringify(data.author),
+                    "title": JSON.stringify(data.title),
+                    "description": JSON.stringify(message),
+                    "file": "",
+                    "date": JSON.stringify(data.date),
+                    "answers": data.answers
+                }
+            }
+            fetch('/db/element', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(obj)
+                })
+                .then(() => {
+                    location.reload();
+                })
+        });
 }
 
 function editMessage(messageId) {
@@ -105,8 +120,8 @@ function editMessage(messageId) {
     document.getElementById(jsonDataid).style.display = "none";
     document.querySelector("formcontainer" + messageId).addEventListener("submit", function(event) {
         event.preventDefault();
-        const message = document.getElementById("messageText" + messageId).value;
-        fetch('/db/element?id=' + messageId + '&collection=services', {
+        const message = document.getElementById("newMessage" + messageId).value;
+        fetch('/db/element?id=' + messageId + '&collection=communityFeed', {
                 method: 'GET'
             })
             .then(response => response.json())
@@ -115,14 +130,15 @@ function editMessage(messageId) {
                 let date = data.availability;
                 date.push(newDate);
                 let obj = {
-                    collection: 'services',
+                    collection: 'communityFeed',
                     elem: {
                         "_id": JSON.stringify(data._id),
                         "author": JSON.stringify(data.author),
                         "title": JSON.stringify(data.title),
                         "description": JSON.stringify(message),
                         "file": JSON.stringify(data.img),
-                        "date": JSON.stringify(data.date)
+                        "date": JSON.stringify(data.date),
+                        "answers": data.answers
                     }
                 }
                 fetch('/db/element', {

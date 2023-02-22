@@ -93,8 +93,8 @@ function addClient(name, username, email, password, pets, admin, animals, score)
                     "username": JSON.stringify(username),
                     "email": JSON.stringify(email),
                     "password": JSON.stringify(password),
-                    "score": JSON.stringify(score),
-                    "admin": JSON.stringify(admin)
+                    "score": score,
+                    "admin": admin
                 }
             };
 
@@ -118,34 +118,43 @@ function editClient(jsonDataid) {
     document.getElementById("formeditcontainer" + jsonDataid).style.display = "block";
     document.querySelector('#editSaveClient' + jsonDataid).addEventListener("click", e => {
         e.preventDefault();
-        const name = document.getElementById('nameEditInput' + jsonDataid).value;
-        const username = document.querySelector('#usernameEditInput' + jsonDataid).value;
-        const email = document.querySelector('#emailEditInput' + jsonDataid).value;
-        const password = document.querySelector('#passwordEditInput' + jsonDataid).value;
-        const admin = document.querySelector('#adminEditInput' + jsonDataid).value;
-        const score = document.querySelector('#scoreEditInput' + jsonDataid).value;
-        let obj = {
-            collection: 'users',
-            elem: {
-                "_id": JSON.stringify(jsonDataid),
-                "name": JSON.stringify(name),
-                "username": JSON.stringify(username),
-                "email": JSON.stringify(email),
-                "password": JSON.stringify(password),
-                "score": JSON.stringify(score),
-                "admin": JSON.stringify(admin)
-            }
-        }
-        fetch('/db/element', {
-                method: 'PUT',
-                headers: {
-                    'Content-type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(obj)
+        fetch('/db/element?id=' + serviceId + '&collection=users', {
+                method: 'GET'
             })
-            .then(() => {
-                location.reload();
+            .then(response => response.json())
+            .then(data => {
+                data = data.result;
+                const name = document.getElementById('nameEditInput' + jsonDataid).value;
+                const username = document.querySelector('#usernameEditInput' + jsonDataid).value;
+                const email = document.querySelector('#emailEditInput' + jsonDataid).value;
+                const password = document.querySelector('#passwordEditInput' + jsonDataid).value;
+                const admin = document.querySelector('#adminEditInput' + jsonDataid).value;
+                const score = document.querySelector('#scoreEditInput' + jsonDataid).value;
+                let obj = {
+                    collection: 'users',
+                    elem: {
+                        "_id": JSON.stringify(jsonDataid),
+                        "name": JSON.stringify(name),
+                        "username": JSON.stringify(username),
+                        "email": JSON.stringify(email),
+                        "password": JSON.stringify(password),
+                        "favorites": data.favorites,
+                        "pets": data.pets,
+                        "score": score,
+                        "admin": admin
+                    }
+                }
+                fetch('/db/element', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(obj)
+                    })
+                    .then(() => {
+                        location.reload();
+                    })
             })
         document.getElementById("formeditcontainer" + jsonDataid).style.display = "none";
     });
