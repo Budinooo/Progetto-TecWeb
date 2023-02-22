@@ -20,6 +20,8 @@ class DisplayResults extends React.Component {
           
           if(searchParams.get('query'))
                this.getSearchedProducts(searchParams.get('query').toLowerCase())
+          else if (searchParams.get('category'))
+               this.getSearchedCategory(searchParams.get('category').toLowerCase())
           else
                this.getProducts();
 
@@ -44,6 +46,17 @@ class DisplayResults extends React.Component {
           .then(data => {
                data = data.result;
                data = data.filter(product => product.name.toLowerCase().includes(query) || product.description.toLowerCase().includes(query))
+               this.setState({products: data, productsDisplayed: data})
+          })
+     }
+
+     getSearchedCategory = (query) =>{
+          fetch('/db/collection?collection=products',{
+               method:'GET'
+          }).then(response => response.json())
+          .then(data => {
+               data = data.result;
+               data = data.filter(product => product.animal.toLowerCase() == query)
                this.setState({products: data, productsDisplayed: data})
           })
      }

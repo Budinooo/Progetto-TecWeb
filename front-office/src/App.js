@@ -14,7 +14,7 @@ const onSearch = (query) =>
 {
   console.log(query);
   if (query && query != "" && query!=" ")
-    window.location.href = "/results?query=query";
+    window.location.href = "/results?query="+query;
 } 
 
 class App extends React.Component {

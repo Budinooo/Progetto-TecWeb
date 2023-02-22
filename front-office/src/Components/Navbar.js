@@ -64,7 +64,7 @@ class Navbar extends React.Component {
               </li>
             </ul>
           </div>
-          <div id="bottom-navbar" className='w-100 d-flex'>
+          <div id="bottom-navbar" className='d-flex'>
             <ul className="navbar-nav">
               <li className='nav-item'>
                 <a className="nav-link bottom" href="/game">
