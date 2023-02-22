@@ -135,7 +135,7 @@ function editMessage(messageId) {
                         "_id": JSON.stringify(data._id),
                         "author": data.author,
                         "title": data.title,
-                        "description": message,
+                        "description": JSON.stringify(message),
                         "file": data.img,
                         "date": data.date,
                         "answers": data.answers
@@ -153,25 +153,6 @@ function editMessage(messageId) {
                         location.reload();
                     })
             })
-
-
-        let obj = {
-            collection: 'communityFeed',
-            elem: {
-                "description": message
-            }
-        }
-        fetch('/db/element', {
-                method: 'PUT',
-                headers: {
-                    'Content-type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(obj)
-            }
-            .then(() => {
-                location.reload();
-            }))
         document.getElementById("formcontainer" + messageId).style.display = "none";
         document.getElementById(jsonDataid).style.display = "block";
     });
