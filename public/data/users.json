@@ -1,7 +1,7 @@
 [
     {
         "_id": "0",
-        "name": "Cliente 1",
+        "name": "ciccio",
         "username": "Ciccio",
         "email": "mail@narcio.com",
         "password":"password",
@@ -12,7 +12,7 @@
     },
     { 
         "_id": "1",
-        "name": "Cliente 1",
+        "name": "admin",
         "username": "admin",
         "email": "mail@narcio.com",
         "password":"admin",
@@ -20,5 +20,35 @@
         "pets":[],
         "score": 10,
         "admin": 1
+    },{
+        "_id": "2",
+        "name": "Gerald",
+        "username": "Budino",
+        "email": "mail@budino.com",
+        "password":"budino",
+        "favorites": [],
+        "pets":[],
+        "score": 1000,
+        "admin": 1 
+    },{
+        "_id": "3",
+        "name": "gloria",
+        "username": "Dir",
+        "email": "gloria@gmail.com",
+        "password":"gloria",
+        "favorites": ["cat"],
+        "pets":[],
+        "score": 0,
+        "admin": 0 
+    },{
+        "_id": "4",
+        "name": "leonardo",
+        "username": "Leo",
+        "email": "lio@gmail.com",
+        "password":"leonardo",
+        "favorites": [],
+        "pets":[],
+        "score": 30,
+        "admin": 0 
     }
 ]
