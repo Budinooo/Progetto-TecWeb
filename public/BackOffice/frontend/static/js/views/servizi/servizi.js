@@ -32,23 +32,23 @@ fetch('/db/collection?collection=services', {
             <form class="form form--hidden" id="editServiceForm">
                 <div class="form-group">
                     <label for="scoreInput">Name</label>
-                    <input type="text" class="form-control" id="nameService" value="` + service.name + `">
+                    <input type="text" class="form-control" id="nameService` + service._id + `" value="` + service.name + `">
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Description</label>
-                    <input type="text" class="form-control" id="descriptionService"` + service.description + `>
+                    <input type="text" class="form-control" id="descriptionService` + service._id + `"` + service.description + `>
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Place</label>
-                    <input type="text" class="form-control" id="placeService"` + service.price + `>
+                    <input type="text" class="form-control" id="placeService` + service._id + `" value="` + service.price + `">
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Availability</label>
-                    <input type="date" class="form-control" id="dateService"` + service.availability + `>
+                    <input type="date" class="form-control" id="dateService` + service._id + `" value="` + service.availability + `">
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Availability</label>
-                    <input type="date" class="form-control" id="imageService"` + service.img + `>
+                    <input type="date" class="form-control" id="imageService` + service._id + `" value="` + service.img + `">
                 </div>
                 <button type="submit" class="btn btn-primary" id="saveService` + service._id + `">Save</button>
             </form>
@@ -86,11 +86,11 @@ function editService(serviceId) {
     document.getElementById("formcontainer" + serviceId).style.display = "block";
     document.querySelector('#saveService' + serviceId + '').addEventListener("click", e => {
         const id = serviceId;
-        const name = document.querySelector('#nameService').value;
-        const description = document.querySelector('#descriptionService').value;
-        const place = document.querySelector('#placeService').value;
-        const date = document.querySelector('#dateService').value;
-        const img = document.querySelector('#imageService').value;
+        const name = document.querySelector('#nameService' + serviceId).value;
+        const description = document.querySelector('#descriptionService' + serviceId).value;
+        const place = document.querySelector('#placeService' + serviceId).value;
+        const date = document.querySelector('#dateService' + serviceId).value;
+        const img = document.querySelector('#imageService' + serviceId).value;
         let obj = {
             collection: 'services',
             elem: {
@@ -98,7 +98,7 @@ function editService(serviceId) {
                 "name": JSON.stringify(name),
                 "description": JSON.stringify(description),
                 "place": JSON.stringify(place),
-                "date": JSON.stringify(date),
+                "date": date,
                 "img": JSON.stringify(img)
             }
         }

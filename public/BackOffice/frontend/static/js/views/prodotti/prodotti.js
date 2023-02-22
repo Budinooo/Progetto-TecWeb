@@ -15,7 +15,6 @@ fetch('/db/collection?collection=products', {
               <p class="card-text">${prodotto.description}</p>
               <p class="card-text">Price €: ${prodotto.price}</p>
               <p class="card-text">Product for: ${prodotto.animal}</p>
-              <p class="card-text">Availability: ${prodotto.availability}</p>
               <button class="btn btn-primary" id="editClient" onclick="editClient(${prodotto._id})">Edit</button>
               <button class="btn btn-danger" onclick="removeElement(${prodotto._id})">Remove</button>
             </div>
@@ -24,23 +23,19 @@ fetch('/db/collection?collection=products', {
             <form class="form form--hidden" id="addProductForm">
                 <div class="form-group">
                     <label for="nameInput">Name</label>
-                    <input type="text" class="form-control" id="nameEditInput${prodotto._id}">
+                    <input type="text" class="form-control" id="nameEditInput${prodotto._id}" value="${prodotto.name}">
                 </div>
                 <div class="form-group">
                     <label for="favoritesInput">Description</label>
-                    <input type="text" class="form-control" id="descriptionEditInput${prodotto._id}">
+                    <input type="text" class="form-control" id="descriptionEditInput${prodotto._id}" value="${prodotto.description}">
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Price</label>
-                    <input type="text" class="form-control" id="priceEditInput${prodotto._id}">
-                </div>
-                <div class="form-group">
-                    <label for="scoreInput">Availability</label>
-                    <input type="text" class="form-control" id="availabilityEditInput${prodotto._id}">
+                    <input type="text" class="form-control" id="priceEditInput${prodotto._id}" value="${prodotto.price}">
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Image url</label>
-                    <input type="text" class="form-control" id="imageEditInput${prodotto._id}">
+                    <input type="text" class="form-control" id="imageEditInput${prodotto._id}" value="${prodotto.img}">
                 </div>
                 <button type="submit" class="btn btn-primary" id="savePEditroduct${prodotto._id}">Save</button>
             </form>
@@ -67,12 +62,11 @@ $("#addBtn").click(function() {
                 let obj = {
                     collection: 'products',
                     elem: {
-                        _id: JSON.stringify(prodotti.result),
-                        name: document.getElementById("nameInput").value,
-                        description: document.getElementById("descriptionInput").value,
-                        price: document.getElementById("priceInput").value,
-                        availability: document.getElementById("availabilityInput").value,
-                        image: document.getElementById("imageInput").value
+                        "_id": JSON.stringify(prodotti.result),
+                        "name": JSON.stringify(document.getElementById("nameInput").value),
+                        "description": JSON.stringify(document.getElementById("descriptionInput").value),
+                        "price": JSON.stringify(document.getElementById("priceInput").value),
+                        "image": JSON.stringify(document.getElementById("imageInput").value)
                     }
 
                 };
@@ -120,11 +114,10 @@ function editClient(jsonDataid) {
             collection: 'products',
             elem: {
                 "_id": JSON.stringify(jsonDataid),
-                "name": document.getElementById("nameEditInput" + jsonDataid).value,
-                "description": document.getElementById("descriptionEditInput" + jsonDataid).value,
-                "price": document.getElementById("priceEditInput" + jsonDataid).value,
-                "availability": document.getElementById("availabilityEditInput" + jsonDataid).value,
-                "image": document.getElementById("imageEditInput" + jsonDataid).value
+                "name": JSON.stringify(document.getElementById("nameEditInput" + jsonDataid).value),
+                "description": JSON.stringify(document.getElementById("descriptionEditInput" + jsonDataid).value),
+                "price": JSON.stringify(document.getElementById("priceEditInput" + jsonDataid).value),
+                "image": JSON.stringify(document.getElementById("imageEditInput" + jsonDataid).value)
             }
         }
         fetch('/db/element', {
