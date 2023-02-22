@@ -323,10 +323,6 @@ const mongoCredentials = {
     }
     /* end */
 
-let MongoClient = require('mongodb').MongoClient;
-
-let localMongoUri = `mongodb://${mongoCredentials.user}:${mongoCredentials.pwd}@${mongoCredentials.site}?writeConcern=majority`
-
 app.get('/db/create', async function(req, res) {
     res.send(await mymongo.create(mongoCredentials))
 });

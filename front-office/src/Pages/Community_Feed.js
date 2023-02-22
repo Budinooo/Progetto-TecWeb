@@ -13,42 +13,22 @@ class Community_Feed extends React.Component {
             isAdd: false,
             isPost: false,
             postChosen: 0,
-            posts: [
-                {
-                    id:'0',
-                    author: 'giorgio vanni',
-                    title: 'Cerco rimedio per stitichezza per il mio cane',
-                    description: 'Il mio cane non la fa da così tanti giorni che ogni volta che incontriamo Angelo Pintus gli chiede sempre "Hai cacato?"',
-                    answers: [
-                        {
-                            author:'Amazon',
-                            description:'https://www.amazon.it/Enterogermina-integratore-alimentare-intestinale-lequilibrio/dp/B07V8TYV98/ref=asc_df_B07V8TYV98/?tag=googshopit-21&linkCode=df0&hvadid=407944040807&hvpos=&hvnetw=g&hvrand=13469476729332512721&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1008141&hvtargid=pla-852835221768&psc=1&tag=&ref=&adgrpid=86164770143&hvpone=&hvptwo=&hvadid=407944040807&hvpos=&hvnetw=g&hvrand=13469476729332512721&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1008141&hvtargid=pla-852835221768',
-                            date:'12/12/12, 12:12:13',
-                            file: ''
-                        },
-                        {
-                            author:'Ebay',
-                            description:'Non fidarti di lui, prova questo https://www.ebay.it/itm/334495836273?mkevt=1&mkcid=1&mkrid=724-53478-19255-0&campid=5338748322&toolid=20006&customid=lyw8ozUVAAAAzj_HIslmY1EwmaYXAAAAAA',
-                            date:'12/12/12, 12:12:14',
-                            file: ''
-                        }
-                    ],
-                    date:'12/12/12, 12:12:12',
-                    file: ''
-                },
-                {
-                    id:'1',
-                    author:'author',
-                    title: 'title',
-                    description: 'description',
-                    answers: [],
-                    date:'11/11/11, 11:11:11',
-                    file: ''
-                }
-            ]
+            posts: []
         }
+        
+        this.getPosts();
 
         this.handleIsPost = this.handleIsPost.bind(this);
+    }
+
+    getPosts = () =>{
+        fetch('/db/collection?collection=communityFeed',{
+            method:'GET'
+        }).then(response => response.json())
+        .then(data => {
+            data = data.result;
+            this.setState({posts: data, isAdd:false});
+        })
     }
 
     handleIsPost = (value, postChosen) => {
@@ -80,28 +60,57 @@ class Community_Feed extends React.Component {
 
     createForm = () => {
         //controllo se utente loggato
-        this.setState({isAdd:true});
+        let login = JSON.parse(localStorage.getItem("login"))
+        if (login.islogged)
+            this.setState({isAdd:true});
+        else
+            alert("You need to login first to make a post")
     }
 
     sendForm = () => { //da fare con mongo 
+        let login = JSON.parse(localStorage.getItem("login"))
         if(this.state.isAdd && this.state.isPost){ //send answer
             let desc = document.getElementById('description').value;
             let file = document.getElementById('upload').files;
             if (desc){
-                let post = (this.state.posts.filter(obj => obj.id == this.state.postChosen))[0];
-                let posts = this.state.posts;
+                let post = (this.state.posts.filter(obj => obj._id == this.state.postChosen))[0];
                 let date = new Date();
-                let obj ={
-                    author: 'giorgio vanni',
-                    description: desc,
-                    date: date.toLocaleString(),
-                    file: ''
-                }
-                if (file.length != 0)  
-                    obj.file = file[0];
-                post.answers.push(obj);
-                posts[this.state.postChosen].answers = post.answers;
-                this.setState({posts:posts, isAdd:false});
+                fetch('/db/element?id='+login.id+'&collection=users',{
+                    method:'GET'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    data = data.result.username;
+                    let newAnswer ={
+                        author: data,
+                        description: desc,
+                        date: date.toLocaleString(),
+                        file: ''
+                    }
+                    if (file.length != 0)  
+                        newAnswer.file = file[0];
+                    post.answers.push(newAnswer);
+                    let obj = {
+                        collection:'communityFeed',
+                        elem:{
+                            "_id": post._id,
+                            "author": post.author,
+                            "title": post.title,
+                            "description": post.description,
+                            "answers": post.answers,
+                            "date": post.date,
+                            "file": post.file
+                        }
+                    }
+                    fetch('/db/element',{
+                        method:'PUT',
+                        headers: {
+                            'Content-type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(obj)
+                    }).then(()=>this.getPosts())
+                })
             }
         }else if(this.state.isAdd){ //send post
             let title = document.getElementById('title').value;
@@ -109,20 +118,36 @@ class Community_Feed extends React.Component {
             let file = document.getElementById('upload').files;
             if (title && desc){
                 let date = new Date();
-                let obj ={
-                    id: this.state.posts.length, 
-                    author: 'giorgio vanni',
-                    title: title,
-                    description: desc,
-                    answers: [],
-                    date: date.toLocaleString(),
-                    file: ''
-                }
-                if (file.length != 0)  
-                    obj.file = file[0];
-                let posts = this.state.posts;
-                posts.push(obj);
-                this.setState({posts:posts, isAdd:false});
+                fetch('/db/element?id='+login.id+'&collection=users',{
+                    method:'GET'
+                })
+                .then(response => response.json())
+                .then(data =>{
+                    data = data.result.username;
+                    let newPost ={
+                        id: this.state.posts.length, 
+                        author: data,
+                        title: title,
+                        description: desc,
+                        answers: [],
+                        date: date.toLocaleString(),
+                        file: ''
+                    }
+                    if (file.length != 0)  
+                        obj.file = file[0];
+                    let obj = {
+                        collection:'communityFeed',
+                        elem:newPost
+                    }
+                    fetch('/db/element',{
+                        method:'POST',
+                        headers: {
+                            'Content-type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(obj)
+                    }).then(()=>this.getPosts())
+                })
             }
         }
     }
