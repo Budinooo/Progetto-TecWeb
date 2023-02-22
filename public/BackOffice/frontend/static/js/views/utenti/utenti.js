@@ -101,14 +101,14 @@ function addClient(name, username, email, password, pets, admin, animals, score)
                 collection: 'users',
                 elem: {
                     "_id": JSON.stringify(size),
-                    "name": name,
-                    "username": username,
-                    "email": email,
-                    "password": password,
-                    "favorites": animals,
-                    "pets": pets,
-                    "score": score,
-                    "admin": admin
+                    "name": JSON.stringify(name),
+                    "username": JSON.stringify(username),
+                    "email": JSON.stringify(email),
+                    "password": JSON.stringify(password),
+                    "favorites": JSON.stringify(animals),
+                    "pets": JSON.stringify(pets),
+                    "score": JSON.stringify(score),
+                    "admin": JSON.stringify(admin)
                 }
             };
 
@@ -132,8 +132,7 @@ function editClient(jsonDataid) {
     document.getElementById("formeditcontainer").style.display = "block";
     document.querySelector('#editSaveClient' + jsonDataid).addEventListener("click", e => {
         e.preventDefault();
-        const id = document.querySelector('#id' + jsonDataid).value;
-        const name = document.querySelector('#nameEditInput' + jsonDataid).value;
+        const name = document.getElementById('nameEditInput' + jsonDataid).value;
         const username = document.querySelector('#usernameEditInput' + jsonDataid).value;
         const animals = document.querySelector('#favoritesEditInput' + jsonDataid).value;
         const email = document.querySelector('#emailEditInput' + jsonDataid).value;
@@ -145,14 +144,14 @@ function editClient(jsonDataid) {
             collection: 'users',
             elem: {
                 "_id": JSON.stringify(jsonDataid),
-                "name": name,
-                "username": username,
-                "email": email,
-                "password": password,
-                "favorites": animals,
-                "pets": pets,
-                "score": score,
-                "admin": admin
+                "name": JSON.stringify(name),
+                "username": JSON.stringify(username),
+                "email": JSON.stringify(email),
+                "password": JSON.stringify(password),
+                "favorites": JSON.stringify(animals),
+                "pets": JSON.stringify(pets),
+                "score": JSON.stringify(score),
+                "admin": JSON.stringify(admin)
             }
         }
         fetch('/db/element', {
