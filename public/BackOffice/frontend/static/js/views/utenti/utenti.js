@@ -21,7 +21,7 @@ fetch('/db/collection?collection=users', {
               <button class="btn btn-danger" onclick="removeClient(${client._id})">Remove</button>
             </div>
           </div>
-          <div class="container" id="formeditcontainer" style="display:none">
+          <div class="container" id="formeditcontainer${client._id}" style="display:none">
                 <form class="form form--hidden" id="editClientForm">
                     <div class="form-group">
                         <label for="nameInput">Name</label>
@@ -129,7 +129,7 @@ function addClient(name, username, email, password, pets, admin, animals, score)
 
 function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
-    document.getElementById("formeditcontainer").style.display = "block";
+    document.getElementById("formeditcontainer" + jsonDataid).style.display = "block";
     document.querySelector('#editSaveClient' + jsonDataid).addEventListener("click", e => {
         e.preventDefault();
         const name = document.getElementById('nameEditInput' + jsonDataid).value;
@@ -165,7 +165,7 @@ function editClient(jsonDataid) {
             .then(() => {
                 location.reload();
             })
-        document.getElementById("formeditcontainer").style.display = "none";
+        document.getElementById("formeditcontainer" + jsonDataid).style.display = "none";
     });
 }
 

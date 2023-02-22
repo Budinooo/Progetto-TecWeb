@@ -117,12 +117,12 @@ function editMessage(messageId) {
                 let obj = {
                     collection: 'services',
                     elem: {
-                        "_id": data._id,
-                        "author": data.author,
-                        "title": data.title,
+                        "_id": JSON.stringify(data._id),
+                        "author": JSON.stringify(data.author),
+                        "title": JSON.stringify(data.title),
                         "description": JSON.stringify(message),
-                        "file": data.img,
-                        "date": data.date
+                        "file": JSON.stringify(data.img),
+                        "date": JSON.stringify(data.date)
                     }
                 }
                 fetch('/db/element', {

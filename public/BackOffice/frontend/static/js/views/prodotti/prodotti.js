@@ -67,12 +67,12 @@ $("#addBtn").click(function() {
                 let obj = {
                     collection: 'products',
                     elem: {
-                        _id: JSON.stringify(prodotti.result),
-                        name: document.getElementById("nameInput").value,
-                        description: document.getElementById("descriptionInput").value,
-                        price: document.getElementById("priceInput").value,
-                        availability: document.getElementById("availabilityInput").value,
-                        image: document.getElementById("imageInput").value
+                        "_id": JSON.stringify(prodotti.result),
+                        "name": JSON.stringify(document.getElementById("nameInput").value),
+                        "description": JSON.stringify(document.getElementById("descriptionInput").value),
+                        "price": JSON.stringify(document.getElementById("priceInput").value),
+                        "availability": JSON.stringify(document.getElementById("availabilityInput").value),
+                        "image": JSON.stringify(document.getElementById("imageInput").value)
                     }
 
                 };
@@ -120,11 +120,11 @@ function editClient(jsonDataid) {
             collection: 'products',
             elem: {
                 "_id": JSON.stringify(jsonDataid),
-                "name": document.getElementById("nameEditInput" + jsonDataid).value,
-                "description": document.getElementById("descriptionEditInput" + jsonDataid).value,
-                "price": document.getElementById("priceEditInput" + jsonDataid).value,
-                "availability": document.getElementById("availabilityEditInput" + jsonDataid).value,
-                "image": document.getElementById("imageEditInput" + jsonDataid).value
+                "name": JSON.stringify(document.getElementById("nameEditInput" + jsonDataid).value),
+                "description": JSON.stringify(document.getElementById("descriptionEditInput" + jsonDataid).value),
+                "price": JSON.stringify(document.getElementById("priceEditInput" + jsonDataid).value),
+                "availability": JSON.stringify(document.getElementById("availabilityEditInput" + jsonDataid).value),
+                "image": JSON.stringify(document.getElementById("imageEditInput" + jsonDataid).value)
             }
         }
         fetch('/db/element', {
