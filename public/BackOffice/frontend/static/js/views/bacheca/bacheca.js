@@ -72,9 +72,9 @@ fetch('/db/collection?collection=communityFeed', {
             });
             // Aggiunta della card al container
             $("#messageContainer").append(card);
-            for (var l = 0; l < res.length; l++) {
+            for (var i = 0; i < res.length; i++) {
                 //aggiunta delle risposte alla card
-                $("#responseContainer").append(res[l]);
+                $("#responseContainer").append(res[i]);
             }
         }
     });
