@@ -133,11 +133,11 @@ function editMessage(messageId) {
                     collection: 'communityFeed',
                     elem: {
                         "_id": JSON.stringify(data._id),
-                        "author": JSON.stringify(data.author),
-                        "title": JSON.stringify(data.title),
-                        "description": JSON.stringify(message),
-                        "file": JSON.stringify(data.img),
-                        "date": JSON.stringify(data.date),
+                        "author": data.author,
+                        "title": data.title,
+                        "description": message,
+                        "file": data.img,
+                        "date": data.date,
                         "answers": data.answers
                     }
                 }

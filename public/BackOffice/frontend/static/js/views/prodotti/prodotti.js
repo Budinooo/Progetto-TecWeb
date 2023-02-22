@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 fetch('/db/collection?collection=products', {
         method: 'GET'
     })
@@ -63,10 +65,12 @@ $("#addBtn").click(function() {
                     collection: 'products',
                     elem: {
                         "_id": JSON.stringify(prodotti.result),
-                        "name": JSON.stringify(document.getElementById("nameInput").value),
-                        "description": JSON.stringify(document.getElementById("descriptionInput").value),
-                        "price": JSON.stringify(document.getElementById("priceInput").value),
-                        "image": JSON.stringify(document.getElementById("imageInput").value)
+                        "name": document.getElementById("nameInput").value,
+                        "description": document.getElementById("descriptionInput").value,
+                        "price": document.getElementById("priceInput").value,
+                        "image": document.getElementById("imageInput").value,
+                        "tag": "food",
+                        "animal": "dog"
                     }
 
                 };
@@ -110,26 +114,35 @@ function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
     document.getElementById("formcontainer" + jsonDataid).style.display = "block";
     document.querySelector("form").addEventListener("submit", function(event) {
-        let obj = {
-            collection: 'products',
-            elem: {
-                "_id": JSON.stringify(jsonDataid),
-                "name": JSON.stringify(document.getElementById("nameEditInput" + jsonDataid).value),
-                "description": JSON.stringify(document.getElementById("descriptionEditInput" + jsonDataid).value),
-                "price": JSON.stringify(document.getElementById("priceEditInput" + jsonDataid).value),
-                "image": JSON.stringify(document.getElementById("imageEditInput" + jsonDataid).value)
+        fetch('/db/collection?collection=products',{
+            method:'GET'
+        }).then(response => response.json())
+        .then(data =>{
+            data = data.result;
+            let obj = {
+                collection: 'products',
+                elem: {
+                    "_id": JSON.stringify(jsonDataid),
+                    "name": document.getElementById("nameEditInput" + jsonDataid).value,
+                    "description": document.getElementById("descriptionEditInput" + jsonDataid).value,
+                    "price": document.getElementById("priceEditInput" + jsonDataid).value,
+                    "image": document.getElementById("imageEditInput" + jsonDataid).value,
+                    "tag": data.tag,
+                    "animal": data.animal
+                }
             }
-        }
-        fetch('/db/element', {
-                method: 'PUT',
-                headers: {
-                    'Content-type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(obj)
-            })
-            .then(() => {
-                location.reload();
-            })
+            fetch('/db/element', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(obj)
+                })
+                .then(() => {
+                    location.reload();
+                })
+        })
+        
     });
 }

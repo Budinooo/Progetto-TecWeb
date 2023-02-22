@@ -89,10 +89,10 @@ function addClient(name, username, email, password, pets, admin, animals, score)
                 collection: 'users',
                 elem: {
                     "_id": JSON.stringify(size),
-                    "name": JSON.stringify(name),
-                    "username": JSON.stringify(username),
-                    "email": JSON.stringify(email),
-                    "password": JSON.stringify(password),
+                    "name": name,
+                    "username": username,
+                    "email": email,
+                    "password": password,
                     "score": score,
                     "admin": admin
                 }
@@ -134,10 +134,10 @@ function editClient(jsonDataid) {
                     collection: 'users',
                     elem: {
                         "_id": JSON.stringify(jsonDataid),
-                        "name": JSON.stringify(name),
-                        "username": JSON.stringify(username),
-                        "email": JSON.stringify(email),
-                        "password": JSON.stringify(password),
+                        "name": name,
+                        "username": username,
+                        "email": email,
+                        "password": password,
                         "favorites": data.favorites,
                         "pets": data.pets,
                         "score": score,
