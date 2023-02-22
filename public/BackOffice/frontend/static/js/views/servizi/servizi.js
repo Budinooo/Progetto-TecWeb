@@ -99,7 +99,7 @@ function editService(serviceId) {
                 "description": JSON.stringify(description),
                 "place": JSON.stringify(place),
                 "date": date,
-                "img": JSON.stringify(img)
+                "img": img
             }
         }
         fetch('/db/element', {
