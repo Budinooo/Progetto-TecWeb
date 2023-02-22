@@ -27,7 +27,7 @@ fetch('/db/collection?collection=communityFeed', {
             <button class="btn btn-danger" onclick="deleteMessage(` + message._id + `)">Remove</button>
             <button class="btn btn-danger" onclick="deleteImage(` + message._id + `)">Remove Image</button>
           </div>
-          <div class="container mt-5" id="responseContainer"></div>
+          <div class="container mt-5" id="responseContainer` + message._id + `"></div>
           <div class="container" id="formcontainer` + message._id + `" style="display:none">
             <form class="form form--hidden" id="editMessageForm` + message._id + `">
                 <div class="form-group">
@@ -71,10 +71,10 @@ fetch('/db/collection?collection=communityFeed', {
       `;
             });
             // Aggiunta della card al container
-            $("#messageContainer").append(card);
-            for (var i = 0; i < res.length; i++) {
+            $("#messageContainer" + message._id).append(card);
+            for (var l = 0; l < res.length; l++) {
                 //aggiunta delle risposte alla card
-                $("#responseContainer").append(res[i]);
+                $("#responseContainer").append(res[l]);
             }
         }
     });
