@@ -71,7 +71,7 @@ button:focus {
 }
 
 body{
-	background-image: url("images/background.avif");
+	background-image: url("game/images/background.avif");
 	background-size:contain;
 	display: flex;
 	flex-direction: column;

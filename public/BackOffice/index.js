@@ -18,7 +18,9 @@ function clearInputElement(inputElement) {
 ////////
 function login(username, password) {
     // caricamento del file JSON degli utenti
-    fetch('users.json')
+    fetch('/db/collection?collection=users',{
+        method:'GET'
+    })
         .then(response => response.json())
         .then(data => {
             // ricerca dell'utente nel file JSON
@@ -37,7 +39,9 @@ function login(username, password) {
 
 function registrazione(name, username, email, password) {
     // caricamento del file JSON degli utenti
-    fetch('users.json')
+    fetch('/db/collection?collection=users',{
+        method:'GET'
+    })
         .then(response => response.json())
         .then(data => {
             data = data.result;
