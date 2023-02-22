@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 fetch('/db/collection?collection=products', {
         method: 'GET'
     })

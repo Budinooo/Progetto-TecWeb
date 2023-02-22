@@ -7,9 +7,9 @@ class Service extends React.Component {
 
   constructor(props){
     super(props);
-    let service = props.service;
+    let service = this.props.service;
     let date = null;
-    this.state = {service, date};
+    this.state = {service: service, date: date};
   }
 
   book = (date) => (e) =>  
@@ -62,23 +62,11 @@ class Service extends React.Component {
   }
   
   render() {
-    if(this.props.short == true) {
-    return (
-      <div className="d-flex service-container">
-        <div className="service-img">
-          <img width="100%" src={this.state.service.img} />
-        </div>
-        <div className="service-body-container">
-          <h4 className="service-name">{this.state.service.name}</h4>
-          <p className="service-desc">{this.state.service.desc}</p>
-          <p className="service-price">{this.state.service.price}</p>
-        </div>
-      </div>
-    )
-    }
-    else {
+    console.log(this.state.service)
+    if (this.state.service){
+      if(this.props.short == true) {
       return (
-        <div className='d-flex service-container'>
+        <div className="d-flex service-container">
           <div className="service-img">
             <img width="100%" src={this.state.service.img} />
           </div>
@@ -86,20 +74,37 @@ class Service extends React.Component {
             <h4 className="service-name">{this.state.service.name}</h4>
             <p className="service-desc">{this.state.service.desc}</p>
             <p className="service-price">{this.state.service.price}</p>
-            <form id="booking-form" className='d-flex flex-column'>
-              <div className='d-flex'>
-                <Calendar
-                  onChange={(value, e) => {this.setState({date:value})}}
-                  minDetail='month'
-                  minDate={new Date()} 
-                  tileDisabled={({date})=> !this.state.service.availability.includes(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)} 
-                />            
-              </div>
-              <button onClick={(e) => this.book(this.state.date)(e)} className="mx-auto book-btn">Book Now</button>
-            </form>      
           </div>
         </div>
       )
+      }
+      else {
+        return (
+          <div className='d-flex service-container'>
+            <div className="service-img">
+              <img width="100%" src={this.state.service.img} />
+            </div>
+            <div className="service-body-container">
+              <h4 className="service-name">{this.state.service.name}</h4>
+              <p className="service-desc">{this.state.service.desc}</p>
+              <p className="service-price">{this.state.service.price}</p>
+              <form id="booking-form" className='d-flex flex-column'>
+                <div className='d-flex'>
+                  <Calendar
+                    onChange={(value, e) => {this.setState({date:value})}}
+                    minDetail='month'
+                    minDate={new Date()} 
+                    tileDisabled={({date})=> !this.state.service.availability.includes(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)} 
+                  />            
+                </div>
+                <button onClick={(e) => this.book(this.state.date)(e)} className="mx-auto book-btn">Book Now</button>
+              </form>      
+            </div>
+          </div>
+        )
+      }
+    }else{
+      return null;
     }
   }
  
