@@ -14,8 +14,6 @@ fetch('/db/collection?collection=users', {
               <p class="card-text">Username: ${client.username}</p>
               <p class="card-text">email: ${client.email}</p>
               <p class="card-text">password: ${client.password}</p>
-              <p class="card-text">Favorite Animals: ${client.favorites}</p>
-              <p class="card-text">Pets: ${client.pets}</p>
               <p class="card-text">Game Score: ${client.score}</p>
               <button class="btn btn-primary" id="editClient${client._id}" onclick="editClient(${client._id})">Edit</button>
               <button class="btn btn-danger" onclick="removeClient(${client._id})">Remove</button>
@@ -38,14 +36,6 @@ fetch('/db/collection?collection=users', {
                     <div class="form-group">
                         <label for="passwordInput">Password</label>
                         <input type="text" class="form-control" id="passwordEditInput${client._id}" value="${client.password}">
-                    </div>
-                    <div class="form-group">
-                        <label for="favoritesInput">Favorite Animals</label>
-                        <input type="text" class="form-control" id="favoritesEditInput${client._id}" value="${client.favorites}">
-                    </div>
-                    <div class="form-group">
-                        <label for="animalsInput">Pets</label>
-                        <input type="text" class="form-control" id="petsEditInput${client._id}" value="${client.pets}">
                     </div>
                     <div class="form-group">
                         <label for="scoreInput">Game Score</label>
@@ -75,10 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const name = document.querySelector('#nameInput').value;
         const username = document.querySelector('#usernameInput').value;
-        const animals = document.querySelector('#favoritesInput').value;
         const email = document.querySelector('#emailInput').value;
         const password = document.querySelector('#passwordInput').value;
-        const pets = document.querySelector('#petsInput').value;
         const admin = document.querySelector('#adminInput').value;
         const score = document.querySelector('#scoreInput').value;
         addClient(name, username, email, password, pets, admin, animals, score);
@@ -105,8 +93,6 @@ function addClient(name, username, email, password, pets, admin, animals, score)
                     "username": JSON.stringify(username),
                     "email": JSON.stringify(email),
                     "password": JSON.stringify(password),
-                    "favorites": JSON.stringify(animals),
-                    "pets": JSON.stringify(pets),
                     "score": JSON.stringify(score),
                     "admin": JSON.stringify(admin)
                 }
@@ -134,10 +120,8 @@ function editClient(jsonDataid) {
         e.preventDefault();
         const name = document.getElementById('nameEditInput' + jsonDataid).value;
         const username = document.querySelector('#usernameEditInput' + jsonDataid).value;
-        const animals = document.querySelector('#favoritesEditInput' + jsonDataid).value;
         const email = document.querySelector('#emailEditInput' + jsonDataid).value;
         const password = document.querySelector('#passwordEditInput' + jsonDataid).value;
-        const pets = document.querySelector('#petsEditInput' + jsonDataid).value;
         const admin = document.querySelector('#adminEditInput' + jsonDataid).value;
         const score = document.querySelector('#scoreEditInput' + jsonDataid).value;
         let obj = {
@@ -148,8 +132,6 @@ function editClient(jsonDataid) {
                 "username": JSON.stringify(username),
                 "email": JSON.stringify(email),
                 "password": JSON.stringify(password),
-                "favorites": JSON.stringify(animals),
-                "pets": JSON.stringify(pets),
                 "score": JSON.stringify(score),
                 "admin": JSON.stringify(admin)
             }
