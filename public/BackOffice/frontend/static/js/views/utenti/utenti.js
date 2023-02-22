@@ -17,7 +17,7 @@ fetch('/db/collection?collection=users', {
               <p class="card-text">Favorite Animals: ${client.favorites}</p>
               <p class="card-text">Pets: ${client.pets}</p>
               <p class="card-text">Game Score: ${client.score}</p>
-              <button class="btn btn-primary" id="editClient" onclick="editClient(${client._id})>Edit</button>
+              <button class="btn btn-primary" id="editClient${client._id}" onclick="editClient(${client._id})">Edit</button>
               <button class="btn btn-danger" onclick="removeClient(${client._id})">Remove</button>
             </div>
           </div>
@@ -25,37 +25,37 @@ fetch('/db/collection?collection=users', {
                 <form class="form form--hidden" id="editClientForm">
                     <div class="form-group">
                         <label for="nameInput">Name</label>
-                        <input type="text" class="form-control" id="nameInput" value="${client.name}">
+                        <input type="text" class="form-control" id="nameEditInput${client._id}" value="${client.name}">
                     </div>
                     <div class="form-group">
                         <label for="nameInput">username</label>
-                        <input type="text" class="form-control" id="usernameInput" value="${client.username}">
+                        <input type="text" class="form-control" id="usernameEditInput${client._id}" value="${client.username}">
                     </div>
                     <div class="form-group">
                         <label for="emailInput">Mail</label>
-                        <input type="text" class="form-control" id="emailInput" value="${client.email}">
+                        <input type="text" class="form-control" id="emailEditInput${client._id}" value="${client.email}">
                     </div>
                     <div class="form-group">
                         <label for="passwordInput">Password</label>
-                        <input type="text" class="form-control" id="passwordInput" value="${client.password}">
+                        <input type="text" class="form-control" id="passwordEditInput${client._id}" value="${client.password}">
                     </div>
                     <div class="form-group">
                         <label for="favoritesInput">Favorite Animals</label>
-                        <input type="text" class="form-control" id="favoritesInput" value="${client.favorites}">
+                        <input type="text" class="form-control" id="favoritesEditInput${client._id}" value="${client.favorites}">
                     </div>
                     <div class="form-group">
                         <label for="animalsInput">Pets</label>
-                        <input type="text" class="form-control" id="petsInput" value="${client.pets}">
+                        <input type="text" class="form-control" id="petsEditInput${client._id}" value="${client.pets}">
                     </div>
                     <div class="form-group">
                         <label for="scoreInput">Game Score</label>
-                        <input type="text" class="form-control" id="scoreInput" value="${client.score}">
+                        <input type="text" class="form-control" id="scoreEditInput${client._id}" value="${client.score}">
                     </div>
                     <div class="form-group">
                         <label for="adminInput">Admin</label>
-                        <input type="checkbox" class="form-control" id="adminInput">
+                        <input type="checkbox" class="form-control" id="adminEditInput${client._id}">
                     </div>
-                    <button type="submit" class="btn btn-primary" id="editSaveClient">Save</button>
+                    <button type="submit" class="btn btn-primary" id="editSaveClient${client._id}">Save</button>
                 </form>
             </div>
         </div>
@@ -97,51 +97,54 @@ function addClient(name, username, email, password, pets, admin, animals, score)
         })
         .then(data => {
             size = data.result;
-        })
-    let obj = {
-        collection: 'users',
-        elem: {
-            "_id": JSON.stringify(size),
-            "name": name,
-            "username": username,
-            "email": email,
-            "password": password,
-            "favorites": animals,
-            "pets": pets,
-            "score": score,
-            "admin": admin
-        }
-    };
+            let obj = {
+                collection: 'users',
+                elem: {
+                    "_id": JSON.stringify(size),
+                    "name": name,
+                    "username": username,
+                    "email": email,
+                    "password": password,
+                    "favorites": animals,
+                    "pets": pets,
+                    "score": score,
+                    "admin": admin
+                }
+            };
 
-    fetch('/db/element', {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(obj)
-    })
-    location.reload();
+            fetch('/db/element', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(obj)
+                })
+                .then(() => {
+                    location.reload();
+                })
+
+        })
 }
 
 function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
     document.getElementById("formeditcontainer").style.display = "block";
-    document.querySelector('#editSaveClient').addEventListener("click", e => {
+    document.querySelector('#editSaveClient' + jsonDataid).addEventListener("click", e => {
         e.preventDefault();
-        const id = document.querySelector('#id').value;
-        const name = document.querySelector('#nameInput').value;
-        const username = document.querySelector('#usernameInput').value;
-        const animals = document.querySelector('#favoritesInput').value;
-        const email = document.querySelector('#emailInput').value;
-        const password = document.querySelector('#passwordInput').value;
-        const pets = document.querySelector('#petsInput').value;
-        const admin = document.querySelector('#adminInput').value;
-        const score = document.querySelector('#scoreInput').value;
+        const id = document.querySelector('#id' + jsonDataid).value;
+        const name = document.querySelector('#nameEditInput' + jsonDataid).value;
+        const username = document.querySelector('#usernameEditInput' + jsonDataid).value;
+        const animals = document.querySelector('#favoritesEditInput' + jsonDataid).value;
+        const email = document.querySelector('#emailEditInput' + jsonDataid).value;
+        const password = document.querySelector('#passwordEditInput' + jsonDataid).value;
+        const pets = document.querySelector('#petsEditInput' + jsonDataid).value;
+        const admin = document.querySelector('#adminEditInput' + jsonDataid).value;
+        const score = document.querySelector('#scoreEditInput' + jsonDataid).value;
         let obj = {
             collection: 'users',
             elem: {
-                "_id": jsonDataid,
+                "_id": JSON.stringify(jsonDataid),
                 "name": name,
                 "username": username,
                 "email": email,
@@ -153,31 +156,36 @@ function editClient(jsonDataid) {
             }
         }
         fetch('/db/element', {
-            method: 'PUT',
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(obj)
+            })
+            .then(() => {
+                location.reload();
+            })
+        document.getElementById("formeditcontainer").style.display = "none";
+    });
+}
+
+function removeClient(clientId) {
+    // logica per la rimozione del cliente
+    console.log(JSON.stringify(clientId));
+    let obj = {
+        collection: 'users',
+        id: JSON.stringify(clientId)
+    }
+    fetch('/db/element', {
+            method: 'DELETE',
             headers: {
                 'Content-type': 'application/json',
                 'Accept': 'application/json'
             },
             body: JSON.stringify(obj)
         })
-        document.getElementById("formeditcontainer").style.display = "none";
-    });
-    location.reload();
-}
-
-function removeClient(clientId) {
-    // logica per la rimozione del cliente
-    let obj = {
-        collection: 'users',
-        id: clientId
-    }
-    fetch('/db/element', {
-        method: 'DELETE',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(obj)
-    })
-    location.reload();
+        .then(() => {
+            location.reload();
+        })
 }
