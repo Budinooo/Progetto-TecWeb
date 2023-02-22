@@ -37,13 +37,13 @@ export default function Home(props)
               </div>
             </div>
           </div>
-          <div className="row mb-5">
+          <div className="row mb-5 carouselContainer">
             <h3 className="mb-4">Featured products:</h3>
             <Product_Carousel productList={props.products} />
           </div>
           <div className="row">
             <h3 className="mb-4">Explore our services</h3>
-            <Service short={true} service={props.services[0]} />
+            <Service short={true} service={props.service} />
           </div>
           <div className="row">
             <a href="/services">More Services</a>

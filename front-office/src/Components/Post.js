@@ -72,14 +72,20 @@ class Post extends React.Component {
     }
 
     render() {
-        return (
-            <div className='postContainer'>
-                <div className={`post ${this.state.screenWidth<500 ? "w-100" : ""}`} onClick={() => this.props.openPost(true, this.props.post._id)}>
-                    {this.setContent()}
+        if (this.props.post){
+            return (
+                <div className='postContainer'>
+                    <div className={`post ${this.state.screenWidth<500 ? "w-100" : ""}`} onClick={() => this.props.openPost(true, this.props.post._id)}>
+                        {this.setContent()}
+                    </div>
+                    {this.renderAnswers()}
                 </div>
-                {this.renderAnswers()}
-            </div>
-        )}
+            )}
+        else{
+            return null
+        }
+    }
+        
 }
 
 export default Post;
