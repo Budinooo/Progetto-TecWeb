@@ -36,7 +36,7 @@ fetch('/db/collection?collection=services', {
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Description</label>
-                    <input type="text" class="form-control" id="descriptionService` + service._id + `"` + service.description + `>
+                    <input type="text" class="form-control" id="descriptionService` + service._id + `" value="` + service.description + `">
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Place</label>
@@ -84,7 +84,7 @@ function bookService(serviceId) {
 function editService(serviceId) {
     // logica per la modifica del servizio
     document.getElementById("formcontainer" + serviceId).style.display = "block";
-    document.querySelector('#saveService' + serviceId + '').addEventListener("click", e => {
+    document.querySelector('#saveService' + serviceId).addEventListener("click", e => {
         const id = serviceId;
         const name = document.querySelector('#nameService' + serviceId).value;
         const description = document.querySelector('#descriptionService' + serviceId).value;

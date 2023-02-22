@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 fetch('/db/collection?collection=products', {
         method: 'GET'
     })
@@ -114,35 +112,35 @@ function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
     document.getElementById("formcontainer" + jsonDataid).style.display = "block";
     document.querySelector("form").addEventListener("submit", function(event) {
-        fetch('/db/collection?collection=products',{
-            method:'GET'
-        }).then(response => response.json())
-        .then(data =>{
-            data = data.result;
-            let obj = {
-                collection: 'products',
-                elem: {
-                    "_id": JSON.stringify(jsonDataid),
-                    "name": document.getElementById("nameEditInput" + jsonDataid).value,
-                    "description": document.getElementById("descriptionEditInput" + jsonDataid).value,
-                    "price": document.getElementById("priceEditInput" + jsonDataid).value,
-                    "image": document.getElementById("imageEditInput" + jsonDataid).value,
-                    "tag": data.tag,
-                    "animal": data.animal
+        fetch('/db/collection?collection=products', {
+                method: 'GET'
+            }).then(response => response.json())
+            .then(data => {
+                data = data.result;
+                let obj = {
+                    collection: 'products',
+                    elem: {
+                        "_id": JSON.stringify(jsonDataid),
+                        "name": document.getElementById("nameEditInput" + jsonDataid).value,
+                        "description": document.getElementById("descriptionEditInput" + jsonDataid).value,
+                        "price": document.getElementById("priceEditInput" + jsonDataid).value,
+                        "image": document.getElementById("imageEditInput" + jsonDataid).value,
+                        "tag": data.tag,
+                        "animal": data.animal
+                    }
                 }
-            }
-            fetch('/db/element', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(obj)
-                })
-                .then(() => {
-                    location.reload();
-                })
-        })
-        
+                fetch('/db/element', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(obj)
+                    })
+                    .then(() => {
+                        location.reload();
+                    })
+            })
+
     });
 }
