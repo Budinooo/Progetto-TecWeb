@@ -56,6 +56,11 @@ class Navbar extends React.Component {
             </li>
           </ul>
         </div>
+        <div className='w-100 d-flex'>
+          <ul className="navbar-nav">
+
+          </ul>
+        </div>
       </nav>
     )
   }

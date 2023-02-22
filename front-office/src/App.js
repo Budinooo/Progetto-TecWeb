@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './Components/Navbar.js';
 import { BrowserRouter as Router, Routes as Switch, Route, useFetcher} from 'react-router-dom';
-import Product_Carousel from './Components/Product_Carousel';
 import Community_Feed from "./Pages/Community_Feed";
-import Animal_Select from "./Components/Animal_Select";
 import "./App.css";
 import Home from "./Pages/Home.js";
 import Cart from "./Pages/Cart.js";
@@ -22,7 +20,7 @@ function App() {
 
   //todo: aggiungere campi tag, disponibilità.
 
-  const [products, setProducts] = useState(fetch('db/collection?collection=products', {method:"GET"}).then((res)=>res.json()).then((data)=> {setProducts(data.result.slice(0,8))}));
+  const [products, setProducts] = useState(fetch('db/collection?collection=products', {method:"GET"}).then((res)=>res.json()).then((data)=> setProducts(data.result.slice(0,8))));
   
   const [services, setServices] = useState(fetch('db/element?id=0&collection=services', {method: "GET"}).then((res) => res.json()).then((data) => setServices(data.result)));
 

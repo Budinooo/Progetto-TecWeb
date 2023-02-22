@@ -1,0 +1,72 @@
+.leaderboard{
+    border: 4px solid #1a2238;
+	border-radius: 10px;
+}
+
+.titlelbContainer{
+    width:100%; 
+    background-color: #1a2238; 
+    text-align:center; 
+    height:13%; 
+    display:flex; 
+    justify-content:center; 
+    align-items:center
+}
+
+.titlelb{
+    font-weight:800; 
+    color:white; 
+    font-size:180%;
+}
+
+.userslbContainer{
+    height: 87%;
+    width:100%; 
+    display: flex;
+    flex-direction: column;
+}
+
+.userlb{
+    display: flex;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 2px solid #1a2238;
+}
+
+.ranklb{
+    border:2px solid #1a2238;
+    border-radius:50%; 
+    width:35px; 
+    height:35px; 
+    justify-content: center;
+    font-weight:600;
+    font-size: 110%;
+    display:flex;
+    align-items: center;
+    background-color: rgb(230, 230, 230);
+}
+
+.scorelb{
+    font-weight: 800; 
+    text-align:center; 
+    font-size:140%
+}
+
+.usernamelb{
+    text-align: center;
+}
+
+.ranklbContainer{
+    width: 25%;
+    display: flex;
+    justify-content: center;
+}
+
+.scorelbContainer{
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

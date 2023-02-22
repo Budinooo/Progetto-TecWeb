@@ -1,0 +1,54 @@
+.navbar-brand img {
+    width: 100%;
+}
+
+.navbar-brand {
+    width: 10%;
+}
+
+#searchbarContainer {
+    width: 70%;
+    display: flex;
+}
+
+#searchBar {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#searchbarContainer > button {
+    border: hidden;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    width: 3%;
+}
+
+#searchbarContainer > button > img {
+    margin-bottom: 3px;
+    margin-right: 3px;
+}
+
+.nav-item {
+    margin-right: 4%;
+}
+
+.icon-btn {
+    border-radius:2em;
+    border-style: solid;
+    text-align: center;
+}
+
+.navbar-nav {
+    width: 20%;
+}
+
+.icon-btn:hover {
+    background-color: black;
+    color: white;
+    border-color: black;
+    transition:0.3s
+}
+
+.nav-link {
+    color: black;
+}
