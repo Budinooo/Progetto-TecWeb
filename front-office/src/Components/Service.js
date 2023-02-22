@@ -52,7 +52,7 @@ export default function Service(props) {
       })})
       .then((res)=>{
         fetch(`/db/element?id=${service._id}&collection=services`, {method: "GET"})
-        .then((res) => res.json).them((data) => setservice(data.result));
+        .then((res) => res.json).then((data) => setservice(data.result));
       });
     alert('prenotazione avvenuta con successo')
   }
