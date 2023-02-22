@@ -50,6 +50,42 @@ class Cart extends React.Component
         this.setState({products:items}, () => localStorage.setItem("cart", JSON.stringify(this.state.products)));
     }
 
+    displayItems = () => 
+    {
+        if(this.state.products.length < 1) {
+            return(
+                <div>
+                    <h2>Your cart is empty</h2>
+                    <a href="/">Visit our store</a>
+                </div>
+            )
+        }
+        this.state.products.map((product) => 
+            {
+                return(
+                    <div key={product.id} className="row cart-item">
+                        <div className="col-sm-1 d-flex align-items-center justify-content-center">
+                            <button onClick={(e) => this.productRemove(product.id)} className="btn-close"></button>
+                        </div>
+                        <div className="col-sm-2">
+                            <img className="product-img my-2" height="70%" src={product.img} />
+                        </div>
+                        <div className="col-sm-5">
+                            <p className="product-name">{product.name}</p>
+                        </div>
+                        <div className="col-sm-2">
+                            <p className="product-price"><b>€{product.price}</b></p>
+                        </div>
+                        <div className="col-sm-1">
+                            <form className="inline-form product-quantity-form">
+                                <input className="quantity" type="number" onChange={(e) => this.setQuantity(e)(product.id)} min="1" defaultValue={product.quantity}></input>
+                            </form>
+                        </div>
+                    </div>
+                )
+            })
+    }
+
     render()
     {
         return(
@@ -60,30 +96,7 @@ class Cart extends React.Component
                             <div className="row mb-3">
                                 <h1>My cart:</h1>
                             </div>
-                            {this.state.products.map((product) => 
-                            {
-                                return(
-                                    <div key={product.id} className="row cart-item">
-                                        <div className="col-sm-1 d-flex align-items-center justify-content-center">
-                                            <button onClick={(e) => this.productRemove(product.id)} className="btn-close"></button>
-                                        </div>
-                                        <div className="col-sm-2">
-                                            <img className="product-img my-2" height="70%" src={product.img} />
-                                        </div>
-                                        <div className="col-sm-5">
-                                            <p className="product-name">{product.name}</p>
-                                        </div>
-                                        <div className="col-sm-2">
-                                            <p className="product-price"><b>€{product.price}</b></p>
-                                        </div>
-                                        <div className="col-sm-1">
-                                            <form className="inline-form product-quantity-form">
-                                                <input className="quantity" type="number" onChange={(e) => this.setQuantity(e)(product.id)} min="1" defaultValue={product.quantity}></input>
-                                            </form>
-                                        </div>
-                                    </div>
-                                )
-                            })}
+                            {this.displayItems()}
                         </div>
                     </div>
                     <div id="payment-container">

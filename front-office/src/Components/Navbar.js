@@ -1,5 +1,4 @@
 import React, {StyleSheet} from 'react'
-import {Link} from 'react-router-dom';
 import './Navbar.css'
 
 
