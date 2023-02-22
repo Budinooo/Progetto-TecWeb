@@ -18,7 +18,7 @@ fetch('/db/collection?collection=communityFeed', {
           </div>
           <div class="card-body">
             <h5 class="card-title">` + message.title + `</h5>
-            <p class="card-text" id="messageText">` + message.description + `</p>
+            <p class="card-text" id="messageText` + message.author + `">` + message.description + `</p>
             <img class="card-img-top" src="` + message.file + `" alt="` + message.author + `" style="width: 18rem;">
             <p>Reference Date: ` + message.date + `</p>
           </div>
@@ -47,7 +47,7 @@ fetch('/db/collection?collection=communityFeed', {
           </div>
           <div class="card-body">
             <h5 class="card-title">` + element.author + `</h5>
-            <p class="card-text" id="messageText">` + element.description + `</p>
+            <p class="card-text" id="messageText` + element.author + `">` + element.description + `</p>
             <img class="card-img-top" src="` + element.file + `" alt="` + element.file + `" style="width: 18rem;">
             <p>Date: ` + element.date + `</p>
           </div>
@@ -105,7 +105,40 @@ function editMessage(messageId) {
     document.getElementById(jsonDataid).style.display = "none";
     document.querySelector("formcontainer" + messageId).addEventListener("submit", function(event) {
         event.preventDefault();
-        const message = document.getElementById("messageText").value;
+        const message = document.getElementById("messageText" + messageId).value;
+        fetch('/db/element?id=' + messageId + '&collection=services', {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                data = data.result;
+                let date = data.availability;
+                date.push(newDate);
+                let obj = {
+                    collection: 'services',
+                    elem: {
+                        "_id": data._id,
+                        "author": data.author,
+                        "title": data.title,
+                        "description": JSON.stringify(message),
+                        "file": data.img,
+                        "date": data.date
+                    }
+                }
+                fetch('/db/element', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(obj)
+                    })
+                    .then(() => {
+                        location.reload();
+                    })
+            })
+
+
         let obj = {
             collection: 'communityFeed',
             elem: {
@@ -132,7 +165,7 @@ function removeMessage(messageId) {
     // logica per la rimozione del messaggio
     let obj = {
         collection: 'communityFeed',
-        id: messageId
+        id: JSON.stringify(messageId)
     }
     fetch('/db/element', {
             method: 'DELETE',
