@@ -320,7 +320,7 @@ const mongoCredentials = {
         user: "site212229",
         pwd: "oiy3ahSa",
         site: "mongo_site212229"
-}
+    }
     /* end */
 
 app.get('/db/create', async function(req, res) {
@@ -335,11 +335,34 @@ app.get('/api/getProducts', async function(req, res) {
     res.send({ risposta: "yoyoyo" });
 })
 
+app.get('/mongo/collections', async(req, res) => {
+    let collection_name = ["Uffici", "Clienti", "Dipendenti", "Manager"];
+
+    MongoClient.connect(localMongoUri, async function(err, database) {
+        if (err) throw err;
+        console.log("DB OK - RESET DATA");
+        var dbo = database.db("SiteDB");
+
+        for (name of collection_name) {
+            //Crea le collezioni di default
+            dbo.createCollection(name, function(err, res) {
+                if (err) throw err;
+                console.log("Collection created! " + name);
+            });
+
+            dbo.collection(name).find({}).toArray(function(err, result) {
+                if (err) throw err;
+                console.log(result);
+            });
+        }
+    });
+});
+
 /*
 fetch('/db/collection?collection=users',{
         method:'GET'
     })
-*/ 
+*/
 app.get('/db/collection', async function(req, res) {
     res.send(await mymongo.getCollection(req.query.collection, mongoCredentials))
 });
@@ -348,7 +371,7 @@ app.get('/db/collection', async function(req, res) {
 fetch('/db/collectionsize?collection=products',{
     method:'GET'
     })
-*/ 
+*/
 app.get('/db/collectionsize', async function(req, res) {
     res.send(await mymongo.getCollectionSize(req.query.collection, mongoCredentials))
 });
@@ -358,9 +381,9 @@ app.get('/db/collectionsize', async function(req, res) {
 fetch('/db/element?id=3&collection=users',{
         method:'GET'
     })
-*/ 
+*/
 app.get('/db/element', async function(req, res) {
-    res.send(await mymongo.getElem(req.query.id,req.query.collection, mongoCredentials))
+    res.send(await mymongo.getElem(req.query.id, req.query.collection, mongoCredentials))
 });
 
 //mettere nel body l'oggetto intero
@@ -388,10 +411,10 @@ fetch('/db/element',{
     },
     body: JSON.stringify(obj)
 })
-*/ 
+*/
 app.post('/db/element', async function(req, res) {
-    console.log("post"+req.body.elem._id)
-    res.send(await mymongo.insertElem(req.body.elem,req.body.collection, mongoCredentials))
+    console.log("post" + req.body.elem._id)
+    res.send(await mymongo.insertElem(req.body.elem, req.body.collection, mongoCredentials))
 });
 
 //mettere nel body l'oggetto intero
@@ -418,9 +441,9 @@ fetch('/db/element',{
     },
     body: JSON.stringify(obj)
 })
-*/ 
+*/
 app.put('/db/element', async function(req, res) {
-    res.send(await mymongo.editElem(req.body.elem,req.body.collection, mongoCredentials))
+    res.send(await mymongo.editElem(req.body.elem, req.body.collection, mongoCredentials))
 });
 
 //mettere nel body direttamente l'id
@@ -437,9 +460,9 @@ fetch('/db/element',{
     },
     body: JSON.stringify(obj)
 })
-*/ 
+*/
 app.delete('/db/element', async function(req, res) {
-    res.send(await mymongo.removeElem(req.body.id,req.body.collection, mongoCredentials))
+    res.send(await mymongo.removeElem(req.body.id, req.body.collection, mongoCredentials))
 });
 
 

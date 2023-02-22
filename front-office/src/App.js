@@ -22,9 +22,9 @@ function App() {
 
   //todo: aggiungere campi tag, disponibilità.
 
-  const [products, setProducts] = useState(fetch('db/collection?collection=products', {method:"GET"}).then((res)=>res.json()).then((data)=> {return data.result.slice(0,8)}));
+  const [products, setProducts] = useState(fetch('db/collection?collection=products', {method:"GET"}).then((res)=>res.json()).then((data)=> {setProducts(data.result.slice(0,8))}));
   
-  const [services, setServices] = useState(fetch('db/element?id=0&collection=services', {method: "GET"}).then((res) => res.json()).then((data) => data.result));
+  const [services, setServices] = useState(fetch('db/element?id=0&collection=services', {method: "GET"}).then((res) => res.json()).then((data) => setServices(data.result)));
 
   useEffect(()=>
   {

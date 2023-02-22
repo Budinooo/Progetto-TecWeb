@@ -1,4 +1,3 @@
-import { response } from 'express';
 import { useSearchParams } from 'react-router-dom';
 import React, {StyleSheet} from 'react'
 import Filter from "../Components/Filter"
@@ -15,14 +14,14 @@ class DisplayResults extends React.Component {
                products: [],
                productsDisplayed: []
           }
-          const [searchParams] = useSearchParams();
-          console.log(searchParams.get('query'));
+          let url = new URL(document.URL);
+          let searchParams = url.searchParams
 
-          /*
+          
           if(searchParams.get('query'))
                this.getSearchedProducts(searchParams.get('query').toLowerCase())
-          else*/
-          this.getProducts();
+          else
+               this.getProducts();
 
           this.handleCategoryFilter = this.handleCategoryFilter.bind(this);
           this.handlePriceFilter = this.handlePriceFilter.bind(this);
