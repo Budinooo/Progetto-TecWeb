@@ -4,6 +4,7 @@ import Service from "../Components/Service.js"
 class ServiceDisplay extends React.Component 
 {
     constructor(props) {
+        super(props);
         let services = [];
         this.state = {services};
         fetch(`/db/collection?collection=services`)
