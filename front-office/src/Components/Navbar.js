@@ -11,15 +11,11 @@ class Navbar extends React.Component {
   handleSearch = (callback) => (e) => 
     {
       e.preventDefault();
-      console.log()
       callback(document.getElementById("searchBar").value);
     }
   
   loginBtn = () =>
   {
-    let login = localStorage.getItem("login");
-    let islogged = JSON.parse(login);
-    console.log(islogged)
     if(JSON.parse(localStorage.getItem("login")).islogged){
       return(<a className="icon-btn nav-link" onClick={this.logoutBtn} href="/">LOG OUT</a>)
     }

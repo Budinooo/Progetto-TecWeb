@@ -7,9 +7,14 @@ class Service extends React.Component {
 
   constructor(props){
     super(props);
-    let service = this.props.service;
     let date = null;
+    let service = null;
     this.state = {service: service, date: date};
+  }
+
+  componentDidUpdate(){
+    if(this.props.service != this.state.service)
+      this.setState({service: this.props.service})
   }
 
   book = (date) => (e) =>  
@@ -62,21 +67,23 @@ class Service extends React.Component {
   }
   
   render() {
-    console.log(this.state.service)
+    //console.log(this.state.service)
+    if(this.state.service == null)
+      return;
     if (this.state.service){
       if(this.props.short == true) {
-      return (
-        <div className="d-flex service-container">
-          <div className="service-img">
-            <img width="100%" src={this.state.service.img} />
+        return (
+          <div className="d-flex service-container">
+            <div className="service-img">
+              <img width="100%" src={this.state.service.img} />
+            </div>
+            <div className="service-body-container">
+              <h4 className="service-name">{this.state.service.name}</h4>
+              <p className="service-desc">{this.state.service.description}</p>
+              <p className="service-price">{this.state.service.price}</p>
+            </div>
           </div>
-          <div className="service-body-container">
-            <h4 className="service-name">{this.state.service.name}</h4>
-            <p className="service-desc">{this.state.service.desc}</p>
-            <p className="service-price">{this.state.service.price}</p>
-          </div>
-        </div>
-      )
+        )
       }
       else {
         return (
@@ -86,7 +93,7 @@ class Service extends React.Component {
             </div>
             <div className="service-body-container">
               <h4 className="service-name">{this.state.service.name}</h4>
-              <p className="service-desc">{this.state.service.desc}</p>
+              <p className="service-desc">{this.state.service.description}</p>
               <p className="service-price">{this.state.service.price}</p>
               <form id="booking-form" className='d-flex flex-column'>
                 <div className='d-flex'>

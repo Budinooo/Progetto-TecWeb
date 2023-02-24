@@ -13,7 +13,7 @@ class Post extends React.Component {
 
     setContent = () =>{
         if (this.isPost){ //post selezionato
-            console.log(this.props.post)
+            //console.log(this.props.post)
             return(
             <div className="postOpen container">
                 <div>

@@ -4,12 +4,12 @@ import './Product.css'
 const addToCart = (item) =>
 {
   let cart = JSON.parse(localStorage.getItem("cart"));
-  let cartItem = cart.findIndex(i => i.id == item.id);
+  let cartItem = cart.findIndex(i => i._id == item._id);
   if(cartItem>=0)
     cart.at(cartItem).quantity++;
   else {
-    let newItem = {id:0, img:"", name:"", price:0, quantity:0};
-    newItem.id = item.id;
+    let newItem = {_id:0, img:"", name:"", price:0, quantity:0};
+    newItem._id = item._id;
     newItem.img = item.img;
     newItem.name = item.name;
     newItem.price = item.price;

@@ -21,6 +21,8 @@ Copyright (c) 2021 by Fabio Vitali
 
 */
 
+/*mongodb+srv://leon:ahdbleon@animalhousedb.loccq0z.mongodb.net/?retryWrites=true&w=majority*/
+
 /* Dati di prova */
 let fn = "/public/data/country-by-capital-city.json"
 let dbname = "countries"
@@ -29,10 +31,11 @@ let fieldname = "country"
 
 const { MongoClient } = require("mongodb");
 const fs = require('fs').promises ;
-const template = require(global.rootDir + '/scripts/tpl.js') ; 
+const template = require(global.rootDir + '/scripts/tpl.js') ;
 
 exports.create = async function(credentials) {
-	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+	//const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+	const mongouri = `mongodb+srv://leon:ahdbleon@animalhousedb.loccq0z.mongodb.net/?retryWrites=true&w=majority`;
 
 	let collections = ['communityFeed', 'products', 'services', 'users', 'bookings'];
 	let debug = []
@@ -76,7 +79,8 @@ exports.create = async function(credentials) {
 
 
 exports.search = async function(q,credentials) {
-	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+	//const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+	const mongouri = `mongodb+srv://leon:ahdbleon@animalhousedb.loccq0z.mongodb.net/?retryWrites=true&w=majority`;
 
 	let query =  {}
 	let debug = []
@@ -121,7 +125,8 @@ exports.search = async function(q,credentials) {
 
 //Recupera l'intera collezione c
 exports.getCollection = async function(c,credentials) {
-	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+	//const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+	const mongouri = `mongodb+srv://leon:ahdbleon@animalhousedb.loccq0z.mongodb.net/?retryWrites=true&w=majority`;
 
 	let debug = [];
 	let data = {result: null};
@@ -156,7 +161,8 @@ exports.getCollection = async function(c,credentials) {
 
 //Recupera l'elemento e
 exports.getElem = async function(id,collection,credentials) {
-	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+	//const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+	const mongouri = `mongodb+srv://leon:ahdbleon@animalhousedb.loccq0z.mongodb.net/?retryWrites=true&w=majority`;
 
 	let debug = []
 	let data = {result: null};
@@ -190,7 +196,8 @@ exports.getElem = async function(id,collection,credentials) {
 
 //Recupera il numero di elementi presenti nella collezione c
 exports.getCollectionSize = async function(c,credentials) {
-	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+	//const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+	const mongouri = `mongodb+srv://leon:ahdbleon@animalhousedb.loccq0z.mongodb.net/?retryWrites=true&w=majority`;
 
 	let debug = []
 	let data = {result: null};
@@ -224,7 +231,8 @@ exports.getCollectionSize = async function(c,credentials) {
 
 //Inserisci l'elemento e 
 exports.insertElem = async function(e,collection,credentials) {
-	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+	//const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+	const mongouri = `mongodb+srv://leon:ahdbleon@animalhousedb.loccq0z.mongodb.net/?retryWrites=true&w=majority`;
 
 	let debug = []
 	let data = {result: null};
@@ -256,7 +264,8 @@ exports.insertElem = async function(e,collection,credentials) {
 
 //Modifica l'elemento e
 exports.editElem = async function(e,collection,credentials) {
-	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+	//const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+	const mongouri = `mongodb+srv://leon:ahdbleon@animalhousedb.loccq0z.mongodb.net/?retryWrites=true&w=majority`;
 
 	let debug = []
 	let data = {result: null};
@@ -292,7 +301,8 @@ exports.editElem = async function(e,collection,credentials) {
 
 //Rimuovi un elemento da una collezione
 exports.removeElem = async function(id,collection,credentials) {
-	const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+	//const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
+	const mongouri = `mongodb+srv://leon:ahdbleon@animalhousedb.loccq0z.mongodb.net/?retryWrites=true&w=majority`;
 
 	let debug = []
 	let data = {result: null};
