@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './Service.css'
@@ -14,7 +14,7 @@ class Service extends React.Component {
 
   componentDidUpdate(){
     if(this.props.service != this.state.service)
-      this.setState({service: this.props.service})
+      this.setState({service: this.props.service}, ()=>console.log(this.state.service.availability))
   }
 
   book = (date) => (e) =>  
@@ -37,7 +37,7 @@ class Service extends React.Component {
       date: formattedDate
     };
 
-    fetch("/db/element", {method: "POST", headers: {
+    fetch("http://localhost:8000/db/element", {method: "POST", headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json'
       }, 
@@ -51,7 +51,7 @@ class Service extends React.Component {
     let dateIndex = updatedService.availability.findIndex(date => date==formattedDate);
     updatedService.availability.splice(dateIndex, 1);
 
-    fetch(`/db/element`, {method: "PUT",headers: {
+    fetch(`http://localhost:8000/db/element`, {method: "PUT",headers: {
       'Content-type': 'application/json',
       'Accept': 'application/json'
       }, 
@@ -60,14 +60,13 @@ class Service extends React.Component {
         elem: updatedService
       })})
       .then((res)=>{
-        fetch(`/db/element?id=${this.state.service._id}&collection=services`, {method: "GET"})
+        fetch(`http://localhost:8000/db/element?id=${this.state.service._id}&collection=services`, {method: "GET"})
         .then((res) => res.json).then((data) => this.setState({service:(data.result)}));
       });
     alert('prenotazione avvenuta con successo')
   }
   
   render() {
-    //console.log(this.state.service)
     if(this.state.service == null)
       return;
     if (this.state.service){

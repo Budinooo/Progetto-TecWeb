@@ -7,7 +7,7 @@ class ServiceDisplay extends React.Component
         super(props);
         let services = [];
         this.state = {services};
-        fetch(`/db/collection?collection=services`)
+        fetch(`http://localhost:8000/db/collection?collection=services`)
         .then((res)=> res.json()).then((data) => this.setState({services: data.result}));
     }
 
