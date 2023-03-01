@@ -27,16 +27,16 @@ fetch('/db/collection?collection=communityFeed', {
             <button class="btn btn-danger" onclick="deleteMessage(` + message._id + `)">Remove</button>
             <button class="btn btn-danger" onclick="deleteImage(` + message._id + `)">Remove Image</button>
           </div>
-          <div class="container mt-5" id="responseContainer"></div>
           <div class="container" id="formcontainer` + message._id + `" style="display:none">
             <form class="form form--hidden" id="editMessageForm` + message._id + `">
                 <div class="form-group">
                     <label for="scoreInput">Message</label>
                     <textarea class="form-control" id="newMessage` + message._id + `">` + message.description + `</textarea>
                 </div>
-                <button type="submit" class="btn btn-primary" id="saveClient">Save</button>
+                <button type="submit" class="btn btn-primary" id="saveEdit` + message._id + `">Save</button>
             </form>
         </div>
+        <div class="container mt-5" id="responseContainer"></div>
         </div>
       `;
             response.forEach((element, j) => {
@@ -63,7 +63,7 @@ fetch('/db/collection?collection=communityFeed', {
                     <label for="scoreInput">Message</label>
                     <input type="text" class="form-control" id="newMessage` + element._id + `" value="` + element.description + `">
                 </div>
-                <button type="submit" class="btn btn-primary" id="saveClient">Save</button>
+                <button type="submit" class="btn btn-primary" id="saveEdit` + element._id + `">Save</button>
             </form>
         </div>
         </div>
@@ -117,9 +117,9 @@ function deleteImage(messageId) {
 function editMessage(messageId) {
     // logica per la modifica delle informazioni del cliente
     document.getElementById("formcontainer" + messageId).style.display = "block";
-    document.getElementById(jsonDataid).style.display = "none";
-    document.querySelector("formcontainer" + messageId).addEventListener("submit", function(event) {
-        event.preventDefault();
+    //document.getElementById(jsonDataid).style.display = "none";
+    document.getElementById("saveEdit" + messageId).addEventListener("click", e => {
+        e.preventDefault();
         const message = document.getElementById("newMessage" + messageId).value;
         fetch('/db/element?id=' + messageId + '&collection=communityFeed', {
                 method: 'GET'
@@ -132,10 +132,10 @@ function editMessage(messageId) {
                 let obj = {
                     collection: 'communityFeed',
                     elem: {
-                        "_id": JSON.stringify(data._id),
+                        "_id": JSON.stringify(messageId),
                         "author": data.author,
                         "title": data.title,
-                        "description": JSON.stringify(message),
+                        "description": document.getElementById("newMessage" + messageId).value,
                         "file": data.img,
                         "date": data.date,
                         "answers": data.answers
@@ -154,7 +154,7 @@ function editMessage(messageId) {
                     })
             })
         document.getElementById("formcontainer" + messageId).style.display = "none";
-        document.getElementById(jsonDataid).style.display = "block";
+        //document.getElementById(jsonDataid).style.display = "block";
     });
 }
 
