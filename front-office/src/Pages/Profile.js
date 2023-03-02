@@ -1,14 +1,13 @@
 import {React, useEffect, useState} from "react";
+import 'mongoose';
 import "./profile.css";
+import mongoose from "mongoose";
 
 export default function Profile() {
     const [profileInfo, setProfileInfo] = useState();
     const [bookings, setBookings] = useState();
-    const [bookedServices, setBookedServices] = useState();
-    const [didRender, setDidRender] = useState(false);
 
     useEffect(() => {
-        setDidRender(true);
         setProfileInfo(null);
         let userId = JSON.parse(localStorage.getItem("login")).id;
         //Get profileInfo
@@ -27,25 +26,52 @@ export default function Profile() {
         
     },[]);
 
-    useEffect(() => 
-    {   
-        if(didRender == true) {
-            let services = [];
-            console.log("2")
-            
+    const deleteBooking = (booking) =>
+    {
+        debugger;
+        let obj = {
+            collection: "bookings",
+            id: mongoose.Types.ObjectId(booking._id)
         }
-    }, [bookings])
+        // Booking deletion
+        fetch('http://localhost:8000/db/element', {
+            method:'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            }, 
+            body: JSON.stringify(obj)
+        });
+
+        //service availability update
+        let service;
+        fetch(`http://localhost:8000/db/element?collection=services&id=${booking.serviceId}`).then((res) => res.json())
+        .then((data) => {
+            service = {collection: "services", elem: data.result};
+            service.elem.availability.push(booking.date);
+            fetch(`http://localhost:8000/db/element`, {
+                method: "PUT",
+                headers: {
+                    'Content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(service)
+            });
+            console.log(service);
+        })
+    }
 
     const displayBookings = () => 
     {
-       if (bookings && bookedServices) 
+       if (bookings) 
        {
             return bookings.map((booking, i) => 
             {
                 return(
                     <div key={booking._id} className="booking-container">
-                        <h4>{bookedServices[i]}</h4>
+                        <h4>{booking.serviceName}</h4>
                         <p>{booking.date}</p>
+                        <button className="btn-booking-del" onClick={(e) => deleteBooking(booking)}>Delete Booking</button>
                     </div>
                 )
             })

@@ -34,9 +34,11 @@ class Service extends React.Component {
     let newBooking = {
       userId: JSON.parse(localStorage.getItem("login")).id,
       serviceId: this.state.service._id,
+      serviceName: this.state.service.name,
       date: formattedDate
     };
-
+    
+    // POST NEW BOOKING
     fetch("http://localhost:8000/db/element", {method: "POST", headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json'
@@ -51,6 +53,7 @@ class Service extends React.Component {
     let dateIndex = updatedService.availability.findIndex(date => date==formattedDate);
     updatedService.availability.splice(dateIndex, 1);
 
+    // UPDATE SERVICE AVAILABILITY
     fetch(`http://localhost:8000/db/element`, {method: "PUT",headers: {
       'Content-type': 'application/json',
       'Accept': 'application/json'

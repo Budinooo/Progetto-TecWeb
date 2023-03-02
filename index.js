@@ -303,7 +303,6 @@ app.put('/backoffice/frontend/static/js/views/prodotti/prodotti.json', (req, res
         image: req.body.image
     };
     json.products.push(newProduct);
-    console.log(req.body);
     fs.writeFileSync(filepath, JSON.stringify(json));
     res.send();
 })
@@ -342,10 +341,17 @@ app.get('/db/getUserBookings', async function(req, res) {
     }
 });
 
-app.get('/db/getMultipleElems', async function(req, res) {
-    let elems = [];
+app.get('/db/getMultipleElements', async function(req, res) {
+    let allElems = await mymongo.getCollection(req.query.collection, mongoCredentials);
+    console.log(req.query.ids);
+    let multElems = [];
     try {
-        
+        allElems.map((elem) => 
+        {
+            if(req.query.ids.includes(elem._id))
+                multElems.push(elem);
+        });
+        res.send(multElems);
     } 
     catch(ex) 
     {
@@ -495,9 +501,6 @@ fetch('/db/element',{
 app.delete('/db/element', async function(req, res) {
     res.send(await mymongo.removeElem(req.body.id, req.body.collection, mongoCredentials))
 });
-
-
-
 
 /* ========================== */
 /*                            */
