@@ -53,6 +53,7 @@ const fs = require('fs');
 let app = express();
 
 let bodyParser = require('body-parser');
+const { Exception } = require('handlebars');
 
 app.use(bodyParser.json());
 app.use(express.static(global.rootDir + '/public'))
@@ -322,6 +323,36 @@ const mongoCredentials = {
         site: "mongo_site212229"
     }
     /* end */
+
+app.get('/db/getUserBookings', async function(req, res) {
+    let allBookings = await mymongo.getCollection("bookings", mongoCredentials);
+    let userBookings = [];
+    try{
+        allBookings.result.map((booking) => 
+        {
+            if(booking.userId == req.query.id)
+                userBookings.push(booking);
+        });
+        res.send(userBookings);
+    }
+    catch(ex)
+    {
+        console.log(ex);
+        res.send(ex);
+    }
+});
+
+app.get('/db/getMultipleElems', async function(req, res) {
+    let elems = [];
+    try {
+        
+    } 
+    catch(ex) 
+    {
+        console.log(ex);
+        res.send(ex);
+    }
+});
 
 app.get('/db/create', async function(req, res) {
     res.send(await mymongo.create(mongoCredentials))

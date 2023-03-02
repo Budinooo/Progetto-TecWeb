@@ -54,6 +54,7 @@ class App extends React.Component {
           <Route path='/feed' element={<Community_Feed />} />
           <Route path='/results' element={<DisplayResults />} />
           <Route path='/services' element={<ServiceDisplay />} />
+          <Route path='/profile' element={<Profile />} />
         </Switch>
       </>
       

@@ -1,0 +1,46 @@
+.profile-container {
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 5%;
+}
+
+#username {
+    font-size: 4em;
+}
+
+#email {
+    opacity: 0.3;
+    font-size: 1.5em;
+}
+
+.pet-name-container {
+    width:7em;
+    margin-left: 2em;
+}
+
+.pet-name {
+    font-size: 1.5em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.pet-icon {
+    font-size: 4em;
+    width: fit-content;
+}
+
+.pet-container {
+    border-style: solid;
+    border-color: gainsboro;
+    border-radius: 10px;
+    border-width: 2px;
+    width: 20em;
+    margin-right: 1em;
+    margin-bottom: 1em;
+}
+
+.edit-btn {
+    width: 1em;
+}
+

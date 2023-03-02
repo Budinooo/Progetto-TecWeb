@@ -5,13 +5,19 @@ class ServiceDisplay extends React.Component
 {
     constructor(props) {
         super(props);
-        let services = [];
+        let services = null;
         this.state = {services};
+    }
+
+    componentDidMount() 
+    {
         fetch(`http://localhost:8000/db/collection?collection=services`)
         .then((res)=> res.json()).then((data) => this.setState({services: data.result}));
     }
 
     render(){
+        if(this.state.services == null) 
+            return (<div></div>);
         return(
             <div id="service-container" className="mx-5 mt-5">
                 {this.state.services.map((service) => 

@@ -14,7 +14,7 @@ class Service extends React.Component {
 
   componentDidUpdate(){
     if(this.props.service != this.state.service)
-      this.setState({service: this.props.service}, ()=>console.log(this.state.service.availability))
+      this.setState({service: this.props.service})
   }
 
   book = (date) => (e) =>  
@@ -67,9 +67,7 @@ class Service extends React.Component {
   }
   
   render() {
-    if(this.state.service == null)
-      return;
-    if (this.state.service){
+    if (this.state.service != null){
       if(this.props.short == true) {
         return (
           <div className="d-flex service-container">
