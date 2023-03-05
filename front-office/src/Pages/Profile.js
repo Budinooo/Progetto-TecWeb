@@ -28,11 +28,11 @@ export default function Profile() {
 
     const deleteBooking = (booking) =>
     {
-        debugger;
         let obj = {
             collection: "bookings",
-            id: mongoose.Types.ObjectId(booking._id)
+            id: booking._id
         }
+        console.log(obj);
         // Booking deletion
         fetch('http://localhost:8000/db/element', {
             method:'DELETE',
@@ -57,7 +57,6 @@ export default function Profile() {
                 },
                 body: JSON.stringify(service)
             });
-            console.log(service);
         })
     }
 

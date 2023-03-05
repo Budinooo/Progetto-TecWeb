@@ -54,6 +54,7 @@ let app = express();
 
 let bodyParser = require('body-parser');
 const { Exception } = require('handlebars');
+const { ObjectID } = require('bson');
 
 app.use(bodyParser.json());
 app.use(express.static(global.rootDir + '/public'))
@@ -499,7 +500,22 @@ fetch('/db/element',{
 })
 */
 app.delete('/db/element', async function(req, res) {
-    res.send(await mymongo.removeElem(req.body.id, req.body.collection, mongoCredentials))
+    console.log("ID DA TROVARE: " + req.body.id);
+    let tmpobj = [];
+    //castedId = ObjectID(req.body.id);
+    let tmp = await mymongo.getCollection(req.body.collection, mongoCredentials);    
+    tmpobj = tmp.result;
+    let tmpids = [];
+    tmpobj.map((obj) => 
+    {
+        tmpids.push(ObjectID(obj._id)); 
+    });
+    console.log("ID TOTALI: " + tmpids);
+    if(tmpids.includes(ObjectID(req.body.id)))
+        console.log("TROVATO");
+    else
+        console.log("NON TROVATO");
+    res.send(await mymongo.removeElem(ObjectID(req.body.id), req.body.collection, mongoCredentials))
 });
 
 /* ========================== */
