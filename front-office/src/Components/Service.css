@@ -32,3 +32,20 @@
 .service-container {
     margin-bottom: 3em;
 }
+
+.more-btn {
+    border-radius: 1em;
+    border-style: solid;
+    border-width: 2px;
+    background-color: white;
+    border-color: black;
+    padding: 0.3em 0.7em;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.more-btn:hover {
+    background-color: black;
+    color: white;
+    transition: 0.2s;
+}

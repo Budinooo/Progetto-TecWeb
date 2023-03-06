@@ -20,3 +20,7 @@
     transition: 0.1s;
 }
 
+.carouselContainer
+{
+    width: 90%;
+}

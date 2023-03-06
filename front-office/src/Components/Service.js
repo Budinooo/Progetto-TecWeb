@@ -81,6 +81,7 @@ class Service extends React.Component {
               <h4 className="service-name">{this.state.service.name}</h4>
               <p className="service-desc">{this.state.service.description}</p>
               <p className="service-price">{this.state.service.price}</p>
+              <button className='more-btn'>LEARN MORE</button>
             </div>
           </div>
         )
