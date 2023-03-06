@@ -1,4 +1,5 @@
 import {React, useEffect, useState} from "react";
+import {Types} from 'mongoose';
 import "./profile.css";
 
 export default function Profile() {
@@ -18,7 +19,6 @@ export default function Profile() {
         .then((res) => res.json())
         .then((data) => 
         {
-            console.log(data)
             setBookings(data);
         });
         
@@ -55,11 +55,11 @@ export default function Profile() {
         
     const deleteBooking = (booking) =>
     {
+        debugger;
         let obj = {
             collection: "bookings",
             id: booking._id
         }
-        console.log(obj);
         // Booking deletion
         fetch('http://localhost:8000/db/element', {
             method:'DELETE',
@@ -68,22 +68,23 @@ export default function Profile() {
                 'Accept': 'application/json'
             }, 
             body: JSON.stringify(obj)
-        });
-        
-        //service availability update
-        let service;
-        fetch(`http://localhost:8000/db/element?collection=services&id=${booking.serviceId}`).then((res) => res.json())
-        .then((data) => {
-            service = {collection: "services", elem: data.result};
-            service.elem.availability.push(booking.date);
-            fetch(`http://localhost:8000/db/element`, {
-            method: "PUT",
-            headers: {
-                'Content-type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(service)
-        });
+        }).then((res) => 
+        {
+            //service availability update
+            let service;
+            fetch(`http://localhost:8000/db/element?collection=services&id=${booking.serviceId}`, {method: "GET"}).then((res) => res.json())
+            .then((data) => {
+                service = {collection: "services", elem: data.result};
+                service.elem.availability.push(booking.date);
+                fetch(`http://localhost:8000/db/element`, {
+                method: "PUT",
+                headers: {
+                    'Content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(service)
+            });
+        })
     })
 }
 
@@ -91,6 +92,12 @@ const displayBookings = () =>
 {
     if (bookings) 
     {
+        if(bookings.length <= 0)
+            return (
+                <div className="mt-4">
+                    <h4 className="no-pet-alert">Book a service <a href="/services">here</a></h4>
+                </div>
+            );
         return bookings.map((booking, i) => 
         {
             return(
@@ -104,9 +111,7 @@ const displayBookings = () =>
         }
         else {
             return (
-                <div className="mt-4">
-                    <h4 className="no-pet-alert">Book a service <a href="/services">here</a></h4>
-                </div>
+                <div></div>
             );
         }
     }

@@ -34,6 +34,9 @@
 }
 
 .more-btn {
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
     border-radius: 1em;
     border-style: solid;
     border-width: 2px;

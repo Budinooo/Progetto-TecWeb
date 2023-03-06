@@ -511,7 +511,7 @@ app.delete('/db/element', async function(req, res) {
         tmpids.push(ObjectID(obj._id)); 
     });
     console.log("ID TOTALI: " + tmpids);
-    if(tmpids.includes(ObjectID(req.body.id)))
+    if(tmpids.includes(req.body.id))
         console.log("TROVATO");
     else
         console.log("NON TROVATO");

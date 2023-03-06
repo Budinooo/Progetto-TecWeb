@@ -37,7 +37,7 @@ exports.create = async function(credentials) {
 	//const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
 	const mongouri = `mongodb+srv://leon:ahdbleon@animalhousedb.loccq0z.mongodb.net/?retryWrites=true&w=majority`;
 
-	let collections = ['communityFeed', 'products', 'services', 'users', 'bookings'];
+	let collections = ['communityFeed', 'products', 'services', 'users', 'bookings', 'locations'];
 	let debug = []
 	try {
 		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
