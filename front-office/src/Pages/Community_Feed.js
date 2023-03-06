@@ -125,13 +125,13 @@ class Community_Feed extends React.Component {
                 .then(data =>{
                     data = data.result.username;
                     let newPost ={
-                        id: this.state.posts.length, 
-                        author: data,
-                        title: title,
-                        description: desc,
-                        answers: [],
-                        date: date.toLocaleString(),
-                        file: ''
+                        "_id": JSON.stringify(this.state.posts.length), 
+                        "author": data,
+                        "title": title,
+                        "description": desc,
+                        "answers": [],
+                        "date": date.toLocaleString(),
+                        "file": ''
                     }
                     if (file.length != 0)  
                         obj.file = file[0];
