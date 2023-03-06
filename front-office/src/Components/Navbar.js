@@ -17,7 +17,10 @@ class Navbar extends React.Component {
   loginBtn = () =>
   {
     if(JSON.parse(localStorage.getItem("login")).islogged){
-      return(<a className="icon-btn nav-link" /*onClick={this.logoutBtn}*/ href="/profile">PROFILE</a>)
+      if(window.location.pathname == '/profile'){
+        return(<a className="icon-btn nav-link" onClick={this.logoutBtn} href="/profile">LOGOUT</a>);
+      }
+      return(<a className="icon-btn nav-link" /*onClick={this.logoutBtn}*/ href="/profile">PROFILE</a>);
     }
     else
       return(<a className="icon-btn nav-link" href="/login">LOG IN</a>)

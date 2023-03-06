@@ -37,8 +37,8 @@ export default function Home(props)
               </div>
             </div>
           </div>
+          <h3 className="mb-4">Featured products:</h3>
           <div className="row mx-auto mb-5 carouselContainer">
-            <h3 className="mb-4">Featured products:</h3>
             <Product_Carousel productList={props.products} />
           </div>
           <div className="row">
