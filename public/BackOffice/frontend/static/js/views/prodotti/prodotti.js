@@ -13,7 +13,7 @@ fetch('/db/collection?collection=products', {
             <div class="card-body" id="${prodotto._id}">
               <h5 class="card-title">${prodotto.name}</h5>
               <p class="card-text">${prodotto.description}</p>
-              <p class="card-text">Price €: ${prodotto.price}</p>
+              <p class="card-text">Price €${prodotto.price}</p>
               <p class="card-text">Product for: ${prodotto.animal}</p>
               <button class="btn btn-primary" id="editClient" onclick="editClient(${prodotto._id})">Edit</button>
               <button class="btn btn-danger" onclick="removeElement(${prodotto._id})">Remove</button>
@@ -34,8 +34,26 @@ fetch('/db/collection?collection=products', {
                     <input type="text" class="form-control" id="priceEditInput${prodotto._id}" value="${prodotto.price}">
                 </div>
                 <div class="form-group">
-                    <label for="scoreInput">Image url</label>
+                    <label for="imageInput">Image url</label>
                     <input type="text" class="form-control" id="imageEditInput${prodotto._id}" value="${prodotto.img}">
+                </div>
+                <div class="form-group">
+                    <label for="tagInput">Tag</label>
+                    <select name="pets" id="tagEditInput${prodotto._id}">
+                        <option value="food">Food</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="toy">Toy</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="animalInput">Animal</label>
+                    <select name="pets" id="animalEditInput${prodotto._id}">
+                        <option value="dog">Dog</option>
+                        <option value="cat">Cat</option>
+                        <option value="fish">Fish</option>
+                        <option value="bird">Bird</option>
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary" id="saveEditProduct${prodotto._id}">Save</button>
             </form>
@@ -51,7 +69,7 @@ $("#addBtn").click(function() {
     // logica per l'aggiunta di un nuovo prodotto
     // legge il contenuto del file JSON
     document.getElementById("formcontainer").style.display = "block";
-    document.querySelector("form").addEventListener("submit", function(event) {
+    document.getElementById("saveClient").addEventListener("click", function(event) {
         event.preventDefault();
         document.getElementById("formcontainer").style.display = "none";
         fetch('/db/collectionsize?collection=products', {
@@ -67,8 +85,8 @@ $("#addBtn").click(function() {
                         "description": document.getElementById("descriptionInput").value,
                         "price": document.getElementById("priceInput").value,
                         "img": document.getElementById("imageInput").value,
-                        "tag": "food",
-                        "animal": "dog"
+                        "tag": document.getElementById("tagInput").value,
+                        "animal": document.getElementById("animalInput").value
                     }
 
                 };
@@ -128,8 +146,8 @@ function editClient(jsonDataid) {
                         "_id": productId,
                         "name": document.getElementById("nameEditInput" + jsonDataid).value,
                         "img": document.getElementById("imageEditInput" + jsonDataid).value,
-                        "tag": data.tag,
-                        "animal": data.animal,
+                        "tag": document.getElementById("tagEditInput" + jsonDataid).value,
+                        "animal": document.getElementById("animalEditInput" + jsonDataid).value,
                         "price": document.getElementById("priceEditInput" + jsonDataid).value,
                         "description": document.getElementById("descriptionEditInput" + jsonDataid).value
                     }

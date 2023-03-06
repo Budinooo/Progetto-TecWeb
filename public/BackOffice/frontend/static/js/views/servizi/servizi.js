@@ -5,8 +5,10 @@ fetch('/db/collection?collection=services', {
     .then(services => {
         services = services.result;
         let servicesHtml = '';
+        var data = [];
         let dateHtml = '';
         services.forEach(service => {
+            data = service.availability;
             servicesHtml += `
         <div class="container">
             <div class="col-sm-4">
@@ -15,9 +17,10 @@ fetch('/db/collection?collection=services', {
                 <p>Description: ${service.description}</p>
                 <p>Place: ${service.place}</p>
                 <p id="date">Availability:  ${service.availability}</p>
-                <button class="btn btn-warning" id="edit-${service._id}" onclick="editService(${service._id})">Edit</button>
-                <button class="btn btn-primary" id="availability-${service._id}" onclick="addAvailability(${service._id})">Add Availabile Date</button>
-                <button class="btn btn-danger" id="remove-${service._id}" onclick="removeService(${service._id})">Remove</button>
+                <button class="btn btn-warning" id="edit-${service._id}" onclick="editService(${service._id})" style="margin-top: 5px">Edit</button>
+                <button class="btn btn-primary" id="availability-${service._id}" onclick="addAvailability(${service._id})" style="margin-top: 5px">Add Availabile Date</button>
+                <button class="btn btn-danger" id="availability-${service._id}" onclick="removeAvailability(${service._id})" style="margin-top: 5px">Remove Availabile Date</button>
+                <button class="btn btn-danger" id="remove-${service._id}" onclick="removeService(${service._id})" style="margin-top: 5px">Remove</button>
             </div>
             <div class="container" id="formdate${service._id}" style="display:none; width:500px">
             <form class="form form--hidden" id="addDateForm">
@@ -27,6 +30,9 @@ fetch('/db/collection?collection=services', {
             </div>
             <button type="submit" class="btn btn-primary" id="saveDateService${service._id}">Save</button>
         </form>
+            </div>
+            <div class="container" id="removeDatecontainer${service._id}" style="display: none">
+                <div id="availableDate" style="margin-left:50px; margin-bottom:50px" style="max-width: 100%"></div>
             </div>
             <div class="container" id="formEditcontainer` + service._id + `" style="display:none">
             <form class="form form--hidden" id="editServiceForm">
@@ -46,7 +52,7 @@ fetch('/db/collection?collection=services', {
                     <label for="scoreInput">Price</label>
                     <input type="text" class="form-control" id="priceEditService` + service._id + `" value="` + service.price + `">
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display:none">
                     <label for="scoreInput">Date</label>
                     <input type="text" class="form-control" id="dateEditService` + service._id + `" value="` + service.availability + `">
                 </div>
@@ -60,8 +66,16 @@ fetch('/db/collection?collection=services', {
         </div>
 
       `;
+
+            for (var j = 0; j < data.length; j++) {
+                let date = data[j]
+                dateHtml += `
+                <button class="btn btn-danger" id="date-${service._id}" style="margin-top: 5px" onclick="removeDate(${service._id},` + j + `)">` + date + `</button>
+                `;
+            }
         });
         document.getElementById('services').innerHTML = servicesHtml;
+        document.getElementById('availableDate').innerHTML = dateHtml;
     });
 /*
 function bookService(serviceId) {
@@ -95,7 +109,7 @@ function editService(serviceId) {
         const description = document.getElementById("descriptionEditService" + serviceId).value;
         const place = document.getElementById("placeEditService" + serviceId).value;
         const price = document.getElementById("priceEditService" + serviceId).value;
-        const date = document.getElementById("dateEditService" + serviceId).value;
+        const date = (document.getElementById("dateEditService" + serviceId).value).split(",");
         const img = document.getElementById("imageEditService" + serviceId).value;
         let obj = {
             collection: 'services',
@@ -120,7 +134,7 @@ function editService(serviceId) {
             .then(() => {
                 location.reload();
             })
-        document.getElementById("formeditcontainer").style.display = "none";
+        document.getElementById("formEditcontainer").style.display = "none";
     });
 }
 
@@ -164,7 +178,46 @@ function addAvailability(serviceId) {
             })
         document.getElementById("formdate" + serviceId).style.display = "none";
     })
+}
 
+function removeAvailability(serviceId) {
+    document.getElementById("removeDatecontainer" + serviceId).style.display = "block";
+}
+
+function removeDate(serviceId, newDate) {
+    // logica per la rimozione della disponibilità del servizio
+    //debugger;
+    fetch('/db/element?id=' + serviceId + '&collection=services', {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(data => {
+            data = data.result;
+            let date = data.availability;
+            date.splice(newDate, 1);
+            let obj = {
+                collection: 'services',
+                elem: {
+                    "_id": JSON.stringify(serviceId),
+                    "name": data.name,
+                    "description": data.description,
+                    "price": data.price,
+                    "img": data.img,
+                    "availability": date
+                }
+            }
+            fetch('/db/element', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(obj)
+                })
+                .then(() => {
+                    location.reload();
+                })
+        })
 }
 
 function saveDate(serviceId) {

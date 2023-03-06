@@ -5,7 +5,6 @@ fetch('/db/collection?collection=communityFeed', {
     .then(response => response.json())
     .then(messages => {
         messages = messages.result;
-        var res = [];
         // Iterazione attraverso tutti i messaggi
         for (var i = 0; i < messages.length; i++) {
             var message = messages[i];
@@ -24,7 +23,7 @@ fetch('/db/collection?collection=communityFeed', {
           </div>
           <div class="card-footer">
             <button class="btn btn-warning" onclick="editMessage(` + message._id + `)">Edit</button>
-            <button class="btn btn-danger" onclick="deleteMessage(` + message._id + `)">Remove</button>
+            <button class="btn btn-danger" onclick="removeMessage(` + message._id + `)">Remove</button>
             <button class="btn btn-danger" onclick="deleteImage(` + message._id + `)">Remove Image</button>
           </div>
           <div class="container" id="formcontainer` + message._id + `" style="display:none">
@@ -39,8 +38,12 @@ fetch('/db/collection?collection=communityFeed', {
         <div class="container mt-5" id="responseContainer"></div>
         </div>
       `;
-            response.forEach((element, j) => {
-                res[j] = `
+
+            // Aggiunta della card al container
+            $("#messageContainer").append(card);
+            for (var j = 0; j < response.length; j++) {
+                var element = response[j];
+                var res = `
         <div class="card mb-3" id="` + element._id + `">
           <div class="card-header">
             <h5>` + element.author + `</h5>
@@ -52,9 +55,9 @@ fetch('/db/collection?collection=communityFeed', {
             <p>Date: ` + element.date + `</p>
           </div>
           <div class="card-footer">
-            <button class="btn btn-warning" onclick="editMessage(` + element._id + `)">Edit</button>
-            <button class="btn btn-danger" onclick="deleteMessage(` + element._id + `)">Remove</button>
-            <button class="btn btn-danger" onclick="deleteImage(` + element._id + `)">Remove Image</button>
+            <button class="btn btn-warning" onclick="editAnswer(` + element._id + `, ` + message._id + `,` + j + `)">Edit</button>
+            <button class="btn btn-danger" onclick="removeAnswer(` + message._id + `,` + j + `)">Remove</button>
+            <button class="btn btn-danger" onclick="deleteAnswerImage(` + message._id + `,` + j + `)">Remove Image</button>
           </div>
           <div class="container mt-5" id="responseContainer"></div>
           <div class="container" id="formcontainer` + element._id + `" style="display:none">
@@ -69,13 +72,9 @@ fetch('/db/collection?collection=communityFeed', {
         </div>
         </div>
       `;
-            });
-            // Aggiunta della card al container
-            $("#messageContainer").append(card);
-            for (var i = 0; i < res.length; i++) {
-                //aggiunta delle risposte alla card
-                $("#responseContainer").append(res[i]);
-            }
+
+                $("#responseContainer").append(res);
+            };
         }
     });
 
@@ -86,17 +85,17 @@ function deleteImage(messageId) {
         .then(response => response.json())
         .then(data => {
             data = data.result;
-            let date = data.availability;
-            date.push(newDate);
+            //let date = data.availability;
+            //date.push(newDate);
             let obj = {
                 collection: 'communityFeed',
                 elem: {
                     "_id": JSON.stringify(data._id),
-                    "author": JSON.stringify(data.author),
-                    "title": JSON.stringify(data.title),
-                    "description": JSON.stringify(message),
+                    "author": data.author,
+                    "title": data.title,
+                    "description": data.description,
                     "file": "",
-                    "date": JSON.stringify(data.date),
+                    "date": data.date,
                     "answers": data.answers
                 }
             }
@@ -127,8 +126,9 @@ function editMessage(messageId) {
             .then(response => response.json())
             .then(data => {
                 data = data.result;
-                let date = data.availability;
-                date.push(newDate);
+                console.log(data);
+                //let date = data.availability;
+                //date.push(newDate);
                 let obj = {
                     collection: 'communityFeed',
                     elem: {
@@ -174,5 +174,128 @@ function removeMessage(messageId) {
         })
         .then(() => {
             location.reload();
+        })
+}
+
+//////answers
+function deleteAnswerImage(messageId, answerPos) {
+    fetch('/db/element?id=' + messageId + '&collection=communityFeed', {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(data => {
+            data = data.result;
+            let answer = data.answers;
+            var mes = answer[answerPos];
+            answer.splice(answerPos, 1);
+            mes.file = "";
+            answer.push(mes)
+            let obj = {
+                collection: 'communityFeed',
+                elem: {
+                    "_id": JSON.stringify(messageId),
+                    "author": data.author,
+                    "title": data.title,
+                    "description": data.description,
+                    "file": data.img,
+                    "date": data.date,
+                    "answers": answer
+                }
+            }
+            fetch('/db/element', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(obj)
+                })
+                .then(() => {
+                    location.reload();
+                })
+        })
+}
+
+function editAnswer(answerId, messageId, answerPos) {
+    // logica per la modifica delle informazioni del cliente
+    document.getElementById("formcontainer" + answerId).style.display = "block";
+    //document.getElementById(jsonDataid).style.display = "none";
+    document.getElementById("saveEdit" + answerId).addEventListener("click", e => {
+        e.preventDefault();
+        const message = document.getElementById("newMessage" + answerId).value;
+        fetch('/db/element?id=' + messageId + '&collection=communityFeed', {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                data = data.result;
+                let answer = data.answers;
+                var mes = answer[answerPos];
+                answer.splice(answerPos, 1);
+                mes.description = document.getElementById("newMessage" + answerId).value;
+                answer.push(mes)
+                let obj = {
+                    collection: 'communityFeed',
+                    elem: {
+                        "_id": JSON.stringify(messageId),
+                        "author": data.author,
+                        "title": data.title,
+                        "description": data.description,
+                        "file": data.img,
+                        "date": data.date,
+                        "answers": answer
+                    }
+                }
+                fetch('/db/element', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(obj)
+                    })
+                    .then(() => {
+                        location.reload();
+                    })
+            })
+        document.getElementById("formcontainer" + answerId).style.display = "none";
+        //document.getElementById(jsonDataid).style.display = "block";
+    });
+}
+
+function removeAnswer(messageId, answerPos) {
+    // logica per la rimozione del messaggio
+    fetch('/db/element?id=' + messageId + '&collection=communityFeed', {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(data => {
+            data = data.result;
+            let answer = data.answers;
+            var mes = answer[answerPos];
+            answer.splice(answerPos, 1);
+            let obj = {
+                collection: 'communityFeed',
+                elem: {
+                    "_id": JSON.stringify(messageId),
+                    "author": data.author,
+                    "title": data.title,
+                    "description": data.description,
+                    "file": data.img,
+                    "date": data.date,
+                    "answers": answer
+                }
+            }
+            fetch('/db/element', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(obj)
+                })
+                .then(() => {
+                    location.reload();
+                })
         })
 }
