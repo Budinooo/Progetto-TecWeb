@@ -18,9 +18,9 @@ function clearInputElement(inputElement) {
 ////////
 function login(username, password) {
     // caricamento del file JSON degli utenti
-    fetch('/db/collection?collection=users',{
-        method:'GET'
-    })
+    fetch('/db/collection?collection=users', {
+            method: 'GET'
+        })
         .then(response => response.json())
         .then(data => {
             // ricerca dell'utente nel file JSON
@@ -39,9 +39,9 @@ function login(username, password) {
 
 function registrazione(name, username, email, password) {
     // caricamento del file JSON degli utenti
-    fetch('/db/collection?collection=users',{
-        method:'GET'
-    })
+    fetch('/db/collection?collection=users', {
+            method: 'GET'
+        })
         .then(response => response.json())
         .then(data => {
             data = data.result;
@@ -84,7 +84,7 @@ function registrazione(name, username, email, password) {
                         fetch('/db/element', options)
                             .then(() => {
                                 console.log("Utente registrato con successo.");
-                                window.location.replace('/backoffice');
+                                window.location.replace('/login');
                                 fetch('/db/collection?collection=users', {
                                         method: 'GET'
                                     }).then(response => response.json())

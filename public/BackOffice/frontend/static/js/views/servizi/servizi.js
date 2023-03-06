@@ -23,34 +23,38 @@ fetch('/db/collection?collection=services', {
             <form class="form form--hidden" id="addDateForm">
             <div class="form-group">
                 <label for="scoreInput">New Date</label>
-                <input type="date" class="form-control" id="dateService${service._id}">
+                <input type="date" class="form-control" id="newDateService${service._id}">
             </div>
-            <button type="submit" class="btn btn-primary" id="saveService" onclick="saveDate(${service._id})">Save</button>
+            <button type="submit" class="btn btn-primary" id="saveDateService${service._id}">Save</button>
         </form>
             </div>
-            <div class="container" id="formcontainer` + service._id + `" style="display:none">
+            <div class="container" id="formEditcontainer` + service._id + `" style="display:none">
             <form class="form form--hidden" id="editServiceForm">
                 <div class="form-group">
                     <label for="scoreInput">Name</label>
-                    <input type="text" class="form-control" id="nameService` + service._id + `" value="` + service.name + `">
+                    <input type="text" class="form-control" id="nameEditService` + service._id + `" value="` + service.name + `">
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Description</label>
-                    <input type="text" class="form-control" id="descriptionService` + service._id + `" value="` + service.description + `">
+                    <input type="text" class="form-control" id="descriptionEditService` + service._id + `" value="` + service.description + `">
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Place</label>
-                    <input type="text" class="form-control" id="placeService` + service._id + `" value="` + service.price + `">
+                    <input type="text" class="form-control" id="placeEditService` + service._id + `" value="` + service.place + `">
                 </div>
                 <div class="form-group">
-                    <label for="scoreInput">Availability</label>
-                    <input type="date" class="form-control" id="dateService` + service._id + `" value="` + service.availability + `">
+                    <label for="scoreInput">Price</label>
+                    <input type="text" class="form-control" id="priceEditService` + service._id + `" value="` + service.price + `">
                 </div>
                 <div class="form-group">
-                    <label for="scoreInput">Availability</label>
-                    <input type="date" class="form-control" id="imageService` + service._id + `" value="` + service.img + `">
+                    <label for="scoreInput">Date</label>
+                    <input type="text" class="form-control" id="dateEditService` + service._id + `" value="` + service.availability + `">
                 </div>
-                <button type="submit" class="btn btn-primary" id="saveService` + service._id + `">Save</button>
+                <div class="form-group">
+                    <label for="scoreInput">Image</label>
+                    <input type="text" class="form-control" id="imageEditService` + service._id + `" value="` + service.img + `">
+                </div>
+                <button type="submit" class="btn btn-primary" id="saveEditService` + service._id + `">Save</button>
             </form>
         </div>
         </div>
@@ -83,22 +87,25 @@ function bookService(serviceId) {
 */
 function editService(serviceId) {
     // logica per la modifica del servizio
-    document.getElementById("formcontainer" + serviceId).style.display = "block";
-    document.querySelector('#saveService' + serviceId).addEventListener("click", e => {
-        const id = serviceId;
-        const name = document.querySelector('#nameService' + serviceId).value;
-        const description = document.querySelector('#descriptionService' + serviceId).value;
-        const place = document.querySelector('#placeService' + serviceId).value;
-        const date = document.querySelector('#dateService' + serviceId).value;
-        const img = document.querySelector('#imageService' + serviceId).value;
+    document.getElementById("formEditcontainer" + serviceId).style.display = "block";
+    document.getElementById('saveEditService' + serviceId).addEventListener("click", e => {
+        e.preventDefault();
+        const id = JSON.stringify(serviceId);
+        const name = document.getElementById("nameEditService" + serviceId).value;
+        const description = document.getElementById("descriptionEditService" + serviceId).value;
+        const place = document.getElementById("placeEditService" + serviceId).value;
+        const price = document.getElementById("priceEditService" + serviceId).value;
+        const date = document.getElementById("dateEditService" + serviceId).value;
+        const img = document.getElementById("imageEditService" + serviceId).value;
         let obj = {
             collection: 'services',
             elem: {
-                "_id": JSON.stringify(id),
-                "name": JSON.stringify(name),
-                "description": JSON.stringify(description),
-                "place": JSON.stringify(place),
-                "date": date,
+                "_id": id,
+                "name": name,
+                "description": description,
+                "price": price,
+                "place": place,
+                "availability": date,
                 "img": img
             }
         }
@@ -120,6 +127,44 @@ function editService(serviceId) {
 function addAvailability(serviceId) {
     // logica per la visualizzazione della disponibilità del servizio
     document.getElementById("formdate" + serviceId).style.display = "block";
+    document.getElementById("saveDateService" + serviceId).addEventListener("click", e => {
+        e.preventDefault();
+        let newDate = document.getElementById("newDateService" + serviceId).value;
+        //debugger;
+        fetch('/db/element?id=' + serviceId + '&collection=services', {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                data = data.result;
+                let date = data.availability;
+                date.push(newDate);
+                let obj = {
+                    collection: 'services',
+                    elem: {
+                        "_id": JSON.stringify(serviceId),
+                        "name": data.name,
+                        "description": data.description,
+                        "price": data.price,
+                        "img": data.img,
+                        "availability": date
+                    }
+                }
+                fetch('/db/element', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(obj)
+                    })
+                    .then(() => {
+                        location.reload();
+                    })
+            })
+        document.getElementById("formdate" + serviceId).style.display = "none";
+    })
+
 }
 
 function saveDate(serviceId) {

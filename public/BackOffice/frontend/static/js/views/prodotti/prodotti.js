@@ -20,7 +20,7 @@ fetch('/db/collection?collection=products', {
             </div>
           </div>
           <div class="container" id="formcontainer${prodotto._id}" style="display:none">
-            <form class="form form--hidden" id="addProductForm">
+            <form class="form form--hidden" id="editProductForm${prodotto._id}">
                 <div class="form-group">
                     <label for="nameInput">Name</label>
                     <input type="text" class="form-control" id="nameEditInput${prodotto._id}" value="${prodotto.name}">
@@ -37,7 +37,7 @@ fetch('/db/collection?collection=products', {
                     <label for="scoreInput">Image url</label>
                     <input type="text" class="form-control" id="imageEditInput${prodotto._id}" value="${prodotto.img}">
                 </div>
-                <button type="submit" class="btn btn-primary" id="saveEditProduct${prodotto._id}" onclick="saveEdit(${prodotto._id})">Save</button>
+                <button type="submit" class="btn btn-primary" id="saveEditProduct${prodotto._id}">Save</button>
             </form>
         </div>
         </div>
@@ -110,24 +110,28 @@ function removeElement(jsonDataid) {
 
 function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
-    document.getElementById("formcontainer" + jsonDataid).style.display = "block";
-    /*
-    document.querySelector("form").addEventListener("submit", function(event) {
-        fetch('/db/collection?collection=products', {
+    productId = JSON.stringify(jsonDataid);
+    console.log(productId);
+    document.getElementById("formcontainer" + productId).style.display = "block";
+    document.getElementById("saveEditProduct" + productId).addEventListener("click", e => {
+        e.preventDefault();
+        fetch('/db/element?id=' + jsonDataid + '&collection=products', {
                 method: 'GET'
-            }).then(response => response.json())
+            })
+            .then(response => response.json())
             .then(data => {
                 data = data.result;
+                console.log(data._id);
                 let obj = {
                     collection: 'products',
                     elem: {
-                        "_id": JSON.stringify(jsonDataid),
+                        "_id": productId,
                         "name": document.getElementById("nameEditInput" + jsonDataid).value,
-                        "description": document.getElementById("descriptionEditInput" + jsonDataid).value,
-                        "price": document.getElementById("priceEditInput" + jsonDataid).value,
-                        "image": document.getElementById("imageEditInput" + jsonDataid).value,
+                        "img": document.getElementById("imageEditInput" + jsonDataid).value,
                         "tag": data.tag,
-                        "animal": data.animal
+                        "animal": data.animal,
+                        "price": document.getElementById("priceEditInput" + jsonDataid).value,
+                        "description": document.getElementById("descriptionEditInput" + jsonDataid).value
                     }
                 }
                 fetch('/db/element', {
@@ -142,15 +146,15 @@ function editClient(jsonDataid) {
                         location.reload();
                     })
             })
-
-    });
-    */
+    })
 }
-
+/*
 function saveEdit(jsonDataid) {
-    fetch('/db/collection?collection=products', {
+    console.log(jsonDataid);
+    fetch('/db/element?id=' + jsonDataid + '&collection=products', {
             method: 'GET'
-        }).then(response => response.json())
+        })
+        .then(response => response.json())
         .then(data => {
             data = data.result;
             let obj = {
@@ -178,3 +182,4 @@ function saveEdit(jsonDataid) {
                 })
         })
 }
+*/
