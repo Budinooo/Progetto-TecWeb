@@ -1,28 +1,36 @@
 import {React, useEffect, useState} from "react";
-import {Types} from 'mongoose';
 import "./profile.css";
 
 export default function Profile() {
     const [profileInfo, setProfileInfo] = useState();
     const [bookings, setBookings] = useState();
+    const [firstTime, setFirstTime] = useState(true);
     
     useEffect(() => {
-        setProfileInfo(null);
-        let userId = JSON.parse(localStorage.getItem("login")).id;
         //Get profileInfo
-        fetch(`http://localhost:8000/db/element?id=${userId}&collection=users`)
-        .then((res)=>res.json())
-        .then((data) => setProfileInfo(data.result));
-        
+        if(firstTime) {  
+            console.log("fetching profile info");
+            let userId = JSON.parse(localStorage.getItem("login")).id;
+            fetch(`http://localhost:8000/db/element?id=${userId}&collection=users`)
+            .then((res)=>res.json())
+            .then((data) => setProfileInfo(data.result));
+            setFirstTime(false);
+        }        
+    });
+    
+    useEffect(() => 
+    {
         //Get bookings
-        fetch(`http://localhost:8000/db/getUserBookings?id=${userId}`)
-        .then((res) => res.json())
-        .then((data) => 
-        {
-            setBookings(data);
-        });
-        
-    },[]);
+        if(!bookings && profileInfo) {
+            console.log("old bookings: " + bookings + ", fetching bookings");
+            fetch(`http://localhost:8000/db/getUserBookings?id=${profileInfo._id}`)
+            .then((res) => res.json())
+            .then((data) => 
+            {
+                setBookings(data);
+            });
+        }
+    }, [profileInfo]);
     
     const displayPets = () => 
     {
@@ -55,7 +63,14 @@ export default function Profile() {
         
     const deleteBooking = (booking) =>
     {
+        // updating state bookings
         debugger;
+        let deletedIndex = bookings.findIndex((arrBooking) => arrBooking._id == booking._id);
+        let remainingBookings = [];
+        remainingBookings = bookings;
+        remainingBookings.splice(deletedIndex, 1);
+        setBookings(remainingBookings);
+        /*
         let obj = {
             collection: "bookings",
             id: booking._id
@@ -74,6 +89,7 @@ export default function Profile() {
             let service;
             fetch(`http://localhost:8000/db/element?collection=services&id=${booking.serviceId}`, {method: "GET"}).then((res) => res.json())
             .then((data) => {
+                debugger;
                 service = {collection: "services", elem: data.result};
                 service.elem.availability.push(booking.date);
                 fetch(`http://localhost:8000/db/element`, {
@@ -83,31 +99,34 @@ export default function Profile() {
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify(service)
-            });
-        })
-    })
-}
-
-const displayBookings = () => 
-{
-    if (bookings) 
-    {
-        if(bookings.length <= 0)
-            return (
-                <div className="mt-4">
-                    <h4 className="no-pet-alert">Book a service <a href="/services">here</a></h4>
-                </div>
-            );
-        return bookings.map((booking, i) => 
-        {
-            return(
-                <div key={booking._id} className="booking-container">
-                <h4 className="booking-title">{booking.serviceName}</h4>
-                <p className="booking-date">{booking.date}</p>
-                <button className="btn-booking-del" onClick={(e) => deleteBooking(booking)}>Cancel</button>
-                </div>
-                )
+                });
             })
+        })*/
+    }
+
+    const displayBookings = () => 
+    {
+        debugger;
+        if (bookings) 
+        {
+            if(bookings.length <= 0)
+                return (
+                    <div className="mt-4">
+                        <h4 className="no-pet-alert">Book a service <a href="/services">here</a></h4>
+                    </div>
+                );
+            else {
+                return bookings.map((booking) => 
+                {
+                    return(
+                        <div key={booking._id} className="booking-container">
+                        <h4 className="booking-title">{booking.serviceName}</h4>
+                        <p className="booking-date">{booking.date}</p>
+                        <button className="btn-booking-del" onClick={(e) => deleteBooking(booking)}>Cancel</button>
+                        </div>
+                    )
+                })
+            }
         }
         else {
             return (
@@ -117,11 +136,11 @@ const displayBookings = () =>
     }
     
     if(profileInfo == null)
-    return (
-        <div>
-        </div>
+        return (
+            <div>
+            </div>
         )
-        else 
+    else 
         return (
             <div className="profile-container">
                 <div id="profile-header">
@@ -138,5 +157,5 @@ const displayBookings = () =>
                     </div>
                 </div>
             </div>
-            )
-        }
+        )
+}

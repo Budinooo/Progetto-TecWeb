@@ -502,7 +502,7 @@ fetch('/db/element',{
 app.delete('/db/element', async function(req, res) {
     console.log("ID DA TROVARE: " + req.body.id);
     let tmpobj = [];
-    //castedId = ObjectID(req.body.id);
+    castedId = ObjectID(req.body.id);
     let tmp = await mymongo.getCollection(req.body.collection, mongoCredentials);    
     tmpobj = tmp.result;
     let tmpids = [];
@@ -511,7 +511,7 @@ app.delete('/db/element', async function(req, res) {
         tmpids.push(ObjectID(obj._id)); 
     });
     console.log("ID TOTALI: " + tmpids);
-    if(tmpids.includes(req.body.id))
+    if(tmpids.includes(castedId))
         console.log("TROVATO");
     else
         console.log("NON TROVATO");
