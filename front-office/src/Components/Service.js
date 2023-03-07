@@ -64,7 +64,7 @@ class Service extends React.Component {
       })})
       .then((res)=>{
         fetch(`http://localhost:8000/db/element?id=${this.state.service._id}&collection=services`, {method: "GET"})
-        .then((res) => res.json).then((data) => {debugger; this.setState({service:(data.result)})});
+        .then((res) => res.json).then((data) => this.setState({service:(data.result)}));
       });
   }
   

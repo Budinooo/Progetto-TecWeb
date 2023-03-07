@@ -21,6 +21,7 @@ export default function Profile() {
     useEffect(() => 
     {
         //Get bookings
+        debugger;
         if(!bookings && profileInfo) {
             console.log("old bookings: " + bookings + ", fetching bookings");
             fetch(`http://localhost:8000/db/getUserBookings?id=${profileInfo._id}`)
@@ -30,7 +31,7 @@ export default function Profile() {
                 setBookings(data);
             });
         }
-    }, [profileInfo]);
+    }, [profileInfo, bookings]);
     
     const displayPets = () => 
     {
@@ -61,16 +62,14 @@ export default function Profile() {
         }
     }
         
-    const deleteBooking = (booking) =>
+    const deleteBooking = (e) => (booking) =>
     {
         // updating state bookings
-        debugger;
         let deletedIndex = bookings.findIndex((arrBooking) => arrBooking._id == booking._id);
         let remainingBookings = [];
         remainingBookings = bookings;
         remainingBookings.splice(deletedIndex, 1);
-        setBookings(remainingBookings);
-        /*
+        setBookings(null);
         let obj = {
             collection: "bookings",
             id: booking._id
@@ -89,7 +88,6 @@ export default function Profile() {
             let service;
             fetch(`http://localhost:8000/db/element?collection=services&id=${booking.serviceId}`, {method: "GET"}).then((res) => res.json())
             .then((data) => {
-                debugger;
                 service = {collection: "services", elem: data.result};
                 service.elem.availability.push(booking.date);
                 fetch(`http://localhost:8000/db/element`, {
@@ -101,12 +99,11 @@ export default function Profile() {
                 body: JSON.stringify(service)
                 });
             })
-        })*/
+        })
     }
 
     const displayBookings = () => 
     {
-        debugger;
         if (bookings) 
         {
             if(bookings.length <= 0)
@@ -122,7 +119,7 @@ export default function Profile() {
                         <div key={booking._id} className="booking-container">
                         <h4 className="booking-title">{booking.serviceName}</h4>
                         <p className="booking-date">{booking.date}</p>
-                        <button className="btn-booking-del" onClick={(e) => deleteBooking(booking)}>Cancel</button>
+                        <button className="btn-booking-del" onClick={(e) => deleteBooking(e)(booking)}>Cancel</button>
                         </div>
                     )
                 })
