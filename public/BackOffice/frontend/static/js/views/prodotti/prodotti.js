@@ -68,7 +68,11 @@ fetch('/db/collection?collection=products', {
 $("#addBtn").click(function() {
     // logica per l'aggiunta di un nuovo prodotto
     // legge il contenuto del file JSON
-    document.getElementById("formcontainer").style.display = "block";
+    if (document.getElementById("formcontainer").style.display == "none") {
+        document.getElementById("formcontainer").style.display = "block";
+    } else if (document.getElementById("formcontainer").style.display == "block") {
+        document.getElementById("formcontainer").style.display = "none";
+    }
     document.getElementById("saveClient").addEventListener("click", function(event) {
         event.preventDefault();
         const name = document.getElementById("nameInput" + jsonDataid).value;
@@ -137,8 +141,11 @@ function removeElement(jsonDataid) {
 function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
     productId = JSON.stringify(jsonDataid);
-    console.log(productId);
-    document.getElementById("formcontainer" + productId).style.display = "block";
+    if (document.getElementById("formcontainer" + productId).style.display == "none") {
+        document.getElementById("formcontainer" + productId).style.display = "block";
+    } else if (document.getElementById("formcontainer" + productId).style.display == "block") {
+        document.getElementById("formcontainer" + productId).style.display = "none";
+    }
     document.getElementById("saveEditProduct" + productId).addEventListener("click", e => {
         e.preventDefault();
         const name = document.getElementById("nameEditInput" + jsonDataid).value;

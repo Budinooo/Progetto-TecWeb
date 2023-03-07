@@ -69,7 +69,7 @@ fetch('/db/collection?collection=services', {
 
       `;
             for (var j = 0; j < data.length; j++) {
-                let date = data[j]
+                let date = data[j];
                 dateHtml[i] += `
                 <button class="btn btn-danger" id="date${service._id}" style="margin-top: 5px" onclick="removeDate(${service._id},` + j + `)">` + date + `</button>
                 `;
@@ -105,7 +105,11 @@ function bookService(serviceId) {
 */
 function editService(serviceId) {
     // logica per la modifica del servizio
-    document.getElementById("formEditcontainer" + serviceId).style.display = "block";
+    if (document.getElementById("formEditcontainer" + serviceId).style.display == "none") {
+        document.getElementById("formEditcontainer" + serviceId).style.display = "block";
+    } else if (document.getElementById("formEditcontainer" + serviceId).style.display == "block") {
+        document.getElementById("formEditcontainer" + serviceId).style.display = "none";
+    }
     document.getElementById('saveEditService' + serviceId).addEventListener("click", e => {
         e.preventDefault();
         const id = JSON.stringify(serviceId);
@@ -146,7 +150,11 @@ function editService(serviceId) {
 
 function addAvailability(serviceId) {
     // logica per la visualizzazione della disponibilità del servizio
-    document.getElementById("formdate" + serviceId).style.display = "block";
+    if (document.getElementById("formdate" + serviceId).style.display == "none") {
+        document.getElementById("formdate" + serviceId).style.display = "block";
+    } else if (document.getElementById("formdate" + serviceId).style.display == "block") {
+        document.getElementById("formdate" + serviceId).style.display = "none";
+    }
     document.getElementById("saveDateService" + serviceId).addEventListener("click", e => {
         e.preventDefault();
         let newDate = document.getElementById("newDateService" + serviceId).value;

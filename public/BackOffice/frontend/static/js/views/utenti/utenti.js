@@ -5,7 +5,10 @@ fetch('/db/collection?collection=users', {
     .then(clients => {
         clients = clients.result;
         let clientsHtml = '';
-        clients.forEach(client => {
+        let adminHtml = [];
+        for (var i = 0; i < clients.length; i++) {
+            let client = clients[i];
+            adminHtml[i] = '';
             clientsHtml += `
         <div class="col-sm-4">
           <div class="card" style=margin-top:5px>
@@ -53,8 +56,23 @@ fetch('/db/collection?collection=users', {
             </div>
         </div>
       `;
-        });
+            if (client.admin == false) {
+                adminHtml[i] += `
+        <option value=0>Not Admin</option>
+        <option value=1>Admin</option>
+                `;
+            } else {
+                adminHtml[i] += `
+        <option value=1>Admin</option>
+        <option value=0>Not Admin</option>
+                `;
+            }
+        };
         document.getElementById('clients').innerHTML = clientsHtml;
+        for (var i = 0; i < clients.length; i++) {
+            let client = clients[i];
+            document.getElementById('adminEditInput' + client._id).innerHTML = adminHtml[i];
+        }
     });
 
 
@@ -62,7 +80,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const addForm = document.querySelector('#addClientForm');
     document.querySelector('#addClientButton').addEventListener("click", e => {
         e.preventDefault();
-        document.getElementById("formcontainer").style.display = "block";
+        if (document.getElementById("formcontainer").style.display == "none") {
+            document.getElementById("formcontainer").style.display = "block";
+        } else if (document.getElementById("formcontainer").style.display == "block") {
+            document.getElementById("formcontainer").style.display = "none";
+        }
     });
     document.querySelector('#saveClient').addEventListener("click", e => {
         e.preventDefault();
@@ -120,7 +142,11 @@ function addClient(name, username, email, password, admin, score) {
 
 function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
-    document.getElementById("formeditcontainer" + jsonDataid).style.display = "block";
+    if (document.getElementById("formeditcontainer" + jsonDataid).style.display == "none") {
+        document.getElementById("formeditcontainer" + jsonDataid).style.display = "block";
+    } else if (document.getElementById("formeditcontainer" + jsonDataid).style.display == "block") {
+        document.getElementById("formeditcontainer" + jsonDataid).style.display = "none";
+    }
     document.querySelector('#editSaveClient' + jsonDataid).addEventListener("click", e => {
         e.preventDefault();
         fetch('/db/element?id=' + jsonDataid + '&collection=users', {

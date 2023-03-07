@@ -115,8 +115,11 @@ function deleteImage(messageId) {
 
 function editMessage(messageId) {
     // logica per la modifica delle informazioni del cliente
-    document.getElementById("formcontainer" + messageId).style.display = "block";
-    //document.getElementById(jsonDataid).style.display = "none";
+    if (document.getElementById("formcontainer" + messageId).style.display == "none") {
+        document.getElementById("formcontainer" + messageId).style.display = "block";
+    } else if (document.getElementById("formcontainer" + messageId).style.display == "block") {
+        document.getElementById("formcontainer" + messageId).style.display = "none";
+    }
     document.getElementById("saveEdit" + messageId).addEventListener("click", e => {
         e.preventDefault();
         const message = document.getElementById("newMessage" + messageId).value;
@@ -154,7 +157,6 @@ function editMessage(messageId) {
                     })
             })
         document.getElementById("formcontainer" + messageId).style.display = "none";
-        //document.getElementById(jsonDataid).style.display = "block";
     });
 }
 
@@ -218,7 +220,11 @@ function deleteAnswerImage(messageId, answerPos) {
 
 function editAnswer(answerId, messageId, answerPos) {
     // logica per la modifica delle informazioni del cliente
-    document.getElementById("formcontainer" + answerId).style.display = "block";
+    if (document.getElementById("formcontainer" + answerId).style.display == "none") {
+        document.getElementById("formcontainer" + answerId).style.display = "block";
+    } else if (document.getElementById("formcontainer" + answerId).style.display == "block") {
+        document.getElementById("formcontainer" + answerId).style.display = "none";
+    }
     //document.getElementById(jsonDataid).style.display = "none";
     document.getElementById("saveEdit" + answerId).addEventListener("click", e => {
         e.preventDefault();
