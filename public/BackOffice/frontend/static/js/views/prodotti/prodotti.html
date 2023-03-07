@@ -7,6 +7,7 @@
     <title>Product Management</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../css/index.css">
+    <link rel="icon" href="../../../../../dog-house.png" />
 </head>
 
 <body>
@@ -22,6 +23,9 @@
     <div id="app">
         <h1 class="title" style="text-align:center; margin-bottom:50px">Products</h1>
         <div id="container" style="margin-bottom:50px">
+            <div class="buttonGroup text-center" id="buttonGroup">
+                <button class="btn btn-warning" id="addBtn">Add product</button>
+            </div>
             <div class="row" id="productCards" style="max-width: 100%"></div>
             <div class="container" id="formcontainer" style="display:none">
                 <form class="form form--hidden" id="addProductForm">
@@ -61,9 +65,6 @@
                     </div>
                     <button type="submit" class="btn btn-primary" id="saveClient">Save</button>
                 </form>
-            </div>
-            <div class="buttonGroup text-center" id="buttonGroup">
-                <button class="btn btn-warning" id="addBtn">Add product</button>
             </div>
         </div>
 </body>

@@ -8,7 +8,7 @@ fetch('/db/collection?collection=products', {
         prodotti.forEach(prodotto => {
             prodottiHtml += `
         <div class="col-sm-4">
-          <div class="card">
+          <div class="card" style="margin-top:5px">
           <img class="card-img-top" src="${prodotto.img}" alt="${prodotto.name}" style="width: 18rem;">
             <div class="card-body" id="${prodotto._id}">
               <h5 class="card-title">${prodotto.name}</h5>
@@ -71,38 +71,46 @@ $("#addBtn").click(function() {
     document.getElementById("formcontainer").style.display = "block";
     document.getElementById("saveClient").addEventListener("click", function(event) {
         event.preventDefault();
-        document.getElementById("formcontainer").style.display = "none";
-        fetch('/db/collectionsize?collection=products', {
-                method: 'GET'
-            })
-            .then(response => response.json())
-            .then(prodotti => {
-                let obj = {
-                    collection: 'products',
-                    elem: {
-                        "_id": JSON.stringify(prodotti.result),
-                        "name": document.getElementById("nameInput").value,
-                        "description": document.getElementById("descriptionInput").value,
-                        "price": document.getElementById("priceInput").value,
-                        "img": document.getElementById("imageInput").value,
-                        "tag": document.getElementById("tagInput").value,
-                        "animal": document.getElementById("animalInput").value
-                    }
+        const name = document.getElementById("nameInput" + jsonDataid).value;
+        const img = document.getElementById("imageInput" + jsonDataid).value;
+        const tag = document.getElementById("tagInput" + jsonDataid).value;
+        const animal = document.getElementById("animalInput" + jsonDataid).value;
+        const price = document.getElementById("priceInput" + jsonDataid).value;
+        const description = document.getElementById("descriptionInput" + jsonDataid).value;
+        if (name != "" && img != "" && tag != "" && animal != "" && price != "" && description != "") {
+            document.getElementById("formcontainer").style.display = "none";
+            fetch('/db/collectionsize?collection=products', {
+                    method: 'GET'
+                })
+                .then(response => response.json())
+                .then(prodotti => {
+                    let obj = {
+                        collection: 'products',
+                        elem: {
+                            "_id": JSON.stringify(prodotti.result),
+                            "name": document.getElementById("nameInput").value,
+                            "description": document.getElementById("descriptionInput").value,
+                            "price": document.getElementById("priceInput").value,
+                            "img": document.getElementById("imageInput").value,
+                            "tag": document.getElementById("tagInput").value,
+                            "animal": document.getElementById("animalInput").value
+                        }
 
-                };
+                    };
 
-                fetch('/db/element', {
-                        method: 'POST',
-                        headers: {
-                            'Content-type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify(obj)
-                    })
-                    .then(() => {
-                        location.reload();
-                    })
-            });
+                    fetch('/db/element', {
+                            method: 'POST',
+                            headers: {
+                                'Content-type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify(obj)
+                        })
+                        .then(() => {
+                            location.reload();
+                        })
+                });
+        }
     });
 });
 
@@ -133,37 +141,45 @@ function editClient(jsonDataid) {
     document.getElementById("formcontainer" + productId).style.display = "block";
     document.getElementById("saveEditProduct" + productId).addEventListener("click", e => {
         e.preventDefault();
-        fetch('/db/element?id=' + jsonDataid + '&collection=products', {
-                method: 'GET'
-            })
-            .then(response => response.json())
-            .then(data => {
-                data = data.result;
-                console.log(data._id);
-                let obj = {
-                    collection: 'products',
-                    elem: {
-                        "_id": productId,
-                        "name": document.getElementById("nameEditInput" + jsonDataid).value,
-                        "img": document.getElementById("imageEditInput" + jsonDataid).value,
-                        "tag": document.getElementById("tagEditInput" + jsonDataid).value,
-                        "animal": document.getElementById("animalEditInput" + jsonDataid).value,
-                        "price": document.getElementById("priceEditInput" + jsonDataid).value,
-                        "description": document.getElementById("descriptionEditInput" + jsonDataid).value
+        const name = document.getElementById("nameEditInput" + jsonDataid).value;
+        const img = document.getElementById("imageEditInput" + jsonDataid).value;
+        const tag = document.getElementById("tagEditInput" + jsonDataid).value;
+        const animal = document.getElementById("animalEditInput" + jsonDataid).value;
+        const price = document.getElementById("priceEditInput" + jsonDataid).value;
+        const description = document.getElementById("descriptionEditInput" + jsonDataid).value;
+        if (name != "" && img != "" && tag != "" && animal != "" && price != "" && description != "") {
+            fetch('/db/element?id=' + jsonDataid + '&collection=products', {
+                    method: 'GET'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    data = data.result;
+                    console.log(data._id);
+                    let obj = {
+                        collection: 'products',
+                        elem: {
+                            "_id": productId,
+                            "name": document.getElementById("nameEditInput" + jsonDataid).value,
+                            "img": document.getElementById("imageEditInput" + jsonDataid).value,
+                            "tag": document.getElementById("tagEditInput" + jsonDataid).value,
+                            "animal": document.getElementById("animalEditInput" + jsonDataid).value,
+                            "price": document.getElementById("priceEditInput" + jsonDataid).value,
+                            "description": document.getElementById("descriptionEditInput" + jsonDataid).value
+                        }
                     }
-                }
-                fetch('/db/element', {
-                        method: 'PUT',
-                        headers: {
-                            'Content-type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify(obj)
-                    })
-                    .then(() => {
-                        location.reload();
-                    })
-            })
+                    fetch('/db/element', {
+                            method: 'PUT',
+                            headers: {
+                                'Content-type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify(obj)
+                        })
+                        .then(() => {
+                            location.reload();
+                        })
+                })
+        }
     })
 }
 /*

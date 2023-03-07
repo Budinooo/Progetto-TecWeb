@@ -6,8 +6,10 @@ fetch('/db/collection?collection=services', {
         services = services.result;
         let servicesHtml = '';
         var data = [];
-        let dateHtml = '';
-        services.forEach(service => {
+        let dateHtml = [];
+        for (var i = 0; i < services.length; i++) {
+            var service = services[i];
+            dateHtml[i] = '';
             data = service.availability;
             servicesHtml += `
         <div class="container">
@@ -32,7 +34,7 @@ fetch('/db/collection?collection=services', {
         </form>
             </div>
             <div class="container" id="removeDatecontainer${service._id}" style="display: none">
-                <div id="availableDate" style="margin-left:50px; margin-bottom:50px" style="max-width: 100%"></div>
+                <div class="container" id="availableDate${service._id}" style="margin-left:50px; margin-bottom:50px" style="max-width: 100%"></div>
             </div>
             <div class="container" id="formEditcontainer` + service._id + `" style="display:none">
             <form class="form form--hidden" id="editServiceForm">
@@ -66,16 +68,18 @@ fetch('/db/collection?collection=services', {
         </div>
 
       `;
-
             for (var j = 0; j < data.length; j++) {
                 let date = data[j]
-                dateHtml += `
-                <button class="btn btn-danger" id="date-${service._id}" style="margin-top: 5px" onclick="removeDate(${service._id},` + j + `)">` + date + `</button>
+                dateHtml[i] += `
+                <button class="btn btn-danger" id="date${service._id}" style="margin-top: 5px" onclick="removeDate(${service._id},` + j + `)">` + date + `</button>
                 `;
             }
-        });
+        };
         document.getElementById('services').innerHTML = servicesHtml;
-        document.getElementById('availableDate').innerHTML = dateHtml;
+        for (var i = 0; i < services.length; i++) {
+            var service = services[i];
+            document.getElementById('availableDate' + service._id).innerHTML = dateHtml[i];
+        };
     });
 /*
 function bookService(serviceId) {
@@ -111,30 +115,32 @@ function editService(serviceId) {
         const price = document.getElementById("priceEditService" + serviceId).value;
         const date = (document.getElementById("dateEditService" + serviceId).value).split(",");
         const img = document.getElementById("imageEditService" + serviceId).value;
-        let obj = {
-            collection: 'services',
-            elem: {
-                "_id": id,
-                "name": name,
-                "description": description,
-                "price": price,
-                "place": place,
-                "availability": date,
-                "img": img
+        if (name != "" && img != "" && place != "" && price != "" && description != "") {
+            let obj = {
+                collection: 'services',
+                elem: {
+                    "_id": id,
+                    "name": name,
+                    "description": description,
+                    "price": price,
+                    "place": place,
+                    "availability": date,
+                    "img": img
+                }
             }
+            fetch('/db/element', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(obj)
+                })
+                .then(() => {
+                    location.reload();
+                })
+            document.getElementById("formEditcontainer").style.display = "none";
         }
-        fetch('/db/element', {
-                method: 'PUT',
-                headers: {
-                    'Content-type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(obj)
-            })
-            .then(() => {
-                location.reload();
-            })
-        document.getElementById("formEditcontainer").style.display = "none";
     });
 }
 
@@ -160,6 +166,7 @@ function addAvailability(serviceId) {
                         "name": data.name,
                         "description": data.description,
                         "price": data.price,
+                        "place": data.place,
                         "img": data.img,
                         "availability": date
                     }
@@ -181,7 +188,11 @@ function addAvailability(serviceId) {
 }
 
 function removeAvailability(serviceId) {
-    document.getElementById("removeDatecontainer" + serviceId).style.display = "block";
+    if (document.getElementById("removeDatecontainer" + serviceId).style.display === "none") {
+        document.getElementById("removeDatecontainer" + serviceId).style.display = "block";
+    } else if (document.getElementById("removeDatecontainer" + serviceId).style.display === "block") {
+        document.getElementById("removeDatecontainer" + serviceId).style.display = "none";
+    }
 }
 
 function removeDate(serviceId, newDate) {
@@ -202,6 +213,7 @@ function removeDate(serviceId, newDate) {
                     "name": data.name,
                     "description": data.description,
                     "price": data.price,
+                    "place": data.place,
                     "img": data.img,
                     "availability": date
                 }
@@ -222,38 +234,40 @@ function removeDate(serviceId, newDate) {
 
 function saveDate(serviceId) {
     let newDate = JSON.stringify(document.getElementById("dateService" + serviceId).value);
-    fetch('/db/element?id=' + serviceId + '&collection=services', {
-            method: 'GET'
-        })
-        .then(response => response.json())
-        .then(data => {
-            data = data.result;
-            let date = data.availability;
-            date.push(newDate);
-            let obj = {
-                collection: 'services',
-                elem: {
-                    "_id": JSOn.stringify(serviceId),
-                    "name": data.name,
-                    "description": data.description,
-                    "price": data.price,
-                    "img": data.img,
-                    "availability": date
+    if (newDate != "") {
+        fetch('/db/element?id=' + serviceId + '&collection=services', {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                data = data.result;
+                let date = data.availability;
+                date.push(newDate);
+                let obj = {
+                    collection: 'services',
+                    elem: {
+                        "_id": JSOn.stringify(serviceId),
+                        "name": data.name,
+                        "description": data.description,
+                        "price": data.price,
+                        "img": data.img,
+                        "availability": date
+                    }
                 }
-            }
-            fetch('/db/element', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(obj)
-                })
-                .then(() => {
-                    location.reload();
-                })
-        })
-    document.getElementById("formdate" + serviceId).style.display = "none";
+                fetch('/db/element', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(obj)
+                    })
+                    .then(() => {
+                        location.reload();
+                    })
+            })
+        document.getElementById("formdate" + serviceId).style.display = "none";
+    }
 }
 
 function removeService(serviceId) {

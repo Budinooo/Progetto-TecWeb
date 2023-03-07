@@ -101,6 +101,25 @@ function registrazione(name, username, email, password) {
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.querySelector('#login');
     const createAccount = document.querySelector('#createAccount');
+    let local = JSON.parse(localStorage.getItem("login"))
+    if (local.islogged) {
+        fetch('/db/element?id=' + local.id + '&collection=users', {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                data = data.result;
+                if (data.admin == 0) {
+                    setFormMessage(loginForm, "success", "You're logged in!");
+                    const longinInfo = {
+                        islogged: true,
+                        id: user._id
+                    }
+                    localStorage.setItem("login", JSON.stringify(longinInfo))
+                    window.location.replace('./frontend/index.html');
+                }
+            })
+    }
     document.querySelector('#linkCreateAccount').addEventListener("click", e => {
         e.preventDefault();
         loginForm.classList.add("form--hidden");
@@ -114,7 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     loginForm.addEventListener("submit", e => {
         e.preventDefault();
-
         //login
         var username = document.getElementById("loginUsername").value;
         var password = document.getElementById("loginPassword").value;
