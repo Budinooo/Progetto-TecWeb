@@ -68,13 +68,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const email = document.querySelector('#emailInput').value;
         const password = document.querySelector('#passwordInput').value;
         const admin = document.querySelector('#adminInput').value;
-        const score = document.querySelector('#scoreInput').value;
-        addClient(name, username, email, password, pets, admin, animals, score);
+        const score = Number(document.querySelector('#scoreInput').value);
+        addClient(name, username, email, password, admin, score);
         document.getElementById("formcontainer").style.display = "none";
     });
 });
 
-function addClient(name, username, email, password, pets, admin, animals, score) {
+function addClient(name, username, email, password, admin, score) {
     // logica per l'aggiunta di un nuovo cliente
     let size;
     fetch('/db/collectionsize?collection=products', {
@@ -93,6 +93,8 @@ function addClient(name, username, email, password, pets, admin, animals, score)
                     "username": username,
                     "email": email,
                     "password": password,
+                    "favorites": [],
+                    "pets": [],
                     "score": score,
                     "admin": admin
                 }
@@ -129,7 +131,7 @@ function editClient(jsonDataid) {
                 const email = document.querySelector('#emailEditInput' + jsonDataid).value;
                 const password = document.querySelector('#passwordEditInput' + jsonDataid).value;
                 const admin = document.querySelector('#adminEditInput' + jsonDataid).value;
-                const score = document.querySelector('#scoreEditInput' + jsonDataid).value;
+                const score = Number(document.querySelector('#scoreEditInput' + jsonDataid).value);
                 let obj = {
                     collection: 'users',
                     elem: {
