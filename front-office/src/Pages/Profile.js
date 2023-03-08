@@ -21,7 +21,6 @@ export default function Profile() {
     useEffect(() => 
     {
         //Get bookings
-        debugger;
         if(!bookings && profileInfo) {
             console.log("old bookings: " + bookings + ", fetching bookings");
             fetch(`http://localhost:8000/db/getUserBookings?id=${profileInfo._id}`)
@@ -85,7 +84,7 @@ export default function Profile() {
         }).then((res) => 
         {
             //service availability update
-            let service;
+            /*let service;
             fetch(`http://localhost:8000/db/element?collection=services&id=${booking.serviceId}`, {method: "GET"}).then((res) => res.json())
             .then((data) => {
                 service = {collection: "services", elem: data.result};
@@ -98,7 +97,7 @@ export default function Profile() {
                 },
                 body: JSON.stringify(service)
                 });
-            })
+            })*/
         })
     }
 
@@ -137,22 +136,21 @@ export default function Profile() {
             <div>
             </div>
         )
-    else 
-        return (
-            <div className="profile-container">
-                <div id="profile-header">
-                    <h1 id="username">{profileInfo.username}</h1>
-                    <h2 id="email">{profileInfo.email}</h2>
+    return (
+        <div className="profile-container">
+            <div id="profile-header">
+                <h1 id="username">{profileInfo.username}</h1>
+                <h2 id="email">{profileInfo.email}</h2>
+            </div>
+            <div className="container mt-5" id="info-container">
+                <div className="row align-items-center">
+                    {displayPets()}
                 </div>
-                <div className="container mt-5" id="info-container">
-                    <div className="row align-items-center">
-                        {displayPets()}
-                    </div>
-                    <div className="row mt-4">
-                        <h3>My Bookings:</h3>
-                        {displayBookings()}
-                    </div>
+                <div className="row mt-4">
+                    <h3>My Bookings:</h3>
+                    {displayBookings()}
                 </div>
             </div>
-        )
+        </div>
+    )
 }

@@ -509,7 +509,7 @@ app.delete('/db/element', async function(req, res) {
     tmpobj.map((obj) => 
     {
         tmpids.push(ObjectID(obj._id)); 
-    });
+    });    
     console.log("ID TOTALI: " + tmpids);
     if(tmpids.includes(castedId))
         console.log("TROVATO");
