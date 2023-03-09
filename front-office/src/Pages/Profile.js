@@ -64,11 +64,12 @@ export default function Profile() {
     const deleteBooking = (e) => (booking) =>
     {
         // updating state bookings
+        /*debugger;
         let deletedIndex = bookings.findIndex((arrBooking) => arrBooking._id == booking._id);
         let remainingBookings = [];
         remainingBookings = bookings;
-        remainingBookings.splice(deletedIndex, 1);
-        setBookings(null);
+        remainingBookings.splice(deletedIndex, 1);*/
+        
         let obj = {
             collection: "bookings",
             id: booking._id
@@ -83,6 +84,13 @@ export default function Profile() {
             body: JSON.stringify(obj)
         }).then((res) => 
         {
+            fetch(`http://localhost:8000/db/getUserBookings?id=${profileInfo._id}`)
+            .then((res) => res.json())
+            .then((data) => 
+            {
+                setBookings(data);
+                //rotella stop
+            });
             //service availability update
             /*let service;
             fetch(`http://localhost:8000/db/element?collection=services&id=${booking.serviceId}`, {method: "GET"}).then((res) => res.json())
@@ -99,6 +107,7 @@ export default function Profile() {
                 });
             })*/
         })
+        //rotella start
     }
 
     const displayBookings = () => 
