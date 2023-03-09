@@ -17,7 +17,7 @@
             <div class="title" class:mobiletitle={screenWidth<500}><div>GAMES</div> </div>
             <div class = "fun flex" class:mobfun={screenWidth<500}>
                 <a class='game flex' class:mobilefun={screenWidth<500} href="/game/quiz"><img src="images/answer.png" alt="quiz"> QUIZ </a>
-                <a class='game flex' class:mobilefun={screenWidth<500} href="/game/wordle"><img src="https://static01.nyt.com/images/2022/03/02/crosswords/alpha-wordle-icon-new/alpha-wordle-icon-new-square320-v3.png?format=pjpg&quality=75&auto=webp&disable=upscale" alt="wordle">WORDLE </a>
+                <a class='game flex' class:mobilefun={screenWidth<500} href="/game/wordle"><img src="http://static01.nyt.com/images/2022/03/02/crosswords/alpha-wordle-icon-new/alpha-wordle-icon-new-square320-v3.png?format=pjpg&quality=75&auto=webp&disable=upscale" alt="wordle">WORDLE </a>
                 <a class='game flex' class:mobilefun={screenWidth<500} href="/game/memory"><img src="images/memory.png" alt="memory">MEMORY </a>
             </div>
         </div>

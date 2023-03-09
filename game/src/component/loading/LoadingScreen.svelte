@@ -27,7 +27,7 @@
                 } 
             }
         }
-        xmlHttp.open( "GET", 'https://api.api-ninjas.com/v1/animals?name=' + animal, true ); 
+        xmlHttp.open( "GET", 'http://api.api-ninjas.com/v1/animals?name=' + animal, true ); 
         xmlHttp.setRequestHeader("X-Api-Key","XeRLqZeWmuiW7/PMyztdHQ==HoJJOzopIX90X1xe");
         xmlHttp.send( null );
     }
@@ -113,7 +113,7 @@
                 curiosity = " Did you know that " + results[Math.floor(Math.random() * results.length)].text
             }
         }
-        xmlHttp.open( "GET", 'https://cat-fact.herokuapp.com/facts', true ); 
+        xmlHttp.open( "GET", 'http://cat-fact.herokuapp.com/facts', true ); 
         xmlHttp.send( null );
     }
 

@@ -77,7 +77,7 @@
                 
             }
         }
-        xmlHttp.open( "GET", 'https://api.api-ninjas.com/v1/animals?name=' + animalName, true ); 
+        xmlHttp.open( "GET", 'http://api.api-ninjas.com/v1/animals?name=' + animalName, true ); 
         xmlHttp.setRequestHeader("X-Api-Key","XeRLqZeWmuiW7/PMyztdHQ==HoJJOzopIX90X1xe");
         xmlHttp.send( null );
     }

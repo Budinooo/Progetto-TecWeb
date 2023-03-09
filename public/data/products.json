@@ -1,7 +1,7 @@
 [{
         "_id": "0",
         "name": "Chicken Feet Dog Treats \u2013 Special Price!*",
-        "img": "https://media.mediazs.com/bilder/8/140/1322020_8.jpg",
+        "img": "http://media.mediazs.com/bilder/8/140/1322020_8.jpg",
         "tag": "food",
         "animal": "dog",
         "price": "2.19",
@@ -10,7 +10,7 @@
     {
         "_id": "1",
         "name": "Dog Poop Bags - Black",
-        "img": "https://media.mediazs.com/bilder/2/140/54350_pla_hundekotbeutel_schwarz_ret_01_2.jpg",
+        "img": "http://media.mediazs.com/bilder/2/140/54350_pla_hundekotbeutel_schwarz_ret_01_2.jpg",
         "tag": "healthcare",
         "animal": "dog",
         "price": "2.29",
@@ -19,7 +19,7 @@
     {
         "_id": "2",
         "name": "12kg Concept for Life Dry Dog Food - 10 + 2kg Free!*",
-        "img": "https://media.mediazs.com/bilder/9/140/1222054_9.jpg",
+        "img": "http://media.mediazs.com/bilder/9/140/1222054_9.jpg",
         "tag": "food",
         "animal": "dog",
         "price": "4.29",
@@ -28,7 +28,7 @@
     {
         "_id": "3",
         "name": "150g Briantos FitBites Dog Treats - Special Price!*",
-        "img": "https://media.mediazs.com/bilder/2/140/1220511_2.jpg",
+        "img": "http://media.mediazs.com/bilder/2/140/1220511_2.jpg",
         "tag": "food",
         "animal": "dog",
         "price": "8.99",
@@ -37,7 +37,7 @@
     {
         "_id": "4",
         "name": "50g/70g Rosie's Farm Dog Treats - Special Price!*",
-        "img": "https://media.mediazs.com/bilder/7/140/1186969_7.jpg",
+        "img": "http://media.mediazs.com/bilder/7/140/1186969_7.jpg",
         "tag": "food",
         "animal": "dog",
         "price": "39.49",
@@ -46,7 +46,7 @@
     {
         "_id": "5",
         "name": "Biodegradable Dog Poop Bags with Handles",
-        "img": "https://media.mediazs.com/bilder/8/140/84807_heavy_duty_poop_bags_50bags_hs_04_8.jpg",
+        "img": "http://media.mediazs.com/bilder/8/140/84807_heavy_duty_poop_bags_50bags_hs_04_8.jpg",
         "tag": "healthcare",
         "animal": "dog",
         "price": "34.99",
@@ -55,7 +55,7 @@
     {
         "_id": "6",
         "name": "12 x 400g Rosie's Farm Wet Dog Food - 10 + 2 Free!*",
-        "img": "https://media.mediazs.com/bilder/0/140/_1426540_0.jpg",
+        "img": "http://media.mediazs.com/bilder/0/140/_1426540_0.jpg",
         "tag": "food",
         "animal": "dog",
         "price": "33.29",
@@ -64,7 +64,7 @@
     {
         "_id": "7",
         "name": "2 x Lukullus Dog Bones - 1 + 1 Free!*",
-        "img": "https://media.mediazs.com/bilder/5/140/1221769_5.jpg",
+        "img": "http://media.mediazs.com/bilder/5/140/1221769_5.jpg",
         "tag": "food",
         "animal": "dog",
         "price": "39.09",
@@ -73,7 +73,7 @@
     {
         "_id": 8,
         "name": "12kg Greenwoods Adult Grain-Free Dry Dog Food - Save \u20ac5!*",
-        "img": "https://media.mediazs.com/bilder/1/140/1__1346198_1.jpg",
+        "img": "http://media.mediazs.com/bilder/1/140/1__1346198_1.jpg",
         "tag": "food",
         "animal": "dog",
         "price": "36.19",
@@ -82,7 +82,7 @@
     {
         "_id": "9",
         "name": "2 x 1kg Wolf of Wilderness Dry Dog Food - 10% Off!*",
-        "img": "https://media.mediazs.com/bilder/4/140/701475_4.jpg",
+        "img": "http://media.mediazs.com/bilder/4/140/701475_4.jpg",
         "tag": "food",
         "animal": "dog",
         "price": "1.79",
@@ -91,7 +91,7 @@
     {
         "_id": "10",
         "name": "Meaty Rolls with Chicken & Rice",
-        "img": "https://media.mediazs.com/bilder/5/140/fleischrollen_huhn_5.jpg",
+        "img": "http://media.mediazs.com/bilder/5/140/fleischrollen_huhn_5.jpg",
         "tag": "food",
         "animal": "dog",
         "price": "1.79",
@@ -100,7 +100,7 @@
     {
         "_id": "11",
         "name": "12kg Purizon Grain-Free Dry Dog Food + Purizon Dog Snacks Free!*",
-        "img": "https://media.mediazs.com/bilder/8/140/_1449313_8.jpg",
+        "img": "http://media.mediazs.com/bilder/8/140/_1449313_8.jpg",
         "tag": "food",
         "animal": "dog",
         "price": "1.79",
@@ -109,7 +109,7 @@
     {
         "_id": "12",
         "name": "Dog Overall Mint",
-        "img": "https://media.mediazs.com/bilder/9/140/73483_hundeoverall_mint_fg_1000px_2928_9.jpg",
+        "img": "http://media.mediazs.com/bilder/9/140/73483_hundeoverall_mint_fg_1000px_2928_9.jpg",
         "tag": "clothing",
         "animal": "dog",
         "price": "1.79",
@@ -118,7 +118,7 @@
     {
         "_id": "13",
         "name": "Premium Bavarian Pigs\u2019 Ears",
-        "img": "https://media.mediazs.com/bilder/5/140/premium_schweineohr_klein_5.jpg",
+        "img": "http://media.mediazs.com/bilder/5/140/premium_schweineohr_klein_5.jpg",
         "tag": "food",
         "animal": "dog",
         "price": "1.99",
@@ -127,7 +127,7 @@
     {
         "_id": "14",
         "name": "Sports & Protective Dog Boots",
-        "img": "https://media.mediazs.com/bilder/3/140/52149_hundeschuhe_xs_fg_0839_ret_3.jpg",
+        "img": "http://media.mediazs.com/bilder/3/140/52149_hundeschuhe_xs_fg_0839_ret_3.jpg",
         "tag": "clothing",
         "animal": "dog",
         "price": "1.99",
@@ -136,7 +136,7 @@
     {
         "_id": "15",
         "name": "12kg Wolf of Wilderness Dry Dog Food  + 180g Snacks Free!*",
-        "img": "https://media.mediazs.com/bilder/3/140/wow_redclassic_rubymidnight_frontright_12kg_1000x1000_7_1__3.jpg",
+        "img": "http://media.mediazs.com/bilder/3/140/wow_redclassic_rubymidnight_frontright_12kg_1000x1000_7_1__3.jpg",
         "tag": "food",
         "animal": "dog",
         "price": "1.69",
@@ -145,7 +145,7 @@
     {
         "_id": "16",
         "name": "Squeaky Ball Dog Toy",
-        "img": "https://media.mediazs.com/bilder/2/140/331033_squeaky_ball_01_08_2013_dsc0209_2.jpg",
+        "img": "http://media.mediazs.com/bilder/2/140/331033_squeaky_ball_01_08_2013_dsc0209_2.jpg",
         "tag": "toy",
         "animal": "dog",
         "price": "1.69",
@@ -154,7 +154,7 @@
     {
         "_id": "17",
         "name": "1kg DogMio Dog Snacks \u2013 Special Price!*",
-        "img": "https://media.mediazs.com/bilder/9/140/1371119_9.jpg",
+        "img": "http://media.mediazs.com/bilder/9/140/1371119_9.jpg",
         "tag": "food",
         "animal": "dog",
         "price": "6.99",
@@ -163,7 +163,7 @@
     {
         "_id": "18",
         "name": "2 x 12kg Tigerino Canada / Premium Cat Litter - Special Price!*",
-        "img": "https://media.mediazs.com/bilder/7/140/999_7.jpg",
+        "img": "http://media.mediazs.com/bilder/7/140/999_7.jpg",
         "tag": "healthcare",
         "animal": "cat",
         "price": "28.99",
@@ -172,7 +172,7 @@
     {
         "_id": "19",
         "name": "Cat's Best Original Cat litter",
-        "img": "https://media.mediazs.com/bilder/0/140/20342_pla_catsbest_original_5l_hs_01_0.jpg",
+        "img": "http://media.mediazs.com/bilder/0/140/20342_pla_catsbest_original_5l_hs_01_0.jpg",
         "tag": "healthcare",
         "animal": "cat",
         "price": "28.99",
@@ -181,7 +181,7 @@
     {
         "_id": "20",
         "name": "Cat Mate C200 2-Meal Automatic Feeder",
-        "img": "https://media.mediazs.com/bilder/6/140/313897_pla_closer_pets_futterautomat_c200_hs_05_6.jpg",
+        "img": "http://media.mediazs.com/bilder/6/140/313897_pla_closer_pets_futterautomat_c200_hs_05_6.jpg",
         "tag": "healthcare",
         "animal": "cat",
         "price": "28.99",
@@ -190,7 +190,7 @@
     {
         "_id": "21",
         "name": "Tigerino Crystals Clumping Cat Litter - Fresh/Baby Powder Scent",
-        "img": "https://media.mediazs.com/bilder/0/140/2_tigerino_crystal_babypowder_5l_ba_1000x1000_0.jpg",
+        "img": "http://media.mediazs.com/bilder/0/140/2_tigerino_crystal_babypowder_5l_ba_1000x1000_0.jpg",
         "tag": "healthcare",
         "animal": "cat",
         "price": "28.99",
@@ -199,7 +199,7 @@
     {
         "_id": "22",
         "name": "3 x 400g Concept for Life Dry Cat Food - 2 + 1 Free!*",
-        "img": "https://media.mediazs.com/bilder/4/140/_1363517_4.jpg",
+        "img": "http://media.mediazs.com/bilder/4/140/_1363517_4.jpg",
         "tag": "food",
         "animal": "cat",
         "price": "28.99",
@@ -208,7 +208,7 @@
     {
         "_id": "23",
         "name": "48 x 85g Concept for Life Wet Cat Food - 36 + 12 Free!*",
-        "img": "https://media.mediazs.com/bilder/6/140/689794_concept_for_life_36___12_free_6.jpg",
+        "img": "http://media.mediazs.com/bilder/6/140/689794_concept_for_life_36___12_free_6.jpg",
         "tag": "food",
         "animal": "cat",
         "price": "19.49",
@@ -217,7 +217,7 @@
     {
         "_id": "24",
         "name": "Royal Canin Indoor Cat",
-        "img": "https://media.mediazs.com/bilder/4/140/rc_fhn_indoor27_mv_eretailkit__4.jpg",
+        "img": "http://media.mediazs.com/bilder/4/140/rc_fhn_indoor27_mv_eretailkit__4.jpg",
         "tag": "food",
         "animal": "cat",
         "price": "25.99",
@@ -226,7 +226,7 @@
     {
         "_id": "25",
         "name": "Catsan Hygiene Plus Cat Litter",
-        "img": "https://media.mediazs.com/bilder/3/140/115096_pla_catsan_18l_katzenstreu_3.jpg",
+        "img": "http://media.mediazs.com/bilder/3/140/115096_pla_catsan_18l_katzenstreu_3.jpg",
         "tag": "healthcare",
         "animal": "cat",
         "price": "7.89",
@@ -235,7 +235,7 @@
     {
         "_id": "26",
         "name": "36 x 85g Gourmet Gold Wet Cat Food - 24 + 12 Free!*",
-        "img": "https://media.mediazs.com/bilder/0/140/1393890_0.jpg",
+        "img": "http://media.mediazs.com/bilder/0/140/1393890_0.jpg",
         "tag": "food",
         "animal": "cat",
         "price": "7.89",
@@ -244,7 +244,7 @@
     {
         "_id": "27",
         "name": " Felix Cat Treats - 1 + 1 Free!*",
-        "img": "https://media.mediazs.com/bilder/0/140/1347638_0.jpg",
+        "img": "http://media.mediazs.com/bilder/0/140/1347638_0.jpg",
         "tag": "food",
         "animal": "cat",
         "price": "7.29",
@@ -253,7 +253,7 @@
     {
         "_id": "28",
         "name": "10kg Hill's Science Plan Dry Cat Food - 8kg + 2kg Free!*",
-        "img": "https://media.mediazs.com/bilder/5/140/994646_5.jpg",
+        "img": "http://media.mediazs.com/bilder/5/140/994646_5.jpg",
         "tag": "food",
         "animal": "cat",
         "price": "7.29",
@@ -262,7 +262,7 @@
     {
         "_id": "29",
         "name": "Sound-Mouse Cat Toy",
-        "img": "https://media.mediazs.com/bilder/8/140/mai_mix_22_gedreht_8.jpg",
+        "img": "http://media.mediazs.com/bilder/8/140/mai_mix_22_gedreht_8.jpg",
         "tag": "toy",
         "animal": "cat",
         "price": "7.89",
@@ -271,7 +271,7 @@
     {
         "_id": "30",
         "name": "Tigerino Crystals Cat Litter - Flower Scent",
-        "img": "https://media.mediazs.com/bilder/6/140/tigerino_crystal_flower_5l_ba_1000x1000_6.jpg",
+        "img": "http://media.mediazs.com/bilder/6/140/tigerino_crystal_flower_5l_ba_1000x1000_6.jpg",
         "tag": "healthcare",
         "animal": "cat",
         "price": "27.79",
@@ -280,7 +280,7 @@
     {
         "_id": "31",
         "name": "Applaws Cat Food 70g - Tuna / Fish",
-        "img": "https://media.mediazs.com/bilder/2/140/22657_PLA_Applaws_Katzenfutter_Thunfischfilet_70g_156g_2.jpg",
+        "img": "http://media.mediazs.com/bilder/2/140/22657_PLA_Applaws_Katzenfutter_Thunfischfilet_70g_156g_2.jpg",
         "tag": "food",
         "animal": "cat",
         "price": "27.79",
@@ -289,7 +289,7 @@
     {
         "_id": "32",
         "name": "Royal Canin Sensible 33 Cat",
-        "img": "https://media.mediazs.com/bilder/9/140/61227_pla_royalcanin_sensible33_9.jpg",
+        "img": "http://media.mediazs.com/bilder/9/140/61227_pla_royalcanin_sensible33_9.jpg",
         "tag": "food",
         "animal": "cat",
         "price": "27.79",
@@ -298,7 +298,7 @@
     {
         "_id": "33",
         "name": "6.5kg Purizon Dry Cat Food - Special Price!*",
-        "img": "https://media.mediazs.com/bilder/2/140/1344338_2.jpg",
+        "img": "http://media.mediazs.com/bilder/2/140/1344338_2.jpg",
         "tag": "food",
         "animal": "cat",
         "price": "27.79",
@@ -307,7 +307,7 @@
     {
         "_id": "34",
         "name": "3 x 5l Tigerino Crystals Cat Litter - Special Price!*",
-        "img": "https://media.mediazs.com/bilder/0/140/281882_3x5l_tigerino_crystals__sonderpreis_sortenrein_0.jpg",
+        "img": "http://media.mediazs.com/bilder/0/140/281882_3x5l_tigerino_crystals__sonderpreis_sortenrein_0.jpg",
         "tag": "healthcare",
         "animal": "cat",
         "price": "27.79",
@@ -316,7 +316,7 @@
     {
         "_id": "35",
         "name": "32 x 100g Rosie's Farm Wet Cat Food - 27 + 5 Free!*",
-        "img": "https://media.mediazs.com/bilder/0/140/1646755036004_img1_0.jpg",
+        "img": "http://media.mediazs.com/bilder/0/140/1646755036004_img1_0.jpg",
         "tag": "food",
         "animal": "cat",
         "price": "176.99",
@@ -325,7 +325,7 @@
     {
         "_id": "36",
         "name": "Lillebro Fat Balls Wild Bird Food Saver Pack",
-        "img": "https://media.mediazs.com/bilder/2/140/606876_2.jpg",
+        "img": "http://media.mediazs.com/bilder/2/140/606876_2.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "15.49",
@@ -334,7 +334,7 @@
     {
         "_id": "37",
         "name": "Lillebro Chopped Peanuts",
-        "img": "https://media.mediazs.com/bilder/4/140/62080_pla_lillebro_erdnuesse_gehackt_1_kg_4.jpg",
+        "img": "http://media.mediazs.com/bilder/4/140/62080_pla_lillebro_erdnuesse_gehackt_1_kg_4.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "4.69",
@@ -343,7 +343,7 @@
     {
         "_id": "38",
         "name": "Lillebro Husk-Free Sunflower Seeds - 10% Off!*",
-        "img": "https://media.mediazs.com/bilder/1/140/lillebro_1000x1000_2_9_1__1.jpg",
+        "img": "http://media.mediazs.com/bilder/1/140/lillebro_1000x1000_2_9_1__1.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "20.99",
@@ -352,7 +352,7 @@
     {
         "_id": "39",
         "name": "Lillebro Dried Mealworms",
-        "img": "https://media.mediazs.com/bilder/3/140/402290_lillebro_mehlwuermer_3.jpg",
+        "img": "http://media.mediazs.com/bilder/3/140/402290_lillebro_mehlwuermer_3.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "3.49",
@@ -361,7 +361,7 @@
     {
         "_id": "40",
         "name": "Lillebro Sunflower Seeds for Wild Birds",
-        "img": "https://media.mediazs.com/bilder/0/140/lillebro_sack_sbk_1kg_rot_0.jpg",
+        "img": "http://media.mediazs.com/bilder/0/140/lillebro_sack_sbk_1kg_rot_0.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "6.79",
@@ -370,7 +370,7 @@
     {
         "_id": "41",
         "name": "Lillebro Wild Bird Food",
-        "img": "https://media.mediazs.com/bilder/4/140/230762_lillebro_wildvogelf2_4.jpg",
+        "img": "http://media.mediazs.com/bilder/4/140/230762_lillebro_wildvogelf2_4.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "19.19",
@@ -379,7 +379,7 @@
     {
         "_id": "42",
         "name": "Orlux Fruity Patee Concentrated Feed",
-        "img": "https://media.mediazs.com/bilder/1/140/13066_PLA_Versele_Orlux_FRUTTI_PATEE_Kraftfutter_250g_1.jpg",
+        "img": "http://media.mediazs.com/bilder/1/140/13066_PLA_Versele_Orlux_FRUTTI_PATEE_Kraftfutter_250g_1.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "5.99",
@@ -388,7 +388,7 @@
     {
         "_id": "43",
         "name": "Menu Nature Clean Garden Mix",
-        "img": "https://media.mediazs.com/bilder/1/140/77975_pla_menu_nature_clean_2_5kg_1.jpg",
+        "img": "http://media.mediazs.com/bilder/1/140/77975_pla_menu_nature_clean_2_5kg_1.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "4.29",
@@ -397,7 +397,7 @@
     {
         "_id": "44",
         "name": "JR Birds Individual Lovebird/African Parrot Food",
-        "img": "https://media.mediazs.com/bilder/6/140/25387_jr_individual_agaporniden_6.jpg",
+        "img": "http://media.mediazs.com/bilder/6/140/25387_jr_individual_agaporniden_6.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "1.99",
@@ -406,7 +406,7 @@
     {
         "_id": "45",
         "name": "JR Birds Pick \u2018n\u2018 Fun Large Parakeets and Parrots",
-        "img": "https://media.mediazs.com/bilder/8/140/34318_pick_n_fun_gro__papa_8.jpg",
+        "img": "http://media.mediazs.com/bilder/8/140/34318_pick_n_fun_gro__papa_8.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "5.29",
@@ -415,7 +415,7 @@
     {
         "_id": "46",
         "name": "Cuttlebone with Mount",
-        "img": "https://media.mediazs.com/bilder/0/140/173396_pla_trixie_sepiaschale_mithalter_0.jpg",
+        "img": "http://media.mediazs.com/bilder/0/140/173396_pla_trixie_sepiaschale_mithalter_0.jpg",
         "tag": "healthcare",
         "animal": "bird",
         "price": "7.79",
@@ -424,7 +424,7 @@
     {
         "_id": "47",
         "name": "Lillebro Fat Ballsnew ",
-        "img": "https://media.mediazs.com/bilder/2/140/lillebro_meisenknoedel_1_web_2.jpg",
+        "img": "http://media.mediazs.com/bilder/2/140/lillebro_meisenknoedel_1_web_2.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "13.49",
@@ -433,7 +433,7 @@
     {
         "_id": "48",
         "name": "Lillebro Husk-Free Sunflower Seeds",
-        "img": "https://media.mediazs.com/bilder/9/140/lillebro_1000x1000_2_9.jpg",
+        "img": "http://media.mediazs.com/bilder/9/140/lillebro_1000x1000_2_9.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "13.89",
@@ -442,7 +442,7 @@
     {
         "_id": "49",
         "name": "10 x 500g Lillebro XXL Fat Balls - 8 + 2 Free!*",
-        "img": "https://media.mediazs.com/bilder/8/140/721648_8.jpg",
+        "img": "http://media.mediazs.com/bilder/8/140/721648_8.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "11.29",
@@ -451,7 +451,7 @@
     {
         "_id": "50",
         "name": "JR Birds Foxtail Millet, Yellow",
-        "img": "https://media.mediazs.com/bilder/1/140/367_10846_pla_jrfarm_kolbenhirse_gelb_9_1.jpg",
+        "img": "http://media.mediazs.com/bilder/1/140/367_10846_pla_jrfarm_kolbenhirse_gelb_9_1.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "6.79",
@@ -460,7 +460,7 @@
     {
         "_id": "51",
         "name": "JR Birds Individual Cockatiel Food",
-        "img": "https://media.mediazs.com/bilder/2/140/52287_jr_individual_nymphensittich_2.jpg",
+        "img": "http://media.mediazs.com/bilder/2/140/52287_jr_individual_nymphensittich_2.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "4.99",
@@ -469,7 +469,7 @@
     {
         "_id": "52",
         "name": "JR Birds Natural Gourmet String",
-        "img": "https://media.mediazs.com/bilder/6/140/37081_schlemmerkette_6.jpg",
+        "img": "http://media.mediazs.com/bilder/6/140/37081_schlemmerkette_6.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "8.99",
@@ -478,7 +478,7 @@
     {
         "_id": "53",
         "name": "Lillebro Coconut Shells with Bird Food",
-        "img": "https://media.mediazs.com/bilder/0/140/lillebro_filled_coconuts_enhanced_3_0.jpg",
+        "img": "http://media.mediazs.com/bilder/0/140/lillebro_filled_coconuts_enhanced_3_0.jpg",
         "tag": "food",
         "animal": "bird",
         "price": "14.79",

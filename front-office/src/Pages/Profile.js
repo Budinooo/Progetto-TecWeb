@@ -23,7 +23,7 @@ export default function Profile() {
         //Get bookings
         if(!bookings && profileInfo) {
             console.log("old bookings: " + bookings + ", fetching bookings");
-            fetch(`https://site212229.tw.cs.unibo.it/db//getUserBookings?id=${profileInfo._id}`)
+            fetch(`http://site212229.tw.cs.unibo.it/db//getUserBookings?id=${profileInfo._id}`)
             .then((res) => res.json())
             .then((data) => 
             {
@@ -84,7 +84,7 @@ export default function Profile() {
             body: JSON.stringify(obj)
         }).then((res) => 
         {
-            fetch(`https://site212229.tw.cs.unibo.it/db//getUserBookings?id=${profileInfo._id}`)
+            fetch(`http://site212229.tw.cs.unibo.it/db//getUserBookings?id=${profileInfo._id}`)
             .then((res) => res.json())
             .then((data) => 
             {
@@ -93,11 +93,11 @@ export default function Profile() {
             });
             //service availability update
             let service;
-            fetch(`https://site212229.tw.cs.unibo.it/db//element?collection=services&id=${booking.serviceId}`, {method: "GET"}).then((res) => res.json())
+            fetch(`http://site212229.tw.cs.unibo.it/db//element?collection=services&id=${booking.serviceId}`, {method: "GET"}).then((res) => res.json())
             .then((data) => {
                 service = {collection: "services", elem: data.result};
                 service.elem.availability.push(booking.date);
-                fetch(`https://site212229.tw.cs.unibo.it/db//element`, {
+                fetch(`http://site212229.tw.cs.unibo.it/db//element`, {
                 method: "PUT",
                 headers: {
                     'Content-type': 'application/json',

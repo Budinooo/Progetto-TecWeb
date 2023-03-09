@@ -9,7 +9,7 @@
 </script>
 
 <div class="flex container content" class:mobile={screenWidth<500}>
-    <iframe src={"https://www.youtube.com/embed/"+currentVideo.snippet.resourceId.videoId} class:mobvideo={screenWidth<500} title={currentVideo.snippet.title}></iframe>
+    <iframe src={"http://www.youtube.com/embed/"+currentVideo.snippet.resourceId.videoId} class:mobvideo={screenWidth<500} title={currentVideo.snippet.title}></iframe>
     <div class="container description" class:mobdes={screenWidth<500}>
         <div>{currentVideo.snippet.channelTitle}</div>
         <p style="font-weight:800; font-size:130%">{currentVideo.snippet.title}</p>

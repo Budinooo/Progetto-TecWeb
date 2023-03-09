@@ -252,10 +252,10 @@ var app = (function () {
     }
 
     // we need to store the information for multiple documents because a Svelte application could also contain iframes
-    // https://github.com/sveltejs/svelte/issues/3624
+    // http://github.com/sveltejs/svelte/issues/3624
     const managed_styles = new Map();
     let active = 0;
-    // https://github.com/darkskyapp/string-hash/blob/master/index.js
+    // http://github.com/darkskyapp/string-hash/blob/master/index.js
     function hash$2(str) {
         let hash = 5381;
         let i = str.length;
@@ -332,7 +332,7 @@ var app = (function () {
      *
      * `onMount` does not run inside a [server-side component](/docs#run-time-server-side-component-api).
      *
-     * https://svelte.dev/docs#run-time-svelte-onmount
+     * http://svelte.dev/docs#run-time-svelte-onmount
      */
     function onMount(fn) {
         get_current_component().$$.on_mount.push(fn);
@@ -343,7 +343,7 @@ var app = (function () {
      * Out of `onMount`, `beforeUpdate`, `afterUpdate` and `onDestroy`, this is the
      * only one that runs inside a server-side component.
      *
-     * https://svelte.dev/docs#run-time-svelte-ondestroy
+     * http://svelte.dev/docs#run-time-svelte-ondestroy
      */
     function onDestroy(fn) {
         get_current_component().$$.on_destroy.push(fn);
@@ -353,12 +353,12 @@ var app = (function () {
      * Event dispatchers are functions that can take two arguments: `name` and `detail`.
      *
      * Component events created with `createEventDispatcher` create a
-     * [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent).
-     * These events do not [bubble](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_bubbling_and_capture).
-     * The `detail` argument corresponds to the [CustomEvent.detail](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/detail)
+     * [CustomEvent](http://developer.mozilla.org/en-US/docs/Web/API/CustomEvent).
+     * These events do not [bubble](http://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_bubbling_and_capture).
+     * The `detail` argument corresponds to the [CustomEvent.detail](http://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/detail)
      * property and can contain any type of data.
      *
-     * https://svelte.dev/docs#run-time-svelte-createeventdispatcher
+     * http://svelte.dev/docs#run-time-svelte-createeventdispatcher
      */
     function createEventDispatcher() {
         const component = get_current_component();
@@ -1502,7 +1502,7 @@ var app = (function () {
 
       /**
        * To work properly with the URL
-       * history.location generated polyfill in https://github.com/devote/HTML5-History-API
+       * history.location generated polyfill in http://github.com/devote/HTML5-History-API
        */
 
       var isLocation = hasWindow && !!(window.history.location || window.location);
@@ -1973,7 +1973,7 @@ var app = (function () {
 
         /*
            When the port is the default http port 80 for http, or 443 for
-           https, internet explorer 11 returns an empty string for loc.port,
+           http, internet explorer 11 returns an empty string for loc.port,
            so we need to compare loc.port with an empty string if url.port
            is the default port 80 or 443.
            Also the comparition with `port` is changed from `===` to `==` because
@@ -3096,7 +3096,7 @@ var app = (function () {
     			attr_dev(a0, "href", "/game/quiz");
     			toggle_class(a0, "mobilefun", /*screenWidth*/ ctx[0] < 500);
     			add_location(a0, file$q, 18, 16, 722);
-    			if (!src_url_equal(img1.src, img1_src_value = "https://static01.nyt.com/images/2022/03/02/crosswords/alpha-wordle-icon-new/alpha-wordle-icon-new-square320-v3.png?format=pjpg&quality=75&auto=webp&disable=upscale")) attr_dev(img1, "src", img1_src_value);
+    			if (!src_url_equal(img1.src, img1_src_value = "http://static01.nyt.com/images/2022/03/02/crosswords/alpha-wordle-icon-new/alpha-wordle-icon-new-square320-v3.png?format=pjpg&quality=75&auto=webp&disable=upscale")) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "alt", "wordle");
     			attr_dev(img1, "class", "svelte-ji0m4w");
     			add_location(img1, file$q, 19, 91, 938);
@@ -5259,7 +5259,7 @@ var app = (function () {
     			}
     		};
 
-    		xmlHttp.open("GET", 'https://api.api-ninjas.com/v1/animals?name=' + animal, true);
+    		xmlHttp.open("GET", 'http://api.api-ninjas.com/v1/animals?name=' + animal, true);
     		xmlHttp.setRequestHeader("X-Api-Key", "XeRLqZeWmuiW7/PMyztdHQ==HoJJOzopIX90X1xe");
     		xmlHttp.send(null);
     	};
@@ -5331,7 +5331,7 @@ var app = (function () {
     			}
     		};
 
-    		xmlHttp.open("GET", 'https://cat-fact.herokuapp.com/facts', true);
+    		xmlHttp.open("GET", 'http://cat-fact.herokuapp.com/facts', true);
     		xmlHttp.send(null);
     	};
 
@@ -5656,7 +5656,7 @@ var app = (function () {
       };
 
       if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
-        if (getNodeName(offsetParent) !== 'body' || // https://github.com/popperjs/popper-core/issues/1078
+        if (getNodeName(offsetParent) !== 'body' || // http://github.com/popperjs/popper-core/issues/1078
         isScrollParent(documentElement)) {
           scroll = getNodeScroll(offsetParent);
         }
@@ -5682,7 +5682,7 @@ var app = (function () {
 
     function getLayoutRect(element) {
       var clientRect = getBoundingClientRect(element); // Use the clientRect sizes if it's not been transformed.
-      // Fixes https://github.com/popperjs/popper-core/issues/1223
+      // Fixes http://github.com/popperjs/popper-core/issues/1223
 
       var width = element.offsetWidth;
       var height = element.offsetHeight;
@@ -5761,7 +5761,7 @@ var app = (function () {
     }
 
     function getTrueOffsetParent(element) {
-      if (!isHTMLElement(element) || // https://github.com/popperjs/popper-core/issues/837
+      if (!isHTMLElement(element) || // http://github.com/popperjs/popper-core/issues/837
       getComputedStyle$1(element).position === 'fixed') {
         return null;
       }
@@ -5793,7 +5793,7 @@ var app = (function () {
       while (isHTMLElement(currentNode) && ['html', 'body'].indexOf(getNodeName(currentNode)) < 0) {
         var css = getComputedStyle$1(currentNode); // This is non-exhaustive but covers the most common CSS properties that
         // create a containing block.
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
+        // http://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
 
         if (css.transform !== 'none' || css.perspective !== 'none' || css.contain === 'paint' || ['transform', 'perspective'].indexOf(css.willChange) !== -1 || isFirefox && css.willChange === 'filter' || isFirefox && css.filter && css.filter !== 'none') {
           return currentNode;
@@ -6044,7 +6044,7 @@ var app = (function () {
 
       if (!isElement(clipperElement)) {
         return [];
-      } // $FlowFixMe[incompatible-return]: https://github.com/facebook/flow/issues/1414
+      } // $FlowFixMe[incompatible-return]: http://github.com/facebook/flow/issues/1414
 
 
       return clippingParents.filter(function (clippingParent) {
@@ -9462,7 +9462,7 @@ var app = (function () {
     			}
     		};
 
-    		xmlHttp.open("GET", 'https://api.api-ninjas.com/v1/animals?name=' + animalName, true);
+    		xmlHttp.open("GET", 'http://api.api-ninjas.com/v1/animals?name=' + animalName, true);
     		xmlHttp.setRequestHeader("X-Api-Key", "XeRLqZeWmuiW7/PMyztdHQ==HoJJOzopIX90X1xe");
     		xmlHttp.send(null);
     	};
@@ -10040,7 +10040,7 @@ var app = (function () {
     				} else if (xmlHttp.status == 404) notWordReminder();
     			};
 
-    			xmlHttp.open("GET", 'https://api.dictionaryapi.dev/api/v2/entries/en/' + word.join(""), true);
+    			xmlHttp.open("GET", 'http://api.dictionaryapi.dev/api/v2/entries/en/' + word.join(""), true);
     			xmlHttp.send(null);
     		} else {
     			notWordReminder();
@@ -12057,7 +12057,7 @@ var app = (function () {
     		var animal = randomAnimal().trim().split(/\s+/);
     		animal = animal[animal.length - 1];
 
-    		fetch("https://api.unsplash.com/search/photos?client_id=" + YOUR_ACCESS_KEY$1 + "&query=" + animal + "&per_page=3").then(result => {
+    		fetch("http://api.unsplash.com/search/photos?client_id=" + YOUR_ACCESS_KEY$1 + "&query=" + animal + "&per_page=3").then(result => {
     			return result.json();
     		}).then(data => {
     			var index = Math.floor(Math.random() * data.results.length);
@@ -16819,13 +16819,13 @@ var app = (function () {
     	var imgSrc;
     	var isModalOpen = false;
 
-    	fetch("https://api.unsplash.com/search/photos?client_id=" + YOUR_ACCESS_KEY + "&query=" + info.name.replace(" ", "") + "&per_page=3").then(result => {
+    	fetch("http://api.unsplash.com/search/photos?client_id=" + YOUR_ACCESS_KEY + "&query=" + info.name.replace(" ", "") + "&per_page=3").then(result => {
     		return result.json();
     	}).then(data => {
     		if (data.results[0]) {
     			$$invalidate(3, imgSrc = data.results[Math.floor(Math.random() * data.results.length)].urls.regular);
     		} else {
-    			fetch("https://api.unsplash.com/search/photos?client_id=" + YOUR_ACCESS_KEY + "&query=" + info.name + "&per_page=3").then(resul => {
+    			fetch("http://api.unsplash.com/search/photos?client_id=" + YOUR_ACCESS_KEY + "&query=" + info.name + "&per_page=3").then(resul => {
     				return resul.json();
     			}).then(dat => {
     				if (dat.results[0]) $$invalidate(3, imgSrc = dat.results[Math.floor(Math.random() * dat.results.length)].urls.regular); else $$invalidate(3, imgSrc = "");
@@ -17913,7 +17913,7 @@ var app = (function () {
     						}
     					};
 
-    					xmlHttp.open("GET", 'https://api.api-ninjas.com/v1/animals?name=' + search, true);
+    					xmlHttp.open("GET", 'http://api.api-ninjas.com/v1/animals?name=' + search, true);
     					xmlHttp.setRequestHeader("X-Api-Key", "XeRLqZeWmuiW7/PMyztdHQ==HoJJOzopIX90X1xe");
     					xmlHttp.send(null);
     				}
@@ -18074,7 +18074,7 @@ var app = (function () {
     			t4 = space();
     			p1 = element("p");
     			t5 = text(t5_value);
-    			if (!src_url_equal(iframe.src, iframe_src_value = "https://www.youtube.com/embed/" + /*currentVideo*/ ctx[0].snippet.resourceId.videoId)) attr_dev(iframe, "src", iframe_src_value);
+    			if (!src_url_equal(iframe.src, iframe_src_value = "http://www.youtube.com/embed/" + /*currentVideo*/ ctx[0].snippet.resourceId.videoId)) attr_dev(iframe, "src", iframe_src_value);
     			attr_dev(iframe, "title", iframe_title_value = /*currentVideo*/ ctx[0].snippet.title);
     			attr_dev(iframe, "class", "svelte-1exb6ot");
     			toggle_class(iframe, "mobvideo", /*screenWidth*/ ctx[1] < 500);
@@ -18110,7 +18110,7 @@ var app = (function () {
     			append_dev(p1, t5);
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*currentVideo*/ 1 && !src_url_equal(iframe.src, iframe_src_value = "https://www.youtube.com/embed/" + /*currentVideo*/ ctx[0].snippet.resourceId.videoId)) {
+    			if (dirty & /*currentVideo*/ 1 && !src_url_equal(iframe.src, iframe_src_value = "http://www.youtube.com/embed/" + /*currentVideo*/ ctx[0].snippet.resourceId.videoId)) {
     				attr_dev(iframe, "src", iframe_src_value);
     			}
 
@@ -18844,7 +18844,7 @@ var app = (function () {
     			}
     		};
 
-    		xmlHttp.open("GET", "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + playlistId[i] + "&key=AIzaSyBwKTLoQHoNYRzU2f6laHTOrXILwMpbtnQ&maxResults=9", true);
+    		xmlHttp.open("GET", "http://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + playlistId[i] + "&key=AIzaSyBwKTLoQHoNYRzU2f6laHTOrXILwMpbtnQ&maxResults=9", true);
     		xmlHttp.send(null);
     	}
 
@@ -19563,7 +19563,7 @@ var app = (function () {
     	{
     		title: "Controlling Cat Litter Box Odor",
     		category: "cat",
-    		img: "https://img.webmd.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_sleeping_on_sofa_other/1800x1200_cat_sleeping_on_sofa_other.jpg?resize=550px:*&output-quality=50",
+    		img: "http://img.webmd.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_sleeping_on_sofa_other/1800x1200_cat_sleeping_on_sofa_other.jpg?resize=550px:*&output-quality=50",
     		ptitle: [
     			"Keep It Clean",
     			"Does the Type of Litter Matter?",
@@ -19581,7 +19581,7 @@ var app = (function () {
     	{
     		title: "Cats and Moving to a New Home: Making the Transition",
     		category: "cat",
-    		img: "https://img.webmd.com/vim/live/consumer_assets/site_images/article_thumbnails/slideshows/pet_ownership_health_benefits_for_psoriasis_slideshow/1800x1200_getty_rf_pet_ownership_health_benefits_for_psoriasis_slideshow.jpg?resize=600px:*&output-quality=75",
+    		img: "http://img.webmd.com/vim/live/consumer_assets/site_images/article_thumbnails/slideshows/pet_ownership_health_benefits_for_psoriasis_slideshow/1800x1200_getty_rf_pet_ownership_health_benefits_for_psoriasis_slideshow.jpg?resize=600px:*&output-quality=75",
     		ptitle: [
     			"Preparing Your Cat to Move",
     			"Moving Your Cat",
@@ -19599,7 +19599,7 @@ var app = (function () {
     	{
     		title: "Feeding Your Cat: Common Mistakes to Avoid",
     		category: "cat",
-    		img: "https://img.webmd.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/other/generic_cat_other/1800x1200_generic_cat_other.jpg?resize=550px:*&output-quality=50",
+    		img: "http://img.webmd.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/other/generic_cat_other/1800x1200_generic_cat_other.jpg?resize=550px:*&output-quality=50",
     		ptitle: [
     			"Close the Kitty Buffet",
     			"Scraps Are Off the Table",
@@ -19617,7 +19617,7 @@ var app = (function () {
     	{
     		title: "Water and Your Dog's Health",
     		category: "dog",
-    		img: "https://img.webmd.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/other/dog_drinking_water/1800x1200_dog_drinking_water.jpg?resize=550px:*&output-quality=50",
+    		img: "http://img.webmd.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/other/dog_drinking_water/1800x1200_dog_drinking_water.jpg?resize=550px:*&output-quality=50",
     		ptitle: [
     			"How Much Water Is Enough?",
     			"Keep Plenty of Water Available",
@@ -19635,7 +19635,7 @@ var app = (function () {
     	{
     		title: "Gear Ideas for Gung-Ho Dogs",
     		category: "dog",
-    		img: "https://img.webmd.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/other/dog_gear_other/1800x1200_dog_gear_other.jpg?resize=550px:*&output-quality=50",
+    		img: "http://img.webmd.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/other/dog_gear_other/1800x1200_dog_gear_other.jpg?resize=550px:*&output-quality=50",
     		ptitle: [
     			"1. A harness.",
     			"2. Foldable water bowls and water.",
@@ -19663,7 +19663,7 @@ var app = (function () {
     	{
     		title: "How to Choose the Right Bed For Your Dog",
     		category: "dog",
-    		img: "https://img.webmd.com/vim/live/consumer_assets/site_images/articles/health_tools/pet_ownership_health_benefits_for_psoriasis_slideshow/1800ss_getty_rf_dog_sleeping_in_dog_bed.jpg?resize=600px:*&output-quality=75",
+    		img: "http://img.webmd.com/vim/live/consumer_assets/site_images/articles/health_tools/pet_ownership_health_benefits_for_psoriasis_slideshow/1800ss_getty_rf_dog_sleeping_in_dog_bed.jpg?resize=600px:*&output-quality=75",
     		ptitle: [
     			"Types of Dog Beds",
     			"Factors to Consider"
@@ -19677,7 +19677,7 @@ var app = (function () {
     	{
     		title: "Types of Small Pets to Adopt",
     		category: "other",
-    		img: "https://img.webmd.com/vim/live/consumer_assets/site_images/articles/health_tools/10_surprising_benefits_of_pet_ownership_for_breast_cancer_slideshow/1800ss_getty_rf_feeding_parakeet_from_hand.jpg?resize=600px:*&output-quality=75",
+    		img: "http://img.webmd.com/vim/live/consumer_assets/site_images/articles/health_tools/10_surprising_benefits_of_pet_ownership_for_breast_cancer_slideshow/1800ss_getty_rf_feeding_parakeet_from_hand.jpg?resize=600px:*&output-quality=75",
     		ptitle: [
     			"Types of Small Pets",
     			"Tips for Adopting a Small Pet"
@@ -19691,7 +19691,7 @@ var app = (function () {
     	{
     		title: "20 Things You Can Learn from Your Pets",
     		category: "other",
-    		img: "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/reference_guide/insect_lawn_care_ref_guide/1800x1200_insect_lawn_care_ref_guide.jpg?resize=600px:*&output-quality=75",
+    		img: "http://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/reference_guide/insect_lawn_care_ref_guide/1800x1200_insect_lawn_care_ref_guide.jpg?resize=600px:*&output-quality=75",
     		ptitle: [
     			"Forget Multitasking",
     			"Take Naps",

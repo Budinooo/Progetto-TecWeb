@@ -12,13 +12,13 @@ class ServiceDisplay extends React.Component
 
     componentDidMount() 
     {
-        fetch(`https://site212229.tw.cs.unibo.it/db//collection?collection=services`)
+        fetch(`http://site212229.tw.cs.unibo.it/db//collection?collection=services`)
         .then((res)=> res.json()).then((data) => this.setState({services: data.result}));
     }
 
     displayLocations()  
     {
-        fetch('https://site212229.tw.cs.unibo.it/db//collection?collection=locations').then((res) => res.json())
+        fetch('http://site212229.tw.cs.unibo.it/db//collection?collection=locations').then((res) => res.json())
         .then((data) => 
         {
             return data.result.map((location) => 

@@ -175,7 +175,7 @@ app.get('/game/yourpets', (req, res) => {
             global.rootDir + 'public/Game/index.html'
         )
     })
-    // https://stackoverflow.com/questions/40459511/in-express-js-req-protocol-is-not-picking-up-https-for-my-secure-link-it-alwa
+    // http://stackoverflow.com/questions/40459511/in-express-js-req-protocol-is-not-picking-up-http-for-my-secure-link-it-alwa
 app.enable('trust proxy');
 
 //Backoffice
