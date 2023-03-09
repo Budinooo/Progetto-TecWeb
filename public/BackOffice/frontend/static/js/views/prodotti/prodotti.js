@@ -75,12 +75,12 @@ $("#addBtn").click(function() {
     }
     document.getElementById("saveClient").addEventListener("click", function(event) {
         event.preventDefault();
-        const name = document.getElementById("nameInput" + jsonDataid).value;
-        const img = document.getElementById("imageInput" + jsonDataid).value;
-        const tag = document.getElementById("tagInput" + jsonDataid).value;
-        const animal = document.getElementById("animalInput" + jsonDataid).value;
-        const price = document.getElementById("priceInput" + jsonDataid).value;
-        const description = document.getElementById("descriptionInput" + jsonDataid).value;
+        const name = document.getElementById("nameInput").value;
+        const img = document.getElementById("imageInput").value;
+        const tag = document.getElementById("tagInput").value;
+        const animal = document.getElementById("animalInput").value;
+        const price = document.getElementById("priceInput").value;
+        const description = document.getElementById("descriptionInput").value;
         if (name != "" && img != "" && tag != "" && animal != "" && price != "" && description != "") {
             document.getElementById("formcontainer").style.display = "none";
             fetch('/db/collectionsize?collection=products', {

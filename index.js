@@ -500,6 +500,7 @@ fetch('/db/element',{
 })
 */
 app.delete('/db/element', async function(req, res) {
+    /*
     console.log("ID DA TROVARE: " + req.body.id);
     let tmpobj = [];
     castedId = ObjectID(req.body.id);
@@ -515,7 +516,8 @@ app.delete('/db/element', async function(req, res) {
         console.log("TROVATO");
     else
         console.log("NON TROVATO");
-    res.send(await mymongo.removeElem(ObjectID(req.body.id), req.body.collection, mongoCredentials))
+        */
+    res.send(await mymongo.removeElem(req.body.id, req.body.collection, mongoCredentials))
 });
 
 /* ========================== */
