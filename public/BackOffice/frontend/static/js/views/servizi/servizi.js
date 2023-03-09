@@ -300,3 +300,11 @@ function removeService(serviceId) {
             location.reload();
         })
 }
+
+function logout() {
+    const longinInfo = {
+        islogged: false,
+        id: ""
+    }
+    localStorage.setItem("login", JSON.stringify(longinInfo));
+}
