@@ -1,5 +1,5 @@
 // Caricamento dei messaggi dal file JSON
-fetch('/db/collection?collection=communityFeed', {
+fetch('http://localhost:8000/db/collection?collection=communityFeed', {
         method: 'GET'
     })
     .then(response => response.json())
@@ -80,7 +80,7 @@ fetch('/db/collection?collection=communityFeed', {
     });
 
 function deleteImage(messageId) {
-    fetch('/db/element?id=' + messageId + '&collection=communityFeed', {
+    fetch('http://localhost:8000/db/element?id=' + messageId + '&collection=communityFeed', {
             method: 'GET'
         })
         .then(response => response.json())
@@ -100,7 +100,7 @@ function deleteImage(messageId) {
                     "answers": data.answers
                 }
             }
-            fetch('/db/element', {
+            fetch('http://localhost:8000/db/element', {
                     method: 'PUT',
                     headers: {
                         'Content-type': 'application/json',
@@ -121,7 +121,7 @@ function editMessage(messageId) {
     document.querySelector("formcontainer" + messageId).addEventListener("submit", function(event) {
         event.preventDefault();
         const message = document.getElementById("newMessage" + messageId).value;
-        fetch('/db/element?id=' + messageId + '&collection=communityFeed', {
+        fetch('http://localhost:8000/db/element?id=' + messageId + '&collection=communityFeed', {
                 method: 'GET'
             })
             .then(response => response.json())
@@ -141,7 +141,7 @@ function editMessage(messageId) {
                         "answers": data.answers
                     }
                 }
-                fetch('/db/element', {
+                fetch('http://localhost:8000/db/element', {
                         method: 'PUT',
                         headers: {
                             'Content-type': 'application/json',
@@ -164,7 +164,7 @@ function removeMessage(messageId) {
         collection: 'communityFeed',
         id: JSON.stringify(messageId)
     }
-    fetch('/db/element', {
+    fetch('http://localhost:8000/db/element', {
             method: 'DELETE',
             headers: {
                 'Content-type': 'application/json',

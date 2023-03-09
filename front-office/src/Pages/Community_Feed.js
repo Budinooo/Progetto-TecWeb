@@ -22,7 +22,7 @@ class Community_Feed extends React.Component {
     }
 
     getPosts = () =>{
-        fetch('/db/collection?collection=communityFeed',{
+        fetch('http://localhost:8000/db/collection?collection=communityFeed',{
             method:'GET'
         }).then(response => response.json())
         .then(data => {
@@ -75,7 +75,7 @@ class Community_Feed extends React.Component {
             if (desc){
                 let post = (this.state.posts.filter(obj => obj._id == this.state.postChosen))[0];
                 let date = new Date();
-                fetch('/db/element?id='+login.id+'&collection=users',{
+                fetch('http://localhost:8000/db/element?id='+login.id+'&collection=users',{
                     method:'GET'
                 })
                 .then(response => response.json())
@@ -102,7 +102,7 @@ class Community_Feed extends React.Component {
                             "file": post.file
                         }
                     }
-                    fetch('/db/element',{
+                    fetch('http://localhost:8000/db/element',{
                         method:'PUT',
                         headers: {
                             'Content-type': 'application/json',
@@ -118,7 +118,7 @@ class Community_Feed extends React.Component {
             let file = document.getElementById('upload').files;
             if (title && desc){
                 let date = new Date();
-                fetch('/db/element?id='+login.id+'&collection=users',{
+                fetch('http://localhost:8000/db/element?id='+login.id+'&collection=users',{
                     method:'GET'
                 })
                 .then(response => response.json())
@@ -139,7 +139,7 @@ class Community_Feed extends React.Component {
                         collection:'communityFeed',
                         elem:newPost
                     }
-                    fetch('/db/element',{
+                    fetch('http://localhost:8000/db/element',{
                         method:'POST',
                         headers: {
                             'Content-type': 'application/json',

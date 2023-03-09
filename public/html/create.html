@@ -56,7 +56,7 @@ Copyright (c) 2021 by Fabio Vitali
 	<script>
 		function create() {
 				$.ajax({
-					url: '/db/create',
+					url: 'http://localhost:8000/db/create',
 					success: function (d) {	
 						if (d.message) {
 							$('#result').html(d.message)

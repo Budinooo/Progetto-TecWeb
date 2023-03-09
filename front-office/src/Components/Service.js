@@ -39,7 +39,7 @@ class Service extends React.Component {
     };
     
     // POST NEW BOOKING
-    fetch("http://localhost:8000/db/element", {method: "POST", headers: {
+    fetch("http://localhost:8000http://localhost:8000/db/element", {method: "POST", headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json'
       }, 
@@ -54,7 +54,7 @@ class Service extends React.Component {
     updatedService.availability.splice(dateIndex, 1);
 
     // UPDATE SERVICE AVAILABILITY
-    fetch(`http://localhost:8000/db/element`, {method: "PUT",headers: {
+    fetch(`http://localhost:8000http://localhost:8000/db/element`, {method: "PUT",headers: {
       'Content-type': 'application/json',
       'Accept': 'application/json'
       }, 
@@ -63,7 +63,7 @@ class Service extends React.Component {
         elem: updatedService
       })})
       .then((res)=>{
-        fetch(`http://localhost:8000/db/element?id=${this.state.service._id}&collection=services`, {method: "GET"})
+        fetch(`http://localhost:8000http://localhost:8000/db/element?id=${this.state.service._id}&collection=services`, {method: "GET"})
         .then((res) => res.json).then((data) => this.setState({service:(data.result)}));
       });
   }

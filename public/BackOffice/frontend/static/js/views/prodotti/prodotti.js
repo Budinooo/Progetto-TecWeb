@@ -1,4 +1,4 @@
-fetch('/db/collection?collection=products', {
+fetch('http://localhost:8000/db/collection?collection=products', {
         method: 'GET'
     })
     .then(response => response.json())
@@ -54,7 +54,7 @@ $("#addBtn").click(function() {
     document.querySelector("form").addEventListener("submit", function(event) {
         event.preventDefault();
         document.getElementById("formcontainer").style.display = "none";
-        fetch('/db/collectionsize?collection=products', {
+        fetch('http://localhost:8000/db/collectionsize?collection=products', {
                 method: 'GET'
             })
             .then(response => response.json())
@@ -73,7 +73,7 @@ $("#addBtn").click(function() {
 
                 };
 
-                fetch('/db/element', {
+                fetch('http://localhost:8000/db/element', {
                         method: 'POST',
                         headers: {
                             'Content-type': 'application/json',
@@ -95,7 +95,7 @@ function removeElement(jsonDataid) {
         collection: 'products',
         id: JSON.stringify(jsonDataid)
     }
-    fetch('/db/element', {
+    fetch('http://localhost:8000/db/element', {
             method: 'DELETE',
             headers: {
                 'Content-type': 'application/json',
@@ -113,7 +113,7 @@ function editClient(jsonDataid) {
     document.getElementById("formcontainer" + jsonDataid).style.display = "block";
     /*
     document.querySelector("form").addEventListener("submit", function(event) {
-        fetch('/db/collection?collection=products', {
+        fetch('http://localhost:8000/db/collection?collection=products', {
                 method: 'GET'
             }).then(response => response.json())
             .then(data => {
@@ -130,7 +130,7 @@ function editClient(jsonDataid) {
                         "animal": data.animal
                     }
                 }
-                fetch('/db/element', {
+                fetch('http://localhost:8000/db/element', {
                         method: 'PUT',
                         headers: {
                             'Content-type': 'application/json',
@@ -148,7 +148,7 @@ function editClient(jsonDataid) {
 }
 
 function saveEdit(jsonDataid) {
-    fetch('/db/collection?collection=products', {
+    fetch('http://localhost:8000/db/collection?collection=products', {
             method: 'GET'
         }).then(response => response.json())
         .then(data => {
@@ -165,7 +165,7 @@ function saveEdit(jsonDataid) {
                     "animal": data.animal
                 }
             }
-            fetch('/db/element', {
+            fetch('http://localhost:8000/db/element', {
                     method: 'PUT',
                     headers: {
                         'Content-type': 'application/json',

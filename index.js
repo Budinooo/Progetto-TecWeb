@@ -324,7 +324,7 @@ const mongoCredentials = {
     }
     /* end */
 
-app.get('/db/getUserBookings', async function(req, res) {
+app.get('http://localhost:8000/db/getUserBookings', async function(req, res) {
     let allBookings = await mymongo.getCollection("bookings", mongoCredentials);
     let userBookings = [];
     try{
@@ -342,7 +342,7 @@ app.get('/db/getUserBookings', async function(req, res) {
     }
 });
 
-app.get('/db/getMultipleElements', async function(req, res) {
+app.get('http://localhost:8000/db/getMultipleElements', async function(req, res) {
     let allElems = await mymongo.getCollection(req.query.collection, mongoCredentials);
     console.log(req.query.ids);
     let multElems = [];
@@ -361,11 +361,11 @@ app.get('/db/getMultipleElements', async function(req, res) {
     }
 });
 
-app.get('/db/create', async function(req, res) {
+app.get('http://localhost:8000/db/create', async function(req, res) {
     res.send(await mymongo.create(mongoCredentials))
 });
 
-app.get('/db/search', async function(req, res) {
+app.get('http://localhost:8000/db/search', async function(req, res) {
     res.send(await mymongo.search(req.query, mongoCredentials))
 });
 
@@ -397,30 +397,30 @@ app.get('/mongo/collections', async(req, res) => {
 });
 
 /*
-fetch('/db/collection?collection=users',{
+fetch('http://localhost:8000/db/collection?collection=users',{
         method:'GET'
     })
 */
-app.get('/db/collection', async function(req, res) {
+app.get('http://localhost:8000/db/collection', async function(req, res) {
     res.send(await mymongo.getCollection(req.query.collection, mongoCredentials))
 });
 
 /*
-fetch('/db/collectionsize?collection=products',{
+fetch('http://localhost:8000/db/collectionsize?collection=products',{
     method:'GET'
     })
 */
-app.get('/db/collectionsize', async function(req, res) {
+app.get('http://localhost:8000/db/collectionsize', async function(req, res) {
     res.send(await mymongo.getCollectionSize(req.query.collection, mongoCredentials))
 });
 
 //mettere nella query direttamente l'id
 /*
-fetch('/db/element?id=3&collection=users',{
+fetch('http://localhost:8000/db/element?id=3&collection=users',{
         method:'GET'
     })
 */
-app.get('/db/element', async function(req, res) {
+app.get('http://localhost:8000/db/element', async function(req, res) {
     res.send(await mymongo.getElem(req.query.id, req.query.collection, mongoCredentials))
 });
 
@@ -441,7 +441,7 @@ let obj = {
     }
 };
 
-fetch('/db/element',{
+fetch('http://localhost:8000/db/element',{
     method:'POST',
     headers: {
         'Content-type': 'application/json',
@@ -450,7 +450,7 @@ fetch('/db/element',{
     body: JSON.stringify(obj)
 })
 */
-app.post('/db/element', async function(req, res) {
+app.post('http://localhost:8000/db/element', async function(req, res) {
     console.log("post" + req.body.elem._id)
     res.send(await mymongo.insertElem(req.body.elem, req.body.collection, mongoCredentials))
 });
@@ -471,7 +471,7 @@ obj = {
         "admin": "1"
     }
 }
-fetch('/db/element',{
+fetch('http://localhost:8000/db/element',{
     method:'PUT',
     headers: {
         'Content-type': 'application/json',
@@ -480,7 +480,7 @@ fetch('/db/element',{
     body: JSON.stringify(obj)
 })
 */
-app.put('/db/element', async function(req, res) {
+app.put('http://localhost:8000/db/element', async function(req, res) {
     res.send(await mymongo.editElem(req.body.elem, req.body.collection, mongoCredentials))
 });
 
@@ -490,7 +490,7 @@ obj = {
     collection:'users',
     id:'3'
 }
-fetch('/db/element',{
+fetch('http://localhost:8000/db/element',{
     method:'DELETE',
     headers: {
         'Content-type': 'application/json',
@@ -499,7 +499,7 @@ fetch('/db/element',{
     body: JSON.stringify(obj)
 })
 */
-app.delete('/db/element', async function(req, res) {
+app.delete('http://localhost:8000/db/element', async function(req, res) {
     console.log("ID DA TROVARE: " + req.body.id);
     let tmpobj = [];
     castedId = ObjectID(req.body.id);

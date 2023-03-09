@@ -1,4 +1,4 @@
-fetch('/db/collection?collection=services', {
+fetch('http://localhost:8000/db/collection?collection=services', {
         method: 'GET'
     })
     .then(response => response.json())
@@ -102,7 +102,7 @@ function editService(serviceId) {
                 "img": img
             }
         }
-        fetch('/db/element', {
+        fetch('http://localhost:8000/db/element', {
                 method: 'PUT',
                 headers: {
                     'Content-type': 'application/json',
@@ -124,7 +124,7 @@ function addAvailability(serviceId) {
 
 function saveDate(serviceId) {
     let newDate = JSON.stringify(document.getElementById("dateService" + serviceId).value);
-    fetch('/db/element?id=' + serviceId + '&collection=services', {
+    fetch('http://localhost:8000/db/element?id=' + serviceId + '&collection=services', {
             method: 'GET'
         })
         .then(response => response.json())
@@ -143,7 +143,7 @@ function saveDate(serviceId) {
                     "availability": date
                 }
             }
-            fetch('/db/element', {
+            fetch('http://localhost:8000/db/element', {
                     method: 'PUT',
                     headers: {
                         'Content-type': 'application/json',
@@ -164,7 +164,7 @@ function removeService(serviceId) {
         collection: 'services',
         id: JSON.stringify(serviceId)
     }
-    fetch('/db/element', {
+    fetch('http://localhost:8000/db/element', {
             method: 'DELETE',
             headers: {
                 'Content-type': 'application/json',

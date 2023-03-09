@@ -1,4 +1,4 @@
-fetch('/db/collection?collection=users', {
+fetch('http://localhost:8000/db/collection?collection=users', {
         method: 'GET'
     })
     .then(response => response.json())
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function addClient(name, username, email, password, pets, admin, animals, score) {
     // logica per l'aggiunta di un nuovo cliente
     let size;
-    fetch('/db/collectionsize?collection=products', {
+    fetch('http://localhost:8000/db/collectionsize?collection=products', {
             method: 'GET'
         })
         .then(response => {
@@ -98,7 +98,7 @@ function addClient(name, username, email, password, pets, admin, animals, score)
                 }
             };
 
-            fetch('/db/element', {
+            fetch('http://localhost:8000/db/element', {
                     method: 'POST',
                     headers: {
                         'Content-type': 'application/json',
@@ -118,7 +118,7 @@ function editClient(jsonDataid) {
     document.getElementById("formeditcontainer" + jsonDataid).style.display = "block";
     document.querySelector('#editSaveClient' + jsonDataid).addEventListener("click", e => {
         e.preventDefault();
-        fetch('/db/element?id=' + jsonDataid + '&collection=users', {
+        fetch('http://localhost:8000/db/element?id=' + jsonDataid + '&collection=users', {
                 method: 'GET'
             })
             .then(response => response.json())
@@ -144,7 +144,7 @@ function editClient(jsonDataid) {
                         "admin": admin
                     }
                 }
-                fetch('/db/element', {
+                fetch('http://localhost:8000/db/element', {
                         method: 'PUT',
                         headers: {
                             'Content-type': 'application/json',
@@ -167,7 +167,7 @@ function removeClient(clientId) {
         collection: 'users',
         id: JSON.stringify(clientId)
     }
-    fetch('/db/element', {
+    fetch('http://localhost:8000/db/element', {
             method: 'DELETE',
             headers: {
                 'Content-type': 'application/json',
