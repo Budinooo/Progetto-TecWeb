@@ -18,6 +18,7 @@ fetch('/db/collection?collection=services', {
                 <img class="card-img-top" src="${service.img}" alt="${service.name}" style="width: 18rem;">
                 <p>Description: ${service.description}</p>
                 <p>Place: ${service.place}</p>
+                <p>Price: €${service.price}</p>
                 <p id="date">Availability:  ${service.availability}</p>
                 <button class="btn btn-warning" id="edit-${service._id}" onclick="editService(${service._id})" style="margin-top: 5px">Edit</button>
                 <button class="btn btn-primary" id="availability-${service._id}" onclick="addAvailability(${service._id})" style="margin-top: 5px">Add Availabile Date</button>
@@ -52,7 +53,7 @@ fetch('/db/collection?collection=services', {
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Price</label>
-                    <input type="text" class="form-control" id="priceEditService` + service._id + `" value="` + service.price + `">
+                    <input type="number" class="form-control" id="priceEditService` + service._id + `" value="` + service.price + `">
                 </div>
                 <div class="form-group" style="display:none">
                     <label for="scoreInput">Date</label>
@@ -158,40 +159,43 @@ function addAvailability(serviceId) {
     document.getElementById("saveDateService" + serviceId).addEventListener("click", e => {
         e.preventDefault();
         let newDate = document.getElementById("newDateService" + serviceId).value;
-        //debugger;
-        fetch('/db/element?id=' + serviceId + '&collection=services', {
-                method: 'GET'
-            })
-            .then(response => response.json())
-            .then(data => {
-                data = data.result;
-                let date = data.availability;
-                date.push(newDate);
-                let obj = {
-                    collection: 'services',
-                    elem: {
-                        "_id": JSON.stringify(serviceId),
-                        "name": data.name,
-                        "description": data.description,
-                        "price": data.price,
-                        "place": data.place,
-                        "img": data.img,
-                        "availability": date
+        if (newDate != "") {
+            fetch('/db/element?id=' + serviceId + '&collection=services', {
+                    method: 'GET'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    data = data.result;
+                    let date = data.availability;
+                    if (!date.includes(newDate)) {
+                        date.push(newDate);
                     }
-                }
-                fetch('/db/element', {
-                        method: 'PUT',
-                        headers: {
-                            'Content-type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify(obj)
-                    })
-                    .then(() => {
-                        location.reload();
-                    })
-            })
-        document.getElementById("formdate" + serviceId).style.display = "none";
+                    let obj = {
+                        collection: 'services',
+                        elem: {
+                            "_id": JSON.stringify(serviceId),
+                            "name": data.name,
+                            "description": data.description,
+                            "price": data.price,
+                            "place": data.place,
+                            "img": data.img,
+                            "availability": date
+                        }
+                    }
+                    fetch('/db/element', {
+                            method: 'PUT',
+                            headers: {
+                                'Content-type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify(obj)
+                        })
+                        .then(() => {
+                            location.reload();
+                        })
+                })
+            document.getElementById("formdate" + serviceId).style.display = "none";
+        }
     })
 }
 

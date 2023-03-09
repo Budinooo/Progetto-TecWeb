@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     setFormMessage(loginForm, "success", "You're logged in!");
                     const longinInfo = {
                         islogged: true,
-                        id: user._id
+                        id: data._id
                     }
                     localStorage.setItem("login", JSON.stringify(longinInfo))
                     window.location.replace('./frontend/index.html');

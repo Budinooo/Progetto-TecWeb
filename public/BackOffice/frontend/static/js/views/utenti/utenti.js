@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const password = document.querySelector('#passwordInput').value;
         const admin = document.querySelector('#adminInput').value;
         const score = Number(document.querySelector('#scoreInput').value);
-        if (name != null && username != null && email != null && password != null) {
+        if (name != "" && username != "" && email != "" && password != "") {
             addClient(name, username, email, password, admin, score);
         }
     });
@@ -114,7 +114,6 @@ function addClient(name, username, email, password, admin, score) {
             let obj = {
                 collection: 'users',
                 elem: {
-                    "_id": JSON.stringify(size),
                     "name": name,
                     "username": username,
                     "email": email,

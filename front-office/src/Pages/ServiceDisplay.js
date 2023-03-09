@@ -12,13 +12,13 @@ class ServiceDisplay extends React.Component
 
     componentDidMount() 
     {
-        fetch(`/db/collection?collection=services`)
+        fetch(`db/collection?collection=services`)
         .then((res)=> res.json()).then((data) => this.setState({services: data.result}));
     }
 
     displayLocations()  
     {
-        fetch('/db/collection?collection=locations').then((res) => res.json())
+        fetch('db/collection?collection=locations').then((res) => res.json())
         .then((data) => 
         {
             return data.result.map((location) => 
