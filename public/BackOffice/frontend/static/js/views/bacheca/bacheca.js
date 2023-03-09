@@ -305,11 +305,3 @@ function removeAnswer(messageId, answerPos) {
                 })
         })
 }
-
-function logout() {
-    const longinInfo = {
-        islogged: false,
-        id: ""
-    }
-    localStorage.setItem("login", JSON.stringify(longinInfo));
-}
