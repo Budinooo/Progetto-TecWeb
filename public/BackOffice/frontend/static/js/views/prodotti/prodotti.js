@@ -188,6 +188,14 @@ function editClient(jsonDataid) {
         }
     })
 }
+
+function logout() {
+    const longinInfo = {
+        islogged: false,
+        id: ""
+    }
+    localStorage.setItem("login", JSON.stringify(longinInfo));
+}
 /*
 function saveEdit(jsonDataid) {
     console.log(jsonDataid);
