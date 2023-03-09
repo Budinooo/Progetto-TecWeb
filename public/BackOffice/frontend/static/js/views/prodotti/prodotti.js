@@ -31,7 +31,7 @@ fetch('/db/collection?collection=products', {
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Price</label>
-                    <input type="text" class="form-control" id="priceEditInput${prodotto._id}" value="${prodotto.price}">
+                    <input type="number" class="form-control" id="priceEditInput${prodotto._id}" value="${prodotto.price}">
                 </div>
                 <div class="form-group">
                     <label for="imageInput">Image url</label>
@@ -91,7 +91,6 @@ $("#addBtn").click(function() {
                     let obj = {
                         collection: 'products',
                         elem: {
-                            "_id": JSON.stringify(prodotti.result),
                             "name": document.getElementById("nameInput").value,
                             "description": document.getElementById("descriptionInput").value,
                             "price": document.getElementById("priceInput").value,
