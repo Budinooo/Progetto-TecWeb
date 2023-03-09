@@ -18,7 +18,7 @@ class Navbar extends React.Component {
   {
     if(JSON.parse(localStorage.getItem("login")).islogged){
       if(window.location.pathname == '/profile/' || window.location.pathname == '/profile' ){
-        return(<a className="icon-btn nav-link" onClick={this.logoutBtn} href="/profile">LOGOUT</a>);
+        return(<a className="icon-btn nav-link" onClick={this.logoutBtn} href="/">LOGOUT</a>);
       }
       return(<a className="icon-btn nav-link" href="/profile">PROFILE</a>);
     }
@@ -38,7 +38,7 @@ class Navbar extends React.Component {
   displayBackOfficeAccess = () => 
   {
     let loginInfo = JSON.parse(localStorage.getItem("login"));
-    fetch('db/element?collection=users&element=' + loginInfo.id).then((res) => res.json())
+    fetch('http://www.site212229.tw.cs.unibo.it/db/element?collection=users&element=' + loginInfo.id).then((res) => res.json())
     .then((data) => 
     {
       if(data.result.admin == 1)
