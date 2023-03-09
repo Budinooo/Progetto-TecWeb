@@ -20,7 +20,7 @@ class Navbar extends React.Component {
       if(window.location.pathname == '/profile'){
         return(<a className="icon-btn nav-link" onClick={this.logoutBtn} href="/profile">LOGOUT</a>);
       }
-      return(<a className="icon-btn nav-link" /*onClick={this.logoutBtn}*/ href="/profile">PROFILE</a>);
+      return(<a className="icon-btn nav-link" href="/profile">PROFILE</a>);
     }
     else
       return(<a className="icon-btn nav-link" href="/login">LOG IN</a>)
@@ -33,6 +33,23 @@ class Navbar extends React.Component {
       "id": ""
     }
     localStorage.setItem("login", JSON.stringify(obj))
+  }
+
+  displayBackOfficeAccess = () => 
+  {
+    let loginInfo = JSON.parse(localStorage.getItem("login"));
+    fetch('db/element?collection=users&element=' + loginInfo.id).then((res) => res.json())
+    .then((data) => 
+    {
+      if(data.result.admin == 1)
+        return (
+          <li className='nav-item'>
+              <a className="nav-link bottom" href="/backoffice">
+                Backoffice
+              </a>
+          </li>
+        );
+    })
   }
 
   render() {
@@ -86,6 +103,7 @@ class Navbar extends React.Component {
                   Cat products
                 </a>
               </li>
+              {displayBackOfficeAccess()}
             </ul>
           </div>
         </div>
