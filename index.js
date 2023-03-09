@@ -53,6 +53,8 @@ const fs = require('fs');
 let app = express();
 
 let bodyParser = require('body-parser');
+const { Exception } = require('handlebars');
+const { ObjectID } = require('bson');
 
 app.use(bodyParser.json());
 app.use(express.static(global.rootDir + '/public'))
@@ -302,7 +304,6 @@ app.put('/backoffice/frontend/static/js/views/prodotti/prodotti.json', (req, res
         image: req.body.image
     };
     json.products.push(newProduct);
-    console.log(req.body);
     fs.writeFileSync(filepath, JSON.stringify(json));
     res.send();
 })
@@ -322,6 +323,43 @@ const mongoCredentials = {
         site: "mongo_site212229"
     }
     /* end */
+
+app.get('/db/getUserBookings', async function(req, res) {
+    let allBookings = await mymongo.getCollection("bookings", mongoCredentials);
+    let userBookings = [];
+    try{
+        allBookings.result.map((booking) => 
+        {
+            if(booking.userId == req.query.id)
+                userBookings.push(booking);
+        });
+        res.send(userBookings);
+    }
+    catch(ex)
+    {
+        console.log(ex);
+        res.send(ex);
+    }
+});
+
+app.get('/db/getMultipleElements', async function(req, res) {
+    let allElems = await mymongo.getCollection(req.query.collection, mongoCredentials);
+    console.log(req.query.ids);
+    let multElems = [];
+    try {
+        allElems.map((elem) => 
+        {
+            if(req.query.ids.includes(elem._id))
+                multElems.push(elem);
+        });
+        res.send(multElems);
+    } 
+    catch(ex) 
+    {
+        console.log(ex);
+        res.send(ex);
+    }
+});
 
 app.get('/db/create', async function(req, res) {
     res.send(await mymongo.create(mongoCredentials))
@@ -462,11 +500,23 @@ fetch('/db/element',{
 })
 */
 app.delete('/db/element', async function(req, res) {
-    res.send(await mymongo.removeElem(req.body.id, req.body.collection, mongoCredentials))
+    console.log("ID DA TROVARE: " + req.body.id);
+    let tmpobj = [];
+    castedId = ObjectID(req.body.id);
+    let tmp = await mymongo.getCollection(req.body.collection, mongoCredentials);    
+    tmpobj = tmp.result;
+    let tmpids = [];
+    tmpobj.map((obj) => 
+    {
+        tmpids.push(ObjectID(obj._id)); 
+    });    
+    console.log("ID TOTALI: " + tmpids);
+    if(tmpids.includes(castedId))
+        console.log("TROVATO");
+    else
+        console.log("NON TROVATO");
+    res.send(await mymongo.removeElem(ObjectID(req.body.id), req.body.collection, mongoCredentials))
 });
-
-
-
 
 /* ========================== */
 /*                            */

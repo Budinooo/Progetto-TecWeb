@@ -11,23 +11,23 @@ class Navbar extends React.Component {
   handleSearch = (callback) => (e) => 
     {
       e.preventDefault();
-      console.log()
       callback(document.getElementById("searchBar").value);
     }
   
   loginBtn = () =>
   {
-    let login = localStorage.getItem("login");
-    let islogged = JSON.parse(login);
-    console.log(islogged)
     if(JSON.parse(localStorage.getItem("login")).islogged){
-      return(<a className="icon-btn nav-link" onClick={this.logoutBtn} href="/">LOG OUT</a>)
+      if(window.location.pathname == '/profile'){
+        return(<a className="icon-btn nav-link" onClick={this.logoutBtn} href="/profile">LOGOUT</a>);
+      }
+      return(<a className="icon-btn nav-link" /*onClick={this.logoutBtn}*/ href="/profile">PROFILE</a>);
     }
     else
       return(<a className="icon-btn nav-link" href="/login">LOG IN</a>)
   }
 
-  logoutBtn = () =>{
+  logoutBtn = () =>
+  {
     let obj = {
       "islogged": false,
       "id": ""
@@ -38,7 +38,7 @@ class Navbar extends React.Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg">
-        <a className="navbar-brand ms-4" href="#">
+        <a className="navbar-brand ms-4" href="/">
           <img src="img/immagine.png" alt="Animal House Logo"/>
         </a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

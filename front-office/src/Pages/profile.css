@@ -1,0 +1,76 @@
+.profile-container {
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 5%;
+}
+
+#username {
+    font-size: 4em;
+}
+
+#email {
+    opacity: 0.3;
+    font-size: 1.5em;
+}
+
+.no-pet-alert {
+    font-weight: 300;
+}
+
+.pet-name-container {
+    width:7em;
+    margin-left: 2em;
+}
+
+.pet-name {
+    font-size: 1.5em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.pet-icon {
+    font-size: 4em;
+    width: fit-content;
+}
+
+.pet-container {
+    border-style: solid;
+    border-color: gainsboro;
+    border-radius: 10px;
+    border-width: 2px;
+    width: 20em;
+    margin-right: 1em;
+    margin-bottom: 1em;
+}
+
+.edit-btn {
+    width: 1em;
+}
+
+.booking-title {
+    font-size: 1.7em;
+    font-weight: 400;
+}
+
+.booking-container {
+    margin-top: 2em;
+    background-color: rgb(230, 230, 230);
+    padding: 0.5em;
+    border-radius: 5px;
+}
+
+.booking-date {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.btn-booking-del {
+    background-color: darkred;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: darkred;
+    border-width: 2px;
+    font-weight: 600;
+    color: white;
+}

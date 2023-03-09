@@ -12,7 +12,7 @@ import ServiceDisplay from "./Pages/ServiceDisplay.js";
 
 const onSearch = (query) =>  
 {
-  console.log(query);
+  //console.log(query);
   if (query && query != "" && query!=" ")
     window.location.href = "/results?query="+query;
 } 
@@ -24,12 +24,13 @@ class App extends React.Component {
     let products = []
     let service = null
     this.state = {products: products, service: service};
-    fetch('/db/collection?collection=products', {method:"GET"}).then((res)=>res.json()).then((data)=> {this.setState({products: data.result.slice(0,8)})});
-    fetch('/db/element?id=0&collection=services', {method: "GET"}).then((res) => res.json()).then((data) => this.setState({services: data.result}));
+
   }
 
   componentDidMount()
-  {
+  {    
+    fetch('http://localhost:8000/db/collection?collection=products', {method:"GET"}).then((res)=>res.json()).then((data)=> {this.setState({products: data.result.slice(0,8)})});
+    fetch('http://localhost:8000/db/element?id=0&collection=services', {method: "GET"}).then((res) => res.json()).then((data) => this.setState({service: data.result}));
     if(localStorage.getItem("cart"))
       return;
     localStorage.setItem("cart","[]");
@@ -53,6 +54,7 @@ class App extends React.Component {
           <Route path='/feed' element={<Community_Feed />} />
           <Route path='/results' element={<DisplayResults />} />
           <Route path='/services' element={<ServiceDisplay />} />
+          <Route path='/profile' element={<Profile />} />
         </Switch>
       </>
       

@@ -21,6 +21,8 @@ Copyright (c) 2021 by Fabio Vitali
 
 */
 
+/*mongodb+srv://leon:ahdbleon@animalhousedb.loccq0z.mongodb.net/?retryWrites=true&w=majority*/
+
 /* Dati di prova */
 let fn = "/public/data/country-by-capital-city.json"
 let dbname = "countries"
@@ -34,6 +36,13 @@ const template = require(global.rootDir + '/scripts/tpl.js');
 exports.create = async function(credentials) {
     const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
 
+	let collections = ['communityFeed', 'products', 'services', 'users', 'bookings', 'locations'];
+	let debug = []
+	try {
+		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
+		const mongo = new MongoClient(mongouri);		
+		await mongo.connect();
+		debug.push("... managed to connect to MongoDB.")
     let collections = ['communityFeed', 'products', 'services', 'users', 'bookings'];
     let debug = []
     try {

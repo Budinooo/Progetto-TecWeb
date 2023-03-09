@@ -8,17 +8,28 @@ class Product_Carousel extends React.Component {
 
   constructor(props) {
     super(props);
-    const pl= props.productList;
-    const slideNum = props.productList.length/4;
-    var slides =[[]];
-    for(let i=0;i<slideNum;++i) {
-      let slideI = [];  
-      for (let j = i*4;j<((i+1)*4) && j<props.productList.length;++j) {
-          slideI[j] = props.productList[j]
+    let slideNum = 0;
+    let slides =[[]];
+    let productList = [];
+    this.state = {slides,slideNum, productList};
+
+    console.log(this.state.slides)
+  }
+
+  componentDidUpdate() {
+    if(this.props.productList != this.state.productList)
+    {
+      let slides = [[]];
+      let slideNum = this.props.productList.length/4;
+      for(let i=0;i<slideNum;++i) {
+        let slideI = [];
+        for (let j = i*4;j<((i+1)*4) && j< this.props.productList.length;++j) {
+            slideI[j] = this.props.productList[j]
+        }
+        slides[i]=slideI;
       }
-      slides[i]=slideI;
+      this.setState({slides: slides, slideNum:slideNum, productList: this.props.productList})
     }
-    this.state = {slides,slideNum};
   }
 
   getCarouselIndicators() {
@@ -28,17 +39,20 @@ class Product_Carousel extends React.Component {
   }
   
   render() {
+    if(this.state.slideNum <= 0) {
+      return null;
+    }
     return (
       <Carousel controls variant='dark'>
         {this.state.slides.map( (productList, i) => {
           return (
-            <Carousel.Item key={i}>
+            <Carousel.Item key={this.state.productList[i]._id}>
               <div className="container">
                 <div className='row'>
                   {productList.map( product => {
                     return ( 
-                      <div key={product.id} className='col-sm-3'>
-                        <Product key={product.id} product={product}/>
+                      <div key={product._id} className='col-sm-3'>
+                        <Product product={product}/>
                       </div>
                     )
                   })}
