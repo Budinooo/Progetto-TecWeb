@@ -17,7 +17,7 @@ class Cart extends React.Component
 
     productRemove = (id) => 
     {
-        let productToRemove = this.state.products.findIndex(product => product.id == id);
+        let productToRemove = this.state.products.findIndex(product => product._id == id);
         let remainingProducts = this.state.products;
         remainingProducts.splice(productToRemove,1);
         this.setState({products: remainingProducts}, () => localStorage.setItem("cart", JSON.stringify(this.state.products)));
@@ -39,10 +39,9 @@ class Cart extends React.Component
 
     setQuantity = (e) => (id) =>
     {
-        debugger;
         if(!e.target.value)
             return;
-        let productToUpdate = this.state.products.findIndex(product => product.id == id);
+        let productToUpdate = this.state.products.findIndex(product => product._id == id);
         let items = this.state.products;
         let newProduct = items.at(productToUpdate);
         newProduct.quantity = e.target.value;
@@ -60,12 +59,12 @@ class Cart extends React.Component
                 </div>
             )
         }
-        this.state.products.map((product) => 
+        return this.state.products.map((product) => 
             {
                 return(
-                    <div key={product.id} className="row cart-item">
+                    <div key={product._id} className="row cart-item">
                         <div className="col-sm-1 d-flex align-items-center justify-content-center">
-                            <button onClick={(e) => this.productRemove(product.id)} className="btn-close"></button>
+                            <button onClick={(e) => this.productRemove(product._id)} className="btn-close"></button>
                         </div>
                         <div className="col-sm-2">
                             <img className="product-img my-2" height="70%" src={product.img} />
@@ -78,7 +77,7 @@ class Cart extends React.Component
                         </div>
                         <div className="col-sm-1">
                             <form className="inline-form product-quantity-form">
-                                <input className="quantity" type="number" onChange={(e) => this.setQuantity(e)(product.id)} min="1" defaultValue={product.quantity}></input>
+                                <input className="quantity" type="number" onChange={(e) => this.setQuantity(e)(product._id)} min="1" defaultValue={product.quantity}></input>
                             </form>
                         </div>
                     </div>

@@ -5,10 +5,13 @@ fetch('/db/collection?collection=users', {
     .then(clients => {
         clients = clients.result;
         let clientsHtml = '';
-        clients.forEach(client => {
+        let adminHtml = [];
+        for (var i = 0; i < clients.length; i++) {
+            let client = clients[i];
+            adminHtml[i] = '';
             clientsHtml += `
         <div class="col-sm-4">
-          <div class="card">
+          <div class="card" style=margin-top:5px>
             <div class="card-body" id="${client._id}">
               <h5 class="card-title">${client.name}</h5>
               <p class="card-text">Username: ${client.username}</p>
@@ -43,15 +46,33 @@ fetch('/db/collection?collection=users', {
                     </div>
                     <div class="form-group">
                         <label for="adminInput">Admin</label>
-                        <input type="checkbox" class="form-control" id="adminEditInput${client._id}">
+                        <select name="Admin" id="adminEditInput${client._id}">
+                            <option value=0>Not Admin</option>
+                            <option value=1>Admin</option>
+                        </select>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="editSaveClient${client._id}">Save</button>
+                    <button type="submit" class="btn btn-primary" id="editSaveClient${client._id}" style= margin-top:5px>Save</button>
                 </form>
             </div>
         </div>
       `;
-        });
+            if (client.admin == false) {
+                adminHtml[i] += `
+        <option value=0>Not Admin</option>
+        <option value=1>Admin</option>
+                `;
+            } else {
+                adminHtml[i] += `
+        <option value=1>Admin</option>
+        <option value=0>Not Admin</option>
+                `;
+            }
+        };
         document.getElementById('clients').innerHTML = clientsHtml;
+        for (var i = 0; i < clients.length; i++) {
+            let client = clients[i];
+            document.getElementById('adminEditInput' + client._id).innerHTML = adminHtml[i];
+        }
     });
 
 
@@ -59,7 +80,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const addForm = document.querySelector('#addClientForm');
     document.querySelector('#addClientButton').addEventListener("click", e => {
         e.preventDefault();
-        document.getElementById("formcontainer").style.display = "block";
+        if (document.getElementById("formcontainer").style.display == "none") {
+            document.getElementById("formcontainer").style.display = "block";
+        } else if (document.getElementById("formcontainer").style.display == "block") {
+            document.getElementById("formcontainer").style.display = "none";
+        }
     });
     document.querySelector('#saveClient').addEventListener("click", e => {
         e.preventDefault();
@@ -69,8 +94,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const password = document.querySelector('#passwordInput').value;
         const admin = document.querySelector('#adminInput').value;
         const score = Number(document.querySelector('#scoreInput').value);
-        addClient(name, username, email, password, admin, score);
-        document.getElementById("formcontainer").style.display = "none";
+        if (name != null && username != null && email != null && password != null) {
+            addClient(name, username, email, password, admin, score);
+        }
     });
 });
 
@@ -111,13 +137,16 @@ function addClient(name, username, email, password, admin, score) {
                 .then(() => {
                     location.reload();
                 })
-
         })
 }
 
 function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
-    document.getElementById("formeditcontainer" + jsonDataid).style.display = "block";
+    if (document.getElementById("formeditcontainer" + jsonDataid).style.display == "none") {
+        document.getElementById("formeditcontainer" + jsonDataid).style.display = "block";
+    } else if (document.getElementById("formeditcontainer" + jsonDataid).style.display == "block") {
+        document.getElementById("formeditcontainer" + jsonDataid).style.display = "none";
+    }
     document.querySelector('#editSaveClient' + jsonDataid).addEventListener("click", e => {
         e.preventDefault();
         fetch('/db/element?id=' + jsonDataid + '&collection=users', {
@@ -132,31 +161,33 @@ function editClient(jsonDataid) {
                 const password = document.querySelector('#passwordEditInput' + jsonDataid).value;
                 const admin = document.querySelector('#adminEditInput' + jsonDataid).value;
                 const score = Number(document.querySelector('#scoreEditInput' + jsonDataid).value);
-                let obj = {
-                    collection: 'users',
-                    elem: {
-                        "_id": JSON.stringify(jsonDataid),
-                        "name": name,
-                        "username": username,
-                        "email": email,
-                        "password": password,
-                        "favorites": data.favorites,
-                        "pets": data.pets,
-                        "score": score,
-                        "admin": admin
+                if (name != null && username != null && email != null && password != null) {
+                    let obj = {
+                        collection: 'users',
+                        elem: {
+                            "_id": JSON.stringify(jsonDataid),
+                            "name": name,
+                            "username": username,
+                            "email": email,
+                            "password": password,
+                            "favorites": data.favorites,
+                            "pets": data.pets,
+                            "score": score,
+                            "admin": admin
+                        }
                     }
+                    fetch('/db/element', {
+                            method: 'PUT',
+                            headers: {
+                                'Content-type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify(obj)
+                        })
+                        .then(() => {
+                            location.reload();
+                        })
                 }
-                fetch('/db/element', {
-                        method: 'PUT',
-                        headers: {
-                            'Content-type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify(obj)
-                    })
-                    .then(() => {
-                        location.reload();
-                    })
             })
         document.getElementById("formeditcontainer" + jsonDataid).style.display = "none";
     });

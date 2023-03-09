@@ -1,8 +1,8 @@
 #animal-select 
 {
     text-align: center;
-    margin-top: 10%;
-    margin-bottom: 10%;
+    margin-top: 3%;
+    margin-bottom: 5%;
 }
 
 .animal-card 
@@ -20,7 +20,7 @@
     transition: 0.1s;
 }
 
-.carouselContainer{
-    width: 70%;
+.carouselContainer
+{
+    width: 90%;
 }
-
