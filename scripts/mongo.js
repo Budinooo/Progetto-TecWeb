@@ -38,13 +38,6 @@ exports.create = async function(credentials) {
 
 	let collections = ['communityFeed', 'products', 'services', 'users', 'bookings', 'locations'];
 	let debug = []
-	try {
-		debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
-		const mongo = new MongoClient(mongouri);		
-		await mongo.connect();
-		debug.push("... managed to connect to MongoDB.")
-    let collections = ['communityFeed', 'products', 'services', 'users', 'bookings'];
-    let debug = []
     try {
         debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
         const mongo = new MongoClient(mongouri);
