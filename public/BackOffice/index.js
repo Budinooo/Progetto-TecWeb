@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const createAccount = document.querySelector('#createAccount');
     let local = JSON.parse(localStorage.getItem("login"))
     console.log(local);
-    debugger;
+    //debugger;
     if (local.islogged) {
         fetch('/db/element?id=' + local.id + '&collection=users', {
                 method: 'GET'
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 data = data.result;
                 if (data.admin == 1) {
                     console.log(data);
-                    debugger;
+                    //debugger;
                     setFormMessage(loginForm, "success", "You're logged in!");
                     const longinInfo = {
                         islogged: true,
