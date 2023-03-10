@@ -103,7 +103,12 @@ class Navbar extends React.Component {
                   Cat products
                 </a>
               </li>
-              {displayBackOfficeAccess()}
+              <li className='nav-item'>
+                <a className="nav-link bottom" href="/feed">
+                  Community Feed
+                </a>
+              </li>
+              {this.displayBackOfficeAccess()}
             </ul>
           </div>
         </div>
