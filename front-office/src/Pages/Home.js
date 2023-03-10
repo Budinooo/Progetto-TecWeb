@@ -45,10 +45,6 @@ export default function Home(props)
             <h3 className="mb-4">Explore our services</h3>
             <Service short={true} service={props.service} />
           </div>
-          <div className="row">
-            <a href="/services">More Services</a>
-          </div>
-          <Community_Feed />
         </div>
     )
 }
