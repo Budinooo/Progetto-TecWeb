@@ -23,9 +23,19 @@ fetch('/db/collection?collection=communityFeed', {
           </div>
           <div class="card-footer">
             <button class="btn btn-warning" onclick="editMessage(` + message._id + `)">Edit</button>
-            <button class="btn btn-danger" onclick="removeMessage(` + message._id + `)">Remove</button>
-            <button class="btn btn-danger" onclick="deleteImage(` + message._id + `)">Remove Image</button>
+            <button class="btn btn-danger" onclick="formRemoveMessage(` + message._id + `)">Remove</button>
+            <button class="btn btn-danger" onclick="formRemoveImage(` + message._id + `)">Remove Image</button>
           </div>
+          <div class="container" id="formRemovecontainer${message._id}" style="display:none">
+          <h2>Are you sure?</h2>
+          <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeMessage(${message._id})">yes</button>
+          <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveMessage(${message._id})">no</button>
+        </div>
+        <div class="container" id="formRemoveImagecontainer${message._id}" style="display:none">
+        <h2>Are you sure?</h2>
+        <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="deleteImage(${message._id})">yes</button>
+        <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveImage(${message._id})">no</button>
+      </div>
           <div class="container" id="formcontainer` + message._id + `" style="display:none">
             <form class="form form--hidden" id="editMessageForm` + message._id + `">
                 <div class="form-group">
@@ -56,10 +66,20 @@ fetch('/db/collection?collection=communityFeed', {
           </div>
           <div class="card-footer">
             <button class="btn btn-warning" onclick="editAnswer(` + element._id + `, ` + message._id + `,` + j + `)">Edit</button>
-            <button class="btn btn-danger" onclick="removeAnswer(` + message._id + `,` + j + `)">Remove</button>
-            <button class="btn btn-danger" onclick="deleteAnswerImage(` + message._id + `,` + j + `)">Remove Image</button>
+            <button class="btn btn-danger" onclick="formRemoveAnswerMessage(` + element._id + `)">Remove</button>
+            <button class="btn btn-danger" onclick="formRemoveAnswerImage(` + element._id + `)">Remove Image</button>
           </div>
-          <div class="container mt-5" id="responseContainer"></div>
+          <div class="container" id="formRemoveAnswercontainer` + element._id + `" style="display:none">
+          <h2>Are you sure?</h2>
+          <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeAnswer(` + message._id + `,` + j + `)">yes</button>
+          <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveAnswerMessage(` + element._id + `)">no</button>
+        </div>
+        <div class="container" id="formRemoveAnswerImagecontainer` + element._id + `" style="display:none">
+        <h2>Are you sure?</h2>
+        <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="deleteAnswerImage(` + message._id + `,` + j + `)">yes</button>
+        <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveAnswerImage(` + element._id + `)">no</button>
+        </div>
+          
           <div class="container" id="formcontainer` + element._id + `" style="display:none">
             <form class="form form--hidden" id="editMessageForm` + element._id + `">
                 <div class="form-group">
@@ -177,6 +197,22 @@ function removeMessage(messageId) {
         .then(() => {
             location.reload();
         })
+}
+
+function formRemoveMessage(messageId) {
+    if (document.getElementById("formRemovecontainer" + messageId).style.display == "none") {
+        document.getElementById("formRemovecontainer" + messageId).style.display = "block";
+    } else if (document.getElementById("formRemovecontainer" + messageId).style.display == "block") {
+        document.getElementById("formRemovecontainer" + messageId).style.display = "none";
+    }
+}
+
+function formRemoveImage(messageId) {
+    if (document.getElementById("formRemoveImagecontainer" + messageId).style.display == "none") {
+        document.getElementById("formRemoveImagecontainer" + messageId).style.display = "block";
+    } else if (document.getElementById("formRemoveImagecontainer" + messageId).style.display == "block") {
+        document.getElementById("formRemoveImagecontainer" + messageId).style.display = "none";
+    }
 }
 
 //////answers
@@ -304,6 +340,22 @@ function removeAnswer(messageId, answerPos) {
                     location.reload();
                 })
         })
+}
+
+function formRemoveAnswerMessage(messageId) {
+    if (document.getElementById("formRemoveAnswercontainer" + messageId).style.display == "none") {
+        document.getElementById("formRemoveAnswercontainer" + messageId).style.display = "block";
+    } else if (document.getElementById("formRemoveAnswercontainer" + messageId).style.display == "block") {
+        document.getElementById("formRemoveAnswercontainer" + messageId).style.display = "none";
+    }
+}
+
+function formRemoveAnswerImage(messageId) {
+    if (document.getElementById("formRemoveAnswerImagecontainer" + messageId).style.display == "none") {
+        document.getElementById("formRemoveAnswerImagecontainer" + messageId).style.display = "block";
+    } else if (document.getElementById("formRemoveAnswerImagecontainer" + messageId).style.display == "block") {
+        document.getElementById("formRemoveAnswerImagecontainer" + messageId).style.display = "none";
+    }
 }
 
 function logout() {

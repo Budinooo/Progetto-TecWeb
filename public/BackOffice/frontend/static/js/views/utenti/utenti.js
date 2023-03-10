@@ -19,9 +19,14 @@ fetch('/db/collection?collection=users', {
               <p class="card-text">password: ${client.password}</p>
               <p class="card-text">Game Score: ${client.score}</p>
               <button class="btn btn-primary" id="editClient${client._id}" onclick="editClient(${client._id})">Edit</button>
-              <button class="btn btn-danger" onclick="removeClient(${client._id})">Remove</button>
+              <button class="btn btn-danger" onclick="formRemoveClient(${client._id})">Remove</button>
             </div>
           </div>
+          <div class="container" id="formRemovecontainer${client._id}" style="display:none">
+          <h2>Are you sure?</h2>
+          <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeClient(${client._id})">yes</button>
+          <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveClient(${client._id})">no</button>
+        </div>
           <div class="container" id="formeditcontainer${client._id}" style="display:none">
                 <form class="form form--hidden" id="editClientForm">
                     <div class="form-group">
@@ -218,4 +223,12 @@ function logout() {
         id: ""
     }
     localStorage.setItem("login", JSON.stringify(longinInfo));
+}
+
+function formRemoveClient(clientId) {
+    if (document.getElementById("formRemovecontainer" + clientId).style.display == "none") {
+        document.getElementById("formRemovecontainer" + clientId).style.display = "block";
+    } else if (document.getElementById("formRemovecontainer" + clientId).style.display == "block") {
+        document.getElementById("formRemovecontainer" + clientId).style.display = "none";
+    }
 }

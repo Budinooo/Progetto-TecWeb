@@ -16,9 +16,14 @@ fetch('/db/collection?collection=products', {
               <p class="card-text">Price €${prodotto.price}</p>
               <p class="card-text">Product for: ${prodotto.animal}</p>
               <button class="btn btn-primary" id="editClient" onclick="editClient(${prodotto._id})">Edit</button>
-              <button class="btn btn-danger" onclick="removeElement(${prodotto._id})">Remove</button>
+              <button class="btn btn-danger" onclick="formRemoveElement(${prodotto._id})">Remove</button>
             </div>
           </div>
+          <div class="container" id="formRemovecontainer${prodotto._id}" style="display:none">
+          <h2>Are you sure?</h2>
+          <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeElement(${prodotto._id})">yes</button>
+          <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveElement(${prodotto._id})">no</button>
+        </div>
           <div class="container" id="formcontainer${prodotto._id}" style="display:none">
             <form class="form form--hidden" id="editProductForm${prodotto._id}">
                 <div class="form-group">
@@ -195,6 +200,14 @@ function logout() {
         id: ""
     }
     localStorage.setItem("login", JSON.stringify(longinInfo));
+}
+
+function formRemoveElement(jsonDataid) {
+    if (document.getElementById("formRemovecontainer" + jsonDataid).style.display == "none") {
+        document.getElementById("formRemovecontainer" + jsonDataid).style.display = "block";
+    } else if (document.getElementById("formRemovecontainer" + jsonDataid).style.display == "block") {
+        document.getElementById("formRemovecontainer" + jsonDataid).style.display = "none";
+    }
 }
 /*
 function saveEdit(jsonDataid) {
