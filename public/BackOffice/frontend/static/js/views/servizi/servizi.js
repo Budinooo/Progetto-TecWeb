@@ -23,7 +23,7 @@ fetch('/db/collection?collection=services', {
                 <button class="btn btn-warning" id="edit-${service._id}" onclick="editService(${service._id})" style="margin-top: 5px">Edit</button>
                 <button class="btn btn-primary" id="availability-${service._id}" onclick="addAvailability(${service._id})" style="margin-top: 5px">Add Availabile Date</button>
                 <button class="btn btn-danger" id="availability-${service._id}" onclick="removeAvailability(${service._id})" style="margin-top: 5px">Remove Availabile Date</button>
-                <button class="btn btn-danger" id="remove-${service._id}" onclick="removeService(${service._id})" style="margin-top: 5px">Remove</button>
+                <button class="btn btn-danger" id="remove-${service._id}" onclick="formRemoveService(${service._id})" style="margin-top: 5px">Remove</button>
             </div>
             <div class="container" id="formdate${service._id}" style="display:none; width:500px">
             <form class="form form--hidden" id="addDateForm">
@@ -37,6 +37,11 @@ fetch('/db/collection?collection=services', {
             <div class="container" id="removeDatecontainer${service._id}" style="display: none">
                 <div class="container" id="availableDate${service._id}" style="margin-left:50px; margin-bottom:50px" style="max-width: 100%"></div>
             </div>
+            <div class="container" id="formRemovecontainer${service._id}" style="display:none">
+            <h2>Are you sure?</h2>
+            <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeService(${service._id})">yes</button>
+            <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveService(${service._id})">no</button>
+          </div>
             <div class="container" id="formEditcontainer` + service._id + `" style="display:none">
             <form class="form form--hidden" id="editServiceForm">
                 <div class="form-group">
@@ -307,4 +312,12 @@ function logout() {
         id: ""
     }
     localStorage.setItem("login", JSON.stringify(longinInfo));
+}
+
+function formRemoveService(serviceId) {
+    if (document.getElementById("formRemovecontainer" + serviceId).style.display === "none") {
+        document.getElementById("formRemovecontainer" + serviceId).style.display = "block";
+    } else if (document.getElementById("formRemovecontainer" + serviceId).style.display === "block") {
+        document.getElementById("formRemovecontainer" + serviceId).style.display = "none";
+    }
 }
