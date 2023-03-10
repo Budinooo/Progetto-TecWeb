@@ -22,7 +22,7 @@ class Community_Feed extends React.Component {
     }
 
     getPosts = () =>{
-        fetch('db/collection?collection=communityFeed',{
+        fetch('/db/collection?collection=communityFeed',{
             method:'GET'
         }).then(response => response.json())
         .then(data => {
@@ -75,7 +75,7 @@ class Community_Feed extends React.Component {
             if (desc){
                 let post = (this.state.posts.filter(obj => obj._id == this.state.postChosen))[0];
                 let date = new Date();
-                fetch('db/element?id='+login.id+'&collection=users',{
+                fetch('/db/element?id='+login.id+'&collection=users',{
                     method:'GET'
                 })
                 .then(response => response.json())
@@ -102,7 +102,7 @@ class Community_Feed extends React.Component {
                             "file": post.file
                         }
                     }
-                    fetch('db/element',{
+                    fetch('/db/element',{
                         method:'PUT',
                         headers: {
                             'Content-type': 'application/json',

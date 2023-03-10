@@ -38,7 +38,7 @@ class Navbar extends React.Component {
   displayBackOfficeAccess = () => 
   {
     let loginInfo = JSON.parse(localStorage.getItem("login"));
-    fetch('db/element?collection=users&element=' + loginInfo.id).then((res) => res.json())
+    fetch('/db/element?collection=users&element=' + loginInfo.id).then((res) => res.json())
     .then((data) => 
     {
       if(data.result.admin == 1)
