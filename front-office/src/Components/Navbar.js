@@ -38,7 +38,7 @@ class Navbar extends React.Component {
   displayBackOfficeAccess = () => 
   {
     let loginInfo = JSON.parse(localStorage.getItem("login"));
-    fetch('http://www.site212229.tw.cs.unibo.it/db/element?collection=users&element=' + loginInfo.id).then((res) => res.json())
+    fetch('db/element?collection=users&element=' + loginInfo.id).then((res) => res.json())
     .then((data) => 
     {
       if(data.result.admin == 1)
@@ -65,7 +65,7 @@ class Navbar extends React.Component {
           <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <form id="searchbarContainer" className="ms-auto my-2 my-lg-0">
               <input id="searchBar" className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-              <button onClick={(e)=>this.handleSearch(this.props.callback)(e)} ><img width="85%" src="http://cdn-icons-png.flaticon.com/512/2811/2811806.png" /></button>
+              <button onClick={(e)=>this.handleSearch(this.props.callback)(e)} ><img width="85%" src="https://cdn-icons-png.flaticon.com/512/2811/2811806.png" /></button>
             </form>
             <ul className="navbar-nav justify-content-end me-5">
               <li className="nav-item active">
