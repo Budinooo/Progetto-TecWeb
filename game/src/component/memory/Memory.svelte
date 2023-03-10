@@ -42,7 +42,7 @@
     const setupCardInfo = () => {
         var animal = randomAnimal().trim().split(/\s+/);
         animal = animal[animal.length-1];
-        fetch("https://api.unsplash.com/search/photos?client_id="+YOUR_ACCESS_KEY+"&query="+animal+"&per_page=3")
+        fetch("http://api.unsplash.com/search/photos?client_id="+YOUR_ACCESS_KEY+"&query="+animal+"&per_page=3")
         .then((result) => {
             return result.json();
         }).then((data) => {

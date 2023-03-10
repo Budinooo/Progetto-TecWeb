@@ -14,14 +14,14 @@
     var imgSrc;
     var isModalOpen = false;
     
-    fetch("https://api.unsplash.com/search/photos?client_id="+YOUR_ACCESS_KEY+"&query="+(info.name).replace(" ","")+"&per_page=3")
+    fetch("http://api.unsplash.com/search/photos?client_id="+YOUR_ACCESS_KEY+"&query="+(info.name).replace(" ","")+"&per_page=3")
     .then((result) => {
         return result.json();
     }).then((data) => {
         if (data.results[0]){
             imgSrc =  data.results[Math.floor(Math.random() * data.results.length)].urls.regular;
         }else{
-            fetch("https://api.unsplash.com/search/photos?client_id="+YOUR_ACCESS_KEY+"&query="+(info.name)+"&per_page=3")
+            fetch("http://api.unsplash.com/search/photos?client_id="+YOUR_ACCESS_KEY+"&query="+(info.name)+"&per_page=3")
             .then((resul) => {
                 return resul.json();
             }).then((dat) => {

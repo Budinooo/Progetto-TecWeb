@@ -35,7 +35,7 @@
                 }
             }
         }
-        xmlHttp.open( "GET", "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId="+playlistId[i]+"&key=AIzaSyBwKTLoQHoNYRzU2f6laHTOrXILwMpbtnQ&maxResults=9", true ); 
+        xmlHttp.open( "GET", "http://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId="+playlistId[i]+"&key=AIzaSyBwKTLoQHoNYRzU2f6laHTOrXILwMpbtnQ&maxResults=9", true ); 
         xmlHttp.send( null );
     }
 

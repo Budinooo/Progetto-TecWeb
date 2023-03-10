@@ -259,10 +259,10 @@ var app = (function (jQuery) {
     }
 
     // we need to store the information for multiple documents because a Svelte application could also contain iframes
-    // https://github.com/sveltejs/svelte/issues/3624
+    // http://github.com/sveltejs/svelte/issues/3624
     const managed_styles = new Map();
     let active = 0;
-    // https://github.com/darkskyapp/string-hash/blob/master/index.js
+    // http://github.com/darkskyapp/string-hash/blob/master/index.js
     function hash$2(str) {
         let hash = 5381;
         let i = str.length;
@@ -339,7 +339,7 @@ var app = (function (jQuery) {
      *
      * `onMount` does not run inside a [server-side component](/docs#run-time-server-side-component-api).
      *
-     * https://svelte.dev/docs#run-time-svelte-onmount
+     * http://svelte.dev/docs#run-time-svelte-onmount
      */
     function onMount(fn) {
         get_current_component().$$.on_mount.push(fn);
@@ -350,7 +350,7 @@ var app = (function (jQuery) {
      * Out of `onMount`, `beforeUpdate`, `afterUpdate` and `onDestroy`, this is the
      * only one that runs inside a server-side component.
      *
-     * https://svelte.dev/docs#run-time-svelte-ondestroy
+     * http://svelte.dev/docs#run-time-svelte-ondestroy
      */
     function onDestroy(fn) {
         get_current_component().$$.on_destroy.push(fn);
@@ -360,12 +360,12 @@ var app = (function (jQuery) {
      * Event dispatchers are functions that can take two arguments: `name` and `detail`.
      *
      * Component events created with `createEventDispatcher` create a
-     * [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent).
-     * These events do not [bubble](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_bubbling_and_capture).
-     * The `detail` argument corresponds to the [CustomEvent.detail](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/detail)
+     * [CustomEvent](http://developer.mozilla.org/en-US/docs/Web/API/CustomEvent).
+     * These events do not [bubble](http://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_bubbling_and_capture).
+     * The `detail` argument corresponds to the [CustomEvent.detail](http://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/detail)
      * property and can contain any type of data.
      *
-     * https://svelte.dev/docs#run-time-svelte-createeventdispatcher
+     * http://svelte.dev/docs#run-time-svelte-createeventdispatcher
      */
     function createEventDispatcher() {
         const component = get_current_component();
@@ -390,7 +390,7 @@ var app = (function (jQuery) {
      *
      * Like lifecycle functions, this must be called during component initialisation.
      *
-     * https://svelte.dev/docs#run-time-svelte-setcontext
+     * http://svelte.dev/docs#run-time-svelte-setcontext
      */
     function setContext(key, context) {
         get_current_component().$$.context.set(key, context);
@@ -400,7 +400,7 @@ var app = (function (jQuery) {
      * Retrieves the context that belongs to the closest parent component with the specified `key`.
      * Must be called during component initialisation.
      *
-     * https://svelte.dev/docs#run-time-svelte-getcontext
+     * http://svelte.dev/docs#run-time-svelte-getcontext
      */
     function getContext(key) {
         return get_current_component().$$.context.get(key);
@@ -1596,7 +1596,7 @@ var app = (function (jQuery) {
 
       /**
        * To work properly with the URL
-       * history.location generated polyfill in https://github.com/devote/HTML5-History-API
+       * history.location generated polyfill in http://github.com/devote/HTML5-History-API
        */
 
       var isLocation = hasWindow && !!(window.history.location || window.location);
@@ -2067,7 +2067,7 @@ var app = (function (jQuery) {
 
         /*
            When the port is the default http port 80 for http, or 443 for
-           https, internet explorer 11 returns an empty string for loc.port,
+           http, internet explorer 11 returns an empty string for loc.port,
            so we need to compare loc.port with an empty string if url.port
            is the default port 80 or 443.
            Also the comparition with `port` is changed from `===` to `==` because
@@ -4188,7 +4188,7 @@ var app = (function (jQuery) {
       };
 
       if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
-        if (getNodeName(offsetParent) !== 'body' || // https://github.com/popperjs/popper-core/issues/1078
+        if (getNodeName(offsetParent) !== 'body' || // http://github.com/popperjs/popper-core/issues/1078
         isScrollParent(documentElement)) {
           scroll = getNodeScroll(offsetParent);
         }
@@ -4214,7 +4214,7 @@ var app = (function (jQuery) {
 
     function getLayoutRect(element) {
       var clientRect = getBoundingClientRect(element); // Use the clientRect sizes if it's not been transformed.
-      // Fixes https://github.com/popperjs/popper-core/issues/1223
+      // Fixes http://github.com/popperjs/popper-core/issues/1223
 
       var width = element.offsetWidth;
       var height = element.offsetHeight;
@@ -4293,7 +4293,7 @@ var app = (function (jQuery) {
     }
 
     function getTrueOffsetParent(element) {
-      if (!isHTMLElement(element) || // https://github.com/popperjs/popper-core/issues/837
+      if (!isHTMLElement(element) || // http://github.com/popperjs/popper-core/issues/837
       getComputedStyle$1(element).position === 'fixed') {
         return null;
       }
@@ -4325,7 +4325,7 @@ var app = (function (jQuery) {
       while (isHTMLElement(currentNode) && ['html', 'body'].indexOf(getNodeName(currentNode)) < 0) {
         var css = getComputedStyle$1(currentNode); // This is non-exhaustive but covers the most common CSS properties that
         // create a containing block.
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
+        // http://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
 
         if (css.transform !== 'none' || css.perspective !== 'none' || css.contain === 'paint' || ['transform', 'perspective'].indexOf(css.willChange) !== -1 || isFirefox && css.willChange === 'filter' || isFirefox && css.filter && css.filter !== 'none') {
           return currentNode;
@@ -4576,7 +4576,7 @@ var app = (function (jQuery) {
 
       if (!isElement(clipperElement)) {
         return [];
-      } // $FlowFixMe[incompatible-return]: https://github.com/facebook/flow/issues/1414
+      } // $FlowFixMe[incompatible-return]: http://github.com/facebook/flow/issues/1414
 
 
       return clippingParents.filter(function (clippingParent) {
@@ -5807,7 +5807,7 @@ var app = (function (jQuery) {
       defaultModifiers: defaultModifiers
     }); // eslint-disable-next-line import/no-unused-modules
 
-    // Code derived from https://github.com/bryanmylee/svelte-popperjs/blob/master/src/index.ts
+    // Code derived from http://github.com/bryanmylee/svelte-popperjs/blob/master/src/index.ts
     function createPopperActions(initOptions) {
       let contentNode;
       let options = initOptions;
@@ -11269,7 +11269,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    // (42:10) <NavLink href="https://github.com/bestguy/sveltestrap">
+    // (42:10) <NavLink href="http://github.com/bestguy/sveltestrap">
     function create_default_slot_10(ctx) {
     	let t;
 
@@ -11289,7 +11289,7 @@ var app = (function (jQuery) {
     		block,
     		id: create_default_slot_10.name,
     		type: "slot",
-    		source: "(42:10) <NavLink href=\\\"https://github.com/bestguy/sveltestrap\\\">",
+    		source: "(42:10) <NavLink href=\\\"http://github.com/bestguy/sveltestrap\\\">",
     		ctx
     	});
 
@@ -11303,7 +11303,7 @@ var app = (function (jQuery) {
 
     	navlink = new NavLink({
     			props: {
-    				href: "https://github.com/bestguy/sveltestrap",
+    				href: "http://github.com/bestguy/sveltestrap",
     				$$slots: { default: [create_default_slot_10] },
     				$$scope: { ctx }
     			},
@@ -12309,7 +12309,7 @@ var app = (function (jQuery) {
     			}
     		};
 
-    		xmlHttp.open("GET", 'https://api.api-ninjas.com/v1/animals?name=' + animal, true);
+    		xmlHttp.open("GET", 'http://api.api-ninjas.com/v1/animals?name=' + animal, true);
     		xmlHttp.setRequestHeader("X-Api-Key", "XeRLqZeWmuiW7/PMyztdHQ==HoJJOzopIX90X1xe");
     		xmlHttp.send(null);
     	};
@@ -14926,7 +14926,7 @@ var app = (function (jQuery) {
     			}
     		};
 
-    		xmlHttp.open("GET", 'https://api.api-ninjas.com/v1/animals?name=' + animalName, true);
+    		xmlHttp.open("GET", 'http://api.api-ninjas.com/v1/animals?name=' + animalName, true);
     		xmlHttp.setRequestHeader("X-Api-Key", "XeRLqZeWmuiW7/PMyztdHQ==HoJJOzopIX90X1xe");
     		xmlHttp.send(null);
     	};
@@ -16641,7 +16641,7 @@ var app = (function (jQuery) {
     		var animal = randomAnimal().trim().split(/\s+/);
     		animal = animal[animal.length - 1];
 
-    		fetch("https://api.unsplash.com/search/photos?client_id=" + YOUR_ACCESS_KEY$1 + "&query=" + animal + "&per_page=3").then(result => {
+    		fetch("http://api.unsplash.com/search/photos?client_id=" + YOUR_ACCESS_KEY$1 + "&query=" + animal + "&per_page=3").then(result => {
     			return result.json();
     		}).then(data => {
     			var index = Math.floor(Math.random() * data.results.length);
@@ -21370,13 +21370,13 @@ var app = (function (jQuery) {
     	var imgSrc;
     	var isModalOpen = false;
 
-    	fetch("https://api.unsplash.com/search/photos?client_id=" + YOUR_ACCESS_KEY + "&query=" + info.name.replace(" ", "") + "&per_page=3").then(result => {
+    	fetch("http://api.unsplash.com/search/photos?client_id=" + YOUR_ACCESS_KEY + "&query=" + info.name.replace(" ", "") + "&per_page=3").then(result => {
     		return result.json();
     	}).then(data => {
     		if (data.results[0]) {
     			$$invalidate(3, imgSrc = data.results[Math.floor(Math.random() * data.results.length)].urls.regular);
     		} else {
-    			fetch("https://api.unsplash.com/search/photos?client_id=" + YOUR_ACCESS_KEY + "&query=" + info.name + "&per_page=3").then(resul => {
+    			fetch("http://api.unsplash.com/search/photos?client_id=" + YOUR_ACCESS_KEY + "&query=" + info.name + "&per_page=3").then(resul => {
     				return resul.json();
     			}).then(dat => {
     				$$invalidate(3, imgSrc = dat.results[Math.floor(Math.random() * dat.results.length)].urls.regular);
@@ -22263,7 +22263,7 @@ var app = (function (jQuery) {
     				}
     			};
 
-    			xmlHttp.open("GET", 'https://api.api-ninjas.com/v1/animals?name=' + search, true);
+    			xmlHttp.open("GET", 'http://api.api-ninjas.com/v1/animals?name=' + search, true);
     			xmlHttp.setRequestHeader("X-Api-Key", "XeRLqZeWmuiW7/PMyztdHQ==HoJJOzopIX90X1xe");
     			xmlHttp.send(null);
     		}
@@ -22412,7 +22412,7 @@ var app = (function (jQuery) {
     			t4 = space();
     			p2 = element("p");
     			t5 = text(t5_value);
-    			if (!src_url_equal(iframe.src, iframe_src_value = "https://www.youtube.com/embed/" + /*currentVideo*/ ctx[0].snippet.resourceId.videoId)) attr_dev(iframe, "src", iframe_src_value);
+    			if (!src_url_equal(iframe.src, iframe_src_value = "http://www.youtube.com/embed/" + /*currentVideo*/ ctx[0].snippet.resourceId.videoId)) attr_dev(iframe, "src", iframe_src_value);
     			attr_dev(iframe, "title", iframe_title_value = /*currentVideo*/ ctx[0].snippet.title);
     			attr_dev(iframe, "class", "svelte-qx0wlh");
     			toggle_class(iframe, "mobvideo", /*screenWidth*/ ctx[1] < 500);
@@ -22448,7 +22448,7 @@ var app = (function (jQuery) {
     			append_dev(p2, t5);
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*currentVideo*/ 1 && !src_url_equal(iframe.src, iframe_src_value = "https://www.youtube.com/embed/" + /*currentVideo*/ ctx[0].snippet.resourceId.videoId)) {
+    			if (dirty & /*currentVideo*/ 1 && !src_url_equal(iframe.src, iframe_src_value = "http://www.youtube.com/embed/" + /*currentVideo*/ ctx[0].snippet.resourceId.videoId)) {
     				attr_dev(iframe, "src", iframe_src_value);
     			}
 
@@ -22932,7 +22932,7 @@ var app = (function (jQuery) {
     	var playlistId = "PLtDp75hOzOlbD7m-Gb2t4dZqyYx7dq0iB";
     	var mainReady = false;
 
-    	fetch("https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + playlistId + "&key=AIzaSyBwKTLoQHoNYRzU2f6laHTOrXILwMpbtnQ&maxResults=9").then(result => {
+    	fetch("http://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + playlistId + "&key=AIzaSyBwKTLoQHoNYRzU2f6laHTOrXILwMpbtnQ&maxResults=9").then(result => {
     		return result.json();
     	}).then(data => {
     		console.log(data);
@@ -22947,7 +22947,7 @@ var app = (function (jQuery) {
     		}
     	}); /*for (let item of data.items){
         videosId = [...videosId, item.snippet.resourceId.videoId]
-    } "https://www.youtube.com/embed/"*/
+    } "http://www.youtube.com/embed/"*/
 
     	const switchVideo = event => {
     		let temp = playlist;
@@ -23644,7 +23644,7 @@ var app = (function (jQuery) {
     	{
     		title: "Controlling Cat Litter Box Odor",
     		category: "cat",
-    		img: "https://img.webmd.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_sleeping_on_sofa_other/1800x1200_cat_sleeping_on_sofa_other.jpg?resize=550px:*&output-quality=50",
+    		img: "http://img.webmd.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_sleeping_on_sofa_other/1800x1200_cat_sleeping_on_sofa_other.jpg?resize=550px:*&output-quality=50",
     		ptitle: [
     			"Keep It Clean",
     			"Does the Type of Litter Matter?",
@@ -23662,7 +23662,7 @@ var app = (function (jQuery) {
     	{
     		title: "Cats and Moving to a New Home: Making the Transition",
     		category: "cat",
-    		img: "https://img.webmd.com/vim/live/consumer_assets/site_images/article_thumbnails/slideshows/pet_ownership_health_benefits_for_psoriasis_slideshow/1800x1200_getty_rf_pet_ownership_health_benefits_for_psoriasis_slideshow.jpg?resize=600px:*&output-quality=75",
+    		img: "http://img.webmd.com/vim/live/consumer_assets/site_images/article_thumbnails/slideshows/pet_ownership_health_benefits_for_psoriasis_slideshow/1800x1200_getty_rf_pet_ownership_health_benefits_for_psoriasis_slideshow.jpg?resize=600px:*&output-quality=75",
     		ptitle: [
     			"Preparing Your Cat to Move",
     			"Moving Your Cat",
@@ -23680,7 +23680,7 @@ var app = (function (jQuery) {
     	{
     		title: "Feeding Your Cat: Common Mistakes to Avoid",
     		category: "cat",
-    		img: "https://img.webmd.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/other/generic_cat_other/1800x1200_generic_cat_other.jpg?resize=550px:*&output-quality=50",
+    		img: "http://img.webmd.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/other/generic_cat_other/1800x1200_generic_cat_other.jpg?resize=550px:*&output-quality=50",
     		ptitle: [
     			"Close the Kitty Buffet",
     			"Scraps Are Off the Table",
@@ -23698,7 +23698,7 @@ var app = (function (jQuery) {
     	{
     		title: "Water and Your Dog's Health",
     		category: "dog",
-    		img: "https://img.webmd.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/other/dog_drinking_water/1800x1200_dog_drinking_water.jpg?resize=550px:*&output-quality=50",
+    		img: "http://img.webmd.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/other/dog_drinking_water/1800x1200_dog_drinking_water.jpg?resize=550px:*&output-quality=50",
     		ptitle: [
     			"How Much Water Is Enough?",
     			"Keep Plenty of Water Available",
@@ -23716,7 +23716,7 @@ var app = (function (jQuery) {
     	{
     		title: "Gear Ideas for Gung-Ho Dogs",
     		category: "dog",
-    		img: "https://img.webmd.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/other/dog_gear_other/1800x1200_dog_gear_other.jpg?resize=550px:*&output-quality=50",
+    		img: "http://img.webmd.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/other/dog_gear_other/1800x1200_dog_gear_other.jpg?resize=550px:*&output-quality=50",
     		ptitle: [
     			"1. A harness.",
     			"2. Foldable water bowls and water.",
@@ -23744,7 +23744,7 @@ var app = (function (jQuery) {
     	{
     		title: "How to Choose the Right Bed For Your Dog",
     		category: "dog",
-    		img: "https://img.webmd.com/vim/live/consumer_assets/site_images/articles/health_tools/pet_ownership_health_benefits_for_psoriasis_slideshow/1800ss_getty_rf_dog_sleeping_in_dog_bed.jpg?resize=600px:*&output-quality=75",
+    		img: "http://img.webmd.com/vim/live/consumer_assets/site_images/articles/health_tools/pet_ownership_health_benefits_for_psoriasis_slideshow/1800ss_getty_rf_dog_sleeping_in_dog_bed.jpg?resize=600px:*&output-quality=75",
     		ptitle: [
     			"Types of Dog Beds",
     			"Factors to Consider"
@@ -23758,7 +23758,7 @@ var app = (function (jQuery) {
     	{
     		title: "Types of Small Pets to Adopt",
     		category: "other",
-    		img: "https://img.webmd.com/vim/live/consumer_assets/site_images/articles/health_tools/10_surprising_benefits_of_pet_ownership_for_breast_cancer_slideshow/1800ss_getty_rf_feeding_parakeet_from_hand.jpg?resize=600px:*&output-quality=75",
+    		img: "http://img.webmd.com/vim/live/consumer_assets/site_images/articles/health_tools/10_surprising_benefits_of_pet_ownership_for_breast_cancer_slideshow/1800ss_getty_rf_feeding_parakeet_from_hand.jpg?resize=600px:*&output-quality=75",
     		ptitle: [
     			"Types of Small Pets",
     			"Tips for Adopting a Small Pet"
@@ -23772,7 +23772,7 @@ var app = (function (jQuery) {
     	{
     		title: "20 Things You Can Learn from Your Pets",
     		category: "other",
-    		img: "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/reference_guide/insect_lawn_care_ref_guide/1800x1200_insect_lawn_care_ref_guide.jpg?resize=600px:*&output-quality=75",
+    		img: "http://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/reference_guide/insect_lawn_care_ref_guide/1800x1200_insect_lawn_care_ref_guide.jpg?resize=600px:*&output-quality=75",
     		ptitle: [
     			"Forget Multitasking",
     			"Take Naps",

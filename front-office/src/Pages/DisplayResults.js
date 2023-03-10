@@ -30,7 +30,7 @@ class DisplayResults extends React.Component {
      }
 
      getProducts = () =>{
-          fetch('db/collection?collection=products',{
+          fetch('http://site212229.tw.cs.unibo.it/db/collection?collection=products',{
                method:'GET'
           }).then(response => response.json())
           .then(data => {
@@ -40,7 +40,7 @@ class DisplayResults extends React.Component {
      }
 
      getSearchedProducts = (query) =>{
-          fetch('db/collection?collection=products',{
+          fetch('http://site212229.tw.cs.unibo.it/db/collection?collection=products',{
                method:'GET'
           }).then(response => response.json())
           .then(data => {
@@ -51,7 +51,7 @@ class DisplayResults extends React.Component {
      }
 
      getSearchedCategory = (query) =>{
-          fetch('db/collection?collection=products',{
+          fetch('http://site212229.tw.cs.unibo.it/db/collection?collection=products',{
                method:'GET'
           }).then(response => response.json())
           .then(data => {
@@ -75,7 +75,7 @@ class DisplayResults extends React.Component {
 
      handleCategoryFilter = (animal,tag) =>{
           //prima fare this.state.products = collezione intera di prodotti
-          fetch('db/collection?collection=products',{
+          fetch('http://site212229.tw.cs.unibo.it/db/collection?collection=products',{
                method:'GET'
           }).then(response => response.json())
           .then(data => {
