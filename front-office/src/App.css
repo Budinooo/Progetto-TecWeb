@@ -24,3 +24,11 @@
 {
     width: 90%;
 }
+
+footer 
+{
+    height: 10em;
+    margin-top: 5em;
+    background-color: rgb(17, 17, 83);
+    display: flex;
+}
