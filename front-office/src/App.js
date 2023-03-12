@@ -9,6 +9,7 @@ import Cart from "./Pages/Cart.js";
 import Profile from "./Pages/Profile.js";
 import DisplayResults from "./Pages/DisplayResults.js";
 import ServiceDisplay from "./Pages/ServiceDisplay.js";
+import { ToastContainer } from "react-toastify";
 
 const onSearch = (query) =>  
 {
@@ -29,10 +30,11 @@ class App extends React.Component {
 
   componentDidMount()
   {    
-    fetch('db/collection?collection=products', {method:"GET"}).then((res)=>res.json()).then((data)=> {this.setState({products: data.result.slice(0,8)})});
-    fetch('db/element?id=0&collection=services', {method: "GET"}).then((res) => res.json()).then((data) => this.setState({service: data.result}));
-    if(localStorage.getItem("cart") == null)
-      localStorage.setItem("cart","[]");
+    fetch('/db/collection?collection=products', {method:"GET"}).then((res)=>res.json()).then((data)=> {this.setState({products: data.result.slice(0,8)})});
+    fetch('/db/collection?collection=services', {method: "GET"}).then((res) => res.json()).then((data) => this.setState({service: data.result[0]}));
+    if(localStorage.getItem("cart"))
+      return;
+    localStorage.setItem("cart","[]");
     if(localStorage.getItem("login") == null) {
       const loginInfo = {
         "islogged": false,
@@ -55,6 +57,10 @@ class App extends React.Component {
           <Route path='/services' element={<ServiceDisplay />} />
           <Route path='/profile' element={<Profile />} />
         </Switch>
+        <footer>
+          
+        </footer>
+        <ToastContainer position="bottom-right" />
       </>
       
     )

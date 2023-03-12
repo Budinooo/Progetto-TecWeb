@@ -1,10 +1,12 @@
 import {React, useEffect, useState} from "react";
+import {TailSpin} from 'react-loader-spinner';
 import "./profile.css";
 
 export default function Profile() {
     const [profileInfo, setProfileInfo] = useState();
     const [bookings, setBookings] = useState();
     const [firstTime, setFirstTime] = useState(true);
+    const [loading, setLoading] = useState(true);
     
     useEffect(() => {
         //Get profileInfo
@@ -28,6 +30,7 @@ export default function Profile() {
             .then((data) => 
             {
                 setBookings(data);
+                setLoading(false);
             });
         }
     }, [profileInfo, bookings]);
@@ -89,7 +92,7 @@ export default function Profile() {
             .then((data) => 
             {
                 setBookings(data);
-                //rotella stop
+                setLoading(false);
             });
             //service availability update
             let service;
@@ -97,7 +100,7 @@ export default function Profile() {
             .then((data) => {
                 service = {collection: "services", elem: data.result};
                 service.elem.availability.push(booking.date);
-                fetch(`db/element`, {
+                fetch(`/db/element`, {
                 method: "PUT",
                 headers: {
                     'Content-type': 'application/json',
@@ -107,12 +110,21 @@ export default function Profile() {
                 });
             })
         })
-        //rotella start
+        setLoading(true);
+    }
+
+    const displaySpinner = (bool) => 
+    {
+        return (
+            <div className="mx-auto" id="spinner-container">
+                <TailSpin height={100} width={100} ariaLabel="loading" visible={bool} color="rgb(186, 186, 186)"/> 
+            </div>
+        )
     }
 
     const displayBookings = () => 
     {
-        if (bookings) 
+        if (bookings && !loading) 
         {
             if(bookings.length <= 0)
                 return (
@@ -125,9 +137,9 @@ export default function Profile() {
                 {
                     return(
                         <div key={booking._id} className="booking-container">
-                        <h4 className="booking-title">{booking.serviceName}</h4>
-                        <p className="booking-date">{booking.date}</p>
-                        <button className="btn-booking-del" onClick={(e) => deleteBooking(e)(booking)}>Cancel</button>
+                            <h4 className="booking-title">{booking.serviceName}</h4>
+                            <p className="booking-date">{booking.date}</p>
+                            <button className="btn-booking-del" onClick={(e) => deleteBooking(e)(booking)}>Cancel</button>
                         </div>
                     )
                 })
@@ -157,6 +169,7 @@ export default function Profile() {
                 </div>
                 <div className="row mt-4">
                     <h3>My Bookings:</h3>
+                    {displaySpinner(loading)}
                     {displayBookings()}
                 </div>
             </div>

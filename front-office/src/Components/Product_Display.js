@@ -1,4 +1,5 @@
 import React from "react";
+import {toast} from 'react-toastify';
 import './Product_Display.css'
 
 class Product_Display extends React.Component 
@@ -36,9 +37,8 @@ class Product_Display extends React.Component
 
     addToCart = (item) =>
     {
-        debugger;
         let cart = JSON.parse(localStorage.getItem("cart"));
-        let cartItem = cart.findIndex(i => i.id == item._id);
+        let cartItem = cart.findIndex(i => i._id == item._id);
         if(cartItem>=0)
             cart.at(cartItem).quantity++;
         else {
@@ -51,7 +51,7 @@ class Product_Display extends React.Component
             cart.push(newItem);
         }
         localStorage.setItem("cart", JSON.stringify(cart));
-        console.log("aggiunto " + item.name + " al carrello");
+        toast(`${item.name} added to cart`)
     }
 
     render() 

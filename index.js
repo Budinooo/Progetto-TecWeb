@@ -56,7 +56,10 @@ let bodyParser = require('body-parser');
 const { Exception } = require('handlebars');
 const { ObjectID } = require('bson');
 
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+app.use(bodyParser.text({ limit: '200mb' }));
 app.use(express.static(global.rootDir + '/public'))
 app.use('/js', express.static(global.rootDir + '/public/js'));
 app.use('/css', express.static(global.rootDir + '/public/css'));
@@ -421,7 +424,7 @@ fetch('/db/element?id=3&collection=users',{
     })
 */
 app.get('/db/element', async function(req, res) {
-    res.send(await mymongo.getElem(req.query.id, req.query.collection, mongoCredentials))
+    res.send(await mymongo.getElem(ObjectID(req.query.id), req.query.collection, mongoCredentials))
 });
 
 //mettere nel body l'oggetto intero
@@ -481,6 +484,7 @@ fetch('/db/element',{
 })
 */
 app.put('/db/element', async function(req, res) {
+    req.body.elem._id = ObjectID(req.body.elem._id);
     res.send(await mymongo.editElem(req.body.elem, req.body.collection, mongoCredentials))
 });
 
@@ -500,24 +504,7 @@ fetch('/db/element',{
 })
 */
 app.delete('/db/element', async function(req, res) {
-    /*
-    console.log("ID DA TROVARE: " + req.body.id);
-    let tmpobj = [];
-    castedId = ObjectID(req.body.id);
-    let tmp = await mymongo.getCollection(req.body.collection, mongoCredentials);    
-    tmpobj = tmp.result;
-    let tmpids = [];
-    tmpobj.map((obj) => 
-    {
-        tmpids.push(ObjectID(obj._id)); 
-    });    
-    console.log("ID TOTALI: " + tmpids);
-    if(tmpids.includes(castedId))
-        console.log("TROVATO");
-    else
-        console.log("NON TROVATO");
-        */
-    res.send(await mymongo.removeElem(req.body.id, req.body.collection, mongoCredentials))
+    res.send(await mymongo.removeElem(ObjectID(req.body.id), req.body.collection, mongoCredentials))
 });
 
 /* ========================== */
