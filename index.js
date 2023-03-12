@@ -83,6 +83,7 @@ app.use('/results', express.static(global.rootDir + '/public/FrontOffice'));
 app.use('/cart', express.static(global.rootDir + '/public/FrontOffice'));
 app.use('/services', express.static(global.rootDir + '/public/FrontOffice'));
 app.use('/profile', express.static(global.rootDir + '/public/FrontOffice'));
+app.use('/feed', express.static(global.rootDir + '/public/FrontOffice'));
 
 app.get('/', (req, res) => {
     res.sendFile(
@@ -109,6 +110,12 @@ app.get('/services', (req, res) => {
 })
 
 app.get('/profile', (req, res) => {
+    res.sendFile(
+        global.rootDir + 'public/FrontOffice/index.html'
+    )
+});
+
+app.get('/feed', (req, res) => {
     res.sendFile(
         global.rootDir + 'public/FrontOffice/index.html'
     )
