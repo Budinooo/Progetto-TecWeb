@@ -58,7 +58,7 @@ fetch('/db/collection?collection=communityFeed', {
             $("#messageContainer").append(card);
             for (var j = 0; j < response.length; j++) {
                 var element = response[j];
-                l = l + j;
+                l = messages.length + j;
                 resIds[l] = element._id;
                 var res = `
         <div class="card mb-3" id="` + l + `">
