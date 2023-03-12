@@ -1,3 +1,5 @@
+var ids = [];
+
 fetch('/db/collection?collection=users', {
         method: 'GET'
     })
@@ -9,6 +11,8 @@ fetch('/db/collection?collection=users', {
         for (var i = 0; i < clients.length; i++) {
             let client = clients[i];
             adminHtml[i] = '';
+            let id = String(i);
+            ids[i] = client._id;
             //debugger;
             clientsHtml += `
         <div class="col-sm-4">
@@ -19,14 +23,14 @@ fetch('/db/collection?collection=users', {
               <p class="card-text">email: ${client.email}</p>
               <p class="card-text">password: ${client.password}</p>
               <p class="card-text">Game Score: ${client.score}</p>
-              <button class="btn btn-primary" id="editClient${client._id}" onclick="editClient(${client._id})">Edit</button>
-              <button class="btn btn-danger" onclick="formRemoveClient(${client._id})">Remove</button>
+              <button class="btn btn-primary" id="editClient${id}" onclick="editClient(${id},${i})">Edit</button>
+              <button class="btn btn-danger" onclick="formRemoveClient(${id})">Remove</button>
             </div>
           </div>
           <div class="container" id="formRemovecontainer${client._id}" style="display:none">
           <h2>Are you sure?</h2>
-          <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeClient(${client._id})">yes</button>
-          <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveClient(${client._id})">no</button>
+          <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeClient(${i})">yes</button>
+          <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveClient(${id})">no</button>
         </div>
           <div class="container" id="formeditcontainer${client._id}" style="display:none">
                 <form class="form form--hidden" id="editClientForm">
@@ -145,17 +149,18 @@ function addClient(name, username, email, password, admin, score) {
         })
 }
 
-function editClient(jsonDataid) {
+function editClient(id, i) {
     // logica per la modifica delle informazioni del cliente
-    console.log(jsonDataid);
-    if (document.getElementById("formeditcontainer" + jsonDataid).style.display == "none") {
-        document.getElementById("formeditcontainer" + jsonDataid).style.display = "block";
-    } else if (document.getElementById("formeditcontainer" + jsonDataid).style.display == "block") {
-        document.getElementById("formeditcontainer" + jsonDataid).style.display = "none";
+    debugger;
+    console.log(i);
+    if (document.getElementById("formeditcontainer" + id).style.display == "none") {
+        document.getElementById("formeditcontainer" + id).style.display = "block";
+    } else if (document.getElementById("formeditcontainer" + id).style.display == "block") {
+        document.getElementById("formeditcontainer" + id).style.display = "none";
     }
     document.querySelector('#editSaveClient' + jsonDataid).addEventListener("click", e => {
         e.preventDefault();
-        fetch('/db/element?id=' + jsonDataid + '&collection=users', {
+        fetch('/db/element?id=' + ids[i] + '&collection=users', {
                 method: 'GET'
             })
             .then(response => response.json())
@@ -171,7 +176,7 @@ function editClient(jsonDataid) {
                     let obj = {
                         collection: 'users',
                         elem: {
-                            "_id": jsonDataid,
+                            "_id": ids[i],
                             "name": name,
                             "username": username,
                             "email": email,
@@ -201,10 +206,10 @@ function editClient(jsonDataid) {
 
 function removeClient(clientId) {
     // logica per la rimozione del cliente
-    console.log(JSON.stringify(clientId));
+    console.log(JSON.stringify(ids[i]));
     let obj = {
         collection: 'users',
-        id: JSON.stringify(clientId)
+        id: ids[i]
     }
     fetch('/db/element', {
             method: 'DELETE',
