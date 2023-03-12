@@ -146,6 +146,7 @@ function addClient(name, username, email, password, admin, score) {
 
 function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
+    console.log(jsonDataid);
     if (document.getElementById("formeditcontainer" + jsonDataid).style.display == "none") {
         document.getElementById("formeditcontainer" + jsonDataid).style.display = "block";
     } else if (document.getElementById("formeditcontainer" + jsonDataid).style.display == "block") {
@@ -169,7 +170,7 @@ function editClient(jsonDataid) {
                     let obj = {
                         collection: 'users',
                         elem: {
-                            "_id": JSON.stringify(jsonDataid),
+                            "_id": jsonDataid,
                             "name": name,
                             "username": username,
                             "email": email,
@@ -226,6 +227,7 @@ function logout() {
 }
 
 function formRemoveClient(clientId) {
+    console.log(clientId);
     if (document.getElementById("formRemovecontainer" + clientId).style.display == "none") {
         document.getElementById("formRemovecontainer" + clientId).style.display = "block";
     } else if (document.getElementById("formRemovecontainer" + clientId).style.display == "block") {
