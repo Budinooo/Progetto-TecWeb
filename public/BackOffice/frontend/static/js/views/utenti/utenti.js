@@ -1,3 +1,5 @@
+var ids = [];
+
 fetch('/db/collection?collection=users', {
         method: 'GET'
     })
@@ -10,6 +12,7 @@ fetch('/db/collection?collection=users', {
             let client = clients[i];
             adminHtml[i] = '';
             let id = String(i);
+            ids[i] = client._id;
             //debugger;
             clientsHtml += `
         <div class="col-sm-4">
@@ -20,13 +23,13 @@ fetch('/db/collection?collection=users', {
               <p class="card-text">email: ${client.email}</p>
               <p class="card-text">password: ${client.password}</p>
               <p class="card-text">Game Score: ${client.score}</p>
-              <button class="btn btn-primary" id="editClient${id}" onclick="editClient(${id},${client._id})">Edit</button>
+              <button class="btn btn-primary" id="editClient${id}" onclick="editClient(${id},${i})">Edit</button>
               <button class="btn btn-danger" onclick="formRemoveClient(${id})">Remove</button>
             </div>
           </div>
           <div class="container" id="formRemovecontainer${id}" style="display:none">
           <h2>Are you sure?</h2>
-          <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeClient(${client._id})">yes</button>
+          <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeClient(${i})">yes</button>
           <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveClient(${id})">no</button>
         </div>
           <div class="container" id="formeditcontainer${id}" style="display:none">
@@ -147,10 +150,10 @@ function addClient(name, username, email, password, admin, score) {
         })
 }
 
-function editClient(id, jsonDataid) {
+function editClient(id, i) {
     // logica per la modifica delle informazioni del cliente
     debugger;
-    console.log(jsonDataid);
+    console.log(i);
     if (document.getElementById("formeditcontainer" + id).style.display == "none") {
         document.getElementById("formeditcontainer" + id).style.display = "block";
     } else if (document.getElementById("formeditcontainer" + id).style.display == "block") {
@@ -158,7 +161,7 @@ function editClient(id, jsonDataid) {
     }
     document.querySelector('#editSaveClient' + id).addEventListener("click", e => {
         e.preventDefault();
-        fetch('/db/element?id=' + jsonDataid + '&collection=users', {
+        fetch('/db/element?id=' + ids[i] + '&collection=users', {
                 method: 'GET'
             })
             .then(response => response.json())
@@ -174,7 +177,7 @@ function editClient(id, jsonDataid) {
                     let obj = {
                         collection: 'users',
                         elem: {
-                            "_id": jsonDataid,
+                            "_id": ids[i],
                             "name": name,
                             "username": username,
                             "email": email,
@@ -204,10 +207,10 @@ function editClient(id, jsonDataid) {
 
 function removeClient(clientId) {
     // logica per la rimozione del cliente
-    console.log(JSON.stringify(clientId));
+    console.log(JSON.stringify(ids[i]));
     let obj = {
         collection: 'users',
-        id: JSON.stringify(clientId)
+        id: ids[i]
     }
     fetch('/db/element', {
             method: 'DELETE',
