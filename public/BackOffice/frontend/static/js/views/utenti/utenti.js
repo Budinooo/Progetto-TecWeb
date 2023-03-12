@@ -9,6 +9,8 @@ fetch('/db/collection?collection=users', {
         for (var i = 0; i < clients.length; i++) {
             let client = clients[i];
             adminHtml[i] = '';
+            console.log(client._id);
+            debugger;
             clientsHtml += `
         <div class="col-sm-4">
           <div class="card" style=margin-top:5px>
@@ -146,6 +148,7 @@ function addClient(name, username, email, password, admin, score) {
 
 function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
+    debugger;
     console.log(jsonDataid);
     if (document.getElementById("formeditcontainer" + jsonDataid).style.display == "none") {
         document.getElementById("formeditcontainer" + jsonDataid).style.display = "block";
