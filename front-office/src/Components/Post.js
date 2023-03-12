@@ -1,7 +1,5 @@
 import React, {StyleSheet} from 'react'
-import {Link} from 'react-router-dom';
 import './Post.css'
-
 
 class Post extends React.Component {
     constructor(props) 
@@ -38,7 +36,8 @@ class Post extends React.Component {
         if (file)
             return (
                 <div className='center'> 
-                    <img src={`${URL.createObjectURL(file)}`} alt="image uploaded"/>
+                    {console.log(file)}
+                    <img src={`${file}`} alt="image uploaded"/>
                 </div>
             );
     }
@@ -46,9 +45,9 @@ class Post extends React.Component {
     renderAnswers = () => {
         let answers = this.props.post.answers;
         if (answers.length != 0 && this.isPost){
-            return answers.map((answer, i)=>{
+            return answers.map((answer)=>{
                 return(
-                    <div className={`answer ${this.state.screenWidth<500 ? "w-100" : ""}`}>
+                    <div key={answer.date} className={`answer ${this.state.screenWidth<500 ? "w-100" : ""}`}>
                         <div className='container'>
                             <div className="description">{answer.description}</div>
                             {this.renderImage(answer.file)}

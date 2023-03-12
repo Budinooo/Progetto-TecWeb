@@ -1,6 +1,5 @@
 [
     {
-        "_id": "0",
         "name": "ciccio",
         "username": "Ciccio",
         "email": "mail@narcio.com",
@@ -11,7 +10,6 @@
         "admin": 0
     },
     { 
-        "_id": "1",
         "name": "admin",
         "username": "admin",
         "email": "mail@narcio.com",
@@ -21,7 +19,6 @@
         "score": 10,
         "admin": 1
     },{
-        "_id": "2",
         "name": "Gerald",
         "username": "Budino",
         "email": "mail@budino.com",
@@ -31,7 +28,6 @@
         "score": 1000,
         "admin": 1 
     },{
-        "_id": "3",
         "name": "gloria",
         "username": "Dir",
         "email": "gloria@gmail.com",
@@ -41,7 +37,6 @@
         "score": 0,
         "admin": 0 
     },{
-        "_id": "4",
         "name": "leonardo",
         "username": "Leo",
         "email": "lio@gmail.com",

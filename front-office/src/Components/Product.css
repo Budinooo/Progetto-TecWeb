@@ -1,3 +1,8 @@
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
 .btn-add {
     border-radius: 0.5em;
     padding: 0.5em 0.75em;
@@ -5,6 +10,7 @@
     color: white;
     font-weight: 500;
     border-style: hidden;
+    margin-top: auto;
 }
 
 .btn-add:hover {

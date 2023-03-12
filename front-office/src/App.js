@@ -9,6 +9,7 @@ import Cart from "./Pages/Cart.js";
 import Profile from "./Pages/Profile.js";
 import DisplayResults from "./Pages/DisplayResults.js";
 import ServiceDisplay from "./Pages/ServiceDisplay.js";
+import { ToastContainer } from "react-toastify";
 
 const onSearch = (query) =>  
 {
@@ -30,7 +31,7 @@ class App extends React.Component {
   componentDidMount()
   {    
     fetch('http://localhost:8000/db/collection?collection=products', {method:"GET"}).then((res)=>res.json()).then((data)=> {this.setState({products: data.result.slice(0,8)})});
-    fetch('http://localhost:8000/db/element?id=0&collection=services', {method: "GET"}).then((res) => res.json()).then((data) => this.setState({service: data.result}));
+    fetch('http://localhost:8000/db/collection?collection=services', {method: "GET"}).then((res) => res.json()).then((data) => this.setState({service: data.result[0]}));
     if(localStorage.getItem("cart"))
       return;
     localStorage.setItem("cart","[]");
@@ -59,6 +60,7 @@ class App extends React.Component {
         <footer>
           
         </footer>
+        <ToastContainer position="bottom-right" />
       </>
       
     )

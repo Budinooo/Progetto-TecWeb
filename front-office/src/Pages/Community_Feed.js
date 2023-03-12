@@ -13,10 +13,9 @@ class Community_Feed extends React.Component {
             isAdd: false,
             isPost: false,
             postChosen: 0,
-            posts: []
+            posts: [],
+            img: null
         }
-        
-        this.getPosts();
 
         this.handleIsPost = this.handleIsPost.bind(this);
     }
@@ -42,8 +41,8 @@ class Community_Feed extends React.Component {
         }else{
             let isPost = this.state.isPost;
             let handleIsPost = this.handleIsPost;
-            return this.state.posts.map((post, i)=>{
-                return <Post isPost={isPost} openPost={handleIsPost} post={post} key={i} />;
+            return this.state.posts.map((post)=>{
+                return <Post isPost={isPost} openPost={handleIsPost} post={post} key={post._id} />;
             })
         }
     }
@@ -82,25 +81,18 @@ class Community_Feed extends React.Component {
                 .then(data => {
                     data = data.result.username;
                     let newAnswer ={
+                        _id: JSON.stringify(post.answers.length+1),
                         author: data,
                         description: desc,
                         date: date.toLocaleString(),
-                        file: ''
+                        file: this.state.img
                     }
-                    if (file.length != 0)  
-                        newAnswer.file = file[0];
+                    this.setState({img: null});
+                    debugger;
                     post.answers.push(newAnswer);
                     let obj = {
                         collection:'communityFeed',
-                        elem:{
-                            "_id": post._id,
-                            "author": post.author,
-                            "title": post.title,
-                            "description": post.description,
-                            "answers": post.answers,
-                            "date": post.date,
-                            "file": post.file
-                        }
+                        elem: post
                     }
                     fetch('http://localhost:8000/db/element',{
                         method:'PUT',
@@ -125,16 +117,14 @@ class Community_Feed extends React.Component {
                 .then(data =>{
                     data = data.result.username;
                     let newPost ={
-                        id: this.state.posts.length, 
                         author: data,
                         title: title,
                         description: desc,
                         answers: [],
                         date: date.toLocaleString(),
-                        file: ''
+                        file: this.state.img
                     }
-                    if (file.length != 0)  
-                        obj.file = file[0];
+                    this.setState({img: null});
                     let obj = {
                         collection:'communityFeed',
                         elem:newPost
@@ -157,11 +147,11 @@ class Community_Feed extends React.Component {
             return (
                 <div className="add">
                     <div className={`insert ${this.state.screenWidth<500 ? "w-100" : ""}`}>
-                        <label for="upload" className='w-100'> Insert image</label>
-                        <input id="upload" type="file" accept="image/jpeg, image/png, image/jpg"></input>
+                        <label htmlFor="upload" className='w-100'> Insert image</label>
+                        <input id="upload" onChange={(e) =>this.onChangeInput(e)} type="file" accept="image/jpeg, image/png, image/jpg"></input>
                     </div>
                     <div className={`insert ${this.state.screenWidth<500 ? "w-100" : ""}`}>
-                        <label for="description"> Insert answer</label>
+                        <label htmlFor="description"> Insert answer</label>
                         <textarea  id="description"/>
                     </div>
                 </div>)
@@ -169,15 +159,15 @@ class Community_Feed extends React.Component {
             return (
                 <div className="add">
                     <div className={`insert ${this.state.screenWidth<500 ? "w-100" : ""}`}>
-                        <label for="title"> Insert title</label>
+                        <label htmlFor="title"> Insert title</label>
                         <input id="title" type="text" placeholder='Title'/>
                     </div>
                     <div className={`insert ${this.state.screenWidth<500 ? "w-100" : ""}`}>
-                        <label for="upload"> Insert image</label>
-                        <input id="upload" type="file" accept="image/jpeg, image/png, image/jpg"></input>
+                        <label htmlFor="upload"> Insert image</label>
+                        <input id="upload" onChange={(e) =>this.onChangeInput(e)} type="file" accept="image/jpeg, image/png, image/jpg"></input>
                     </div>
                     <div className={`insert ${this.state.screenWidth<500 ? "w-100" : ""}`}>
-                        <label for="description"> Insert description</label>
+                        <label htmlFor="description"> Insert description</label>
                         <textarea  id="description"/>
                     </div>
                 </div>)
@@ -194,6 +184,17 @@ class Community_Feed extends React.Component {
 
     componentDidMount() {
         window.addEventListener("resize", this.handleResize);
+        this.getPosts();
+    }
+
+    onChangeInput = (e) =>
+    {
+        const reader = new FileReader();
+        reader.addEventListener("load",() => {
+            console.log(reader.result)
+            this.setState({img: reader.result});
+        })
+        reader.readAsDataURL(e.target.files[0]);
     }
 
     componentWillUnmount() {

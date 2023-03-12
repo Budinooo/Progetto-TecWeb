@@ -1,3 +1,13 @@
+html, body {
+    min-height: 100vh;
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 #animal-select 
 {
     text-align: center;
@@ -28,7 +38,7 @@
 footer 
 {
     height: 10em;
-    margin-top: 5em;
+    margin-top: auto;
     background-color: rgb(17, 17, 83);
     display: flex;
 }

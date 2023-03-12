@@ -6,6 +6,18 @@ class Navbar extends React.Component {
   constructor(props) 
   {
     super(props);
+    this.state = {isAdmin: 0};
+  }
+
+  componentDidMount()
+  {
+    let loginInfo = JSON.parse(localStorage.getItem("login"));
+    if(loginInfo.islogged)
+      fetch('http://localhost:8000/db/element?id=' + loginInfo.id + '&collection=users').then((res) => res.json())
+      .then((data) => 
+      {
+        this.setState({isAdmin: data.result.admin}, () => console.log(this.state));
+      })
   }
 
   handleSearch = (callback) => (e) => 
@@ -18,7 +30,7 @@ class Navbar extends React.Component {
   {
     if(JSON.parse(localStorage.getItem("login")).islogged){
       if(window.location.pathname == '/profile'){
-        return(<a className="icon-btn nav-link" onClick={this.logoutBtn} href="/profile">LOGOUT</a>);
+        return(<a className="icon-btn nav-link" onClick={this.logoutBtn} href="/">LOGOUT</a>);
       }
       return(<a className="icon-btn nav-link" href="/profile">PROFILE</a>);
     }
@@ -37,19 +49,14 @@ class Navbar extends React.Component {
 
   displayBackOfficeAccess = () => 
   {
-    let loginInfo = JSON.parse(localStorage.getItem("login"));
-    fetch('http://localhost:8000/db/element?collection=users&element=' + loginInfo.id).then((res) => res.json())
-    .then((data) => 
-    {
-      if(data.result.admin == 1)
-        return (
-          <li className='nav-item'>
-              <a className="nav-link bottom" href="/backoffice">
-                Backoffice
-              </a>
-          </li>
-        );
-    })
+    if(this.state.isAdmin == 1)   
+      return (
+        <li className='nav-item'>
+            <a className="nav-link bottom" href="/backoffice">
+              Backoffice
+            </a>
+        </li>
+      );
   }
 
   render() {
