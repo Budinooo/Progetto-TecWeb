@@ -7,7 +7,8 @@ fetch('/db/collection?collection=products', {
     .then(prodotti => {
         prodotti = prodotti.result;
         let prodottiHtml = '';
-        prodotti.forEach(prodotto => {
+        for (var i = 0; i < prodotti.length; i++) {
+            var prodotto = prodotti[i];
             ids[i] = prodotto._id;
             prodottiHtml += `
         <div class="col-sm-4">
@@ -68,7 +69,7 @@ fetch('/db/collection?collection=products', {
         </div>
         </div>
       `;
-        });
+        };
         document.getElementById('productCards').innerHTML = prodottiHtml;
     });
 
