@@ -78,6 +78,7 @@ fetch('/db/collection?collection=users', {
         document.getElementById('clients').innerHTML = clientsHtml;
         for (var i = 0; i < clients.length; i++) {
             let client = clients[i];
+            let id = String(i);
             document.getElementById('adminEditInput' + id).innerHTML = adminHtml[i];
         }
     });
