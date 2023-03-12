@@ -57,7 +57,7 @@ fetch('/db/collection?collection=communityFeed', {
             $("#messageContainer").append(card);
             for (var j = 0; j < response.length; j++) {
                 var element = response[j];
-                resIds[j] = element._id;
+                //resIds[j] = element._id;
                 var res = `
         <div class="card mb-3" id="` + j + `">
           <div class="card-header">
@@ -261,15 +261,15 @@ function deleteAnswerImage(messageId, answerPos) {
 
 function editAnswer(answerId, messageId, answerPos) {
     // logica per la modifica delle informazioni del cliente
-    if (document.getElementById("formcontainer" + answerId).style.display == "none") {
-        document.getElementById("formcontainer" + answerId).style.display = "block";
-    } else if (document.getElementById("formcontainer" + answerId).style.display == "block") {
-        document.getElementById("formcontainer" + answerId).style.display = "none";
+    if (document.getElementById("formcontainer" + answerPos).style.display == "none") {
+        document.getElementById("formcontainer" + answerPos).style.display = "block";
+    } else if (document.getElementById("formcontainer" + answerPos).style.display == "block") {
+        document.getElementById("formcontainer" + answerPos).style.display = "none";
     }
     //document.getElementById(jsonDataid).style.display = "none";
-    document.getElementById("saveEdit" + answerId).addEventListener("click", e => {
+    document.getElementById("saveEdit" + answerPos).addEventListener("click", e => {
         e.preventDefault();
-        const message = document.getElementById("newMessage" + answerId).value;
+        const message = document.getElementById("newMessage" + answerPos).value;
         fetch('/db/element?id=' + ids[messageId] + '&collection=communityFeed', {
                 method: 'GET'
             })
@@ -279,7 +279,7 @@ function editAnswer(answerId, messageId, answerPos) {
                 let answer = data.answers;
                 var mes = answer[answerPos];
                 answer.splice(answerPos, 1);
-                mes.description = document.getElementById("newMessage" + answerId).value;
+                mes.description = document.getElementById("newMessage" + answerPos).value;
                 answer.push(mes)
                 let obj = {
                     collection: 'communityFeed',
