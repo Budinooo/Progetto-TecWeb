@@ -263,13 +263,13 @@ function deleteAnswerImage(messageId, answerPos) {
 
 function editAnswer(answerId, messageId, answerPos) {
     // logica per la modifica delle informazioni del cliente
-    if (document.getElementById("formcontainer" + answerPos).style.display == "none") {
-        document.getElementById("formcontainer" + answerPos).style.display = "block";
-    } else if (document.getElementById("formcontainer" + answerPos).style.display == "block") {
-        document.getElementById("formcontainer" + answerPos).style.display = "none";
+    if (document.getElementById("formcontainer" + answerId).style.display == "none") {
+        document.getElementById("formcontainer" + answerId).style.display = "block";
+    } else if (document.getElementById("formcontainer" + answerId).style.display == "block") {
+        document.getElementById("formcontainer" + answerId).style.display = "none";
     }
     //document.getElementById(jsonDataid).style.display = "none";
-    document.getElementById("saveEdit" + answerPos).addEventListener("click", e => {
+    document.getElementById("saveEdit" + answerId).addEventListener("click", e => {
         e.preventDefault();
         const message = document.getElementById("newMessage" + answerPos).value;
         fetch('/db/element?id=' + ids[messageId] + '&collection=communityFeed', {
@@ -281,7 +281,7 @@ function editAnswer(answerId, messageId, answerPos) {
                 let answer = data.answers;
                 var mes = answer[answerPos];
                 answer.splice(answerPos, 1);
-                mes.description = document.getElementById("newMessage" + answerPos).value;
+                mes.description = document.getElementById("newMessage" + answerId).value;
                 answer.push(mes)
                 let obj = {
                     collection: 'communityFeed',
