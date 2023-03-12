@@ -1,4 +1,7 @@
 // Caricamento dei messaggi dal file JSON
+var ids = [];
+var resIds = [];
+
 fetch('/db/collection?collection=communityFeed', {
         method: 'GET'
     })
@@ -8,10 +11,11 @@ fetch('/db/collection?collection=communityFeed', {
         // Iterazione attraverso tutti i messaggi
         for (var i = 0; i < messages.length; i++) {
             var message = messages[i];
+            ids[i] = message._id;
             var response = message.answers;
             // Creazione della card per ogni messaggio
             var card = `
-        <div class="card mb-3" id="` + message._id + `">
+        <div class="card mb-3" id="` + i + `">
           <div class="card-header">
             <h5>` + message.author + `</h5>
           </div>
@@ -22,27 +26,27 @@ fetch('/db/collection?collection=communityFeed', {
             <p>Reference Date: ` + message.date + `</p>
           </div>
           <div class="card-footer">
-            <button class="btn btn-warning" onclick="editMessage(` + message._id + `)">Edit</button>
-            <button class="btn btn-danger" onclick="formRemoveMessage(` + message._id + `)">Remove</button>
-            <button class="btn btn-danger" onclick="formRemoveImage(` + message._id + `)">Remove Image</button>
+            <button class="btn btn-warning" onclick="editMessage(` + i + `)">Edit</button>
+            <button class="btn btn-danger" onclick="formRemoveMessage(` + i + `)">Remove</button>
+            <button class="btn btn-danger" onclick="formRemoveImage(` + i + `)">Remove Image</button>
           </div>
-          <div class="container" id="formRemovecontainer${message._id}" style="display:none">
+          <div class="container" id="formRemovecontainer${i}" style="display:none">
           <h2>Are you sure?</h2>
-          <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeMessage(${message._id})">yes</button>
-          <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveMessage(${message._id})">no</button>
+          <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeMessage(${i})">yes</button>
+          <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveMessage(${i})">no</button>
         </div>
-        <div class="container" id="formRemoveImagecontainer${message._id}" style="display:none">
+        <div class="container" id="formRemoveImagecontainer${i}" style="display:none">
         <h2>Are you sure?</h2>
-        <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="deleteImage(${message._id})">yes</button>
-        <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveImage(${message._id})">no</button>
+        <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="deleteImage(${i})">yes</button>
+        <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveImage(${i})">no</button>
       </div>
-          <div class="container" id="formcontainer` + message._id + `" style="display:none">
-            <form class="form form--hidden" id="editMessageForm` + message._id + `">
+          <div class="container" id="formcontainer` + i + `" style="display:none">
+            <form class="form form--hidden" id="editMessageForm` + i + `">
                 <div class="form-group">
                     <label for="scoreInput">Message</label>
-                    <textarea class="form-control" id="newMessage` + message._id + `">` + message.description + `</textarea>
+                    <textarea class="form-control" id="newMessage` + i + `">` + message.description + `</textarea>
                 </div>
-                <button type="submit" class="btn btn-primary" id="saveEdit` + message._id + `">Save</button>
+                <button type="submit" class="btn btn-primary" id="saveEdit` + i + `">Save</button>
             </form>
         </div>
         <div class="container mt-5" id="responseContainer"></div>
@@ -53,8 +57,9 @@ fetch('/db/collection?collection=communityFeed', {
             $("#messageContainer").append(card);
             for (var j = 0; j < response.length; j++) {
                 var element = response[j];
+                resIds[j] = element._id;
                 var res = `
-        <div class="card mb-3" id="` + element._id + `">
+        <div class="card mb-3" id="` + j + `">
           <div class="card-header">
             <h5>` + element.author + `</h5>
           </div>
@@ -65,28 +70,28 @@ fetch('/db/collection?collection=communityFeed', {
             <p>Date: ` + element.date + `</p>
           </div>
           <div class="card-footer">
-            <button class="btn btn-warning" onclick="editAnswer(` + element._id + `, ` + message._id + `,` + j + `)">Edit</button>
-            <button class="btn btn-danger" onclick="formRemoveAnswerMessage(` + element._id + `)">Remove</button>
-            <button class="btn btn-danger" onclick="formRemoveAnswerImage(` + element._id + `)">Remove Image</button>
+            <button class="btn btn-warning" onclick="editAnswer(` + j + `, ` + i + `,` + j + `)">Edit</button>
+            <button class="btn btn-danger" onclick="formRemoveAnswerMessage(` + j + `)">Remove</button>
+            <button class="btn btn-danger" onclick="formRemoveAnswerImage(` + j + `)">Remove Image</button>
           </div>
-          <div class="container" id="formRemoveAnswercontainer` + element._id + `" style="display:none">
+          <div class="container" id="formRemoveAnswercontainer` + j + `" style="display:none">
           <h2>Are you sure?</h2>
-          <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeAnswer(` + message._id + `,` + j + `)">yes</button>
-          <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveAnswerMessage(` + element._id + `)">no</button>
+          <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeAnswer(` + i + `,` + j + `)">yes</button>
+          <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveAnswerMessage(` + j + `)">no</button>
         </div>
-        <div class="container" id="formRemoveAnswerImagecontainer` + element._id + `" style="display:none">
+        <div class="container" id="formRemoveAnswerImagecontainer` + j + `" style="display:none">
         <h2>Are you sure?</h2>
-        <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="deleteAnswerImage(` + message._id + `,` + j + `)">yes</button>
-        <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveAnswerImage(` + element._id + `)">no</button>
+        <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="deleteAnswerImage(` + i + `,` + j + `)">yes</button>
+        <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveAnswerImage(` + j + `)">no</button>
         </div>
           
-          <div class="container" id="formcontainer` + element._id + `" style="display:none">
-            <form class="form form--hidden" id="editMessageForm` + element._id + `">
+          <div class="container" id="formcontainer` + j + `" style="display:none">
+            <form class="form form--hidden" id="editMessageForm` + j + `">
                 <div class="form-group">
                     <label for="scoreInput">Message</label>
-                    <input type="text" class="form-control" id="newMessage` + element._id + `" value="` + element.description + `">
+                    <input type="text" class="form-control" id="newMessage` + j + `" value="` + element.description + `">
                 </div>
-                <button type="submit" class="btn btn-primary" id="saveEdit` + element._id + `">Save</button>
+                <button type="submit" class="btn btn-primary" id="saveEdit` + j + `">Save</button>
             </form>
         </div>
         </div>
@@ -99,7 +104,7 @@ fetch('/db/collection?collection=communityFeed', {
     });
 
 function deleteImage(messageId) {
-    fetch('/db/element?id=' + messageId + '&collection=communityFeed', {
+    fetch('/db/element?id=' + ids[messageId] + '&collection=communityFeed', {
             method: 'GET'
         })
         .then(response => response.json())
@@ -110,7 +115,7 @@ function deleteImage(messageId) {
             let obj = {
                 collection: 'communityFeed',
                 elem: {
-                    "_id": JSON.stringify(data._id),
+                    "_id": ids[messageId],
                     "author": data.author,
                     "title": data.title,
                     "description": data.description,
@@ -143,7 +148,7 @@ function editMessage(messageId) {
     document.getElementById("saveEdit" + messageId).addEventListener("click", e => {
         e.preventDefault();
         const message = document.getElementById("newMessage" + messageId).value;
-        fetch('/db/element?id=' + messageId + '&collection=communityFeed', {
+        fetch('/db/element?id=' + ids[messageId] + '&collection=communityFeed', {
                 method: 'GET'
             })
             .then(response => response.json())
@@ -155,7 +160,7 @@ function editMessage(messageId) {
                 let obj = {
                     collection: 'communityFeed',
                     elem: {
-                        "_id": JSON.stringify(messageId),
+                        "_id": ids[messageId],
                         "author": data.author,
                         "title": data.title,
                         "description": document.getElementById("newMessage" + messageId).value,
@@ -184,7 +189,7 @@ function removeMessage(messageId) {
     // logica per la rimozione del messaggio
     let obj = {
         collection: 'communityFeed',
-        id: JSON.stringify(messageId)
+        id: ids[messageId]
     }
     fetch('/db/element', {
             method: 'DELETE',
@@ -217,7 +222,7 @@ function formRemoveImage(messageId) {
 
 //////answers
 function deleteAnswerImage(messageId, answerPos) {
-    fetch('/db/element?id=' + messageId + '&collection=communityFeed', {
+    fetch('/db/element?id=' + ids[messageId] + '&collection=communityFeed', {
             method: 'GET'
         })
         .then(response => response.json())
@@ -231,7 +236,7 @@ function deleteAnswerImage(messageId, answerPos) {
             let obj = {
                 collection: 'communityFeed',
                 elem: {
-                    "_id": JSON.stringify(messageId),
+                    "_id": ids[messageId],
                     "author": data.author,
                     "title": data.title,
                     "description": data.description,
@@ -265,7 +270,7 @@ function editAnswer(answerId, messageId, answerPos) {
     document.getElementById("saveEdit" + answerId).addEventListener("click", e => {
         e.preventDefault();
         const message = document.getElementById("newMessage" + answerId).value;
-        fetch('/db/element?id=' + messageId + '&collection=communityFeed', {
+        fetch('/db/element?id=' + ids[messageId] + '&collection=communityFeed', {
                 method: 'GET'
             })
             .then(response => response.json())
@@ -279,7 +284,7 @@ function editAnswer(answerId, messageId, answerPos) {
                 let obj = {
                     collection: 'communityFeed',
                     elem: {
-                        "_id": JSON.stringify(messageId),
+                        "_id": ids[messageId],
                         "author": data.author,
                         "title": data.title,
                         "description": data.description,
@@ -300,14 +305,12 @@ function editAnswer(answerId, messageId, answerPos) {
                         location.reload();
                     })
             })
-        document.getElementById("formcontainer" + answerId).style.display = "none";
-        //document.getElementById(jsonDataid).style.display = "block";
     });
 }
 
 function removeAnswer(messageId, answerPos) {
     // logica per la rimozione del messaggio
-    fetch('/db/element?id=' + messageId + '&collection=communityFeed', {
+    fetch('/db/element?id=' + ids[messageId] + '&collection=communityFeed', {
             method: 'GET'
         })
         .then(response => response.json())
@@ -319,7 +322,7 @@ function removeAnswer(messageId, answerPos) {
             let obj = {
                 collection: 'communityFeed',
                 elem: {
-                    "_id": JSON.stringify(messageId),
+                    "_id": ids[messageId],
                     "author": data.author,
                     "title": data.title,
                     "description": data.description,

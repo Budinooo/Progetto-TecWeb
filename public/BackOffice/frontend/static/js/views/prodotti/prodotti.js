@@ -1,3 +1,5 @@
+var ids = [];
+
 fetch('/db/collection?collection=products', {
         method: 'GET'
     })
@@ -6,45 +8,46 @@ fetch('/db/collection?collection=products', {
         prodotti = prodotti.result;
         let prodottiHtml = '';
         prodotti.forEach(prodotto => {
+            ids[i] = prodotto._id;
             prodottiHtml += `
         <div class="col-sm-4">
           <div class="card" style="margin-top:5px">
           <img class="card-img-top" src="${prodotto.img}" alt="${prodotto.name}" style="width: 18rem;">
-            <div class="card-body" id="${prodotto._id}">
+            <div class="card-body" id="${i}">
               <h5 class="card-title">${prodotto.name}</h5>
               <p class="card-text">${prodotto.description}</p>
               <p class="card-text">Price €${prodotto.price}</p>
               <p class="card-text">Product for: ${prodotto.animal}</p>
-              <button class="btn btn-primary" id="editClient" onclick="editClient(${prodotto._id})">Edit</button>
-              <button class="btn btn-danger" onclick="formRemoveElement(${prodotto._id})">Remove</button>
+              <button class="btn btn-primary" id="editClient" onclick="editClient(${i})">Edit</button>
+              <button class="btn btn-danger" onclick="formRemoveElement(${i})">Remove</button>
             </div>
           </div>
-          <div class="container" id="formRemovecontainer${prodotto._id}" style="display:none">
+          <div class="container" id="formRemovecontainer${i}" style="display:none">
           <h2>Are you sure?</h2>
-          <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeElement(${prodotto._id})">yes</button>
-          <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveElement(${prodotto._id})">no</button>
+          <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeElement(${i})">yes</button>
+          <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveElement(${i})">no</button>
         </div>
-          <div class="container" id="formcontainer${prodotto._id}" style="display:none">
-            <form class="form form--hidden" id="editProductForm${prodotto._id}">
+          <div class="container" id="formcontainer${i}" style="display:none">
+            <form class="form form--hidden" id="editProductForm${i}">
                 <div class="form-group">
                     <label for="nameInput">Name</label>
-                    <input type="text" class="form-control" id="nameEditInput${prodotto._id}" value="${prodotto.name}">
+                    <input type="text" class="form-control" id="nameEditInput${i}" value="${prodotto.name}">
                 </div>
                 <div class="form-group">
                     <label for="favoritesInput">Description</label>
-                    <input type="text" class="form-control" id="descriptionEditInput${prodotto._id}" value="${prodotto.description}">
+                    <input type="text" class="form-control" id="descriptionEditInput${i}" value="${prodotto.description}">
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Price</label>
-                    <input type="number" class="form-control" id="priceEditInput${prodotto._id}" value="${prodotto.price}">
+                    <input type="number" class="form-control" id="priceEditInput${i}" value="${prodotto.price}">
                 </div>
                 <div class="form-group">
                     <label for="imageInput">Image url</label>
-                    <input type="text" class="form-control" id="imageEditInput${prodotto._id}" value="${prodotto.img}">
+                    <input type="text" class="form-control" id="imageEditInput${i}" value="${prodotto.img}">
                 </div>
                 <div class="form-group">
                     <label for="tagInput">Tag</label>
-                    <select name="pets" id="tagEditInput${prodotto._id}">
+                    <select name="pets" id="tagEditInput${i}">
                         <option value="food">Food</option>
                         <option value="healthcare">Healthcare</option>
                         <option value="clothing">Clothing</option>
@@ -53,14 +56,14 @@ fetch('/db/collection?collection=products', {
                 </div>
                 <div class="form-group">
                     <label for="animalInput">Animal</label>
-                    <select name="pets" id="animalEditInput${prodotto._id}">
+                    <select name="pets" id="animalEditInput${i}">
                         <option value="dog">Dog</option>
                         <option value="cat">Cat</option>
                         <option value="fish">Fish</option>
                         <option value="bird">Bird</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary" id="saveEditProduct${prodotto._id}">Save</button>
+                <button type="submit" class="btn btn-primary" id="saveEditProduct${i}">Save</button>
             </form>
         </div>
         </div>
@@ -127,7 +130,7 @@ function removeElement(jsonDataid) {
     // Implementare la logica per rimuovere un prodotto
     let obj = {
         collection: 'products',
-        id: JSON.stringify(jsonDataid)
+        id: ids[jsonDataid]
     }
     fetch('/db/element', {
             method: 'DELETE',
@@ -144,7 +147,7 @@ function removeElement(jsonDataid) {
 
 function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
-    productId = JSON.stringify(jsonDataid);
+    productId = jsonDataid;
     if (document.getElementById("formcontainer" + productId).style.display == "none") {
         document.getElementById("formcontainer" + productId).style.display = "block";
     } else if (document.getElementById("formcontainer" + productId).style.display == "block") {
@@ -159,7 +162,7 @@ function editClient(jsonDataid) {
         const price = document.getElementById("priceEditInput" + jsonDataid).value;
         const description = document.getElementById("descriptionEditInput" + jsonDataid).value;
         if (name != "" && img != "" && tag != "" && animal != "" && price != "" && description != "") {
-            fetch('/db/element?id=' + jsonDataid + '&collection=products', {
+            fetch('/db/element?id=' + ids[jsonDataid] + '&collection=products', {
                     method: 'GET'
                 })
                 .then(response => response.json())
@@ -169,7 +172,7 @@ function editClient(jsonDataid) {
                     let obj = {
                         collection: 'products',
                         elem: {
-                            "_id": productId,
+                            "_id": ids[jsonDataid],
                             "name": document.getElementById("nameEditInput" + jsonDataid).value,
                             "img": document.getElementById("imageEditInput" + jsonDataid).value,
                             "tag": document.getElementById("tagEditInput" + jsonDataid).value,
