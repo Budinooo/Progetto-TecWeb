@@ -56,7 +56,10 @@ let bodyParser = require('body-parser');
 const { Exception } = require('handlebars');
 const { ObjectID } = require('bson');
 
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+app.use(bodyParser.text({ limit: '200mb' }));
 app.use(express.static(global.rootDir + '/public'))
 app.use('/js', express.static(global.rootDir + '/public/js'));
 app.use('/css', express.static(global.rootDir + '/public/css'));
