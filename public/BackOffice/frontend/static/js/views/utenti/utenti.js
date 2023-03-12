@@ -203,7 +203,7 @@ function editClient(jsonDataid) {
 
 function removeClient(clientId) {
     // logica per la rimozione del cliente
-    console.log(JSON.stringify(ids[i]));
+    console.log(JSON.stringify(ids[clientId]));
     let obj = {
         collection: 'users',
         id: ids[clientId]
