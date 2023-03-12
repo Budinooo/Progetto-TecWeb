@@ -10,7 +10,7 @@ fetch('/db/collection?collection=users', {
             let client = clients[i];
             adminHtml[i] = '';
             console.log(typeof client._id === "string");
-            debugger;
+            //debugger;
             clientsHtml += `
         <div class="col-sm-4">
           <div class="card" style=margin-top:5px>
