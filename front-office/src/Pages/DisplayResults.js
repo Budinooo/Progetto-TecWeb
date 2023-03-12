@@ -14,16 +14,6 @@ class DisplayResults extends React.Component {
                products: [],
                productsDisplayed: []
           }
-          let url = new URL(document.URL);
-          let searchParams = url.searchParams
-
-          
-          if(searchParams.get('query'))
-               this.getSearchedProducts(searchParams.get('query').toLowerCase())
-          else if (searchParams.get('category'))
-               this.getSearchedCategory(searchParams.get('category').toLowerCase())
-          else
-               this.getProducts();
 
           this.handleCategoryFilter = this.handleCategoryFilter.bind(this);
           this.handlePriceFilter = this.handlePriceFilter.bind(this);
@@ -67,6 +57,16 @@ class DisplayResults extends React.Component {
 
      componentDidMount() {
           window.addEventListener("resize", this.handleResize);
+          let url = new URL(document.URL);
+          let searchParams = url.searchParams;
+
+          
+          if(searchParams.get('query'))
+               this.getSearchedProducts(searchParams.get('query').toLowerCase())
+          else if (searchParams.get('category'))
+               this.getSearchedCategory(searchParams.get('category').toLowerCase())
+          else
+               this.getProducts();
      }
 
      componentWillUnmount() {

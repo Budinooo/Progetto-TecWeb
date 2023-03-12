@@ -1,4 +1,6 @@
 import React from 'react'
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './Product.css'
 
 const addToCart = (item) =>
@@ -17,7 +19,7 @@ const addToCart = (item) =>
     cart.push(newItem);
   }
   localStorage.setItem("cart", JSON.stringify(cart));
-  console.log("aggiunto " + item.name + " al carrello");
+  toast(`${item.name} added to cart`);
 }
 
 export default function Product(props) {

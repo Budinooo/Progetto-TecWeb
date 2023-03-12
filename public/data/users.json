@@ -1,5 +1,5 @@
-[{
-        "_id": "0",
+[
+    {
         "name": "ciccio",
         "username": "Ciccio",
         "email": "mail@narcio.com",
@@ -9,8 +9,7 @@
         "score": 10,
         "admin": 0
     },
-    {
-        "_id": "1",
+    { 
         "name": "admin",
         "username": "admin",
         "email": "mail@narcio.com",
@@ -19,8 +18,7 @@
         "pets": [],
         "score": 10,
         "admin": 1
-    }, {
-        "_id": "2",
+    },{
         "name": "Gerald",
         "username": "Budino",
         "email": "mail@budino.com",
@@ -28,9 +26,8 @@
         "favorites": [],
         "pets": [],
         "score": 1000,
-        "admin": 1
-    }, {
-        "_id": "3",
+        "admin": 1 
+    },{
         "name": "gloria",
         "username": "Dir",
         "email": "gloria@gmail.com",
@@ -38,9 +35,8 @@
         "favorites": ["cat"],
         "pets": [],
         "score": 0,
-        "admin": 0
-    }, {
-        "_id": "4",
+        "admin": 0 
+    },{
         "name": "leonardo",
         "username": "Leo",
         "email": "lio@gmail.com",

@@ -1,5 +1,6 @@
 import React from 'react'
 import Calendar from 'react-calendar';
+import {toast} from 'react-toastify';
 import 'react-calendar/dist/Calendar.css';
 import './Service.css'
 
@@ -66,6 +67,7 @@ class Service extends React.Component {
         fetch(`/db/element?id=${this.state.service._id}&collection=services`, {method: "GET"})
         .then((res) => res.json).then((data) => this.setState({service:(data.result)}));
       });
+    toast(`${this.state.service.name} booked for ${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`)
   }
   
   render() {

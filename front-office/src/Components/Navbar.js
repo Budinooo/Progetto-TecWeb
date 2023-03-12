@@ -6,6 +6,18 @@ class Navbar extends React.Component {
   constructor(props) 
   {
     super(props);
+    this.state = {isAdmin: 0};
+  }
+
+  componentDidMount()
+  {
+    let loginInfo = JSON.parse(localStorage.getItem("login"));
+    if(loginInfo.islogged)
+      fetch('/db/element?id=' + loginInfo.id + '&collection=users').then((res) => res.json())
+      .then((data) => 
+      {
+        this.setState({isAdmin: data.result.admin}, () => console.log(this.state));
+      })
   }
 
   handleSearch = (callback) => (e) => 
@@ -37,19 +49,14 @@ class Navbar extends React.Component {
 
   displayBackOfficeAccess = () => 
   {
-    let loginInfo = JSON.parse(localStorage.getItem("login"));
-    fetch('/db/element?collection=users&element=' + loginInfo.id).then((res) => res.json())
-    .then((data) => 
-    {
-      if(data.result.admin == 1)
-        return (
-          <li className='nav-item'>
-              <a className="nav-link bottom" href="/backoffice">
-                Backoffice
-              </a>
-          </li>
-        );
-    })
+    if(this.state.isAdmin == 1)   
+      return (
+        <li className='nav-item'>
+            <a className="nav-link bottom" href="/backoffice">
+              Backoffice
+            </a>
+        </li>
+      );
   }
 
   render() {
@@ -104,7 +111,7 @@ class Navbar extends React.Component {
                 </a>
               </li>
               <li className='nav-item'>
-                <a className="nav-link bottom" href="/CommunityFeed">
+                <a className="nav-link bottom" href="/feed">
                   Community Feed
                 </a>
               </li>
