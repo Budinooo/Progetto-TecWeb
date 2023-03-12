@@ -8,6 +8,7 @@ fetch('/db/collection?collection=communityFeed', {
     .then(response => response.json())
     .then(messages => {
         messages = messages.result;
+        var l = 0;
         // Iterazione attraverso tutti i messaggi
         for (var i = 0; i < messages.length; i++) {
             var message = messages[i];
@@ -57,9 +58,10 @@ fetch('/db/collection?collection=communityFeed', {
             $("#messageContainer").append(card);
             for (var j = 0; j < response.length; j++) {
                 var element = response[j];
-                //resIds[j] = element._id;
+                l = l + j;
+                resIds[l] = element._id;
                 var res = `
-        <div class="card mb-3" id="` + j + `">
+        <div class="card mb-3" id="` + l + `">
           <div class="card-header">
             <h5>` + element.author + `</h5>
           </div>
@@ -70,28 +72,28 @@ fetch('/db/collection?collection=communityFeed', {
             <p>Date: ` + element.date + `</p>
           </div>
           <div class="card-footer">
-            <button class="btn btn-warning" onclick="editAnswer(` + j + `, ` + i + `,` + j + `)">Edit</button>
-            <button class="btn btn-danger" onclick="formRemoveAnswerMessage(` + j + `)">Remove</button>
-            <button class="btn btn-danger" onclick="formRemoveAnswerImage(` + j + `)">Remove Image</button>
+            <button class="btn btn-warning" onclick="editAnswer(` + l + `, ` + i + `,` + j + `)">Edit</button>
+            <button class="btn btn-danger" onclick="formRemoveAnswerMessage(` + l + `)">Remove</button>
+            <button class="btn btn-danger" onclick="formRemoveAnswerImage(` + l + `)">Remove Image</button>
           </div>
-          <div class="container" id="formRemoveAnswercontainer` + j + `" style="display:none">
+          <div class="container" id="formRemoveAnswercontainer` + l + `" style="display:none">
           <h2>Are you sure?</h2>
           <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeAnswer(` + i + `,` + j + `)">yes</button>
           <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveAnswerMessage(` + j + `)">no</button>
         </div>
-        <div class="container" id="formRemoveAnswerImagecontainer` + j + `" style="display:none">
+        <div class="container" id="formRemoveAnswerImagecontainer` + l + `" style="display:none">
         <h2>Are you sure?</h2>
         <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="deleteAnswerImage(` + i + `,` + j + `)">yes</button>
-        <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveAnswerImage(` + j + `)">no</button>
+        <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveAnswerImage(` + l + `)">no</button>
         </div>
           
-          <div class="container" id="formcontainer` + j + `" style="display:none">
-            <form class="form form--hidden" id="editMessageForm` + j + `">
+          <div class="container" id="formcontainer` + l + `" style="display:none">
+            <form class="form form--hidden" id="editMessageForm` + l + `">
                 <div class="form-group">
                     <label for="scoreInput">Message</label>
-                    <input type="text" class="form-control" id="newMessage` + j + `" value="` + element.description + `">
+                    <input type="text" class="form-control" id="newMessage` + l + `" value="` + element.description + `">
                 </div>
-                <button type="submit" class="btn btn-primary" id="saveEdit` + j + `">Save</button>
+                <button type="submit" class="btn btn-primary" id="saveEdit` + l + `">Save</button>
             </form>
         </div>
         </div>

@@ -155,7 +155,7 @@ function editClient(jsonDataid) {
     } else if (document.getElementById("formeditcontainer" + jsonDataid).style.display == "block") {
         document.getElementById("formeditcontainer" + jsonDataid).style.display = "none";
     }
-    document.querySelector('#editSaveClient' + jsonDataid).addEventListener("click", e => {
+    document.getElementById("editSaveClient" + jsonDataid).addEventListener("click", e => {
         e.preventDefault();
         fetch('/db/element?id=' + ids[jsonDataid] + '&collection=users', {
                 method: 'GET'
@@ -164,11 +164,11 @@ function editClient(jsonDataid) {
             .then(data => {
                 data = data.result;
                 const name = document.getElementById('nameEditInput' + jsonDataid).value;
-                const username = document.querySelector('#usernameEditInput' + jsonDataid).value;
-                const email = document.querySelector('#emailEditInput' + jsonDataid).value;
-                const password = document.querySelector('#passwordEditInput' + jsonDataid).value;
-                const admin = document.querySelector('#adminEditInput' + jsonDataid).value;
-                const score = Number(document.querySelector('#scoreEditInput' + jsonDataid).value);
+                const username = document.getElementById('usernameEditInput' + jsonDataid).value;
+                const email = document.getElementById('emailEditInput' + jsonDataid).value;
+                const password = document.getElementById('passwordEditInput' + jsonDataid).value;
+                const admin = document.getElementById('adminEditInput' + jsonDataid).value;
+                const score = Number(document.getElementById('scoreEditInput' + jsonDataid).value);
                 if (name != null && username != null && email != null && password != null) {
                     let obj = {
                         collection: 'users',
