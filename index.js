@@ -456,7 +456,6 @@ fetch('/db/element',{
 */
 app.post('/db/element', async function(req, res) {
     console.log("post" + req.body.elem._id)
-        //req.body.elem._id = new ObjectID();
     res.send(await mymongo.insertElem(req.body.elem, req.body.collection, mongoCredentials))
 });
 

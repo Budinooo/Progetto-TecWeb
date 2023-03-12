@@ -9,56 +9,55 @@ fetch('/db/collection?collection=users', {
         for (var i = 0; i < clients.length; i++) {
             let client = clients[i];
             adminHtml[i] = '';
-            let id = String(i);
             //debugger;
             clientsHtml += `
         <div class="col-sm-4">
           <div class="card" style=margin-top:5px>
-            <div class="card-body" id="${id}">
+            <div class="card-body" id="${client._id}">
               <h5 class="card-title">${client.name}</h5>
               <p class="card-text">Username: ${client.username}</p>
               <p class="card-text">email: ${client.email}</p>
               <p class="card-text">password: ${client.password}</p>
               <p class="card-text">Game Score: ${client.score}</p>
-              <button class="btn btn-primary" id="editClient${id}" onclick="editClient(${id},${client._id})">Edit</button>
-              <button class="btn btn-danger" onclick="formRemoveClient(${id})">Remove</button>
+              <button class="btn btn-primary" id="editClient${client._id}" onclick="editClient(${client._id})">Edit</button>
+              <button class="btn btn-danger" onclick="formRemoveClient(${client._id})">Remove</button>
             </div>
           </div>
-          <div class="container" id="formRemovecontainer${id}" style="display:none">
+          <div class="container" id="formRemovecontainer${client._id}" style="display:none">
           <h2>Are you sure?</h2>
           <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeClient(${client._id})">yes</button>
-          <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveClient(${id})">no</button>
+          <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveClient(${client._id})">no</button>
         </div>
-          <div class="container" id="formeditcontainer${id}" style="display:none">
+          <div class="container" id="formeditcontainer${client._id}" style="display:none">
                 <form class="form form--hidden" id="editClientForm">
                     <div class="form-group">
                         <label for="nameInput">Name</label>
-                        <input type="text" class="form-control" id="nameEditInput${id}" value="${client.name}">
+                        <input type="text" class="form-control" id="nameEditInput${client._id}" value="${client.name}">
                     </div>
                     <div class="form-group">
                         <label for="nameInput">username</label>
-                        <input type="text" class="form-control" id="usernameEditInput${id}" value="${client.username}">
+                        <input type="text" class="form-control" id="usernameEditInput${client._id}" value="${client.username}">
                     </div>
                     <div class="form-group">
                         <label for="emailInput">Mail</label>
-                        <input type="text" class="form-control" id="emailEditInput${id}" value="${client.email}">
+                        <input type="text" class="form-control" id="emailEditInput${client._id}" value="${client.email}">
                     </div>
                     <div class="form-group">
                         <label for="passwordInput">Password</label>
-                        <input type="text" class="form-control" id="passwordEditInput${id}" value="${client.password}">
+                        <input type="text" class="form-control" id="passwordEditInput${client._id}" value="${client.password}">
                     </div>
                     <div class="form-group">
                         <label for="scoreInput">Game Score</label>
-                        <input type="text" class="form-control" id="scoreEditInput${id}" value="${client.score}">
+                        <input type="text" class="form-control" id="scoreEditInput${client._id}" value="${client.score}">
                     </div>
                     <div class="form-group">
                         <label for="adminInput">Admin</label>
-                        <select name="Admin" id="adminEditInput${id}">
+                        <select name="Admin" id="adminEditInput${client._id}">
                             <option value=0>Not Admin</option>
                             <option value=1>Admin</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="editSaveClient${id}" style= margin-top:5px>Save</button>
+                    <button type="submit" class="btn btn-primary" id="editSaveClient${client._id}" style= margin-top:5px>Save</button>
                 </form>
             </div>
         </div>
@@ -78,8 +77,7 @@ fetch('/db/collection?collection=users', {
         document.getElementById('clients').innerHTML = clientsHtml;
         for (var i = 0; i < clients.length; i++) {
             let client = clients[i];
-            let id = String(i);
-            document.getElementById('adminEditInput' + id).innerHTML = adminHtml[i];
+            document.getElementById('adminEditInput' + client._id).innerHTML = adminHtml[i];
         }
     });
 
@@ -147,16 +145,15 @@ function addClient(name, username, email, password, admin, score) {
         })
 }
 
-function editClient(id, jsonDataid) {
+function editClient(jsonDataid) {
     // logica per la modifica delle informazioni del cliente
-    debugger;
     console.log(jsonDataid);
-    if (document.getElementById("formeditcontainer" + id).style.display == "none") {
-        document.getElementById("formeditcontainer" + id).style.display = "block";
-    } else if (document.getElementById("formeditcontainer" + id).style.display == "block") {
-        document.getElementById("formeditcontainer" + id).style.display = "none";
+    if (document.getElementById("formeditcontainer" + jsonDataid).style.display == "none") {
+        document.getElementById("formeditcontainer" + jsonDataid).style.display = "block";
+    } else if (document.getElementById("formeditcontainer" + jsonDataid).style.display == "block") {
+        document.getElementById("formeditcontainer" + jsonDataid).style.display = "none";
     }
-    document.querySelector('#editSaveClient' + id).addEventListener("click", e => {
+    document.querySelector('#editSaveClient' + jsonDataid).addEventListener("click", e => {
         e.preventDefault();
         fetch('/db/element?id=' + jsonDataid + '&collection=users', {
                 method: 'GET'
@@ -164,12 +161,12 @@ function editClient(id, jsonDataid) {
             .then(response => response.json())
             .then(data => {
                 data = data.result;
-                const name = document.getElementById('nameEditInput' + id).value;
-                const username = document.querySelector('#usernameEditInput' + id).value;
-                const email = document.querySelector('#emailEditInput' + id).value;
-                const password = document.querySelector('#passwordEditInput' + id).value;
-                const admin = document.querySelector('#adminEditInput' + id).value;
-                const score = Number(document.querySelector('#scoreEditInput' + id).value);
+                const name = document.getElementById('nameEditInput' + jsonDataid).value;
+                const username = document.querySelector('#usernameEditInput' + jsonDataid).value;
+                const email = document.querySelector('#emailEditInput' + jsonDataid).value;
+                const password = document.querySelector('#passwordEditInput' + jsonDataid).value;
+                const admin = document.querySelector('#adminEditInput' + jsonDataid).value;
+                const score = Number(document.querySelector('#scoreEditInput' + jsonDataid).value);
                 if (name != null && username != null && email != null && password != null) {
                     let obj = {
                         collection: 'users',
@@ -198,7 +195,7 @@ function editClient(id, jsonDataid) {
                         })
                 }
             })
-        document.getElementById("formeditcontainer" + id).style.display = "none";
+        document.getElementById("formeditcontainer" + jsonDataid).style.display = "none";
     });
 }
 
