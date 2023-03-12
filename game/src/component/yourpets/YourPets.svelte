@@ -15,7 +15,7 @@
     var user;
     let local = JSON.parse(localStorage.getItem("login"))
     if (local.islogged){
-        fetch('http://localhost:8000/db/element?id='+local.id+'&collection=users',{
+        fetch('/db/element?id='+local.id+'&collection=users',{
             method:'GET'
         }).then(response => response.json())
         .then(data => {
@@ -97,7 +97,7 @@
                 "admin": user.admin
             }
         }
-        fetch('http://localhost:8000/db/element',{
+        fetch('/db/element',{
             method:'PUT',
             headers: {
                 'Content-type': 'application/json',

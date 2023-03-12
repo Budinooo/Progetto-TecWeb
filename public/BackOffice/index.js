@@ -18,7 +18,7 @@ function clearInputElement(inputElement) {
 ////////
 function login(username, password) {
     // caricamento del file JSON degli utenti
-    fetch('http://localhost:8000/db/collection?collection=users',{
+    fetch('/db/collection?collection=users',{
         method:'GET'
     })
         .then(response => response.json())
@@ -39,7 +39,7 @@ function login(username, password) {
 
 function registrazione(name, username, email, password) {
     // caricamento del file JSON degli utenti
-    fetch('http://localhost:8000/db/collection?collection=users',{
+    fetch('/db/collection?collection=users',{
         method:'GET'
     })
         .then(response => response.json())
@@ -50,7 +50,7 @@ function registrazione(name, username, email, password) {
             if (userExists) {
                 console.log("Utente già registrato con questo username o email.");
             } else {
-                fetch('http://localhost:8000/db/collectionsize?collection=users', {
+                fetch('/db/collectionsize?collection=users', {
                         method: 'GET'
                     }).then(response => response.json())
                     .then(data => {
@@ -81,11 +81,11 @@ function registrazione(name, username, email, password) {
                             },
                             body: JSON.stringify(elem)
                         };
-                        fetch('http://localhost:8000/db/element', options)
+                        fetch('/db/element', options)
                             .then(() => {
                                 console.log("Utente registrato con successo.");
                                 window.location.replace('/backoffice');
-                                fetch('http://localhost:8000/db/collection?collection=users', {
+                                fetch('/db/collection?collection=users', {
                                         method: 'GET'
                                     }).then(response => response.json())
                                     .then(data => console.log(data.result))
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //login
         var username = document.getElementById("loginUsername").value;
         var password = document.getElementById("loginPassword").value;
-        fetch('http://localhost:8000/db/collection?collection=users', {
+        fetch('/db/collection?collection=users', {
                 method: 'GET'
             })
             .then(response => response.json())

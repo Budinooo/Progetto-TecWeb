@@ -8754,7 +8754,7 @@ var app = (function () {
     	var myRank;
     	var isReady = false;
 
-    	fetch('http://localhost:8000/db/collection?collection=users', { method: 'GET' }).then(response => response.json()).then(data => {
+    	fetch('/db/collection?collection=users', { method: 'GET' }).then(response => response.json()).then(data => {
     		$$invalidate(2, myRank = data.result);
     		$$invalidate(2, myRank = myRank.sort((r1, r2) => r1.score < r2.score ? 1 : r1.score > r2.score ? -1 : 0));
     	});
@@ -8763,7 +8763,7 @@ var app = (function () {
     	let local = JSON.parse(localStorage.getItem("login"));
 
     	if (local.islogged) {
-    		fetch('http://localhost:8000/db/element?id=' + local.id + '&collection=users', { method: 'GET' }).then(response => response.json()).then(data => {
+    		fetch('/db/element?id=' + local.id + '&collection=users', { method: 'GET' }).then(response => response.json()).then(data => {
     			$$invalidate(4, user = data.result);
     		});
     	}
@@ -8793,7 +8793,7 @@ var app = (function () {
     				}
     			};
 
-    			fetch('http://localhost:8000/db/element', {
+    			fetch('/db/element', {
     				method: 'PUT',
     				headers: {
     					'Content-type': 'application/json',
@@ -8801,7 +8801,7 @@ var app = (function () {
     				},
     				body: JSON.stringify(obj)
     			}).then(() => {
-    				fetch('http://localhost:8000/db/collection?collection=users', { method: 'GET' }).then(response => response.json()).then(data => {
+    				fetch('/db/collection?collection=users', { method: 'GET' }).then(response => response.json()).then(data => {
     					$$invalidate(2, myRank = data.result);
     					$$invalidate(2, myRank = myRank.sort((r1, r2) => r1.score < r2.score ? 1 : r1.score > r2.score ? -1 : 0));
     				});
@@ -17660,7 +17660,7 @@ var app = (function () {
     	let local = JSON.parse(localStorage.getItem("login"));
 
     	if (local.islogged) {
-    		fetch('http://localhost:8000/db/element?id=' + local.id + '&collection=users', { method: 'GET' }).then(response => response.json()).then(data => {
+    		fetch('/db/element?id=' + local.id + '&collection=users', { method: 'GET' }).then(response => response.json()).then(data => {
     			$$invalidate(1, storedPets = data.result.pets);
     		});
     	}
@@ -21153,7 +21153,7 @@ var app = (function () {
     	let local = JSON.parse(localStorage.getItem("login"));
 
     	if (local.islogged) {
-    		fetch('http://localhost:8000/db/element?id=' + local.id + '&collection=users', { method: 'GET' }).then(response => response.json()).then(data => {
+    		fetch('/db/element?id=' + local.id + '&collection=users', { method: 'GET' }).then(response => response.json()).then(data => {
     			user = data.result;
     			$$invalidate(1, petsList = data.result.pets);
     			$$invalidate(2, petCounter = petsList.length);
@@ -21223,7 +21223,7 @@ var app = (function () {
     			}
     		};
 
-    		fetch('http://localhost:8000/db/element', {
+    		fetch('/db/element', {
     			method: 'PUT',
     			headers: {
     				'Content-type': 'application/json',

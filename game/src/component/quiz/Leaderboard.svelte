@@ -12,7 +12,7 @@
     var myRank;
     var isReady = false;
     
-    fetch('http://localhost:8000/db/collection?collection=users',{
+    fetch('/db/collection?collection=users',{
         method:'GET'
     }).then(response => response.json())
     .then(data => {
@@ -23,7 +23,7 @@
     var user;
     let local = JSON.parse(localStorage.getItem("login"))
     if (local.islogged){
-        fetch('http://localhost:8000/db/element?id='+local.id+'&collection=users',{
+        fetch('/db/element?id='+local.id+'&collection=users',{
             method:'GET'
         }).then(response => response.json())
         .then(data => {
@@ -58,7 +58,7 @@
                     "admin": user.admin
                 }
             }
-            fetch('http://localhost:8000/db/element',{
+            fetch('/db/element',{
                 method:'PUT',
                 headers: {
                     'Content-type': 'application/json',
@@ -66,7 +66,7 @@
                 },
                 body: JSON.stringify(obj)
             }).then(()=>{
-                fetch('http://localhost:8000/db/collection?collection=users',{
+                fetch('/db/collection?collection=users',{
                     method:'GET'
                 }).then(response => response.json())
                 .then(data => {
