@@ -9,8 +9,7 @@ fetch('/db/collection?collection=users', {
         for (var i = 0; i < clients.length; i++) {
             let client = clients[i];
             adminHtml[i] = '';
-            client._id = JSON.stringify(client._id);
-            console.log(client._id);
+            console.log(typeof client._id === "string");
             debugger;
             clientsHtml += `
         <div class="col-sm-4">
