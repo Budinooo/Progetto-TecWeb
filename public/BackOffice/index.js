@@ -170,11 +170,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else if (!data.find(u => u.username == username)) {
                     // login fallito
                     console.log("Utente non trovato.");
-                    setFormMessage(loginForm, "error", "Utente non trovato!");
+                    setFormMessage(loginForm, "error", "User not found!");
                 } else {
                     // login fallito
                     console.log("Password errata!");
-                    setFormMessage(loginForm, "error", "Password errata!");
+                    setFormMessage(loginForm, "error", "Wrong password!");
                 }
             });
     });
