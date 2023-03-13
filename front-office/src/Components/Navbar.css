@@ -67,3 +67,26 @@ nav {
     margin-left: 7%;
     width: 70%;
 }
+
+.logo{
+    font-weight: bold;
+    font-size: 150%;
+    color: rgb(0, 0, 0);
+}
+
+.logo > span {
+    font-size: 180%;
+}
+
+.logo > img {
+    width: 30%;
+    margin-bottom: 0.3em;
+}
+
+.slogan{
+    margin-top: -20px;
+    margin-left: 39px;
+    font-weight: bold;
+    font-size: 50%;
+    color:#ff6a3d
+}
