@@ -51,7 +51,7 @@ fetch('/db/collection?collection=users', {
                     </div>
                     <div class="form-group">
                         <label for="scoreInput">Game Score</label>
-                        <input type="text" class="form-control" id="scoreEditInput${i}" value="${client.score}">
+                        <input type="number" class="form-control" id="scoreEditInput${i}" value="${client.score}">
                     </div>
                     <div class="form-group">
                         <label for="adminInput">Admin</label>
