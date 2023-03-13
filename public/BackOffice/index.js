@@ -56,7 +56,6 @@ function registrazione(name, username, email, password) {
                     .then(data => {
                         // creazione di un nuovo oggetto utente
                         const newUser = {
-                            "_id": JSON.stringify(data.result),
                             "name": name,
                             "username": username,
                             "email": email,

@@ -1,3 +1,5 @@
+var ids = [];
+
 fetch('/db/collection?collection=services', {
         method: 'GET'
     })
@@ -9,6 +11,7 @@ fetch('/db/collection?collection=services', {
         let dateHtml = [];
         for (var i = 0; i < services.length; i++) {
             var service = services[i];
+            ids[i] = service._id;
             dateHtml[i] = '';
             data = service.availability;
             servicesHtml += `
@@ -20,55 +23,55 @@ fetch('/db/collection?collection=services', {
                 <p>Place: ${service.place}</p>
                 <p>Price: €${service.price}</p>
                 <p id="date">Availability:  ${service.availability}</p>
-                <button class="btn btn-warning" id="edit-${service._id}" onclick="editService(${service._id})" style="margin-top: 5px">Edit</button>
-                <button class="btn btn-primary" id="availability-${service._id}" onclick="addAvailability(${service._id})" style="margin-top: 5px">Add Availabile Date</button>
-                <button class="btn btn-danger" id="availability-${service._id}" onclick="removeAvailability(${service._id})" style="margin-top: 5px">Remove Availabile Date</button>
-                <button class="btn btn-danger" id="remove-${service._id}" onclick="formRemoveService(${service._id})" style="margin-top: 5px">Remove</button>
+                <button class="btn btn-warning" id="edit-${i}" onclick="editService(${i})" style="margin-top: 5px">Edit</button>
+                <button class="btn btn-primary" id="availability-${i}" onclick="addAvailability(${i})" style="margin-top: 5px">Add Availabile Date</button>
+                <button class="btn btn-danger" id="availability-${i}" onclick="removeAvailability(${i})" style="margin-top: 5px">Remove Availabile Date</button>
+                <button class="btn btn-danger" id="remove-${i}" onclick="formRemoveService(${i})" style="margin-top: 5px">Remove</button>
             </div>
-            <div class="container" id="formdate${service._id}" style="display:none; width:500px">
+            <div class="container" id="formdate${i}" style="display:none; width:500px">
             <form class="form form--hidden" id="addDateForm">
             <div class="form-group">
                 <label for="scoreInput">New Date</label>
-                <input type="date" class="form-control" id="newDateService${service._id}">
+                <input type="date" class="form-control" id="newDateService${i}">
             </div>
-            <button type="submit" class="btn btn-primary" id="saveDateService${service._id}">Save</button>
+            <button type="submit" class="btn btn-primary" id="saveDateService${i}">Save</button>
         </form>
             </div>
-            <div class="container" id="removeDatecontainer${service._id}" style="display: none">
-                <div class="container" id="availableDate${service._id}" style="margin-left:50px; margin-bottom:50px" style="max-width: 100%"></div>
+            <div class="container" id="removeDatecontainer${i}" style="display: none">
+                <div class="container" id="availableDate${i}" style="margin-left:50px; margin-bottom:50px" style="max-width: 100%"></div>
             </div>
-            <div class="container" id="formRemovecontainer${service._id}" style="display:none">
+            <div class="container" id="formRemovecontainer${i}" style="display:none">
             <h2>Are you sure?</h2>
-            <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeService(${service._id})">yes</button>
-            <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveService(${service._id})">no</button>
+            <button class="btn btn-danger" aria-pressed="false" aria-role="button" aria-label="Yes" onclick="removeService(${i})">yes</button>
+            <button class="btn btn-primary" aria-pressed="false" aria-role="button" aria-label="No" onclick="formRemoveService(${i})">no</button>
           </div>
-            <div class="container" id="formEditcontainer` + service._id + `" style="display:none">
+            <div class="container" id="formEditcontainer` + i + `" style="display:none">
             <form class="form form--hidden" id="editServiceForm">
                 <div class="form-group">
                     <label for="scoreInput">Name</label>
-                    <input type="text" class="form-control" id="nameEditService` + service._id + `" value="` + service.name + `">
+                    <input type="text" class="form-control" id="nameEditService` + i + `" value="` + service.name + `">
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Description</label>
-                    <input type="text" class="form-control" id="descriptionEditService` + service._id + `" value="` + service.description + `">
+                    <input type="text" class="form-control" id="descriptionEditService` + i + `" value="` + service.description + `">
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Place</label>
-                    <input type="text" class="form-control" id="placeEditService` + service._id + `" value="` + service.place + `">
+                    <input type="text" class="form-control" id="placeEditService` + i + `" value="` + service.place + `">
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Price</label>
-                    <input type="number" class="form-control" id="priceEditService` + service._id + `" value="` + service.price + `">
+                    <input type="number" class="form-control" id="priceEditService` + i + `" value="` + service.price + `">
                 </div>
                 <div class="form-group" style="display:none">
                     <label for="scoreInput">Date</label>
-                    <input type="text" class="form-control" id="dateEditService` + service._id + `" value="` + service.availability + `">
+                    <input type="text" class="form-control" id="dateEditService` + i + `" value="` + service.availability + `">
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Image</label>
-                    <input type="text" class="form-control" id="imageEditService` + service._id + `" value="` + service.img + `">
+                    <input type="text" class="form-control" id="imageEditService` + i + `" value="` + service.img + `">
                 </div>
-                <button type="submit" class="btn btn-primary" id="saveEditService` + service._id + `">Save</button>
+                <button type="submit" class="btn btn-primary" id="saveEditService` + i + `">Save</button>
             </form>
         </div>
         </div>
@@ -77,14 +80,14 @@ fetch('/db/collection?collection=services', {
             for (var j = 0; j < data.length; j++) {
                 let date = data[j];
                 dateHtml[i] += `
-                <button class="btn btn-danger" id="date${service._id}" style="margin-top: 5px" onclick="removeDate(${service._id},` + j + `)">` + date + `</button>
+                <button class="btn btn-danger" id="date${i}" style="margin-top: 5px" onclick="removeDate(${i},` + j + `)">` + date + `</button>
                 `;
             }
         };
         document.getElementById('services').innerHTML = servicesHtml;
         for (var i = 0; i < services.length; i++) {
             var service = services[i];
-            document.getElementById('availableDate' + service._id).innerHTML = dateHtml[i];
+            document.getElementById('availableDate' + i).innerHTML = dateHtml[i];
         };
     });
 /*
@@ -118,7 +121,7 @@ function editService(serviceId) {
     }
     document.getElementById('saveEditService' + serviceId).addEventListener("click", e => {
         e.preventDefault();
-        const id = JSON.stringify(serviceId);
+        const id = ids[serviceId];
         const name = document.getElementById("nameEditService" + serviceId).value;
         const description = document.getElementById("descriptionEditService" + serviceId).value;
         const place = document.getElementById("placeEditService" + serviceId).value;
@@ -149,7 +152,6 @@ function editService(serviceId) {
                 .then(() => {
                     location.reload();
                 })
-            document.getElementById("formEditcontainer").style.display = "none";
         }
     });
 }
@@ -165,7 +167,7 @@ function addAvailability(serviceId) {
         e.preventDefault();
         let newDate = document.getElementById("newDateService" + serviceId).value;
         if (newDate != "") {
-            fetch('/db/element?id=' + serviceId + '&collection=services', {
+            fetch('/db/element?id=' + ids[serviceId] + '&collection=services', {
                     method: 'GET'
                 })
                 .then(response => response.json())
@@ -178,7 +180,7 @@ function addAvailability(serviceId) {
                     let obj = {
                         collection: 'services',
                         elem: {
-                            "_id": JSON.stringify(serviceId),
+                            "_id": ids[serviceId],
                             "name": data.name,
                             "description": data.description,
                             "price": data.price,
@@ -199,7 +201,6 @@ function addAvailability(serviceId) {
                             location.reload();
                         })
                 })
-            document.getElementById("formdate" + serviceId).style.display = "none";
         }
     })
 }
@@ -215,7 +216,7 @@ function removeAvailability(serviceId) {
 function removeDate(serviceId, newDate) {
     // logica per la rimozione della disponibilità del servizio
     //debugger;
-    fetch('/db/element?id=' + serviceId + '&collection=services', {
+    fetch('/db/element?id=' + ids[serviceId] + '&collection=services', {
             method: 'GET'
         })
         .then(response => response.json())
@@ -226,7 +227,7 @@ function removeDate(serviceId, newDate) {
             let obj = {
                 collection: 'services',
                 elem: {
-                    "_id": JSON.stringify(serviceId),
+                    "_id": ids[serviceId],
                     "name": data.name,
                     "description": data.description,
                     "price": data.price,
@@ -252,7 +253,7 @@ function removeDate(serviceId, newDate) {
 function saveDate(serviceId) {
     let newDate = JSON.stringify(document.getElementById("dateService" + serviceId).value);
     if (newDate != "") {
-        fetch('/db/element?id=' + serviceId + '&collection=services', {
+        fetch('/db/element?id=' + ids[serviceId] + '&collection=services', {
                 method: 'GET'
             })
             .then(response => response.json())
@@ -263,7 +264,7 @@ function saveDate(serviceId) {
                 let obj = {
                     collection: 'services',
                     elem: {
-                        "_id": JSOn.stringify(serviceId),
+                        "_id": ids[serviceId],
                         "name": data.name,
                         "description": data.description,
                         "price": data.price,
@@ -291,7 +292,7 @@ function removeService(serviceId) {
     // logica per la modifica del servizio
     let obj = {
         collection: 'services',
-        id: JSON.stringify(serviceId)
+        id: ids[serviceId]
     }
     fetch('/db/element', {
             method: 'DELETE',

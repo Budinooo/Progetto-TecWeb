@@ -57,8 +57,8 @@ const { Exception } = require('handlebars');
 const { ObjectID } = require('bson');
 
 //app.use(bodyParser.json());
-app.use(bodyParser.json({limit: '50mb', extended: true}));
-app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+app.use(bodyParser.json({ limit: '50mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
 app.use(bodyParser.text({ limit: '200mb' }));
 app.use(express.static(global.rootDir + '/public'))
 app.use('/js', express.static(global.rootDir + '/public/js'));
@@ -337,16 +337,13 @@ const mongoCredentials = {
 app.get('/db/getUserBookings', async function(req, res) {
     let allBookings = await mymongo.getCollection("bookings", mongoCredentials);
     let userBookings = [];
-    try{
-        allBookings.result.map((booking) => 
-        {
-            if(booking.userId == req.query.id)
+    try {
+        allBookings.result.map((booking) => {
+            if (booking.userId == req.query.id)
                 userBookings.push(booking);
         });
         res.send(userBookings);
-    }
-    catch(ex)
-    {
+    } catch (ex) {
         console.log(ex);
         res.send(ex);
     }
@@ -357,15 +354,12 @@ app.get('/db/getMultipleElements', async function(req, res) {
     console.log(req.query.ids);
     let multElems = [];
     try {
-        allElems.map((elem) => 
-        {
-            if(req.query.ids.includes(elem._id))
+        allElems.map((elem) => {
+            if (req.query.ids.includes(elem._id))
                 multElems.push(elem);
         });
         res.send(multElems);
-    } 
-    catch(ex) 
-    {
+    } catch (ex) {
         console.log(ex);
         res.send(ex);
     }
@@ -492,6 +486,7 @@ fetch('/db/element',{
 */
 app.put('/db/element', async function(req, res) {
     req.body.elem._id = ObjectID(req.body.elem._id);
+    console.log(req.body.elem._id);
     res.send(await mymongo.editElem(req.body.elem, req.body.collection, mongoCredentials))
 });
 
