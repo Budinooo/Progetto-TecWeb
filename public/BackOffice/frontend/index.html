@@ -18,11 +18,19 @@
         <a href="./static/js/views/servizi/servizi.html" class="nav__link" data-link>Services</a>
         <a href="/" class="nav__link" data-link>Back to Shop</a>
         <a href="/game" class="nav__link" data-link>Play</a>
-        <a href="/backoffice" class="nav__link" data-link>LogOut</a>
+        <a href="/backoffice" class="nav__link" data-link onclick="logout()">LogOut</a>
     </nav>
     <div id="app">
     </div>
-    <script type="module" src="./static/js/index.js"></script>
+    <script type="text/javascript">
+        function logout() {
+            const longinInfo = {
+                islogged: false,
+                id: ""
+            }
+            localStorage.setItem("login", JSON.stringify(longinInfo));
+        }
+    </script>
 </body>
 
 </html>

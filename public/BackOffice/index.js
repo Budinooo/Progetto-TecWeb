@@ -29,10 +29,12 @@ function login(username, password) {
             if (user) {
                 // login effettuato con successo
                 console.log(`Benvenuto ${user.username}!`);
+                setFormMessage(loginForm, "success", "You're logged in!");
                 log = true;
             } else {
                 // login fallito
                 console.log("Credenziali non valide.");
+                setFormMessage(loginForm, "error", "Credenziali non valide.");
             }
         });
 }
@@ -165,10 +167,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                     localStorage.setItem("login", JSON.stringify(longinInfo))
                     window.location.replace("/")
+                } else if (!data.find(u => u.username == username)) {
+                    // login fallito
+                    console.log("Utente non trovato.");
+                    setFormMessage(loginForm, "error", "Utente non trovato!");
                 } else {
                     // login fallito
-                    console.log("Credenziali non valide.");
-                    setFormMessage(loginForm, "error", "Something went wrong!");
+                    console.log("Password errata!");
+                    setFormMessage(loginForm, "error", "Password errata!");
                 }
             });
     });

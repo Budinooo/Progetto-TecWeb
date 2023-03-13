@@ -112,14 +112,26 @@ document.addEventListener("DOMContentLoaded", () => {
 function addClient(name, username, email, password, admin, score) {
     // logica per l'aggiunta di un nuovo cliente
     let size;
-    fetch('/db/collectionsize?collection=products', {
+    fetch('/db/collectionsize?collection=users', {
             method: 'GET'
         })
         .then(response => {
             return response.json()
         })
         .then(data => {
-            size = data.result;
+            data = data.result;
+            let existsUsername = false;
+            let existsMail = false;
+            for (var i = 0; i < clients.length; i++) {
+                let element = clients[i];
+                if (element.username == username) {
+                    existsUsername = true;
+                }
+                if (element.email == email) {
+                    existsMail = true;
+                }
+            }
+            //if (existsUsername == false || existsMail == false) {
             let obj = {
                 collection: 'users',
                 elem: {
@@ -145,6 +157,13 @@ function addClient(name, username, email, password, admin, score) {
                 .then(() => {
                     location.reload();
                 })
+                /*
+            } else if (existsMail == true) {
+                document.querySelector('#emailInput').value = "mail already exists!";
+            } else if (existsUsername == true) {
+                document.querySelector('#usernameInput').value = "username already exists!";
+            }
+            */
         })
 }
 
