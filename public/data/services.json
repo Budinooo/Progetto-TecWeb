@@ -2,7 +2,7 @@
         "name": "Grooming",
         "description": "A Full Groom Includes: Pre bath brush, bath with your choice of shampoo and conditioner all available in our room, ear cleansing, fluff up warm blow dry by hand with brush styling, pawdicure (hair clip, nail clip and file), eye stain removal, scissor cut to breed specific styling or your own style preference. Your choice of cologne from the blue room. Hair Accessory \nPLEASE NOTE - Additional costs apply for parasites present/ heavily soiled or matted coats/ difficult / aggressive behaviour. Final cost is dependent on the complexity of the groom and how long it takes. ",
         "price": "50.00",
-        "place": "Bologna",
+        "locations": ["Via di Dozza 35, Imola (BO)", "Via Marcisi 1, Monte Sant'Angelo (FG)", "Via Garibaldi 24, Roma (RO)", "Via Duomo 42, Milano (MI)" ],
         "animals": ["dog"],
         "img": "https://larchmontvillagevet.com/wp-content/uploads/2019/02/grooming-lab-bath-1024x682.jpg",
         "availability": ["2023-03-01", "2023-03-02", "2023-03-03", "2023-03-06", "2023-03-07", "2023-03-08", "2023-03-09","2023-03-10", "2023-03-13", "2023-03-14", "2023-03-15", "2023-03-16", "2023-03-17", "2023-03-20", "2023-03-21", "2023-03-22", "2023-03-23", "2023-03-24", "2023-03-26", "2023-03-27", "2023-03-28", "2023-03-29", "2023-03-30", "2023-03-31"]
@@ -11,7 +11,7 @@
         "name": "Dinosaur vet",
         "description": "Is your pet feeling unwell? Our vet team is ready to take care of them. Our staff, trained on Isla Nublar, are among the best in treating large reptiles. Let them treat your scaly friend and they'll go back to normal! *We reserve the ability to charge additional fees in case of dismemberment of staff*",
         "price": "50.00",
-        "place": "Bologna",
+        "locations": ["Via Duomo 42, Milano (MI)", "Lakeshore Drive, New York (NY)"],
         "animals": ["dinosaur"],
         "img": "https://s.yimg.com/ny/api/res/1.2/dWy8vcVjGDKUdM9EZ.Ja3w--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD03Njk-/https://s.yimg.com/cd/resizer/2.0/FIT_TO_WIDTH-w1248/febd64e074c51ef538d9c2f8408d47a33559fdd4.png",
         "availability": ["2023-03-01", "2023-03-02", "2023-03-03", "2023-03-06", "2023-03-07", "2023-03-08", "2023-03-09","2023-03-10", "2023-03-13", "2023-03-14", "2023-03-15", "2023-03-16", "2023-03-17", "2023-03-20", "2023-03-21", "2023-03-22", "2023-03-23", "2023-03-24", "2023-03-26", "2023-03-27", "2023-03-28", "2023-03-29", "2023-03-30", "2023-03-31"]

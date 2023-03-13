@@ -110,7 +110,7 @@ class Community_Feed extends React.Component {
             let file = document.getElementById('upload').files;
             if (title && desc){
                 let date = new Date();
-                fetch('db/element?id='+login.id+'&collection=users',{
+                fetch('/db/element?id='+login.id+'&collection=users',{
                     method:'GET'
                 })
                 .then(response => response.json())
@@ -129,7 +129,7 @@ class Community_Feed extends React.Component {
                         collection:'communityFeed',
                         elem:newPost
                     }
-                    fetch('db/element',{
+                    fetch('/db/element',{
                         method:'POST',
                         headers: {
                             'Content-type': 'application/json',
@@ -206,7 +206,7 @@ class Community_Feed extends React.Component {
             <div className="container">
                 <div className='titleContainer'>
                     <div className='title'>Community Feed</div>
-                    {this.state.isPost ? <button onClick={this.goBack}>Back</button>: null }
+                    {this.state.isPost ? <button id="back-btn" onClick={this.goBack}>Back</button>: null }
                 </div>
                 <div className='buttons'>
                     {this.renderButtons()}    

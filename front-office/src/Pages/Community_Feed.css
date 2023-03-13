@@ -27,6 +27,20 @@
     transition: 0.2s;
 }
 
+#back-btn {
+    background-color: springgreen;
+    border-color: black;
+    border-width: 2px;
+    font-weight: 500;
+    width:4em;
+    border-radius: 10px;
+}
+
+#back-btn:hover {
+    background-color: rgba(0, 131, 66, 0.999);
+    color:white;
+}
+
 .add{
     display:flex;
     flex-direction: column;
