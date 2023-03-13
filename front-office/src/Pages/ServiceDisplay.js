@@ -21,7 +21,7 @@ class ServiceDisplay extends React.Component
         .then((res)=> res.json()).then((data) => this.setState({locations: data.result}));
     }
 
-    displayLocations()  
+    displayLocations()
     {
         return this.state.locations?.map((location) =>
         {
@@ -55,7 +55,8 @@ class ServiceDisplay extends React.Component
             <div className="p-5">
                 <div id="filter-container">
                     <h2>Choose a location:</h2>
-                    <select onChange={(e) => this.displayServiceUsingLocation(e)} id="location-select">
+                    <select value={"0"} onChange={(e) => this.displayServiceUsingLocation(e)} id="location-select">
+                        <option value={"0"}>SELECT A LOCATION</option>
                         {this.displayLocations()}
                     </select>
                 </div>                
