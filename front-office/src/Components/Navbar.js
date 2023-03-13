@@ -11,6 +11,10 @@ class Navbar extends React.Component {
   componentDidMount()
   {
     let loginInfo = JSON.parse(localStorage.getItem("login"));
+    if(loginInfo == null){
+      loginInfo = {"islogged": false, "id": ""};
+      localStorage.setItem("login", JSON.stringify(loginInfo));
+    }
     fetch('/db/collection?collection=users').then(res => res.json())
     .then((data) => 
       {
