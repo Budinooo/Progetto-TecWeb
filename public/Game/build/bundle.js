@@ -2504,7 +2504,7 @@ var app = (function () {
     }
 
     // (53:2) {#if screenWidth<500}
-    function create_if_block$g(ctx) {
+    function create_if_block$h(ctx) {
     	let div0;
     	let input;
     	let t0;
@@ -2604,7 +2604,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$g.name,
+    		id: create_if_block$h.name,
     		type: "if",
     		source: "(53:2) {#if screenWidth<500}",
     		ctx
@@ -2730,7 +2730,7 @@ var app = (function () {
     	let t22;
     	let a8;
     	let if_block0 = /*screenWidth*/ ctx[0] > 500 && create_if_block_2$4(ctx);
-    	let if_block1 = /*screenWidth*/ ctx[0] < 500 && create_if_block$g(ctx);
+    	let if_block1 = /*screenWidth*/ ctx[0] < 500 && create_if_block$h(ctx);
 
     	const block = {
     		c: function create() {
@@ -2885,7 +2885,7 @@ var app = (function () {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
     				} else {
-    					if_block1 = create_if_block$g(ctx);
+    					if_block1 = create_if_block$h(ctx);
     					if_block1.c();
     					if_block1.m(header, t8);
     				}
@@ -2982,8 +2982,62 @@ var app = (function () {
 
     const file$r = "src\\component\\Home.svelte";
 
+    // (34:4) {#if !(JSON.parse(localStorage.getItem("login")).islogged)}
+    function create_if_block$g(ctx) {
+    	let div;
+    	let a;
+    	let t1;
+    	let span;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			a = element("a");
+    			a.textContent = "LOG IN";
+    			t1 = text("  OR KEEP PLAYING AS A ");
+    			span = element("span");
+    			span.textContent = "GUEST";
+    			attr_dev(a, "href", "/login");
+    			set_style(a, "color", "#ff6a3d");
+    			set_style(a, "font-weight", "800");
+    			attr_dev(a, "class", "svelte-ji0m4w");
+    			add_location(a, file$r, 35, 12, 2310);
+    			set_style(span, "color", "#ff6a3d");
+    			set_style(span, "font-weight", "800");
+    			add_location(span, file$r, 35, 101, 2399);
+    			attr_dev(div, "class", "logguest svelte-ji0m4w");
+    			toggle_class(div, "moblogguest", /*screenWidth*/ ctx[0] < 500);
+    			add_location(div, file$r, 34, 8, 2238);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, a);
+    			append_dev(div, t1);
+    			append_dev(div, span);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*screenWidth*/ 1) {
+    				toggle_class(div, "moblogguest", /*screenWidth*/ ctx[0] < 500);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$g.name,
+    		type: "if",
+    		source: "(34:4) {#if !(JSON.parse(localStorage.getItem(\\\"login\\\")).islogged)}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
     function create_fragment$r(ctx) {
-    	let div11;
+    	let div10;
     	let div0;
     	let t1;
     	let div9;
@@ -3027,14 +3081,12 @@ var app = (function () {
     	let img5_src_value;
     	let t16;
     	let t17;
-    	let div10;
-    	let a6;
-    	let t19;
-    	let span;
+    	let show_if = !JSON.parse(localStorage.getItem("login")).islogged;
+    	let if_block = show_if && create_if_block$g(ctx);
 
     	const block = {
     		c: function create() {
-    			div11 = element("div");
+    			div10 = element("div");
     			div0 = element("div");
     			div0.textContent = "WELCOME TO THE FUN ZONE";
     			t1 = space();
@@ -3075,12 +3127,7 @@ var app = (function () {
     			img5 = element("img");
     			t16 = text("MEDICAL INFO");
     			t17 = space();
-    			div10 = element("div");
-    			a6 = element("a");
-    			a6.textContent = "LOG IN";
-    			t19 = text("  OR KEEP PLAYING AS A ");
-    			span = element("span");
-    			span.textContent = "GUEST";
+    			if (if_block) if_block.c();
     			attr_dev(div0, "class", "welcome svelte-ji0m4w");
     			toggle_class(div0, "moblogguest", /*screenWidth*/ ctx[0] < 500);
     			add_location(div0, file$r, 10, 4, 209);
@@ -3156,28 +3203,17 @@ var app = (function () {
     			set_style(div9, "justify-content", "space-evenly");
     			toggle_class(div9, "mobileflex", /*screenWidth*/ ctx[0] < 500);
     			add_location(div9, file$r, 13, 4, 317);
-    			attr_dev(a6, "href", "/login");
-    			set_style(a6, "color", "#ff6a3d");
-    			set_style(a6, "font-weight", "800");
-    			attr_dev(a6, "class", "svelte-ji0m4w");
-    			add_location(a6, file$r, 34, 8, 2237);
-    			set_style(span, "color", "#ff6a3d");
-    			set_style(span, "font-weight", "800");
-    			add_location(span, file$r, 34, 97, 2326);
-    			attr_dev(div10, "class", "logguest svelte-ji0m4w");
-    			toggle_class(div10, "moblogguest", /*screenWidth*/ ctx[0] < 500);
-    			add_location(div10, file$r, 33, 4, 2169);
-    			attr_dev(div11, "class", "container");
-    			add_location(div11, file$r, 8, 0, 174);
+    			attr_dev(div10, "class", "container");
+    			add_location(div10, file$r, 8, 0, 174);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div11, anchor);
-    			append_dev(div11, div0);
-    			append_dev(div11, t1);
-    			append_dev(div11, div9);
+    			insert_dev(target, div10, anchor);
+    			append_dev(div10, div0);
+    			append_dev(div10, t1);
+    			append_dev(div10, div9);
     			append_dev(div9, div4);
     			append_dev(div4, div2);
     			append_dev(div2, div1);
@@ -3211,11 +3247,8 @@ var app = (function () {
     			append_dev(div7, a5);
     			append_dev(a5, img5);
     			append_dev(a5, t16);
-    			append_dev(div11, t17);
-    			append_dev(div11, div10);
-    			append_dev(div10, a6);
-    			append_dev(div10, t19);
-    			append_dev(div10, span);
+    			append_dev(div10, t17);
+    			if (if_block) if_block.m(div10, null);
     		},
     		p: function update(ctx, [dirty]) {
     			if (dirty & /*screenWidth*/ 1) {
@@ -3274,14 +3307,13 @@ var app = (function () {
     				toggle_class(div9, "mobileflex", /*screenWidth*/ ctx[0] < 500);
     			}
 
-    			if (dirty & /*screenWidth*/ 1) {
-    				toggle_class(div10, "moblogguest", /*screenWidth*/ ctx[0] < 500);
-    			}
+    			if (show_if) if_block.p(ctx, dirty);
     		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div11);
+    			if (detaching) detach_dev(div10);
+    			if (if_block) if_block.d();
     		}
     	};
 
