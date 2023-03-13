@@ -43,7 +43,7 @@ class Product_Display extends React.Component
             cart.at(cartItem).quantity++;
         else {
             let newItem = {id:0, img:"", name:"", price:0, quantity:0};
-            newItem.id = item._id;
+            newItem._id = item._id;
             newItem.img = item.img;
             newItem.name = item.name;
             newItem.price = item.price;

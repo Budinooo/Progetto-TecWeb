@@ -18,6 +18,19 @@ class Service extends React.Component {
       this.setState({service: this.props.service})
   }
 
+  makeStandardDate(date){
+    let newDate = date.getFullYear();
+    if([...Array(10).keys()].includes(date.getMonth()+1))
+      newDate += '-' + '0' + (date.getMonth()+1);
+    else
+      newDate += '-' + (date.getMonth()+1) ;
+    if([...Array(10).keys()].includes(date.getDate()))
+      newDate += '-' + '0' + (date.getDate());
+    else
+      newDate += '-' + (date.getDate());
+    return newDate;
+  }
+
   book = (date) => (e) =>  
   {
     e.preventDefault();
@@ -31,7 +44,7 @@ class Service extends React.Component {
       alert("Please log in");
       return;
     }
-    let formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    let formattedDate = this.makeStandardDate(date);
     let newBooking = {
       userId: JSON.parse(localStorage.getItem("login")).id,
       serviceId: this.state.service._id,
@@ -67,7 +80,7 @@ class Service extends React.Component {
         fetch(`/db/element?id=${this.state.service._id}&collection=services`, {method: "GET"})
         .then((res) => res.json).then((data) => this.setState({service:(data.result)}));
       });
-    toast(`${this.state.service.name} booked for ${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`)
+    toast(`${this.state.service.name} booked for ${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`)
   }
   
   render() {
@@ -96,14 +109,14 @@ class Service extends React.Component {
             <div className="service-body-container">
               <h4 className="service-name">{this.state.service.name}</h4>
               <p className="service-desc">{this.state.service.description}</p>
-              <p className="service-price">{this.state.service.price}</p>
+              <p className="service-price">€ {this.state.service.price}</p>
               <form id="booking-form" className='d-flex flex-column'>
                 <div className='d-flex'>
                   <Calendar
                     onChange={(value, e) => {this.setState({date:value})}}
                     minDetail='month'
                     minDate={new Date()} 
-                    tileDisabled={({date})=> !this.state.service.availability.includes(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)} 
+                    tileDisabled={({date})=> !this.state.service.availability.includes(this.makeStandardDate(date))} 
                   />            
                 </div>
                 <button onClick={(e) => this.book(this.state.date)(e)} className="mx-auto book-btn">Book Now</button>

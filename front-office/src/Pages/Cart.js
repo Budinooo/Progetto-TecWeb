@@ -1,5 +1,6 @@
 import React from "react";
 import Product from "../Components/Product";
+import {toast} from 'react-toastify';
 import './Cart.css'
 
 class Cart extends React.Component
@@ -7,12 +8,11 @@ class Cart extends React.Component
     constructor(props)
     {
         super(props);
-//        const products = props.products;
         const services = props.services;
         let products = JSON.parse(localStorage.getItem("cart"));
         if (!products)
             products = [];
-        this.state = {products, services};
+        this.state = {products: products, services: services};
     }
 
     productRemove = (id) => 
@@ -85,6 +85,16 @@ class Cart extends React.Component
             })
     }
 
+    payment = () => 
+    {
+        if(this.getTotal() <= 0)
+            return;
+        let emptyCart = "[]";
+        localStorage.setItem("cart", emptyCart);
+        this.setState({products: []});
+        toast('Payment Successful! Thank you for your purchase.');
+    }
+
     render()
     {
         return(
@@ -103,7 +113,7 @@ class Cart extends React.Component
                                 <h2>Total: </h2> <span id="total">€ {this.getTotal()}</span>
                             </div>
                             <p id="total-items">{this.getTotalItems()} Items</p>
-                            <button id="btn-pay" className="mt-4">Pay now</button>
+                            <button id="btn-pay" onClick={(e)=>this.payment()} className="mt-4">Pay now</button>
                     </div>
                 </div>
             </div>

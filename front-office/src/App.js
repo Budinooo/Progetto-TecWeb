@@ -25,23 +25,14 @@ class App extends React.Component {
     let products = []
     let service = null
     this.state = {products: products, service: service};
-
   }
 
   componentDidMount()
   {    
     fetch('/db/collection?collection=products', {method:"GET"}).then((res)=>res.json()).then((data)=> {this.setState({products: data.result.slice(0,8)})});
     fetch('/db/collection?collection=services', {method: "GET"}).then((res) => res.json()).then((data) => this.setState({service: data.result[0]}));
-    if(localStorage.getItem("cart"))
-      return;
-    localStorage.setItem("cart","[]");
-    if(localStorage.getItem("login") == null) {
-      const loginInfo = {
-        "islogged": false,
-        "id": "",
-      }
-      localStorage.setItem("login",JSON.stringify(loginInfo))
-    }
+    if(!localStorage.getItem("cart"))
+      localStorage.setItem("cart","[]");
   }
   
   render () {
