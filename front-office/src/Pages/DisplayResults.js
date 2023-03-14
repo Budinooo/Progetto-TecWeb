@@ -20,7 +20,7 @@ class DisplayResults extends React.Component {
      }
 
      getProducts = () =>{
-          fetch('http://localhost:8000/db/collection?collection=products',{
+          fetch('/db/collection?collection=products',{
                method:'GET'
           }).then(response => response.json())
           .then(data => {
@@ -30,7 +30,7 @@ class DisplayResults extends React.Component {
      }
 
      getSearchedProducts = (query) =>{
-          fetch('http://localhost:8000/db/collection?collection=products',{
+          fetch('/db/collection?collection=products',{
                method:'GET'
           }).then(response => response.json())
           .then(data => {
@@ -41,7 +41,7 @@ class DisplayResults extends React.Component {
      }
 
      getSearchedCategory = (query) =>{
-          fetch('http://localhost:8000/db/collection?collection=products',{
+          fetch('/db/collection?collection=products',{
                method:'GET'
           }).then(response => response.json())
           .then(data => {
@@ -75,7 +75,7 @@ class DisplayResults extends React.Component {
 
      handleCategoryFilter = (animal,tag) =>{
           //prima fare this.state.products = collezione intera di prodotti
-          fetch('http://localhost:8000/db/collection?collection=products',{
+          fetch('/db/collection?collection=products',{
                method:'GET'
           }).then(response => response.json())
           .then(data => {

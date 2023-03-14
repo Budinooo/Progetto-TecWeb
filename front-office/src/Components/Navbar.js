@@ -16,7 +16,7 @@ class Navbar extends React.Component {
   componentDidMount()
   {
     let loginInfo = JSON.parse(localStorage.getItem("login"));
-    fetch('http://localhost:8000/db/collection?collection=users').then(res => res.json())
+    fetch('/db/collection?collection=users').then(res => res.json())
     .then((data) => 
       {
         let totalIds = [];
@@ -33,7 +33,7 @@ class Navbar extends React.Component {
           localStorage.setItem("login",JSON.stringify(loginInfo))
         }
         else if(loginInfo.islogged){
-          fetch('http://localhost:8000/db/element?id=' + loginInfo.id + '&collection=users').then((res) => res.json())
+          fetch('/db/element?id=' + loginInfo.id + '&collection=users').then((res) => res.json())
           .then((data) => 
           {
             this.setState({isAdmin: data.result.admin});

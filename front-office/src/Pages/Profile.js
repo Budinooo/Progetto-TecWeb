@@ -13,7 +13,7 @@ export default function Profile() {
         if(firstTime) {  
             console.log("fetching profile info");
             let userId = JSON.parse(localStorage.getItem("login")).id;
-            fetch(`http://localhost:8000/db/element?id=${userId}&collection=users`)
+            fetch(`/db/element?id=${userId}&collection=users`)
             .then((res)=>res.json())
             .then((data) => setProfileInfo(data.result));
             setFirstTime(false);
@@ -25,7 +25,7 @@ export default function Profile() {
         //Get bookings
         if(!bookings && profileInfo) {
             console.log("old bookings: " + bookings + ", fetching bookings");
-            fetch(`http://localhost:8000/db/getUserBookings?id=${profileInfo._id}`)
+            fetch(`/db/getUserBookings?id=${profileInfo._id}`)
             .then((res) => res.json())
             .then((data) => 
             {
@@ -78,7 +78,7 @@ export default function Profile() {
             id: booking._id
         }
         // Booking deletion
-        fetch('http://localhost:8000/db/element', {
+        fetch('/db/element', {
             method:'DELETE',
             headers: {
                 'Content-type': 'application/json',
@@ -87,7 +87,7 @@ export default function Profile() {
             body: JSON.stringify(obj)
         }).then((res) => 
         {
-            fetch(`http://localhost:8000/db/getUserBookings?id=${profileInfo._id}`)
+            fetch(`/db/getUserBookings?id=${profileInfo._id}`)
             .then((res) => res.json())
             .then((data) => 
             {
@@ -121,7 +121,7 @@ export default function Profile() {
             updatedLocation.services = serviceList;
 
             //PUT della location con disponibilità servizi aggiornata
-            fetch(`http://localhost:8000/db/element`, {method: "PUT",headers: {
+            fetch(`/db/element`, {method: "PUT",headers: {
                 'Content-type': 'application/json',
                 'Accept': 'application/json'
                 }, 

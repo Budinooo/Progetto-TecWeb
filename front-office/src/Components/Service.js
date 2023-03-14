@@ -57,7 +57,7 @@ class Service extends React.Component {
     };
     
     // POST NEW BOOKING
-    fetch("http://localhost:8000/db/element", {method: "POST", headers: {
+    fetch("/db/element", {method: "POST", headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json'
       }, 
@@ -90,7 +90,7 @@ class Service extends React.Component {
     updatedLocation.services = serviceList;
 
     // Facciamo finalmente la put al server
-    fetch(`http://localhost:8000/db/element`, {method: "PUT",headers: {
+    fetch(`/db/element`, {method: "PUT",headers: {
       'Content-type': 'application/json',
       'Accept': 'application/json'
       }, 
@@ -99,7 +99,7 @@ class Service extends React.Component {
         elem: updatedLocation
       })})
       .then((res)=>{
-        fetch(`http://localhost:8000/db/element?id=${this.state.location._id}&collection=locations`, {method: "GET"})
+        fetch(`/db/element?id=${this.state.location._id}&collection=locations`, {method: "GET"})
         .then((res) => res.json).then((data) => 
         {
           data.result.services.map((service) =>
