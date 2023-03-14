@@ -66,21 +66,21 @@ class Service extends React.Component {
         elem: newBooking
       })
     });
-
+    debugger;
     // UPDATE LOCATION SERVICE AVAILABILITY
     let updatedLocation = this.state.location;
     let serviceList = updatedLocation.services;
     let updatedServiceName = this.state.service.name;
-    //togliamo il servizio che stiamo modificando dalla lista servizi
-    let serviceIndex = serviceList.findIndex(service => service.name == updatedServiceName);
-    serviceList.splice(serviceIndex, 1);
     // creaiamo un nuovo array disponibilità senza la data appena prenotata
     let newAvailability = [];
     serviceList.map((service) =>
     {
-      if(service.name = updatedServiceName)
+      if(service.name == updatedServiceName)
         newAvailability = service.availability;
     })
+    //togliamo il servizio che stiamo modificando dalla lista servizi
+    let serviceIndex = serviceList.findIndex(service => service.name == updatedServiceName);
+    serviceList.splice(serviceIndex, 1);
     let dateIndex = newAvailability.findIndex(date => date==formattedDate);
     newAvailability.splice(dateIndex, 1);
     // rimettiamo il servizio appena ricreato con la nuova disponibilità nella lista servizi
