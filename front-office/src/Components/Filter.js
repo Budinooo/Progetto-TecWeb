@@ -1,5 +1,6 @@
 import React from "react";
-import './Filter.css'
+import './Filter.css';
+import {Collapse} from 'react-bootstrap';
 
 class Filter extends React.Component
 {
@@ -9,6 +10,9 @@ class Filter extends React.Component
         this.state = {
             min: 0,
             max:100,
+            dogSubfilter: false,
+            catSubfilter: false,
+            birdSubfilter: false,
             screenWidth: window.innerWidth
         }
     }
@@ -45,40 +49,48 @@ class Filter extends React.Component
             <div className={`filters container-fluid ${this.state.screenWidth<500 ? "w-100" : ""}`}>
                 <div className='filter w-100'>
                     <div className="titlef"><b>Category</b></div>
-                    <div className="subfilter" data-bs-toggle="collapse" data-bs-target="#collapseDog" aria-expanded="false" aria-controls="collapseDog"> Dog</div>
-                    <div className="collapse" id="collapseDog">
-                        <div className="collpasebody">
-                            <div onClick={()=>this.props.applyCategory("dog","food")}>Food</div>
-                            <div onClick={()=>this.props.applyCategory("dog","healthcare")}>Healthcare</div>
-                            <div onClick={()=>this.props.applyCategory("dog","clothing")}>Clothing</div>
-                        </div>
+                    <div className="category-filter">
+                        <a className="subfilter" onClick={() => this.setState({dogSubfilter:!this.state.dogSubfilter})} type="button" role="button" aria-expanded="false" aria-controls="collapseDog"> Dog</a>
+                        <Collapse id="collapseDog" in={this.state.dogSubfilter}>
+                            <div className="collapsebody">
+                                <a role="button" type="button" className="category-link" onClick={()=>this.props.applyCategory("dog","food")}>Food</a>
+                                <a role="button" type="button" className="category-link" onClick={()=>this.props.applyCategory("dog","healthcare")}>Healthcare</a>
+                                <a role="button" type="button" className="category-link" onClick={()=>this.props.applyCategory("dog","clothing")}>Clothing</a>
+                            </div>
+                        </Collapse>
                     </div>
-                    <div className="subfilter" data-bs-toggle="collapse" data-bs-target="#collapseCat" aria-expanded="false" aria-controls="collapseCat"> Cat</div>
-                    <div className="collapse" id="collapseCat">
-                        <div className="collpasebody">
-                            <div onClick={()=>this.props.applyCategory("cat","food")}>Food</div>
-                            <div onClick={()=>this.props.applyCategory("cat","healthcare")}>Healthcare</div>
-                        </div>
+                    <div className="category-filter">
+                        <a className="subfilter" type="button" role="button" onClick={()=>this.setState({catSubfilter:!this.state.catSubfilter})} aria-expanded="false" aria-controls="collapseCat"> Cat</a>
+                        <Collapse id="collapseCat" in={this.state.catSubfilter}>
+                            <div className="collapsebody">
+                                <a role="button" type="button" className="category-link" onClick={()=>this.props.applyCategory("cat","food")}>Food</a>
+                                <a role="button" type="button" className="category-link" onClick={()=>this.props.applyCategory("cat","healthcare")}>Healthcare</a>
+                            </div>
+                        </Collapse>
                     </div>
-                    <div className="subfilter" data-bs-toggle="collapse" data-bs-target="#collapseBird" aria-expanded="false" aria-controls="collapseBird"> Bird</div>
-                    <div className="collapse" id="collapseBird">
-                        <div className="collpasebody">
-                            <div onClick={()=>this.props.applyCategory("bird","food")}>Food</div>
-                        </div>
+                    <div className="category-filter">
+                        <a className="subfilter" onClick={()=>this.setState({birdSubfilter: !this.state.birdSubfilter})} type="button" role="button" aria-expanded="false" aria-controls="collapseBird">
+                            Bird
+                        </a>
+                        <Collapse id="collapseBird" in={this.state.birdSubfilter}>
+                            <div className="collapsebody">
+                                <a role="button" type="button" className="category-link" onClick={()=>this.props.applyCategory("bird","food")}>Food</a>
+                            </div>
+                        </Collapse>
                     </div>
                 </div>
                 <div className='filter w-100'>
                     <div className="titlef"><b>Price</b></div>
                     <div className="subfilter">
                         <label htmlFor="minf" className="form-label">Min: {this.state.min}€</label>
-                        <input type="range" className="form-range" id="minf"></input>
+                        <input type="range" className="price-range" id="minf"></input>
                     </div>
                     <div className="subfilter">
                         <label htmlFor="maxf" className="form-label">Max: {this.state.max}€</label>
-                        <input type="range" className="form-range" id="maxf"></input>
+                        <input type="range" className="price-range" id="maxf"></input>
                     </div>
-                    <div className="subfilter">
-                        <button onClick={()=>this.props.applyPrice(this.state.min,this.state.max)}>Apply Price</button>
+                    <div id="apply-container" className="subfilter">
+                        <button id="btn-apply" onClick={()=>this.props.applyPrice(this.state.min,this.state.max)}>Apply</button>
                     </div>
                 </div>
             </div>
