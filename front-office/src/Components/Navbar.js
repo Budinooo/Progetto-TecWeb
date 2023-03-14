@@ -6,15 +6,16 @@ class Navbar extends React.Component {
   {
     super(props);
     this.state = {isAdmin: 0};
-  }
-
-  componentDidMount()
-  {
     let loginInfo = JSON.parse(localStorage.getItem("login"));
     if(loginInfo == null){
       loginInfo = {"islogged": false, "id": ""};
       localStorage.setItem("login", JSON.stringify(loginInfo));
     }
+  }
+
+  componentDidMount()
+  {
+    let loginInfo = JSON.parse(localStorage.getItem("login"));
     fetch('/db/collection?collection=users').then(res => res.json())
     .then((data) => 
       {
@@ -35,7 +36,7 @@ class Navbar extends React.Component {
           fetch('/db/element?id=' + loginInfo.id + '&collection=users').then((res) => res.json())
           .then((data) => 
           {
-            this.setState({isAdmin: data.result.admin}, () => console.log(this.state));
+            this.setState({isAdmin: data.result.admin});
           })
         }
       })
@@ -95,10 +96,7 @@ class Navbar extends React.Component {
               <input id="searchBar" className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
               <button onClick={(e)=>this.handleSearch(this.props.callback)(e)} ><img src="https://cdn-icons-png.flaticon.com/512/2811/2811806.png" /></button>
             </form>
-            <ul className="navbar-nav nav-top justify-content-end me-5">
-              <li className="nav-item active">
-                <a className="nav-link" href="/">HOME</a>
-              </li>          
+            <ul className="navbar-nav nav-top justify-content-end me-5">          
               <li className="nav-item">
                 <a className="icon-btn nav-link" href="/cart">
                   CART
@@ -111,10 +109,8 @@ class Navbar extends React.Component {
           </div>
           <div id="bottom-navbar" className='d-flex'>
             <ul className="navbar-nav">
-              <li className='nav-item'>
-                <a className="nav-link bottom" href="/game">
-                    Game
-                </a> 
+              <li className="nav-item active">
+                <a className="nav-link bottom" href="/">Home</a>
               </li>
               <li className='nav-item'>
                 <a className="nav-link bottom" href="/services">
@@ -130,6 +126,11 @@ class Navbar extends React.Component {
                 <a className="nav-link bottom" href="/feed">
                   Community Feed
                 </a>
+              </li>
+              <li className='nav-item'>
+                <a className="nav-link bottom" href="/game">
+                    Game
+                </a> 
               </li>
               {this.displayBackOfficeAccess()}
             </ul>

@@ -94,21 +94,42 @@ export default function Profile() {
                 setBookings(data);
                 setLoading(false);
             });
+
             //service availability update
-            let service;
-            fetch(`/db/element?collection=services&id=${booking.serviceId}`, {method: "GET"}).then((res) => res.json())
-            .then((data) => {
-                service = {collection: "services", elem: data.result};
-                service.elem.availability.push(booking.date);
-                fetch(`/db/element`, {
-                method: "PUT",
-                headers: {
-                    'Content-type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(service)
-                });
+            let updatedLocation = booking.location;
+            let serviceList = updatedLocation.services;
+            let updatedServiceName = booking.serviceName;
+
+            //togliamo il servizio che stiamo modificando dalla lista servizi
+            let serviceIndex = serviceList.findIndex(service => service.name == updatedServiceName);
+            serviceList.splice(serviceIndex, 1);
+
+            // creaiamo un nuovo array disponibilità senza la data appena prenotata
+            let newAvailability = [];
+            serviceList.map((service) =>
+            {
+            if(service.name = updatedServiceName)
+                newAvailability = service.availability;
             })
+            newAvailability.push(booking.date);
+
+            // rimettiamo il servizio appena ricreato con la nuova disponibilità nella lista servizi
+            let updatedService = {name: updatedServiceName, availability: newAvailability};
+            serviceList.push(updatedService);
+
+            //rimettiamo la lista servizi aggiornata nella location 
+            updatedLocation.services = serviceList;
+
+            //PUT della location con disponibilità servizi aggiornata
+            fetch(`/db/element`, {method: "PUT",headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+                }, 
+                body: JSON.stringify({
+                  collection: "locations", 
+                  elem: updatedLocation
+                })
+            });
         })
         setLoading(true);
     }
@@ -138,7 +159,7 @@ export default function Profile() {
                     return(
                         <div key={booking._id} className="booking-container">
                             <h4 className="booking-title">{booking.serviceName}</h4>
-                            <p className="booking-date">{booking.date}</p>
+                            <p className="booking-date">{booking.date} at {booking.location.name}</p>
                             <button className="btn-booking-del" onClick={(e) => deleteBooking(e)(booking)}>Cancel</button>
                         </div>
                     )
