@@ -51,7 +51,6 @@ function bookService(serviceId) {
 */
 
 function selectLocation() {
-    debugger;
     selectedLocation = locations.find(location => location.name == document.getElementById("locations").value)
     let servicesHtml = '';
     var data = [];
@@ -193,6 +192,8 @@ function editService(serviceId) {
                                 }, 500)
                             })
                         }
+                    }else{
+                        document.location.reload();
                     }
                 })
         }
