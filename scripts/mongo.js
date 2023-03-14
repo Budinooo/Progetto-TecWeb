@@ -35,7 +35,7 @@ exports.create = async function(credentials) {
     const mongouri = `mongodb://${credentials.user}:${credentials.pwd}@${credentials.site}?writeConcern=majority`;
     //const mongouri = 'mongodb+srv://leon:ahdbleon@animalhousedb.loccq0z.mongodb.net/?retryWrites=true&w=majority';
 
-    let collections = ['communityFeed', 'products', 'services', 'users', 'bookings'];
+    let collections = ['communityFeed', 'products', 'services', 'users', 'bookings', 'locations'];
     let debug = []
     try {
         debug.push(`Trying to connect to MongoDB with user: '${credentials.user}' and site: '${credentials.site}' and a ${credentials.pwd.length}-character long password...`)
@@ -44,12 +44,12 @@ exports.create = async function(credentials) {
         debug.push("... managed to connect to MongoDB.")
 
         for (let i = 0; i < collections.length; i++) {
-            debug.push(`Trying to read file '${fn}'... `)
+            debug.push(`Trying to read file '${collections[i]}'... `)
             let doc = await fs.readFile(rootDir + "/public/data/" + collections[i] + ".json", 'utf8')
             let data = JSON.parse(doc)
             debug.push(`... read ${data.length} records successfully. `)
 
-            debug.push(`Trying to remove all records in table '${dbname}'... `)
+            debug.push(`Trying to remove all records in table '${collections[i]}'... `)
             let cleared = await mongo.db(dbname)
                 .collection(collections[i])
                 .deleteMany()
