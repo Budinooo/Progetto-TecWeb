@@ -95,7 +95,7 @@ export default function Profile() {
                 setLoading(false);
             });
             debugger;
-            fetch(`http://localhost:8000/db/element?collection=locations&id=${booking.location}`).then((res) => res.json())
+            fetch(`/db/element?collection=locations&id=${booking.location}`).then((res) => res.json())
             .then((data) =>
             {
                 //service availability update
@@ -123,7 +123,7 @@ export default function Profile() {
                 updatedLocation.services = serviceList;
     
                 //PUT della location con disponibilità servizi aggiornata
-                fetch(`http://localhost:8000/db/element`, {method: "PUT",headers: {
+                fetch(`/db/element`, {method: "PUT",headers: {
                     'Content-type': 'application/json',
                     'Accept': 'application/json'
                     }, 
