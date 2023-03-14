@@ -97,18 +97,8 @@ class Service extends React.Component {
       body: JSON.stringify({
         collection: "locations", 
         elem: updatedLocation
-      })})
-      .then((res)=>{
-        fetch(`/db/element?id=${this.state.location._id}&collection=locations`, {method: "GET"})
-        .then((res) => res.json).then((data) => 
-        {
-          data.result.services.map((service) =>
-          {
-            if(this.state.service.name == service.name)
-              this.setState({service: service});
-          })  
-        });
-      });
+      })
+    });
     toast(`${this.state.service.name} booked for ${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`)
   }
 
