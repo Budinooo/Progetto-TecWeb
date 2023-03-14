@@ -12,7 +12,8 @@ class DisplayResults extends React.Component {
           this.state={
                screenWidth: window.innerWidth,
                products: null,
-               productsDisplayed: []
+               productsDisplayed: [],
+               productsFiltered: [],
           }
 
           this.handleCategoryFilter = this.handleCategoryFilter.bind(this);
@@ -75,19 +76,12 @@ class DisplayResults extends React.Component {
 
      handleCategoryFilter = (animal,tag) =>{
           //prima fare this.state.products = collezione intera di prodotti
-          fetch('http://localhost:8000/db/collection?collection=products',{
-               method:'GET'
-          }).then(response => response.json())
-          .then(data => {
-               data = data.result;
-               this.setState({products: data})
-               let products = this.state.products.filter(product => product.animal == animal && product.tag == tag);
-               this.setState({productsDisplayed: products});
-          })
+          let products = this.state.products.filter(product => product.animal == animal && product.tag == tag);
+          this.setState({productsDisplayed: products, productsFiltered: products});
      }
 
      handlePriceFilter = (min,max) =>{
-          let products = this.state.products.filter(product => parseFloat(product.price) >= min && parseFloat(product.price) <= max);
+          let products = this.state.productsFiltered.filter(product => parseFloat(product.price) >= min && parseFloat(product.price) <= max);
           this.setState({productsDisplayed: products});
      }
 
