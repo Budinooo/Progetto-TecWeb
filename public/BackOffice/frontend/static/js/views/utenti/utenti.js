@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function addClient(name, username, email, password, admin, score) {
     // logica per l'aggiunta di un nuovo cliente
     let size;
-    fetch('/db/collectionsize?collection=users', {
+    fetch('/db/collection?collection=users', {
             method: 'GET'
         })
         .then(response => {
@@ -120,50 +120,36 @@ function addClient(name, username, email, password, admin, score) {
         })
         .then(data => {
             data = data.result;
-            let existsUsername = false;
-            let existsMail = false;
-            for (var i = 0; i < clients.length; i++) {
-                let element = clients[i];
-                if (element.username == username) {
-                    existsUsername = true;
-                }
-                if (element.email == email) {
-                    existsMail = true;
-                }
-            }
-            //if (existsUsername == false || existsMail == false) {
-            let obj = {
-                collection: 'users',
-                elem: {
-                    "name": name,
-                    "username": username,
-                    "email": email,
-                    "password": password,
-                    "favorites": [],
-                    "pets": [],
-                    "score": score,
-                    "admin": admin
-                }
-            };
+            const userExists = data.some(u => u.username === username || u.email === email);
+            if (!userExists) {
+                let obj = {
+                    collection: 'users',
+                    elem: {
+                        "name": name,
+                        "username": username,
+                        "email": email,
+                        "password": password,
+                        "favorites": [],
+                        "pets": [],
+                        "score": score,
+                        "admin": admin
+                    }
+                };
 
-            fetch('/db/element', {
-                    method: 'POST',
-                    headers: {
-                        'Content-type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(obj)
-                })
-                .then(() => {
-                    location.reload();
-                })
-                /*
-            } else if (existsMail == true) {
-                document.querySelector('#emailInput').value = "mail already exists!";
-            } else if (existsUsername == true) {
-                document.querySelector('#usernameInput').value = "username already exists!";
+                fetch('/db/element', {
+                        method: 'POST',
+                        headers: {
+                            'Content-type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(obj)
+                    })
+                    .then(() => {
+                        location.reload();
+                    })
+            } else if (userExists) {
+                document.getElementById("userAlreadyExists").style.display = "block";
             }
-            */
         })
 }
 
