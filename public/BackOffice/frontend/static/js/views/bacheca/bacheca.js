@@ -14,6 +14,11 @@ fetch('/db/collection?collection=communityFeed', {
             var message = messages[i];
             ids[i] = message._id;
             var response = message.answers;
+            if (message.file == "") {
+                var imageStyle = "none";
+            } else {
+                var imageStyle = "block";
+            }
             // Creazione della card per ogni messaggio
             var card = `
         <div class="card mb-3" id="` + i + `">
@@ -23,13 +28,13 @@ fetch('/db/collection?collection=communityFeed', {
           <div class="card-body">
             <h5 class="card-title">` + message.title + `</h5>
             <p class="card-text" id="messageText` + message.author + `">` + message.description + `</p>
-            <img class="card-img-top" src="` + message.file + `" alt="` + message.author + `" style="width: 18rem;">
+            <img class="card-img-top" src="` + message.file + `" alt="` + message.author + `" style="width: 18rem;display:` + imageStyle + `">
             <p>Reference Date: ` + message.date + `</p>
           </div>
           <div class="card-footer">
             <button class="btn btn-warning" onclick="editMessage(` + i + `)">Edit</button>
             <button class="btn btn-danger" onclick="formRemoveMessage(` + i + `)">Remove</button>
-            <button class="btn btn-danger" onclick="formRemoveImage(` + i + `)">Remove Image</button>
+            <button class="btn btn-danger" onclick="formRemoveImage(` + i + `)" style="display:` + imageStyle + `">Remove Image</button>
           </div>
           <div class="container" id="formRemovecontainer${i}" style="display:none">
           <h2>Are you sure?</h2>
@@ -60,6 +65,11 @@ fetch('/db/collection?collection=communityFeed', {
                 var element = response[j];
                 l = messages.length + j;
                 resIds[l] = element._id;
+                if (element.file == "") {
+                    var responseImageStyle = "none";
+                } else {
+                    var responseImageStyle = "block";
+                }
                 var res = `
         <div class="card mb-3" id="` + l + `">
           <div class="card-header">
@@ -68,13 +78,13 @@ fetch('/db/collection?collection=communityFeed', {
           <div class="card-body">
             <h5 class="card-title">` + element.author + `</h5>
             <p class="card-text" id="messageText` + element.author + `">` + element.description + `</p>
-            <img class="card-img-top" src="` + element.file + `" alt="` + element.file + `" style="width: 18rem;">
+            <img class="card-img-top" src="` + element.file + `" alt="` + element.file + `" style="width: 18rem; display:` + responseImageStyle + `">
             <p>Date: ` + element.date + `</p>
           </div>
           <div class="card-footer">
             <button class="btn btn-warning" onclick="editAnswer(` + l + `, ` + i + `,` + j + `)">Edit</button>
             <button class="btn btn-danger" onclick="formRemoveAnswerMessage(` + l + `)">Remove</button>
-            <button class="btn btn-danger" onclick="formRemoveAnswerImage(` + l + `)">Remove Image</button>
+            <button class="btn btn-danger" onclick="formRemoveAnswerImage(` + l + `)" style="display:` + responseImageStyle + `">Remove Image</button>
           </div>
           <div class="container" id="formRemoveAnswercontainer` + l + `" style="display:none">
           <h2>Are you sure?</h2>

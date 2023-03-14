@@ -50,7 +50,8 @@ function registrazione(name, username, email, password) {
             // verifica che l'username o l'email non siano già presenti
             const userExists = data.some(u => u.username === username || u.email === email);
             if (userExists) {
-                console.log("Utente già registrato con questo username o email.");
+                console.log("User already registered with this username or email.");
+                setFormMessage(createAccount, "error", "User already registered with this username or email.");
             } else {
                 fetch('/db/collectionsize?collection=users', {
                         method: 'GET'
@@ -85,6 +86,7 @@ function registrazione(name, username, email, password) {
                         fetch('/db/element', options)
                             .then(() => {
                                 console.log("Utente registrato con successo.");
+                                setFormMessage(createAccount, "success", "Registered user.");
                                 window.location.replace('/login');
                                 fetch('/db/collection?collection=users', {
                                         method: 'GET'
