@@ -11,22 +11,37 @@ class Product_Carousel extends React.Component {
     let slideNum = 0;
     let slides =[[]];
     let productList = [];
-    this.state = {slides,slideNum, productList};
+    this.state = {slides: slides,slideNum: slideNum, productList: productList, screenWidth: null };
+  }
 
-    console.log(this.state.slides)
+  componentDidMount() 
+  {
+    this.setState({screenWidth: window.innerWidth});
   }
 
   componentDidUpdate() {
     if(this.props.productList != this.state.productList)
     {
       let slides = [[]];
-      let slideNum = this.props.productList.length/4;
-      for(let i=0;i<slideNum;++i) {
-        let slideI = [];
-        for (let j = i*4;j<((i+1)*4) && j< this.props.productList.length;++j) {
-            slideI[j] = this.props.productList[j]
+      let slideNum;
+      if(this.state.screenWidth < 500)
+      {
+        slideNum = this.state.productList.length;
+        for(let i=0;i<slideNum;++i) {
+          slides[i]=[this.state.productList[i]];
         }
-        slides[i]=slideI;
+        console.log(slides)
+      }
+      else
+      {
+        slideNum = this.props.productList.length/4;
+        for(let i=0;i<slideNum;++i) {
+          let slideI = [];
+          for (let j = i*4;j<((i+1)*4) && j< this.props.productList.length;++j) {
+              slideI[j] = this.props.productList[j]
+          }
+          slides[i]=slideI;
+        }
       }
       this.setState({slides: slides, slideNum:slideNum, productList: this.props.productList})
     }
@@ -42,8 +57,9 @@ class Product_Carousel extends React.Component {
     if(this.state.slideNum <= 0) {
       return null;
     }
+
     return (
-      <Carousel controls variant='dark'>
+      <Carousel controls={this.screenWidth < 500 ? true : false } variant='dark'>
         {this.state.slides.map( (productList, i) => {
           return (
             <Carousel.Item key={this.state.productList[i]._id}>

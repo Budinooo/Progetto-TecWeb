@@ -52,3 +52,40 @@
     color: white;
     transition: 0.2s;
 }
+
+.mobile-service 
+{
+    flex-direction: column;
+}
+
+.mobile-service > .service-img {
+    width: 100%;
+}
+
+.mobile-service > .service-img > img {
+    border-radius: 10px;
+}
+
+.mobile-service > .service-body-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-service .service-name {
+    text-align: center;
+}
+
+.mobile-service .service-price {
+    text-align: center;
+    font-weight: 600;
+    font-size: large;
+}
+
+.mobile-service .more-btn {
+    text-align: center;
+}
+
+.mobile-service .book-btn {
+    width: 80%;
+}

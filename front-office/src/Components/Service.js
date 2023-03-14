@@ -11,7 +11,12 @@ class Service extends React.Component {
     let date = null;
     let service = null;
     let location = null;
-    this.state = {service: service, date: date, location: location};
+    this.state = {service: service, date: date, location: location, screenWidth: null};
+  }
+
+  componentDidMount() 
+  {
+    this.setState({screenWidth: window.innerWidth})
   }
 
   componentDidUpdate(){
@@ -113,6 +118,7 @@ class Service extends React.Component {
     });
     return (
       <Calendar
+          width={this.screenWidth < 500 ? "100%" : ""}
           onChange={(value, e) => {this.setState({date:value})}}
           minDetail='month'
           minDate={new Date()} 
@@ -125,14 +131,14 @@ class Service extends React.Component {
     if (this.state.service != null){
       if(this.props.short == true) {
         return (
-          <div className="d-flex service-container">
+          <div className={`d-flex service-container ${this.state.screenWidth < 500 ? "mobile-service" : ""}`}>
             <div className="service-img">
               <img width="100%" src={this.state.service.img} />
             </div>
             <div className="service-body-container">
               <h4 className="service-name">{this.state.service.name}</h4>
               <p className="service-desc">{this.state.service.description}</p>
-              <p className="service-price">{this.state.service.price}</p>
+              <p className="service-price">€ {this.state.service.price}</p>
               <a className='more-btn' href="/services">LEARN MORE</a>
             </div>
           </div>
@@ -140,7 +146,7 @@ class Service extends React.Component {
       }
       else {
         return (
-          <div className='d-flex service-container'>
+          <div className={`d-flex service-container ${this.state.screenWidth < 500 ? "mobile-service" : ""}`}>
             <div className="service-img">
               <img width="100%" src={this.state.service.img} />
             </div>

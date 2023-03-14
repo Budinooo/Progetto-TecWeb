@@ -87,6 +87,28 @@ nav {
     width:10em;
 }
 
+.nav-mobile {
+    width: 100%
+}
+
+.nav-mobile form {
+    width: 100% !important;
+}
+
+.nav-mobile button {
+    display: none;
+}
+
+.nav-mobile ul {
+    margin-right: 0 !important;
+    margin-left: auto;
+    width: 40%;
+}
+
+.nav-mobile a {
+    margin-bottom: 0.2em;
+}
+
 #bottom-navbar {
     width: fit-content;
 }
