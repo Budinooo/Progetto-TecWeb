@@ -9,23 +9,23 @@ fetch('/db/collection?collection=services', {
     .then(response => response.json())
     .then(data => {
         services = data.result;
-        
+
         fetch('/db/collection?collection=locations', {
-            method: 'GET'
-        })
-        .then(response => response.json())
-        .then(data =>{
-            locations = data.result;
-            let locationsHtml = '';
-            for(let i = 0; i < locations.length; i++){
-                var location = locations[i];
-                locationsHtml+= `
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                locations = data.result;
+                let locationsHtml = '';
+                for (let i = 0; i < locations.length; i++) {
+                    var location = locations[i];
+                    locationsHtml += `
                     <option value="${location.name}">${location.name}</option>
                 `;
-            }
-            document.getElementById("locations").innerHTML+=locationsHtml;
-            selectLocation();
-        })
+                }
+                document.getElementById("locations").innerHTML += locationsHtml;
+                selectLocation();
+            })
     });
 /*
 function bookService(serviceId) {
@@ -50,12 +50,12 @@ function bookService(serviceId) {
 }
 */
 
-function selectLocation(){
+function selectLocation() {
     selectedLocation = locations.find(location => location.name == document.getElementById("locations").value)
     let servicesHtml = '';
     var data = [];
     let dateHtml = [];
-    for(var i = 0; i < selectedLocation.services.length; i++){
+    for (var i = 0; i < selectedLocation.services.length; i++) {
         const service = services.find(service => service.name == selectedLocation.services[i].name)
         idService[i] = service._id;
         dateHtml[i] = '';
@@ -162,34 +162,34 @@ function editService(serviceId) {
                     body: JSON.stringify(obj)
                 })
                 .then(() => {
-                    if (name != services[serviceId].name){
+                    if (name != services[serviceId].name) {
                         var locationsToModify = [];
-                        for (var i = 0; i<locations.length; i++){
+                        for (var i = 0; i < locations.length; i++) {
                             var location = locations[i];
-                            for (var j = 0; j<location.services.length; j++){
-                                if (location.services[j].name == services[serviceId].name){
+                            for (var j = 0; j < location.services.length; j++) {
+                                if (location.services[j].name == services[serviceId].name) {
                                     location.services[j].name = name;
                                     locationsToModify.push(location);
                                     break;
                                 }
                             }
                         }
-                        for (var i = 0; i<locationsToModify.length; i++){
+                        for (var i = 0; i < locationsToModify.length; i++) {
                             let obj = {
                                 collection: 'locations',
                                 elem: locationsToModify[i]
                             }
                             fetch('/db/element', {
-                                    method: 'PUT',
-                                    headers: {
-                                        'Content-type': 'application/json',
-                                        'Accept': 'application/json'
-                                    },
-                                    body: JSON.stringify(obj)
-                            }).then(()=>{
-                                setTimeout(function(){
+                                method: 'PUT',
+                                headers: {
+                                    'Content-type': 'application/json',
+                                    'Accept': 'application/json'
+                                },
+                                body: JSON.stringify(obj)
+                            }).then(() => {
+                                setTimeout(function() {
                                     document.location.reload();
-                                },500)
+                                }, 500)
                             })
                         }
                     }
@@ -298,12 +298,18 @@ function removeDate(serviceId, newDate) {
 
 function removeService(serviceId) {
     // logica per la modifica del servizio
+    var services = selectedLocation.services;
+    services.splice(serviceId, 1);
     let obj = {
         collection: 'services',
-        id: idService[serviceId]
+        elem: {
+            "_id": selectedLocation._id,
+            "name": selectedLocation.name,
+            "services": services
+        }
     }
     fetch('/db/element', {
-            method: 'DELETE',
+            method: 'PUT',
             headers: {
                 'Content-type': 'application/json',
                 'Accept': 'application/json'
@@ -313,6 +319,24 @@ function removeService(serviceId) {
         .then(() => {
             location.reload();
         })
+        ///////
+        /*
+        let obj = {
+            collection: 'services',
+            id: idService[serviceId]
+        }
+        fetch('/db/element', {
+                method: 'DELETE',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(obj)
+            })
+            .then(() => {
+                location.reload();
+            })
+            */
 }
 
 function logout() {
