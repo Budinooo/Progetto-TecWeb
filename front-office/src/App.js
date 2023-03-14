@@ -10,6 +10,7 @@ import Profile from "./Pages/Profile.js";
 import DisplayResults from "./Pages/DisplayResults.js";
 import ServiceDisplay from "./Pages/ServiceDisplay.js";
 import { ToastContainer } from "react-toastify";
+import { Facebook, Instagram, Youtube, Twitter, Linkedin } from "react-bootstrap-icons";
 
 const onSearch = (query) =>  
 {
@@ -49,7 +50,20 @@ class App extends React.Component {
           <Route path='/profile' element={<Profile />} />
         </Switch>
         <footer>
-          
+          <div id="brag-text">
+            <p className="footer-text">
+              <span>Number 1 </span> 
+              Pet store in the W
+              <img className="mb-1" src="dog-house.png" alt="logo" width="25px"/>rld
+            </p>
+          </div>
+          <div className="mx-auto" id="socials">
+            <a><Facebook size={30} /></a>
+            <a href="https://www.instagram.com/neon_glider_/"><Instagram size={30} /></a>
+            <a href="https://twitter.com/PirazzoliLeon"><Twitter size={30} /></a>
+            <a><Youtube size={30} /></a>
+            <a><Linkedin size={30}/></a>
+          </div>
         </footer>
         <ToastContainer position="bottom-right" />
       </>

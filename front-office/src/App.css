@@ -40,5 +40,32 @@ footer
     height: 10em;
     margin-top: auto;
     background-color: rgb(17, 17, 83);
+}
+
+.footer-text {
+    font-weight: bold; 
+    text-align:center; 
+    font-size:200%; 
+    color:white; 
+    padding-top:10px
+}
+
+.footer-text > span {
+    color:#ff6a3d
+}
+
+#socials {
+    padding-top:1em;
     display: flex;
+    justify-content: center;
+    color:white;
+    border-top-color: white;
+    border-top-style: solid;
+    border-top-width: 4px;
+    width: 50%;
+}
+
+#socials > a {
+    margin: 0 3px;
+    color: white;
 }
