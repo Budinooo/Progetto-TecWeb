@@ -56,7 +56,6 @@ function selectLocation(){
     var data = [];
     let dateHtml = [];
     for(var i = 0; i < selectedLocation.services.length; i++){
-        debugger;
         const service = services.find(service => service.name == selectedLocation.services[i].name)
         idService[i] = service._id;
         dateHtml[i] = '';
@@ -163,32 +162,37 @@ function editService(serviceId) {
                     body: JSON.stringify(obj)
                 })
                 .then(() => {
-                    var locationsToModify = [];
-                    for (var i = 0; i<locations.length; i++){
-                        var location = locations[i];
-                        for (var j = 0; j<location.services.length; j++){
-                            if (location.services[j].name == services[serviceId].name){
-                                location.services[j].name = services[serviceId].name;
-                                locationsToModify.push(location);
-                                break;
+                    if (name != services[serviceId].name){
+                        var locationsToModify = [];
+                        for (var i = 0; i<locations.length; i++){
+                            var location = locations[i];
+                            for (var j = 0; j<location.services.length; j++){
+                                if (location.services[j].name == services[serviceId].name){
+                                    location.services[j].name = name;
+                                    locationsToModify.push(location);
+                                    break;
+                                }
                             }
                         }
-                    }
-                    for (var i = 0; i<locationsToModify.length; i++){
-                        let obj = {
-                            collection: 'locations',
-                            elem: locationsToModify[i]
-                        }
-                        fetch('/db/element', {
-                                method: 'PUT',
-                                headers: {
-                                    'Content-type': 'application/json',
-                                    'Accept': 'application/json'
-                                },
-                                body: JSON.stringify(obj)
+                        for (var i = 0; i<locationsToModify.length; i++){
+                            let obj = {
+                                collection: 'locations',
+                                elem: locationsToModify[i]
+                            }
+                            fetch('/db/element', {
+                                    method: 'PUT',
+                                    headers: {
+                                        'Content-type': 'application/json',
+                                        'Accept': 'application/json'
+                                    },
+                                    body: JSON.stringify(obj)
+                            }).then(()=>{
+                                setTimeout(function(){
+                                    document.location.reload();
+                                },500)
                             })
+                        }
                     }
-                    location.reload();
                 })
         }
     });
