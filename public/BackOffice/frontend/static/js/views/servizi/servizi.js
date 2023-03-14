@@ -1,28 +1,72 @@
 var ids = [];
+var locations = [];
+var services = [];
 
 fetch('/db/collection?collection=services', {
         method: 'GET'
     })
     .then(response => response.json())
-    .then(services => {
-        services = services.result;
-        let servicesHtml = '';
-        var data = [];
-        let dateHtml = [];
-        for (var i = 0; i < services.length; i++) {
-            var service = services[i];
-            ids[i] = service._id;
-            dateHtml[i] = '';
-            data = service.availability;
-            servicesHtml += `
+    .then(data => {
+        services = data.result;
+        
+        fetch('/db/collection?collection=locations', {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(data =>{
+            locations = data.result;
+            let locationsHtml = '';
+            for(let i = 0; i < locations.length; i++){
+                var location = locations[i];
+                locationsHtml+= `
+                    <option value="${location.name}">${location.name}</option>
+                `;
+            }
+            document.getElementById("locations").innerHTML+=locationsHtml;
+        })
+    });
+/*
+function bookService(serviceId) {
+    // logica per la prenotazione del servizio
+    document.getElementById("formdate" + serviceId).style.display = "block";
+    fetch('services.json')
+        .then(response => response.json())
+        .then(services => {
+            let servicesHtml = '';
+            services.forEach(service => {
+                if (service.id == serviceId) {
+                    service.availability.forEach(date => {
+                        servicesHtml += `
+                        <option value=${date.date}>${date.date}</option>
+                        `;
+                    });
+                }
+
+            });
+            document.getElementById('bookDate').innerHTML = servicesHtml;
+        });
+}
+*/
+
+function selectLocation(){
+    var selectedLocation = locations.find(location => location.name == document.getElementById("locations").value)
+    let servicesHtml = '';
+    var data = [];
+    let dateHtml = [];
+    for(var i = 0; i < selectedLocation.services.length; i++){
+        var service = services.find(service => service.name == selectedLocation.services[i].name)
+        ids[i] = service._id;
+        dateHtml[i] = '';
+        data = selectedLocation.services[i].availability;
+        servicesHtml += `
         <div class="container">
             <div class="col-sm-4">
                 <h2 class="title" style="margin-top:50px">${service.name}</h2>
                 <img class="card-img-top" src="${service.img}" alt="${service.name}" style="width: 18rem;">
                 <p>Description: ${service.description}</p>
-                <p>Place: ${service.place}</p>
+                <p>Place: ${selectedLocation.name}</p>
                 <p>Price: €${service.price}</p>
-                <p id="date">Availability:  ${service.availability}</p>
+                <p id="date">Availability:  ${selectedLocation.services[i].availability}</p>
                 <button class="btn btn-warning" id="edit-${i}" onclick="editService(${i})" style="margin-top: 5px">Edit</button>
                 <button class="btn btn-primary" id="availability-${i}" onclick="addAvailability(${i})" style="margin-top: 5px">Add Availabile Date</button>
                 <button class="btn btn-danger" id="availability-${i}" onclick="removeAvailability(${i})" style="margin-top: 5px">Remove Availabile Date</button>
@@ -56,16 +100,8 @@ fetch('/db/collection?collection=services', {
                     <input type="text" class="form-control" id="descriptionEditService` + i + `" value="` + service.description + `">
                 </div>
                 <div class="form-group">
-                    <label for="scoreInput">Place</label>
-                    <input type="text" class="form-control" id="placeEditService` + i + `" value="` + service.place + `">
-                </div>
-                <div class="form-group">
                     <label for="scoreInput">Price</label>
                     <input type="number" class="form-control" id="priceEditService` + i + `" value="` + service.price + `">
-                </div>
-                <div class="form-group" style="display:none">
-                    <label for="scoreInput">Date</label>
-                    <input type="text" class="form-control" id="dateEditService` + i + `" value="` + service.availability + `">
                 </div>
                 <div class="form-group">
                     <label for="scoreInput">Image</label>
@@ -77,41 +113,20 @@ fetch('/db/collection?collection=services', {
         </div>
 
       `;
-            for (var j = 0; j < data.length; j++) {
-                let date = data[j];
-                dateHtml[i] += `
-                <button class="btn btn-danger" id="date${i}" style="margin-top: 5px" onclick="removeDate(${i},` + j + `)">` + date + `</button>
-                `;
-            }
-        };
-        document.getElementById('services').innerHTML = servicesHtml;
-        for (var i = 0; i < services.length; i++) {
-            var service = services[i];
-            document.getElementById('availableDate' + i).innerHTML = dateHtml[i];
-        };
-    });
-/*
-function bookService(serviceId) {
-    // logica per la prenotazione del servizio
-    document.getElementById("formdate" + serviceId).style.display = "block";
-    fetch('services.json')
-        .then(response => response.json())
-        .then(services => {
-            let servicesHtml = '';
-            services.forEach(service => {
-                if (service.id == serviceId) {
-                    service.availability.forEach(date => {
-                        servicesHtml += `
-                        <option value=${date.date}>${date.date}</option>
-                        `;
-                    });
-                }
-
-            });
-            document.getElementById('bookDate').innerHTML = servicesHtml;
-        });
+        for (var j = 0; j < data.length; j++) {
+            let date = data[j];
+            dateHtml[i] += `
+            <button class="btn btn-danger" id="date${i}" style="margin-top: 5px" onclick="removeDate(${i},` + j + `)">` + date + `</button>
+            `;
+        }
+    }
+    document.getElementById('services').innerHTML = servicesHtml;
+    for (var i = 0; i < services.length; i++) {
+        var service = services[i];
+        document.getElementById('availableDate' + i).innerHTML = dateHtml[i];
+    };
 }
-*/
+
 function editService(serviceId) {
     // logica per la modifica del servizio
     if (document.getElementById("formEditcontainer" + serviceId).style.display == "none") {
@@ -136,8 +151,6 @@ function editService(serviceId) {
                     "name": name,
                     "description": description,
                     "price": price,
-                    "place": place,
-                    "availability": date,
                     "img": img
                 }
             }
@@ -184,9 +197,7 @@ function addAvailability(serviceId) {
                             "name": data.name,
                             "description": data.description,
                             "price": data.price,
-                            "place": data.place,
-                            "img": data.img,
-                            "availability": date
+                            "img": data.img
                         }
                     }
                     fetch('/db/element', {
@@ -322,3 +333,16 @@ function formRemoveService(serviceId) {
         document.getElementById("formRemovecontainer" + serviceId).style.display = "none";
     }
 }
+
+/*
+
+                <div class="form-group">
+                    <label for="scoreInput">Place</label>
+                    <input type="text" class="form-control" id="placeEditService` + i + `" value="` + selectedLocation.name + `">
+                </div>
+                
+                <div class="form-group" style="display:none">
+                    <label for="scoreInput">Date</label>
+                    <input type="text" class="form-control" id="dateEditService` + i + `" value="` + selectedLocation.services[i].availability + `">
+                </div>
+*/
