@@ -1,5 +1,5 @@
 var idService = [];
-var idLocation = [];
+var selectedLocation;
 var locations = [];
 var services = [];
 
@@ -51,7 +51,7 @@ function bookService(serviceId) {
 */
 
 function selectLocation(){
-    var selectedLocation = locations.find(location => location.name == document.getElementById("locations").value)
+    selectedLocation = locations.find(location => location.name == document.getElementById("locations").value)
     let servicesHtml = '';
     var data = [];
     let dateHtml = [];
@@ -209,37 +209,21 @@ function addAvailability(serviceId) {
         e.preventDefault();
         let newDate = document.getElementById("newDateService" + serviceId).value;
         if (newDate != "") {
-            fetch('/db/element?id=' + idService[serviceId] + '&collection=services', {
-                    method: 'GET'
+            selectedLocation.services[serviceId].push(newDate);
+            let obj = {
+                collection: 'locations',
+                elem: selectedLocation
+            }
+            fetch('/db/element', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(obj)
                 })
-                .then(response => response.json())
-                .then(data => {
-                    data = data.result;
-                    let date = data.availability;
-                    if (!date.includes(newDate)) {
-                        date.push(newDate);
-                    }
-                    let obj = {
-                        collection: 'services',
-                        elem: {
-                            "_id": idService[serviceId],
-                            "name": data.name,
-                            "description": data.description,
-                            "price": data.price,
-                            "img": data.img
-                        }
-                    }
-                    fetch('/db/element', {
-                            method: 'PUT',
-                            headers: {
-                                'Content-type': 'application/json',
-                                'Accept': 'application/json'
-                            },
-                            body: JSON.stringify(obj)
-                        })
-                        .then(() => {
-                            location.reload();
-                        })
+                .then(() => {
+                    location.reload();
                 })
         }
     })
@@ -290,7 +274,7 @@ function removeDate(serviceId, newDate) {
         })
 }
 
-function saveDate(serviceId) {
+/*function saveDate(serviceId) {
     let newDate = JSON.stringify(document.getElementById("dateService" + serviceId).value);
     if (newDate != "") {
         fetch('/db/element?id=' + idService[serviceId] + '&collection=services', {
@@ -326,7 +310,7 @@ function saveDate(serviceId) {
             })
         document.getElementById("formdate" + serviceId).style.display = "none";
     }
-}
+}*/
 
 function removeService(serviceId) {
     // logica per la modifica del servizio
