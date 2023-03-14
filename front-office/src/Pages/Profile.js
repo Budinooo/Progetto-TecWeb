@@ -100,19 +100,18 @@ export default function Profile() {
             let serviceList = updatedLocation.services;
             let updatedServiceName = booking.serviceName;
 
-            //togliamo il servizio che stiamo modificando dalla lista servizi
-            let serviceIndex = serviceList.findIndex(service => service.name == updatedServiceName);
-            serviceList.splice(serviceIndex, 1);
-
             // creaiamo un nuovo array disponibilità senza la data appena prenotata
             let newAvailability = [];
             serviceList.map((service) =>
             {
-            if(service.name = updatedServiceName)
+                if(service.name == updatedServiceName)
                 newAvailability = service.availability;
             })
             newAvailability.push(booking.date);
-
+            
+            //togliamo il servizio che stiamo modificando dalla lista servizi
+            let serviceIndex = serviceList.findIndex(service => service.name == updatedServiceName);
+            serviceList.splice(serviceIndex, 1);
             // rimettiamo il servizio appena ricreato con la nuova disponibilità nella lista servizi
             let updatedService = {name: updatedServiceName, availability: newAvailability};
             serviceList.push(updatedService);
