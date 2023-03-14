@@ -37,7 +37,7 @@ class DisplayResults extends React.Component {
           .then(data => {
                data = data.result;
                data = data.filter(product => product.name.toLowerCase().includes(query) || product.description.toLowerCase().includes(query))
-               this.setState({products: data, productsDisplayed: data})
+               this.setState({products: data, productsFiltered:data, productsDisplayed: data})
           })
      }
 
@@ -48,7 +48,7 @@ class DisplayResults extends React.Component {
           .then(data => {
                data = data.result;
                data = data.filter(product => product.animal.toLowerCase() == query)
-               this.setState({products: data, productsDisplayed: data})
+               this.setState({products: data, productsFiltered: data, productsDisplayed: data})
           })
      }
 
@@ -60,7 +60,6 @@ class DisplayResults extends React.Component {
           window.addEventListener("resize", this.handleResize);
           let url = new URL(document.URL);
           let searchParams = url.searchParams;
-
           
           if(searchParams.get('query'))
                this.getSearchedProducts(searchParams.get('query').toLowerCase())
