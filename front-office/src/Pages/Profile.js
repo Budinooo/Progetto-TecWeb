@@ -94,41 +94,45 @@ export default function Profile() {
                 setBookings(data);
                 setLoading(false);
             });
-
-            //service availability update
-            let updatedLocation = booking.location;
-            let serviceList = updatedLocation.services;
-            let updatedServiceName = booking.serviceName;
-
-            // creaiamo un nuovo array disponibilità senza la data appena prenotata
-            let newAvailability = [];
-            serviceList.map((service) =>
+            debugger;
+            fetch(`http://localhost:8000/db/element?collection=locations&id=${booking.location}`).then((res) => res.json())
+            .then((data) =>
             {
-                if(service.name == updatedServiceName)
-                newAvailability = service.availability;
-            })
-            newAvailability.push(booking.date);
-            
-            //togliamo il servizio che stiamo modificando dalla lista servizi
-            let serviceIndex = serviceList.findIndex(service => service.name == updatedServiceName);
-            serviceList.splice(serviceIndex, 1);
-            // rimettiamo il servizio appena ricreato con la nuova disponibilità nella lista servizi
-            let updatedService = {name: updatedServiceName, availability: newAvailability};
-            serviceList.push(updatedService);
-
-            //rimettiamo la lista servizi aggiornata nella location 
-            updatedLocation.services = serviceList;
-
-            //PUT della location con disponibilità servizi aggiornata
-            fetch(`http://localhost:8000/db/element`, {method: "PUT",headers: {
-                'Content-type': 'application/json',
-                'Accept': 'application/json'
-                }, 
-                body: JSON.stringify({
-                  collection: "locations", 
-                  elem: updatedLocation
+                //service availability update
+                let updatedLocation = data.result;
+                let serviceList = updatedLocation.services;
+                let updatedServiceName = booking.serviceName;
+    
+                // creaiamo un nuovo array disponibilità senza la data appena prenotata
+                let newAvailability = [];
+                serviceList.map((service) =>
+                {
+                    if(service.name == updatedServiceName)
+                    newAvailability = service.availability;
                 })
-            });
+                newAvailability.push(booking.date);
+                
+                //togliamo il servizio che stiamo modificando dalla lista servizi
+                let serviceIndex = serviceList.findIndex(service => service.name == updatedServiceName);
+                serviceList.splice(serviceIndex, 1);
+                // rimettiamo il servizio appena ricreato con la nuova disponibilità nella lista servizi
+                let updatedService = {name: updatedServiceName, availability: newAvailability};
+                serviceList.push(updatedService);
+    
+                //rimettiamo la lista servizi aggiornata nella location 
+                updatedLocation.services = serviceList;
+    
+                //PUT della location con disponibilità servizi aggiornata
+                fetch(`http://localhost:8000/db/element`, {method: "PUT",headers: {
+                    'Content-type': 'application/json',
+                    'Accept': 'application/json'
+                    }, 
+                    body: JSON.stringify({
+                    collection: "locations", 
+                    elem: updatedLocation
+                    })
+                });
+            })
         })
         setLoading(true);
     }
@@ -158,7 +162,7 @@ export default function Profile() {
                     return(
                         <div key={booking._id} className="booking-container">
                             <h4 className="booking-title">{booking.serviceName}</h4>
-                            <p className="booking-date">{booking.date} at {booking.location.name}</p>
+                            <p className="booking-date">{booking.date} at {booking.locationName}</p>
                             <button className="btn-booking-del" onClick={(e) => deleteBooking(e)(booking)}>Cancel</button>
                         </div>
                     )

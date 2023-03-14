@@ -53,7 +53,8 @@ class Service extends React.Component {
       serviceId: this.state.service._id,
       serviceName: this.state.service.name,
       date: formattedDate,
-      location: this.state.location
+      location: this.state.location._id,
+      locationName: this.state.location.name
     };
     
     // POST NEW BOOKING
