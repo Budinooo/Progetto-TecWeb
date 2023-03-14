@@ -209,7 +209,7 @@ function addAvailability(serviceId) {
         e.preventDefault();
         let newDate = document.getElementById("newDateService" + serviceId).value;
         if (newDate != "") {
-            selectedLocation.services[serviceId].push(newDate);
+            selectedLocation.services[serviceId].availability.push(newDate);
             let obj = {
                 collection: 'locations',
                 elem: selectedLocation
@@ -240,37 +240,21 @@ function removeAvailability(serviceId) {
 function removeDate(serviceId, newDate) {
     // logica per la rimozione della disponibilità del servizio
     //debugger;
-    fetch('/db/element?id=' + idService[serviceId] + '&collection=services', {
-            method: 'GET'
+    selectedLocation.services[serviceId].availability.splice(newDate, 1);
+    let obj = {
+        collection: 'locations',
+        elem: selectedLocation
+    }
+    fetch('/db/element', {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(obj)
         })
-        .then(response => response.json())
-        .then(data => {
-            data = data.result;
-            let date = data.availability;
-            date.splice(newDate, 1);
-            let obj = {
-                collection: 'services',
-                elem: {
-                    "_id": idService[serviceId],
-                    "name": data.name,
-                    "description": data.description,
-                    "price": data.price,
-                    "place": data.place,
-                    "img": data.img,
-                    "availability": date
-                }
-            }
-            fetch('/db/element', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(obj)
-                })
-                .then(() => {
-                    location.reload();
-                })
+        .then(() => {
+            location.reload();
         })
 }
 
