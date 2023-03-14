@@ -301,7 +301,7 @@ function removeService(serviceId) {
     var services = selectedLocation.services;
     services.splice(serviceId, 1);
     let obj = {
-        collection: 'services',
+        collection: 'locations',
         elem: {
             "_id": selectedLocation._id,
             "name": selectedLocation.name,
