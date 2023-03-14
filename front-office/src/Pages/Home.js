@@ -1,35 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Product_Carousel from "../Components/Product_Carousel";
 import Community_Feed from "./Community_Feed.js";
 import Service from '../Components/Service.js';
 
 export default function Home(props)
 {
+  const [screenWidth, setScreenWidth] = useState();
+  useEffect(()=>
+  {
+    setScreenWidth(window.innerWidth);
+  })
+    
     return(
         <div className="container mt-5">
-          <div id="animal-select" className="row mx-3">
-            <div className="col-sm-3">
+          <div id="animal-select" className={`row mx-3 ${screenWidth < 500 ? "mobile-animal-sel" : ""}`}>
+            <div className="col-md-3">
               <div className="animal-card">
                 <a href="/results?category=dog" role="link">
                   <img width="60%" src="img/dog.png" alt="Picture of a dog"/>
                 </a>
               </div>
             </div>
-            <div className="col-sm-3">
+            <div className="col-md-3">
               <div className="animal-card">
                 <a href="/results?category=bird" role="link">
                   <img width="60%" src="img/bird.png" alt="Picture of a bird"/>
                 </a>
               </div>
             </div>
-            <div className="col-sm-3">
+            <div className="col-md-3">
               <div className="animal-card">
                 <a href="/results?category=fish" role="link">
                   <img width="60%" src="img/clown-fish.png" alt="Picture of a clown fish"/>
                 </a>
               </div>
             </div>
-            <div className="col-sm-3">
+            <div className="col-md-3">
               <div className="animal-card">
                 <a href="/results?category=cat" role="link">
                   <img width="60%" src="img/tiger.png" alt="Picture of a tiger"/>

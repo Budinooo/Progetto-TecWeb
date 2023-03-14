@@ -15,6 +15,29 @@ html, body {
     margin-bottom: 5%;
 }
 
+.mobile-animal-sel 
+{
+    justify-content: space-between;
+}
+
+.mobile-animal-sel > div 
+{
+    width: 10em;
+    margin-bottom: 1em;
+    padding-left: 0;
+}
+
+.mobile-animal-sel > div > .animal-card 
+{
+    width: 10em;
+    margin: 0;
+}
+
+.mobile-animal-sel > div > .animal-card > a > img  
+{
+    width: 45%;
+}
+
 .animal-card 
 {
     border-radius: 50%;

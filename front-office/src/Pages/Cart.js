@@ -12,7 +12,12 @@ class Cart extends React.Component
         let products = JSON.parse(localStorage.getItem("cart"));
         if (!products)
             products = [];
-        this.state = {products: products, services: services};
+        this.state = {products: products, services: services, screenWidth: null};
+    }
+
+    componentDidMount()
+    {
+        this.setState({screenWidth: window.innerWidth});
     }
 
     productRemove = (id) => 
@@ -63,19 +68,19 @@ class Cart extends React.Component
             {
                 return(
                     <div key={product._id} className="row cart-item">
-                        <div className="col-sm-1 d-flex align-items-center justify-content-center">
+                        <div className="close-btn col-sm-1 d-flex align-items-center justify-content-center">
                             <button onClick={(e) => this.productRemove(product._id)} className="btn-close"></button>
                         </div>
-                        <div className="col-sm-2">
+                        <div className="img-container col-sm-2">
                             <img className="product-img my-2" height="70%" src={product.img} />
                         </div>
-                        <div className="col-sm-5">
+                        <div className="name-container col-sm-5">
                             <p className="product-name">{product.name}</p>
                         </div>
-                        <div className="col-sm-2">
+                        <div className="price-container col-sm-2">
                             <p className="product-price"><b>€{product.price}</b></p>
                         </div>
-                        <div className="col-sm-1">
+                        <div className="quantity-container col-sm-1">
                             <form className="inline-form product-quantity-form">
                                 <input className="quantity" type="number" onChange={(e) => this.setQuantity(e)(product._id)} min="1" defaultValue={product.quantity}></input>
                             </form>
@@ -99,7 +104,7 @@ class Cart extends React.Component
     {
         return(
             <div>
-                <div id="main-container" className="d-flex my-5">
+                <div id="main-container" className={` d-flex my-5 ${this.state.screenWidth < 500 ? "mobile-cart" : ""}`}>
                     <div id="cart">
                         <div className="container">
                             <div className="row mb-3">

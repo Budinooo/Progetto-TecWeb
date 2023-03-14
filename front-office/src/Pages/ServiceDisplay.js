@@ -8,11 +8,12 @@ class ServiceDisplay extends React.Component
         super(props);
         let services = null;
         let locations = null;
-        this.state = {services: services, displayedServices: services, locations: locations, selectedLocation: null};
+        this.state = {services: services, displayedServices: services, locations: locations, selectedLocation: null, screenWidth: null};
     }
 
     componentDidMount() 
     {
+        this.setState({screenWidth: window.innerWidth});
         fetch(`/db/collection?collection=services`)
         .then((res)=> res.json()).then((data) => {
             this.setState({services: data.result, displayedServices: data.result})
@@ -66,7 +67,7 @@ class ServiceDisplay extends React.Component
         }
         else 
             return (
-                <h2>Please select a location</h2>
+                <h2 id="no-location-alert">Please select a location</h2>
             )
     }
 
@@ -74,7 +75,7 @@ class ServiceDisplay extends React.Component
         if(this.state.services == null) 
             return (<div></div>);
         return(
-            <div className="p-5">
+            <div className={`p-5 ${this.state.screenWidth < 500? "mobile-service-display" : ""}`}>
                 <div id="filter-container">
                     <h2>Choose a location:</h2>
                     <select name="location selection" defaultValue={"0"} onChange={(e) => this.displayServiceUsingLocation(e)} id="location-select">

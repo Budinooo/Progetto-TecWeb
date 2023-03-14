@@ -8,3 +8,16 @@
 {
     width: fit-content;
 }
+
+.mobile-service-display #no-location-alert {
+    display: none;
+}
+
+.mobile-service-display > #filter-container {
+    width:100%;
+}
+
+.mobile-service-display > #service-container {
+    margin-top: 1em;
+    width:100%;
+}
