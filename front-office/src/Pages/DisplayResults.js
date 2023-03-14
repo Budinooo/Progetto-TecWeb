@@ -11,7 +11,7 @@ class DisplayResults extends React.Component {
           super(props);
           this.state={
                screenWidth: window.innerWidth,
-               products: [],
+               products: null,
                productsDisplayed: []
           }
 
@@ -92,6 +92,12 @@ class DisplayResults extends React.Component {
      }
 
     renderProducts = () => {
+          if(this.state.products?.length <= 0)
+               return(
+                    <div>
+                         <h2>We found no products related to your search</h2>
+                    </div>
+               )
           return this.state.productsDisplayed.map((product, i)=>{
                return <Product_Display product={product} key={i} />;
           })
@@ -101,7 +107,7 @@ class DisplayResults extends React.Component {
         return (
             <div className="container displayResult">
                 <Filter applyCategory={this.handleCategoryFilter} applyPrice={this.handlePriceFilter}/>
-                <div className={`products ${this.state.screenWidth<500 ? "w-100" : ""}`}>
+                <div className={`products ${this.state.screenWidth<500 ? "w-100" : "row align-items-stretch"}`}>
                     {this.renderProducts() }
                 </div>
             </div>

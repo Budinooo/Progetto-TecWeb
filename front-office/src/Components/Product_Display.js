@@ -58,22 +58,18 @@ class Product_Display extends React.Component
     {
         let id = "product"+this.props.product._id;
         return(
-            <div id={id} className={`container product ${this.state.screenWidth<500 ? "w-100 prodmob" : ""}`}>
-                <div>
-                    <div className="imgpContainer">
-                        <img className="imgp" src={this.props.product.img}></img>
-                    </div>
-                    <div className={`${this.state.content ==  this.props.product.name? "namep" : "descp"}`}>
-                        {this.state.content}
-                    </div>
-                    <div className="descp">
-                        {this.props.product.description}
-                    </div>
+            <div id={id} className={`product ${this.state.screenWidth<500 ? "w-100 prodmob" : "col-sm-3"}`}>
+                <div className="imgpContainer">
+                    <img className="imgp" src={this.props.product.img}></img>
                 </div>
-                <div>
-                    <div className="pricep"> €{this.props.product.price}</div>
-                    <button className='btn-add' onClick={()=>this.addToCart(this.props.product)}>ADD TO CART</button>
+                <div className={`${this.state.content ==  this.props.product.name? "namep" : "descp"}`}>
+                    {this.state.content}
                 </div>
+                <div className="descp">
+                    {this.props.product.description}
+                </div>
+                <div className="pricep"> €{this.props.product.price}</div>
+                <button className='btn-add' onClick={()=>this.addToCart(this.props.product)}>ADD TO CART</button>
             </div>
         )
     }

@@ -1,6 +1,7 @@
 {
     "dependencies": {
         "body-parser": "^1.20.1",
+        "bootstrap": "^5.2.3",
         "cors": "^2.8.5",
         "Datepicker.js": "^0.1.1",
         "express": "^4.18.2",
@@ -11,6 +12,7 @@
         "mongoose": "^6.9.1",
         "morgan": "^1.10.0",
         "react": "^18.2.0",
+        "react-bootstrap": "^2.7.2",
         "react-calendar": "^4.0.0",
         "react-day-picker": "^8.6.0",
         "react-dom": "^18.2.0",

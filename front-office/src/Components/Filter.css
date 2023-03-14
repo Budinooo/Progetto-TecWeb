@@ -1,21 +1,41 @@
 .filters{
     width: 20%;
-    border: 2px solid grey;
+    border: 1px solid grey;
     background-color: lightgray;
     border-radius: 10px;
     height: fit-content;
     padding-top: 5px;
     padding-bottom: 5px;
+    background-color: white;
 }
 
 .subfilter{
-    padding-left: 10%;
-    cursor: pointer;
     width: fit-content;
+    text-decoration: none;
+}
+
+.category-filter > .subfilter {
+    font-weight: 700;
+    color: deepskyblue;
+}
+
+.collpasebody {
+    background-color: white;
+}
+
+.category-link {
+    text-decoration: none;
+    display: block;
+    color: black;
+    margin-left: 5%;
 }
 
 .titlef{
     font-size: 110%;
+}
+
+.price-range {
+    width: 200px;
 }
 
 .collpasebody{
@@ -28,4 +48,30 @@
     margin-bottom: 1px;
     width: fit-content;
     cursor: pointer;
+}
+
+#btn-apply {
+    width: 150px;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    border-radius: 1em;
+    padding-bottom: 0.2em;
+    background-color: rgb(0, 72, 207);
+    border-color:  rgb(0, 72, 207);
+    border-style: groove;
+    transition:0.2s;
+}
+
+#apply-container {
+    display:flex;
+    width:100%;
+    justify-content: center;
+    margin-bottom: 0.3em;
+}
+
+#btn-apply:hover {
+    border-radius: 10px;
+    transition: 0.2s;
 }
