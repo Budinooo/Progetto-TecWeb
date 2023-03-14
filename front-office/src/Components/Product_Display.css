@@ -1,15 +1,19 @@
 .product{
     width: 32%;
     border-radius: 10px;
-    border: 2px solid grey;
-    height: 65vh;
+    border: 1px solid grey;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     max-height: fit-content;
+    padding-bottom: 0.5em;
+    min-height: 30em;
+    transition: 0.2s;
 }
 
 .product:hover{
+    border-width: 2px;
+    transition: 0.2s;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
