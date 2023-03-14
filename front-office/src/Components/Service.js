@@ -10,12 +10,15 @@ class Service extends React.Component {
     super(props);
     let date = null;
     let service = null;
-    this.state = {service: service, date: date};
+    let location = null;
+    this.state = {service: service, date: date, location: location};
   }
 
   componentDidUpdate(){
     if(this.props.service != this.state.service)
-      this.setState({service: this.props.service})
+      this.setState({service: this.props.service});
+    if(this.props.location != this.state.location)
+      this.setState({location: this.props.location});
   }
 
   makeStandardDate(date){
@@ -49,11 +52,12 @@ class Service extends React.Component {
       userId: JSON.parse(localStorage.getItem("login")).id,
       serviceId: this.state.service._id,
       serviceName: this.state.service.name,
-      date: formattedDate
+      date: formattedDate,
+      location: this.state.location
     };
     
     // POST NEW BOOKING
-    fetch("/db/element", {method: "POST", headers: {
+    fetch("http://localhost:8000/db/element", {method: "POST", headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json'
       }, 
@@ -63,24 +67,67 @@ class Service extends React.Component {
       })
     });
 
-    let updatedService = this.state.service;
-    let dateIndex = updatedService.availability.findIndex(date => date==formattedDate);
-    updatedService.availability.splice(dateIndex, 1);
+    // UPDATE LOCATION SERVICE AVAILABILITY
+    let updatedLocation = this.state.location;
+    let serviceList = updatedLocation.services;
+    let updatedServiceName = this.state.service.name;
+    //togliamo il servizio che stiamo modificando dalla lista servizi
+    let serviceIndex = serviceList.findIndex(service => service.name == updatedServiceName);
+    serviceList.splice(serviceIndex, 1);
+    // creaiamo un nuovo array disponibilità senza la data appena prenotata
+    let newAvailability = [];
+    serviceList.map((service) =>
+    {
+      if(service.name = updatedServiceName)
+        newAvailability = service.availability;
+    })
+    let dateIndex = newAvailability.findIndex(date => date==formattedDate);
+    newAvailability.splice(dateIndex, 1);
+    // rimettiamo il servizio appena ricreato con la nuova disponibilità nella lista servizi
+    let updatedService = {name: updatedServiceName, availability: newAvailability};
+    serviceList.push(updatedService);
+    //rimettiamo la lista servizi aggiornata nella location 
+    updatedLocation.services = serviceList;
 
-    // UPDATE SERVICE AVAILABILITY
-    fetch(`/db/element`, {method: "PUT",headers: {
+    // Facciamo finalmente la put al server
+    fetch(`http://localhost:8000/db/element`, {method: "PUT",headers: {
       'Content-type': 'application/json',
       'Accept': 'application/json'
       }, 
       body: JSON.stringify({
-        collection: "services", 
-        elem: updatedService
+        collection: "locations", 
+        elem: updatedLocation
       })})
       .then((res)=>{
-        fetch(`/db/element?id=${this.state.service._id}&collection=services`, {method: "GET"})
-        .then((res) => res.json).then((data) => this.setState({service:(data.result)}));
+        fetch(`http://localhost:8000/db/element?id=${this.state.location._id}&collection=locations`, {method: "GET"})
+        .then((res) => res.json).then((data) => 
+        {
+          data.result.services.map((service) =>
+          {
+            if(this.state.service.name == service.name)
+              this.setState({service: service});
+          })  
+        });
       });
     toast(`${this.state.service.name} booked for ${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`)
+  }
+
+  displayCalendar() 
+  {
+    let availability;
+    this.state.location.services.map((service) => 
+    {
+      if(service.name == this.state.service.name)
+        availability = service.availability;
+    });
+    return (
+      <Calendar
+          onChange={(value, e) => {this.setState({date:value})}}
+          minDetail='month'
+          minDate={new Date()} 
+          tileDisabled={({date})=> !availability.includes(this.makeStandardDate(date))} 
+      />
+    )
   }
   
   render() {
@@ -112,12 +159,7 @@ class Service extends React.Component {
               <p className="service-price">€ {this.state.service.price}</p>
               <form id="booking-form" className='d-flex flex-column'>
                 <div className='d-flex'>
-                  <Calendar
-                    onChange={(value, e) => {this.setState({date:value})}}
-                    minDetail='month'
-                    minDate={new Date()} 
-                    tileDisabled={({date})=> !this.state.service.availability.includes(this.makeStandardDate(date))} 
-                  />            
+                  {this.displayCalendar()}
                 </div>
                 <button onClick={(e) => this.book(this.state.date)(e)} className="mx-auto book-btn">Book Now</button>
               </form>      
@@ -133,15 +175,3 @@ class Service extends React.Component {
 }
 
 export default Service
-
-
-/*            {props.service.days.map((day, i) => 
-            {
-              if(day){
-                let weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-                let res = " " + weekdays[i];
-                if(i>0)
-                  res = "," + res;
-                return (res);
-              }
-            })}*/

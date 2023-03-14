@@ -13,7 +13,7 @@ export default function Profile() {
         if(firstTime) {  
             console.log("fetching profile info");
             let userId = JSON.parse(localStorage.getItem("login")).id;
-            fetch(`/db/element?id=${userId}&collection=users`)
+            fetch(`http://localhost:8000/db/element?id=${userId}&collection=users`)
             .then((res)=>res.json())
             .then((data) => setProfileInfo(data.result));
             setFirstTime(false);
@@ -25,7 +25,7 @@ export default function Profile() {
         //Get bookings
         if(!bookings && profileInfo) {
             console.log("old bookings: " + bookings + ", fetching bookings");
-            fetch(`/db/getUserBookings?id=${profileInfo._id}`)
+            fetch(`http://localhost:8000/db/getUserBookings?id=${profileInfo._id}`)
             .then((res) => res.json())
             .then((data) => 
             {
@@ -78,7 +78,7 @@ export default function Profile() {
             id: booking._id
         }
         // Booking deletion
-        fetch('/db/element', {
+        fetch('http://localhost:8000/db/element', {
             method:'DELETE',
             headers: {
                 'Content-type': 'application/json',
@@ -87,28 +87,49 @@ export default function Profile() {
             body: JSON.stringify(obj)
         }).then((res) => 
         {
-            fetch(`/db/getUserBookings?id=${profileInfo._id}`)
+            fetch(`http://localhost:8000/db/getUserBookings?id=${profileInfo._id}`)
             .then((res) => res.json())
             .then((data) => 
             {
                 setBookings(data);
                 setLoading(false);
             });
+
             //service availability update
-            let service;
-            fetch(`/db/element?collection=services&id=${booking.serviceId}`, {method: "GET"}).then((res) => res.json())
-            .then((data) => {
-                service = {collection: "services", elem: data.result};
-                service.elem.availability.push(booking.date);
-                fetch(`/db/element`, {
-                method: "PUT",
-                headers: {
-                    'Content-type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(service)
-                });
+            let updatedLocation = booking.location;
+            let serviceList = updatedLocation.services;
+            let updatedServiceName = booking.serviceName;
+
+            //togliamo il servizio che stiamo modificando dalla lista servizi
+            let serviceIndex = serviceList.findIndex(service => service.name == updatedServiceName);
+            serviceList.splice(serviceIndex, 1);
+
+            // creaiamo un nuovo array disponibilità senza la data appena prenotata
+            let newAvailability = [];
+            serviceList.map((service) =>
+            {
+            if(service.name = updatedServiceName)
+                newAvailability = service.availability;
             })
+            newAvailability.push(booking.date);
+
+            // rimettiamo il servizio appena ricreato con la nuova disponibilità nella lista servizi
+            let updatedService = {name: updatedServiceName, availability: newAvailability};
+            serviceList.push(updatedService);
+
+            //rimettiamo la lista servizi aggiornata nella location 
+            updatedLocation.services = serviceList;
+
+            //PUT della location con disponibilità servizi aggiornata
+            fetch(`http://localhost:8000/db/element`, {method: "PUT",headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+                }, 
+                body: JSON.stringify({
+                  collection: "locations", 
+                  elem: updatedLocation
+                })
+            });
         })
         setLoading(true);
     }
@@ -138,7 +159,7 @@ export default function Profile() {
                     return(
                         <div key={booking._id} className="booking-container">
                             <h4 className="booking-title">{booking.serviceName}</h4>
-                            <p className="booking-date">{booking.date}</p>
+                            <p className="booking-date">{booking.date} at {booking.location.name}</p>
                             <button className="btn-booking-del" onClick={(e) => deleteBooking(e)(booking)}>Cancel</button>
                         </div>
                     )
