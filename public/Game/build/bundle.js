@@ -2741,13 +2741,13 @@ var app = (function () {
     			attr(div6, "class", "title svelte-ji0m4w");
     			toggle_class(div6, "mobiletitle", /*screenWidth*/ ctx[0] < 500);
     			attr(a3, "class", "entertainment flex svelte-ji0m4w");
-    			attr(a3, "href", "/funnyvideos");
+    			attr(a3, "href", "/game/funnyvideos");
     			toggle_class(a3, "mobilefun", /*screenWidth*/ ctx[0] < 500);
     			attr(a4, "class", "entertainment flex svelte-ji0m4w");
-    			attr(a4, "href", "/animalinfo");
+    			attr(a4, "href", "/game/animalinfo");
     			toggle_class(a4, "mobilefun", /*screenWidth*/ ctx[0] < 500);
     			attr(a5, "class", "entertainment flex svelte-ji0m4w");
-    			attr(a5, "href", "/medinfo");
+    			attr(a5, "href", "/game/medinfo");
     			toggle_class(a5, "mobilefun", /*screenWidth*/ ctx[0] < 500);
     			attr(div7, "class", "fun flex svelte-ji0m4w");
     			toggle_class(div7, "mobfun", /*screenWidth*/ ctx[0] < 500);
