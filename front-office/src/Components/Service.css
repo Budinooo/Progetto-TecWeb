@@ -33,6 +33,10 @@
     margin-bottom: 3em;
 }
 
+.service-img > img {
+    border-radius: 10px;
+}
+
 .more-btn {
     cursor: pointer;
     text-decoration: none;

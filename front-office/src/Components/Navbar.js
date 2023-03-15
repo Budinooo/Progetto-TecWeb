@@ -11,6 +11,8 @@ class Navbar extends React.Component {
     if(loginInfo == null){
       loginInfo = {"islogged": false, "id": ""};
       localStorage.setItem("login", JSON.stringify(loginInfo));
+      if(JSON.parse(localStorage.getItem("cart")))
+        localStorage.setItem("cart", "[]");
     }
   }
 
@@ -33,6 +35,7 @@ class Navbar extends React.Component {
             "id": "",
           }
           localStorage.setItem("login",JSON.stringify(loginInfo))
+          localStorage.setItem("cart", "[]");
         }
         else if(loginInfo.islogged){
           fetch('/db/element?id=' + loginInfo.id + '&collection=users').then((res) => res.json())
